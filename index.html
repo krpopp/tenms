@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="utf-8" />
+    <title>10s</title>
+     <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="phaser.js"></script>
+    <script src="Boot.js"></script>
+    <script src="Preloader.js"></script>
+    <script src="MainMenu.js"></script>
+    <script src="LevelOne.js"></script>    
+    <script src="LevelTwo.js"></script>  
+    <script src="LevelThree.js"></script>  
+    <script src="LevelFour.js"></script>  
+    <script src="LevelFive.js"></script>  
+    <script src="LevelSix.js"></script> 
+    <script src="LevelSeven.js"></script> 
+    <script src="LevelEight.js"></script> 
+    <script src="LevelNine.js"></script> 
+    <script src="LevelTen.js"></script> 
+    <script src="LevelEleven.js"></script>
+    <script src="LevelTwelve.js"></script> 
+
+    
+</head> 
+<body> 
+	<body bgcolor="#000000">
+    <div id="content" />
+</body>
+</body>
+    
+<div id = "gameContainer"></div>
+
+<script type = "text/javascript">
+    var game = new Phaser.Game(1200, 500, Phaser.AUTO, 'gameContainer');
+
+    window.onload = function(){
+    
+    
+        game.state.add('Boot', SceneGame.Boot);
+        game.state.add('Preloader', SceneGame.Preloader);
+        game.state.add('MainMenu', SceneGame.MainMenu);
+        game.state.add('LevelOne', SceneGame.LevelOne);
+        game.state.add('LevelTwo', SceneGame.LevelTwo);
+        game.state.add('LevelThree', SceneGame.LevelThree);
+        game.state.add('LevelFour', SceneGame.LevelFour);
+        game.state.add('LevelFive', SceneGame.LevelFive);
+        game.state.add('LevelSix', SceneGame.LevelSix);
+        game.state.add('LevelSeven', SceneGame.LevelSeven);
+        game.state.add('LevelEight', SceneGame.LevelEight);
+        game.state.add('LevelNine', SceneGame.LevelNine);
+        game.state.add('LevelTen', SceneGame.LevelTen);
+        game.state.add('LevelEleven', SceneGame.LevelEleven);
+        game.state.add('LevelTwelve', SceneGame.LevelTwelve);
+
+        
+        game.state.start('Boot');
+    
+    }
+ 
+
+</script> 
+    
+    <div align = "center">
+        <img id="tutorial" src="assets/image/title.gif">
+        </div>
+    
+    <!--<div align = "center"><button onclick="myFunction()">Dev Comments</button>
+    <p id="demo"></p>
+</div>-->
+
+   
+    <script>
+       
+
+    </script>
+</html>  
+
+<body>    
+    
+    
+
+
+</body>

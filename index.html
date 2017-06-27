@@ -5,21 +5,22 @@
     <title>10s</title>
      <link rel="stylesheet" type="text/css" href="style.css">
     <script src="phaser.js"></script>
-    <script src="Boot.js"></script>
-    <script src="Preloader.js"></script>
-    <script src="MainMenu.js"></script>
-    <script src="LevelOne.js"></script>    
-    <script src="LevelTwo.js"></script>  
-    <script src="LevelThree.js"></script>  
-    <script src="LevelFour.js"></script>  
-    <script src="LevelFive.js"></script>  
-    <script src="LevelSix.js"></script> 
-    <script src="LevelSeven.js"></script> 
-    <script src="LevelEight.js"></script> 
-    <script src="LevelNine.js"></script> 
-    <script src="LevelTen.js"></script> 
-    <script src="LevelEleven.js"></script>
-    <script src="LevelTwelve.js"></script> 
+    <script src="assets/scripts/Boot.js"></script>
+    <script src="assets/scripts/Preloader.js"></script>
+    <script src="assets/scripts/MainMenu.js"></script>
+    <script src="assets/scripts/LevelOne.js"></script>    
+    <script src="assets/scripts/LevelTwo.js"></script>  
+    <script src="assets/scripts/LevelThree.js"></script>  
+    <script src="assets/scripts/LevelFour.js"></script>  
+    <script src="assets/scripts/LevelFive.js"></script>  
+    <script src="assets/scripts/LevelSix.js"></script> 
+    <script src="assets/scripts/LevelSeven.js"></script> 
+    <script src="assets/scripts/LevelEight.js"></script> 
+    <script src="assets/scripts/LevelNine.js"></script> 
+    <script src="assets/scripts/LevelTen.js"></script> 
+    <script src="assets/scripts/LevelEleven.js"></script>
+    <script src="assets/scripts/LevelTwelve.js"></script> 
+    <script src="assets/scripts/Manager.js"></script> 
 
     
 </head> 
@@ -52,6 +53,7 @@
         game.state.add('LevelTen', SceneGame.LevelTen);
         game.state.add('LevelEleven', SceneGame.LevelEleven);
         game.state.add('LevelTwelve', SceneGame.LevelTwelve);
+        game.state.add('Manager', SceneGame.Manager);
 
         
         game.state.start('Boot');

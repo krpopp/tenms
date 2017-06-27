@@ -208,7 +208,7 @@ SceneGame.Preloader.prototype = {
     
     create: function(){
         this.ready = true;
-        this.state.start('LevelOne');
+        this.state.start('Manager');
     }
     
 };

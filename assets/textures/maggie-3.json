@@ -1,0 +1,44 @@
+{"frames": [
+
+{
+	"filename": "maggie6.png",
+	"frame": {"x":1,"y":1,"w":1200,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":500},
+	"sourceSize": {"w":1200,"h":500}
+},
+{
+	"filename": "maggie7.png",
+	"frame": {"x":1,"y":503,"w":1200,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":500},
+	"sourceSize": {"w":1200,"h":500}
+},
+{
+	"filename": "maggie8.png",
+	"frame": {"x":1,"y":1005,"w":1200,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":500},
+	"sourceSize": {"w":1200,"h":500}
+},
+{
+	"filename": "maggie9.png",
+	"frame": {"x":1,"y":1507,"w":1200,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":500},
+	"sourceSize": {"w":1200,"h":500}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "maggie-3.png",
+	"format": "RGBA8888",
+	"size": {"w":1202,"h":2008},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:369205b0f6b058f1f15eec0e7814e0f5:632582d92c4b56523ae5cd1c30d5aae3:21afc7158a5ad62e98e42e28b822cc82$"
+}
+}

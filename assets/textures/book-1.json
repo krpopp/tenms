@@ -1,0 +1,44 @@
+{"frames": [
+
+{
+	"filename": "book2.png",
+	"frame": {"x":1,"y":503,"w":1200,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":500},
+	"sourceSize": {"w":1200,"h":500}
+},
+{
+	"filename": "book3.png",
+	"frame": {"x":1,"y":1005,"w":1200,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":500},
+	"sourceSize": {"w":1200,"h":500}
+},
+{
+	"filename": "book4.png",
+	"frame": {"x":1,"y":1507,"w":1200,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":500},
+	"sourceSize": {"w":1200,"h":500}
+},
+{
+	"filename": "book13.png",
+	"frame": {"x":1,"y":1,"w":1200,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":500},
+	"sourceSize": {"w":1200,"h":500}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "book-1.png",
+	"format": "RGBA8888",
+	"size": {"w":1202,"h":2008},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:45be771d3f66e4b13c0d3926872a16bf:c8a7fc155731c264c60763b69cb3bc2f:71ef2c79a0f3509150b5593275d1610c$"
+}
+}

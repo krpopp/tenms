@@ -24,23 +24,44 @@ SceneGame.Manager.prototype = {
     create: function(){ 
         var manager = this;
         manager.cursors = manager.input.keyboard.createCursorKeys();
-        manager.photoSet = [];
         manager.keySet = [];
+        manager.sceneSpeed = 0;
+        manager.spriteSet = [];
+        manager.sheetSet = [];
         manager.SceneSwitch(0);
     },
     
-    PhotoLoader: function(){
+    PhotoLoader: function(count, name){
         var manager = this;
-        for (var i = 0; i <= manager.photoSet.length; i++){
-            manager.load.image(manager.photoSet[i], 'assets/image/' + manager.photoSet[i] + '.png');
+        manager.count = count;
+        manager.name = name;
+        for (var i = 0; i < count; i++){
+            manager.sheetSet.push(name+'-'+i);
+            for(var j = 0; j < 4; j++){
+                manager.spriteSet.push(name+i+j);
+                console.log('assets/textures/'+name+'-'+j+'.png');
+                console.log('assets/textures/'+name+'-'+i+'.json');
+                manager.load.atlasJSONArray(name+j, 'assets/textures/'+name+'-'+j+'.png', 'assets/textures/'+name+'-'+i+'.json');
+                //manager.load.image(manager.photoSet[i], 'assets/image/' + manager.photoSet[i] + '.png'); 
+            }
         }
-        manager.load.start();
         manager.load.onLoadComplete.add(manager.PhotoCreate, this);
+        manager.load.start();
     },
     
     PhotoCreate: function(){
         var manager = this;
-        manager.photo = manager.add.sprite(0,0,manager.photoSet[0]);
+        //manager.photo = manager.add.sprite(0,0,manager.photoSet[0]);
+        //manager.photo = manager.add.sprite(0,0,manager.name+'00',manager.name+'-0');
+        manager.photo = manager.add.sprite(0,0,'hands-0','hands00');
+        manager.keysPressed = [];
+        for(var i = 0; i < manager.keySet.length; i++){
+            manager.keysPressed[i] = false;
+        }
+        manager.upInt = 0;
+        manager.sheetNum = 0;
+        manager.spriteNum = 0;
+        manager.allKeys = false;
         manager.gameReady = true;
     },
     
@@ -54,6 +75,21 @@ SceneGame.Manager.prototype = {
         var manager = this;
         if(manager.gameReady){
             manager.KeyCheckSwitch(0);
+            if(manager.upInt != 0){
+                if(manager.upInt%manager.sceneSpeed == 0){
+                    console.log("so what's the deal here");
+                    manager.spriteNum += 1;
+                    if(manager.spriteNum/4){
+                        manager.sheetNum += 1;
+                        manager.spriteNum == 0;
+                    }
+                    if(manager.sheetNum >= manager.keySet.length && manager.spriteNum > 3){
+                        console.log("end");
+                    } else{
+                        manager.add.sprite(0,0,manager.name+manager.sheetNum+manager.spriteNum,manager.name+'-'+manager.sheetNum);   
+                    }
+                }   
+            }
         }
     },
     
@@ -61,73 +97,84 @@ SceneGame.Manager.prototype = {
     
     SceneSwitch: function(scene){
         var manager = this;
-        manager.photoSet.length = 0;
         manager.keySet.length = 0;
         switch(scene){
             case 0:
-                manager.photoSet.push('hand2', 'hand3', 'hand4', 'hand5', 'hand6', 'hand7', 'hand8', 'hand9', 'hand10', 'hand11', 'hand12', 'hand13', 'hand14', 'hand15', 'hand16');
+                manager.sceneSpeed = 30;
+                console.log(manager.sceneSpeed);
+                manager.PhotoLoader(4, 'hands');
                 manager.keySet.push(manager.cursors.up, manager.cursors.down);
                 break;
             case 1:
-                manager.photoSet.push('brush2', 'brush3', 'brush4', 'brush5', 'brush6', 'brush7', 'brush8', 'brush9', 'brush10');
+                manager.photoSet.push(2, 'brush');
                 manager.keySet.push(manager.cursors.left);
                 break;
             case 2:
-                manager.photoSet.push('cat2', 'cat3', 'cat4', 'cat5', 'cat6', 'cat7', 'cat8', 'cat9', 'cat10', 'cat11', 'cat12');
+                manager.photoSet.push(3, 'cat');
                 manager.keySet.push(manager.cursors.up);
                 break;
             case 3:
-                manager.photoSet.push('fountain2', 'fountain3', 'fountain4', 'fountain5', 'fountain6', 'fountain7', 'fountain8', 'fountain9');
+                manager.photoSet.push(2, 'fountain');
                 manager.keySet.push(manager.cursors.down);
                 break;
             case 4:
-                manager.photoSet.push('type1', 'type2', 'type3', 'type4', 'type5', 'type6', 'type7', 'type8', 'type9');
+                manager.photoSet.push(2, 'type');
                 //this is an any key on down callback
                 break;
             case 5:
-                manager.photoSet.push('write2', 'write3', 'write4', 'write5', 'write6', 'write7', 'write8', 'write9', 'write10', 'write11', 'write12', 'write13', 'write14', 'write15');
+                manager.photoSet.push(3, 'write');
                 manager.keySet.push(manager.cursors.up, manager.cursors.down, manager.cursors.right, manager.cursors.left);
                 break;
             case 6:
-                manager.photoSet.push('maggie2', 'maggie3', 'maggie4', 'maggie5', 'maggie6', 'maggie7', 'maggie8', 'maggie9', 'maggie10', 'maggie11', 'maggie12', 'maggie13', 'maggie14', 'maggie15', 'maggie16');
+                manager.photoSet.push(4, 'maggie');
                 manager.keySet.push(manager.cursors.down);
                 break;
             case 7:
-                manager.photoSet.push('coffee2', 'coffee3', 'coffee4', 'coffee5', 'coffee6', 'coffee7', 'coffee8', 'coffee9');
+                manager.photoSet.push(2, 'coffee');
                 manager.keySet.push(manager.cursors.down);
                 break;
             case 8:
-                manager.photoSet.push('book2', 'book3', 'book4', 'book5', 'book6', 'book7', 'book8', 'book9');
+                manager.photoSet.push(3, 'book');
                 manager.keySet.push(manager.cursors.left);
                 break;
             case 9:
-                manager.photoSet.push('juice2', 'juice3', 'juice4', 'juice5', 'juice6', 'juice7', 'juice8', 'juice9', 'juice10', 'juice11', 'juice12', 'juice13', 'juice14');
+                manager.photoSet.push(3, 'juice');
                 manager.keySet.push(manager.cursors.left, manager.cursors.right);
                 break;
             case 10:
-                manager.photoSet.push('fridge2', 'fridge3', 'fridge4', 'fridge5', 'fridge6', 'fridge7', 'fridge8', 'fridge9', 'fridge10', 'fridge11');
+                manager.photoSet.push(2, 'fridge');
                 manager.keySet.push(manager.cursors.left, manager.cursors.right);
                 break;
             case 11:
-                manager.photoSet.push('egg2', 'egg3', 'egg4', 'egg5', 'egg6', 'egg7', 'egg8', 'egg9', 'egg10', 'egg11', 'egg12');
+                manager.photoSet.push(3, 'egg');
                 manager.keySet.push(manager.cursors.down);
                 break;
                     }
-        console.log(manager.keySet);
-        manager.PhotoLoader()
     },
     
     KeyCheckSwitch: function(scene){
         var manager = this;
         switch(scene){
             case 0:
-                manager.HoldKeys();
-                break;
             case 1:
+            case 2:
+            case 3:
+            case 6:
                 manager.HoldKeys();
                 break;
-            case 2:
-                manager.HoldKeys();
+            case 9:
+            case 5:
+                manager.SequentialKeys();
+                break;
+            case 11:
+            case 8:
+                manager.TapKeys();
+                break;
+            case 10: 
+                manager.SwitchKeys();
+                break;
+            case 4:
+                manager.AnyKey();
                 break;
                     }
     },
@@ -135,28 +182,110 @@ SceneGame.Manager.prototype = {
     HoldKeys: function(){
         var manager = this;
         if(manager.keySet[0].isDown){
-            console.log("ONE");
+            manager.keysPressed[0] = true;
+            //console.log("ONE");
+        } else{
+            manager.keysPressed[0] = false;
         }
         if(manager.keySet[1] != null){
             if(manager.keySet[1].isDown){
-                console.log("TWO");
+                manager.keysPressed[1] = true;
+                //console.log("TWO");
+            } else{
+                manager.keysPressed[1] = false;
             }
         }
         if(manager.keySet[2] != null){
             if(manager.keySet[2].isDown){
+                manager.keysPressed[2] = true;
                 console.log("THREE");
+            } else{
+                manager.keysPressed[2] = false;
             }
         }
         if(manager.keySet[3] != null){
             if(manager.keySet[3].isDown){
+                manager.keysPressed[3] = true;
                 console.log("FOUR");
+            } else{
+                manager.keysPressed[3] = false;
             }
         }
+
+        if(manager.keysPressed.every(manager.AreTrue)){
+            manager.allKeys = true;
+            console.log(manager.allKeys);
+        } else{
+            manager.allKeys = false;
+        }
+        if(manager.allKeys){
+            manager.IncreaseInt();
+        }
+    },
+    
+    AreTrue: function(element, index, array){
+        var manager = this;
+        return element == true;   
     },
     
     SequentialKeys: function(){
         var manager = this;
-        
+        var keyOnePress = false;
+        var keyTwoPress = false;
+        var keyThreePress = false;
+        var keyFourPress = true;
+        if(manager.keySet[0].isDown && keyFourPress){
+            keyOnePress = true;
+            keyFourPress = false;
+        }
+        if(manager.keySet[1].isDown && keyOnePress){
+            keyTwoPress = true;
+            keyOnePress = false;
+        }
+        if(manager.keySet[2] != null){
+            if(manager.keySet[2].isDown && keyTwoPress){
+                keyThreePress = true;
+                keyTwoPress = false;
+            }
+        }
+        if(manager.keySet[3] != null){
+            if(manager.keySet[3].isDown && keyThreePress){
+                keyFourPress = true;
+                keyThreePress = false;
+            }
+        }
+    },
+    
+    TapKeys: function(){
+        var manager = this;
+        //manager.tap = manager.keySet[0].onDown.add(manager.IncreaseInt, this);
+    },
+    
+    AnyKey: function(){
+        var manager = this;
+        manager.input.keyboard.onDownCallback = function(){
+            //change the picture in here
+        }
+    },
+    
+    SwitchKeys: function(){
+        var manager = this;
+        var keyOnePress = false;
+        var keyTwoPress = false;
+        var keyThreePress = false;
+        var keyFourPress = false;
+        //have threshold range for when the game is ready to move on to the next picture
+        if(manager.keySet[0].isDown){
+            
+        }
+    },
+    
+    IncreaseInt: function(){
+        var manager = this;
+        manager.upInt += 1;
+        if(manager.upInt == manager.sceneSpeed){
+            console.log("ok");
+        }
     }
 
 

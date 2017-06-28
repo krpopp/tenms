@@ -1,114 +1,114 @@
 {
-  "Scenes" : [
-    {
-      "name" : "hands",
-      "sheets" : 4,
-      "time" : "start",
-      "keySet" : [
+    "Scenes": [
+        {
+            "name": "hands",
+            "sheets": 4,
+            "time": "start",
+            "keySet": [
         "manager.cursors.up",
         "manager.cursors.down"
       ],
-      "pattern" : 0,
-      "speed" : 30
+            "pattern": 0,
+            "speed": 30
     },
-    {
-      "name" : "brush",
-      "sheets" : 2,
-      "time" : "morning",
-      "keySet" : "manager.cursors.left",
-      "pattern" : 0,
-      "speed" : 30
+        {
+            "name": "brush",
+            "sheets": 2,
+            "time": "morning",
+            "keySet": "manager.cursors.left",
+            "pattern": 0,
+            "speed": 30
     },
-    {
-      "name" : "cat",
-      "sheets" : 3,
-      "time" : "morning",
-      "keySet" : "manager.cursors.up",
-      "pattern" : 0,
-      "speed" : 30
+        {
+            "name": "cat",
+            "sheets": 3,
+            "time": "morning",
+            "keySet": "manager.cursors.up",
+            "pattern": 0,
+            "speed": 30
     },
-    {
-      "name" : "coffee",
-      "sheets" : 2,
-      "time" : "morning",
-      "keySet" : "manager.cursors.down",
-      "pattern" : 0,
-      "speed" : 30
+        {
+            "name": "coffee",
+            "sheets": 2,
+            "time": "morning",
+            "keySet": "manager.cursors.down",
+            "pattern": 0,
+            "speed": 30
     },
-    {
-      "name" : "egg",
-      "sheets" : 3,
-      "time" : "morning",
-      "keySet" : "manager.cursors.down",
-      "pattern" : 2,
-      "speed" : 30
+        {
+            "name": "egg",
+            "sheets": 3,
+            "time": "morning",
+            "keySet": "manager.cursors.down",
+            "pattern": 2,
+            "speed": 30
     },
-    {
-      "name" : "write",
-      "sheets" : 3,
-      "time" : "midday",
-      "keySet" : [
+        {
+            "name": "write",
+            "sheets": 3,
+            "time": "midday",
+            "keySet": [
         "manager.cursors.up",
         "manager.cursors.down",
         "manager.cursors.left",
         "manager.cursors.right"
       ],
-      "pattern" : 1,
-      "speed" : 30
+            "pattern": 1,
+            "speed": 30
     },
-    {
-      "name" : "maggie",
-      "sheets" : 4,
-      "time" : "midday",
-      "keySet" : "manager.cursors.down",
-      "pattern" : 2,
-      "speed" : 30
+        {
+            "name": "maggie",
+            "sheets": 4,
+            "time": "midday",
+            "keySet": "manager.cursors.down",
+            "pattern": 2,
+            "speed": 30
     },
-    {
-      "name" : "fountain",
-      "sheets" : 2,
-      "time" : "midday",
-      "keySet" : "manager.cursors.down",
-      "pattern" : 0,
-      "speed" : 30
+        {
+            "name": "fountain",
+            "sheets": 2,
+            "time": "midday",
+            "keySet": "manager.cursors.down",
+            "pattern": 0,
+            "speed": 30
     },
-    {
-      "name" : "book",
-      "sheets" : 3,
-      "time" : "midday",
-      "keySet" : "manager.cursors.left",
-      "pattern" : 2,
-      "speed" : 30
+        {
+            "name": "book",
+            "sheets": 3,
+            "time": "midday",
+            "keySet": "manager.cursors.left",
+            "pattern": 2,
+            "speed": 30
     },
-    {
-      "name" : "juice",
-      "sheets" : 3,
-      "time" : "morning",
-      "keySet" : [
+        {
+            "name": "juice",
+            "sheets": 3,
+            "time": "morning",
+            "keySet": [
         "manager.cursors.left",
         "manager.cursors.right"
       ],
-      "pattern" : 1,
-      "speed" : 30
+            "pattern": 1,
+            "speed": 30
     },
-    {
-      "name" : "fridge",
-      "sheets" : 2,
-      "time" : "morning",
-      "keySet" : [
+        {
+            "name": "fridge",
+            "sheets": 2,
+            "time": "morning",
+            "keySet": [
         "manager.cursors.left",
         "manager.cursors.right"
       ],
-      "pattern" : 3,
-      "speed" : 30
+            "pattern": 3,
+            "speed": 30
     },
-    {
-      "name" : "type",
-      "sheets" : 2,
-      "time" : "midday",
-      "keySet" : "all",
-      "pattern" : 4,
-      "speed" : 30
+        {
+            "name": "type",
+            "sheets": 2,
+            "time": "midday",
+            "keySet": "manager.cursors.left",
+            "pattern": 4,
+            "speed": 30
     }
   ]
 }

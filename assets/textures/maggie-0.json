@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "maggie1.png",
+	"filename": "maggie00",
 	"frame": {"x":1,"y":1,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,
@@ -9,7 +9,7 @@
 	"sourceSize": {"w":1200,"h":500}
 },
 {
-	"filename": "maggie10.png",
+	"filename": "maggie01",
 	"frame": {"x":1,"y":503,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,
@@ -17,7 +17,7 @@
 	"sourceSize": {"w":1200,"h":500}
 },
 {
-	"filename": "maggie11.png",
+	"filename": "maggie02",
 	"frame": {"x":1,"y":1005,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,
@@ -25,7 +25,7 @@
 	"sourceSize": {"w":1200,"h":500}
 },
 {
-	"filename": "maggie12.png",
+	"filename": "maggie03",
 	"frame": {"x":1,"y":1507,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,

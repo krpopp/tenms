@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "book1.png",
+	"filename": "book00",
 	"frame": {"x":1,"y":1,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,
@@ -9,7 +9,7 @@
 	"sourceSize": {"w":1200,"h":500}
 },
 {
-	"filename": "book10.png",
+	"filename": "book01",
 	"frame": {"x":1,"y":503,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,
@@ -17,7 +17,7 @@
 	"sourceSize": {"w":1200,"h":500}
 },
 {
-	"filename": "book11.png",
+	"filename": "book02",
 	"frame": {"x":1,"y":1005,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,
@@ -25,7 +25,7 @@
 	"sourceSize": {"w":1200,"h":500}
 },
 {
-	"filename": "book12.png",
+	"filename": "book03",
 	"frame": {"x":1,"y":1507,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,

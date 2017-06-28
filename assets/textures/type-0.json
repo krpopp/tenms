@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "type1.png",
+	"filename": "type00",
 	"frame": {"x":1,"y":1,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,
@@ -9,7 +9,7 @@
 	"sourceSize": {"w":1200,"h":500}
 },
 {
-	"filename": "type2.png",
+	"filename": "type01",
 	"frame": {"x":1,"y":503,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,
@@ -17,7 +17,7 @@
 	"sourceSize": {"w":1200,"h":500}
 },
 {
-	"filename": "type3.png",
+	"filename": "type02",
 	"frame": {"x":1,"y":1005,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,
@@ -25,7 +25,7 @@
 	"sourceSize": {"w":1200,"h":500}
 },
 {
-	"filename": "type4.png",
+	"filename": "type03",
 	"frame": {"x":1,"y":1507,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,

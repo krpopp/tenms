@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "hands-13",
+	"filename": "hands30",
 	"frame": {"x":1,"y":1,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,
@@ -9,7 +9,7 @@
 	"sourceSize": {"w":1200,"h":500}
 },
 {
-	"filename": "hands-14",
+	"filename": "hands31",
 	"frame": {"x":1,"y":503,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,
@@ -17,7 +17,7 @@
 	"sourceSize": {"w":1200,"h":500}
 },
 {
-	"filename": "hands-15",
+	"filename": "hands32",
 	"frame": {"x":1,"y":1005,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,
@@ -25,7 +25,7 @@
 	"sourceSize": {"w":1200,"h":500}
 },
 {
-	"filename": "hands-16",
+	"filename": "hands33",
 	"frame": {"x":1,"y":1507,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,

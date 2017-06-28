@@ -1,291 +1,286 @@
-SceneGame.Manager = function(game){
+SceneGame.Manager = function (game) {
     this.game;
     this.add;
     this.camera;
     this.cache;
     this.input;
-    this.load; 
-    this.math; 
+    this.load;
+    this.math;
     this.sound;
     this.stage;
     this.time;
-    this.tweens; 
-    this.state; 
-    this.world; 
-    this.particles; 
-    this.physics;  
-    this.rnd; 
+    this.tweens;
+    this.state;
+    this.world;
+    this.particles;
+    this.physics;
+    this.rnd;
 
 };
 
 SceneGame.Manager.prototype = {
 
 
-    create: function(){ 
+    create: function () {
         var manager = this;
         manager.cursors = manager.input.keyboard.createCursorKeys();
+        manager.scenesJSON = manager.cache.getJSON('scenes');
         manager.keySet = [];
-        manager.sceneSpeed = 0;
+        manager.preloadedSets = [];
+        manager.unloadedSets = [];
+        for (var i = 0; i < manager.scenesJSON.Scenes.length; i++) {
+            if (manager.scenesJSON.Scenes[i].time == 'morning') {
+                manager.preloadedSets.push(manager.scenesJSON.Scenes[i].name);
+            } else if (manager.scenesJSON.Scenes[i].time == 'start') {
+                manager.preloadedSets.push(manager.scenesJSON.Scenes[i].name);
+                manager.currentScene = manager.scenesJSON.Scenes[i];
+                var getSheets = manager.scenesJSON.Scenes[i].sheets;
+                var getName = manager.scenesJSON.Scenes[i].name;
+                var getKeys = [];
+                for (var j = 0; j < manager.scenesJSON.Scenes[i].keySet.length; j++) {
+                    var tempVar = eval(manager.scenesJSON.Scenes[i].keySet[j]);
+                    getKeys.push(tempVar);
+                }
+            } else {
+                manager.unloadedSets.push(manager.scenesJSON.Scenes[i].name);
+            }
+        }
         manager.spriteSet = [];
         manager.sheetSet = [];
-        manager.SceneSwitch(0);
+        manager.sceneSpeed = manager.currentScene.speed;
+        manager.keySet = [];
+
+        manager.keySet = getKeys;
+        console.log("the create key set is " + manager.keySet);
+        manager.PhotoLoader(getSheets, getName);
+
     },
-    
-    PhotoLoader: function(count, name){
+
+    PhotoLoader: function (count, name) {
         var manager = this;
         manager.count = count;
         manager.name = name;
-        for (var i = 0; i < count; i++){
-            manager.sheetSet.push(name+'-'+i);
-            for(var j = 0; j < 4; j++){
-                manager.spriteSet.push(name+i+j);
-                console.log('assets/textures/'+name+'-'+j+'.png');
-                console.log('assets/textures/'+name+'-'+i+'.json');
-                manager.load.atlasJSONArray(name+j, 'assets/textures/'+name+'-'+j+'.png', 'assets/textures/'+name+'-'+i+'.json');
-                //manager.load.image(manager.photoSet[i], 'assets/image/' + manager.photoSet[i] + '.png'); 
+        for (var i = 0; i < count; i++) {
+            manager.sheetSet.push(name + '-' + i);
+            for (var j = 0; j < 4; j++) {
+                manager.spriteSet.push(name + i + j);
             }
         }
-        manager.load.onLoadComplete.add(manager.PhotoCreate, this);
-        manager.load.start();
+        if (manager.unloadedSets.length != 0) {
+            var nextSet = manager.unloadedSets[Math.floor(Math.random() * manager.unloadedSets.length)];
+            for (var i = 0; i < this.scenesJSON.Scenes.length; i++) {
+                if (this.scenesJSON.Scenes[i].name == nextSet) {
+                    var sheetNum = this.scenesJSON.Scenes[i].sheets;
+                    for (var j = 0; j < sheetNum; j++) {
+                        this.load.atlasJSONArray(this.scenesJSON.Scenes[i].name + '-' + j, 'assets/textures/' + this.scenesJSON.Scenes[i].name + '-' + j + '.png', 'assets/textures/' + this.scenesJSON.Scenes[i].name + '-' + j + '.json');
+                    }
+                }
+            }
+            manager.load.start();
+
+        } else {
+            console.log("reached end of array");
+        }
+        manager.PhotoCreate();
+
     },
-    
-    PhotoCreate: function(){
+
+    PhotoCreate: function () {
         var manager = this;
-        //manager.photo = manager.add.sprite(0,0,manager.photoSet[0]);
-        //manager.photo = manager.add.sprite(0,0,manager.name+'00',manager.name+'-0');
-        manager.photo = manager.add.sprite(0,0,'hands-0','hands00');
+        manager.photo = manager.add.sprite(0, 0, manager.name + '-' + '0', manager.name + '00');
         manager.keysPressed = [];
-        for(var i = 0; i < manager.keySet.length; i++){
+        for (var i = 0; i < manager.keySet.length; i++) {
             manager.keysPressed[i] = false;
         }
         manager.upInt = 0;
         manager.sheetNum = 0;
         manager.spriteNum = 0;
         manager.allKeys = false;
+        manager.time.events.add(Phaser.Timer.SECOND * 10, manager.NextScene, this);
         manager.gameReady = true;
     },
-    
-    PhotoPlay: function(keys){
+
+    NextScene: function () {
         var manager = this;
-        
+        manager.world.removeAll();
+        if (manager.preloadedSets.length != 0) {
+            var nextSet = manager.preloadedSets[Math.floor(Math.random() * manager.unloadedSets.length)];
+            for (var i = 0; i < this.scenesJSON.Scenes.length; i++) {
+                if (this.scenesJSON.Scenes[i].name == nextSet) {
+                    manager.currentScene = manager.scenesJSON.Scenes[i];
+
+                    var getKeys = [];
+                    console.log(manager.currentScene.name);
+                    if (manager.currentScene.keySet === Array) {
+                        for (var j = 0; j < manager.currentScene.keySet.length; j++) {
+                            var tempVar = eval(manager.currentScene.keySet[j]);
+                            getKeys.push(tempVar);
+                        }
+                    } else {
+                        getKeys.push(eval(manager.currentScene.keySet))
+                    }
+
+                    manager.keySet = [];
+
+                    manager.keySet = getKeys;
+                    console.log("the key set in the enxt scene is " + manager.keySet);
+                    manager.sceneSpeed = manager.currentScene.speed;
+                    manager.PhotoLoader(manager.currentScene.sheets, manager.currentScene.name);
+                    break;
+                }
+            }
+
+        } else {
+            console.log("reached end of array");
+        }
     },
-    
-    
-    update: function(){
+
+
+    update: function () {
         var manager = this;
-        if(manager.gameReady){
-            manager.KeyCheckSwitch(0);
-            if(manager.upInt != 0){
-                if(manager.upInt%manager.sceneSpeed == 0){
-                    console.log("so what's the deal here");
-                    manager.spriteNum += 1;
-                    if(manager.spriteNum/4){
+        if (manager.gameReady) {
+            manager.KeyCheckSwitch(manager.currentScene.pattern);
+            if (manager.upInt != 0) {
+                if (manager.upInt % manager.sceneSpeed == 0) {
+                    if (manager.spriteNum >= 3) {
                         manager.sheetNum += 1;
-                        manager.spriteNum == 0;
+                        manager.spriteNum = 0;
+                        if (manager.sheetNum >= manager.sheetSet.length) {
+                            manager.gameReady = false;
+                        } else {
+                            var tempSprite = manager.add.sprite(0, 0, manager.name + '-' + manager.sheetNum, manager.name + manager.sheetNum + manager.spriteNum);
+                        }
+                    } else {
+                        manager.spriteNum += 1;
+                        var tempSprite = manager.add.sprite(0, 0, manager.name + '-' + manager.sheetNum, manager.name + manager.sheetNum + manager.spriteNum);
                     }
-                    if(manager.sheetNum >= manager.keySet.length && manager.spriteNum > 3){
-                        console.log("end");
-                    } else{
-                        manager.add.sprite(0,0,manager.name+manager.sheetNum+manager.spriteNum,manager.name+'-'+manager.sheetNum);   
-                    }
-                }   
+                }
             }
         }
     },
-    
-    //switch statement will need to be reworked so that it loads texture packer images
-    
-    SceneSwitch: function(scene){
+
+    KeyCheckSwitch: function (pattern) {
         var manager = this;
-        manager.keySet.length = 0;
-        switch(scene){
+        switch (pattern) {
             case 0:
-                manager.sceneSpeed = 30;
-                console.log(manager.sceneSpeed);
-                manager.PhotoLoader(4, 'hands');
-                manager.keySet.push(manager.cursors.up, manager.cursors.down);
-                break;
-            case 1:
-                manager.photoSet.push(2, 'brush');
-                manager.keySet.push(manager.cursors.left);
-                break;
-            case 2:
-                manager.photoSet.push(3, 'cat');
-                manager.keySet.push(manager.cursors.up);
-                break;
-            case 3:
-                manager.photoSet.push(2, 'fountain');
-                manager.keySet.push(manager.cursors.down);
-                break;
-            case 4:
-                manager.photoSet.push(2, 'type');
-                //this is an any key on down callback
-                break;
-            case 5:
-                manager.photoSet.push(3, 'write');
-                manager.keySet.push(manager.cursors.up, manager.cursors.down, manager.cursors.right, manager.cursors.left);
-                break;
-            case 6:
-                manager.photoSet.push(4, 'maggie');
-                manager.keySet.push(manager.cursors.down);
-                break;
-            case 7:
-                manager.photoSet.push(2, 'coffee');
-                manager.keySet.push(manager.cursors.down);
-                break;
-            case 8:
-                manager.photoSet.push(3, 'book');
-                manager.keySet.push(manager.cursors.left);
-                break;
-            case 9:
-                manager.photoSet.push(3, 'juice');
-                manager.keySet.push(manager.cursors.left, manager.cursors.right);
-                break;
-            case 10:
-                manager.photoSet.push(2, 'fridge');
-                manager.keySet.push(manager.cursors.left, manager.cursors.right);
-                break;
-            case 11:
-                manager.photoSet.push(3, 'egg');
-                manager.keySet.push(manager.cursors.down);
-                break;
-                    }
-    },
-    
-    KeyCheckSwitch: function(scene){
-        var manager = this;
-        switch(scene){
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 6:
                 manager.HoldKeys();
                 break;
-            case 9:
-            case 5:
+            case 1:
                 manager.SequentialKeys();
                 break;
-            case 11:
-            case 8:
+            case 2:
                 manager.TapKeys();
                 break;
-            case 10: 
+            case 3:
                 manager.SwitchKeys();
                 break;
             case 4:
                 manager.AnyKey();
                 break;
-                    }
+        }
     },
-                
-    HoldKeys: function(){
+
+    HoldKeys: function () {
         var manager = this;
-        if(manager.keySet[0].isDown){
+        if (manager.keySet[0].isDown) {
+            console.log("press");
             manager.keysPressed[0] = true;
-            //console.log("ONE");
-        } else{
+        } else {
             manager.keysPressed[0] = false;
         }
-        if(manager.keySet[1] != null){
-            if(manager.keySet[1].isDown){
+        if (manager.keySet[1] != null) {
+            if (manager.keySet[1].isDown) {
                 manager.keysPressed[1] = true;
-                //console.log("TWO");
-            } else{
+            } else {
                 manager.keysPressed[1] = false;
             }
         }
-        if(manager.keySet[2] != null){
-            if(manager.keySet[2].isDown){
+        if (manager.keySet[2] != null) {
+            if (manager.keySet[2].isDown) {
                 manager.keysPressed[2] = true;
-                console.log("THREE");
-            } else{
+            } else {
                 manager.keysPressed[2] = false;
             }
         }
-        if(manager.keySet[3] != null){
-            if(manager.keySet[3].isDown){
+        if (manager.keySet[3] != null) {
+            if (manager.keySet[3].isDown) {
                 manager.keysPressed[3] = true;
-                console.log("FOUR");
-            } else{
+            } else {
                 manager.keysPressed[3] = false;
             }
         }
 
-        if(manager.keysPressed.every(manager.AreTrue)){
+        if (manager.keysPressed.every(manager.AreTrue)) {
             manager.allKeys = true;
-            console.log(manager.allKeys);
-        } else{
+        } else {
             manager.allKeys = false;
         }
-        if(manager.allKeys){
+        if (manager.allKeys) {
             manager.IncreaseInt();
         }
     },
-    
-    AreTrue: function(element, index, array){
+
+    AreTrue: function (element, index, array) {
         var manager = this;
-        return element == true;   
+        return element == true;
     },
-    
-    SequentialKeys: function(){
+
+    SequentialKeys: function () {
         var manager = this;
         var keyOnePress = false;
         var keyTwoPress = false;
         var keyThreePress = false;
         var keyFourPress = true;
-        if(manager.keySet[0].isDown && keyFourPress){
+        if (manager.keySet[0].isDown && keyFourPress) {
             keyOnePress = true;
             keyFourPress = false;
         }
-        if(manager.keySet[1].isDown && keyOnePress){
+        if (manager.keySet[1].isDown && keyOnePress) {
             keyTwoPress = true;
             keyOnePress = false;
         }
-        if(manager.keySet[2] != null){
-            if(manager.keySet[2].isDown && keyTwoPress){
+        if (manager.keySet[2] != null) {
+            if (manager.keySet[2].isDown && keyTwoPress) {
                 keyThreePress = true;
                 keyTwoPress = false;
             }
         }
-        if(manager.keySet[3] != null){
-            if(manager.keySet[3].isDown && keyThreePress){
+        if (manager.keySet[3] != null) {
+            if (manager.keySet[3].isDown && keyThreePress) {
                 keyFourPress = true;
                 keyThreePress = false;
             }
         }
     },
-    
-    TapKeys: function(){
+
+    TapKeys: function () {
         var manager = this;
         //manager.tap = manager.keySet[0].onDown.add(manager.IncreaseInt, this);
     },
-    
-    AnyKey: function(){
+
+    AnyKey: function () {
         var manager = this;
-        manager.input.keyboard.onDownCallback = function(){
+        manager.input.keyboard.onDownCallback = function () {
             //change the picture in here
         }
     },
-    
-    SwitchKeys: function(){
+
+    SwitchKeys: function () {
         var manager = this;
         var keyOnePress = false;
         var keyTwoPress = false;
         var keyThreePress = false;
         var keyFourPress = false;
         //have threshold range for when the game is ready to move on to the next picture
-        if(manager.keySet[0].isDown){
-            
+        if (manager.keySet[0].isDown) {
+
         }
     },
-    
-    IncreaseInt: function(){
+
+    IncreaseInt: function () {
         var manager = this;
         manager.upInt += 1;
-        if(manager.upInt == manager.sceneSpeed){
-            console.log("ok");
-        }
+
     }
 
 

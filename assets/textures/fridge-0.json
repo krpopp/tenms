@@ -1,7 +1,7 @@
 {"frames": [
 
 {
-	"filename": "fridge1.png",
+	"filename": "fridge00",
 	"frame": {"x":1,"y":1,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,
@@ -9,7 +9,7 @@
 	"sourceSize": {"w":1200,"h":500}
 },
 {
-	"filename": "fridge2.png",
+	"filename": "fridge01",
 	"frame": {"x":1,"y":1507,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,
@@ -17,7 +17,7 @@
 	"sourceSize": {"w":1200,"h":500}
 },
 {
-	"filename": "fridge10.png",
+	"filename": "fridge02",
 	"frame": {"x":1,"y":503,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,
@@ -25,7 +25,7 @@
 	"sourceSize": {"w":1200,"h":500}
 },
 {
-	"filename": "fridge11.png",
+	"filename": "fridge03",
 	"frame": {"x":1,"y":1005,"w":1200,"h":500},
 	"rotated": false,
 	"trimmed": false,

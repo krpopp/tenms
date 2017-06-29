@@ -35,7 +35,6 @@ SceneGame.Manager.prototype = {
                 manager.preloadedSets.push(manager.scenesJSON.Scenes[i].name);
             } else if (manager.scenesJSON.Scenes[i].time == 'start') {
                 manager.currentScene = manager.scenesJSON.Scenes[i];
-                manager.preloadedSets.push(manager.currentScene.name);
                 var getKeys = [];
                 for (var j = 0; j < manager.scenesJSON.Scenes[i].keySet.length; j++) {
                     var tempVar = eval(manager.scenesJSON.Scenes[i].keySet[j]);
@@ -45,6 +44,9 @@ SceneGame.Manager.prototype = {
                 manager.unloadedSets.push(manager.scenesJSON.Scenes[i].name);
             }
         }
+
+        console.log(manager.preloadedSets);
+        console.log(manager.unloadedSets);
 
         //also, set the keys for the initial scene
         //for some reason, this one can't be set by the function
@@ -60,15 +62,17 @@ SceneGame.Manager.prototype = {
         var manager = this;
         var getKeys = [];
         manager.keySet = [];
-        if (manager.currentScene.keySet === Array) {
-            for (var j = 0; j < manager.currentScene.keySet.length; j++) {
-                var tempVar = eval(manager.currentScene.keySet[j]);
-                getKeys.push(tempVar);
+        getKeys.push(eval(manager.currentScene.keySet));
+        if (getKeys[0].length >= 2) {
+            var arrayKey = [];
+            for (var i = 0; i < getKeys[0].length; i++) {
+                arrayKey.push(eval(getKeys[0][i]));
             }
+            manager.keySet = arrayKey;
         } else {
-            getKeys.push(eval(manager.currentScene.keySet))
+            manager.keySet = getKeys;
         }
-        manager.keySet = getKeys;
+
     },
 
     //sets some parameters for the scene
@@ -81,13 +85,15 @@ SceneGame.Manager.prototype = {
             manager.preloadedSets.push(nextSet);
             for (var i = 0; i < manager.scenesJSON.Scenes.length; i++) {
                 if (manager.scenesJSON.Scenes[i].name == nextSet) {
+                    console.log("hello");
                     var sheetNum = manager.scenesJSON.Scenes[i].sheets;
-                    for (var j = 0; j < manager; j++) {
+                    for (var j = 0; j < sheetNum; j++) {
                         this.load.atlasJSONArray(manager.scenesJSON.Scenes[i].name + '-' + j, 'assets/textures/' + manager.scenesJSON.Scenes[i].name + '-' + j + '.png', 'assets/textures/' + manager.scenesJSON.Scenes[i].name + '-' + j + '.json');
                     }
                 }
             }
             manager.load.start();
+            manager.load.onLoadComplete.add(function () {}, this);
 
         } else {
             console.log("reached end of array");
@@ -118,10 +124,12 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.world.removeAll();
         if (manager.preloadedSets.length != 0) {
-            var nextSet = manager.preloadedSets[Math.floor(Math.random() * manager.unloadedSets.length)];
+            //var nextSet = manager.preloadedSets[Math.floor(Math.random() * manager.unloadedSets.length)];
+            var nextSet = manager.preloadedSets.shift();
             for (var i = 0; i < this.scenesJSON.Scenes.length; i++) {
                 if (this.scenesJSON.Scenes[i].name == nextSet) {
                     manager.currentScene = manager.scenesJSON.Scenes[i];
+                    console.log(manager.currentScene.name);
                     manager.FindKeys();
                     manager.PhotoLoader();
                     break;
@@ -233,28 +241,38 @@ SceneGame.Manager.prototype = {
     //for when keys must be pressed in a certain order
     SequentialKeys: function () {
         var manager = this;
-        var keyOnePress = false;
-        var keyTwoPress = false;
-        var keyThreePress = false;
-        var keyFourPress = true;
-        if (manager.keySet[0].isDown && keyFourPress) {
-            keyOnePress = true;
-            keyFourPress = false;
+        if (manager.keySet[0].isDown) {
+            manager.keysPressed[0] = true;
         }
-        if (manager.keySet[1].isDown && keyOnePress) {
-            keyTwoPress = true;
-            keyOnePress = false;
+        if (manager.keySet[1].isDown && manager.keysPressed[0]) {
+            manager.keysPressed[1] = true;
         }
-        if (manager.keySet[2] != null) {
-            if (manager.keySet[2].isDown && keyTwoPress) {
-                keyThreePress = true;
-                keyTwoPress = false;
+        if (manager.keysPressed.length == 2) {
+            if (manager.keysPressed[1]) {
+                manager.IncreaseInt();
+                manager.keysPressed[1] = false;
+                manager.keysPressed[0] = false;
             }
-        }
-        if (manager.keySet[3] != null) {
-            if (manager.keySet[3].isDown && keyThreePress) {
-                keyFourPress = true;
-                keyThreePress = false;
+        } else if (manager.keysPressed.length == 3) {
+            if (manager.keySet[2].isDown && manager.keysPressed[1]) {
+                manager.keysPressed[2] = true;
+            }
+            if (manager.keysPressed[2]) {
+                manager.IncreaseInt();
+                manager.keysPressed[1] = false;
+                manager.keysPressed[0] = false;
+                manager.keysPressed[2] = false;
+            }
+        } else if (manager.keysPressed.length == 4) {
+            if (manager.keySet[3].isDown && manager.keysPressed[2]) {
+                manager.keysPressed[3] = true;
+            }
+            if (manager.keysPressed[2]) {
+                manager.IncreaseInt();
+                manager.keysPressed[1] = false;
+                manager.keysPressed[0] = false;
+                manager.keysPressed[2] = false;
+                manager.keysPressed[3] = false;
             }
         }
     },
@@ -277,20 +295,24 @@ SceneGame.Manager.prototype = {
     //can possibl combine with or make distinct from SequentialKeys
     SwitchKeys: function () {
         var manager = this;
-        var keyOnePress = false;
-        var keyTwoPress = false;
-        var keyThreePress = false;
-        var keyFourPress = false;
         //have threshold range for when the game is ready to move on to the next picture
-        if (manager.keySet[0].isDown) {
-
+        if (manager.keySet[0].isDown && !manager.keysPressed[0]) {
+            manager.IncreaseInt();
+            if (manager.upInt >= 30) {
+                manager.keysPressed[0] = true;
+            }
+        }
+        if (manager.keySet[1].isDown && manager.keysPressed[0]) {
+            manager.IncreaseInt();
+            if (manager.upInt >= 60) {
+                manager.keyPress[0] = false;
+            }
         }
     },
 
     //Int that increases based on input in order to move the photos forward
     IncreaseInt: function () {
         var manager = this;
-        console.log("int increased");
         manager.upInt += 1;
 
     }

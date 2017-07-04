@@ -1,0 +1,100 @@
+{
+    "frames": [
+
+        {
+            "filename": "subway13",
+            "frame": {
+                "x": 1,
+                "y": 1,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+},
+        {
+            "filename": "subway12",
+            "frame": {
+                "x": 1,
+                "y": 503,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+},
+        {
+            "filename": "subway11",
+            "frame": {
+                "x": 1,
+                "y": 1005,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+},
+        {
+            "filename": "subway10",
+            "frame": {
+                "x": 1,
+                "y": 1507,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+}],
+    "meta": {
+        "app": "http://www.codeandweb.com/texturepacker",
+        "version": "1.0",
+        "image": "subway2-4.png",
+        "format": "RGBA8888",
+        "size": {
+            "w": 1202,
+            "h": 2008
+        },
+        "scale": "1",
+        "smartupdate": "$TexturePacker:SmartUpdate:f743256a476c91fdc94554ac69efbb53:bccf17e7ac1afe44850b3e9e4e17a810:bb0e37994b1327c7301eec9c2f6d7d2f$"
+    }
+}

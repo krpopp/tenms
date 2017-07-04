@@ -28,7 +28,12 @@ SceneGame.Boot.prototype = {
     preload: function () {
 
         this.load.json('scenes', 'assets/json/scenes.json');
-        this.load.spritesheet('loading', 'assets/image/loading.png', 246, 100);
+        for (var i = 0; i < 4; i++) {
+            this.load.atlasJSONArray('sky-' + i, 'assets/textures/sky-' + i + '.png', 'assets/textures/sky-' + i + '.json');
+        }
+
+        this.load.atlasJSONArray('outline', 'assets/textures/outline.png', 'assets/textures/outline.json');
+        this.load.atlasJSONArray('logo', 'assets/textures/logo.png', 'assets/textures/logo.json');
 
     },
 

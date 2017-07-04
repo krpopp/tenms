@@ -14,9 +14,23 @@ SceneGame.Preloader.prototype = {
         this.stage.backgroundColor = "000000";
 
         this.scenesJSON = this.cache.getJSON('scenes');
-        this.loading = this.add.sprite(500, 250, 'loading');
-        this.loadPlay = this.loading.animations.add('loadPlay');
-        this.loading.animations.play('loadPlay', 5, true);
+        this.loadingLogo = this.add.sprite(this.world.centerX, 660, 'logo', 0);
+        this.loadingLogo.anchor.setTo(.5, .5);
+        this.logoAnim = this.loadingLogo.animations.add('twitch');
+        this.logoAnim.play(10, true);
+        this.loadingBar = this.add.sprite(220, 660, 'outline', 0);
+        this.world.sendToBack(this.loadingBar);
+        this.loadingBar.anchor.setTo(0, .5);
+        this.outlineAnim = this.loadingBar.animations.add('wiggle');
+        this.outlineAnim.play(10, true);
+        this.game.load.setPreloadSprite(this.loadingBar);
+
+        this.sky = this.add.sprite(0, 0, 'sky-0', 0);
+        this.skyNum = 0;
+        this.sheetNum = 0;
+        this.loadNum = 0;
+        this.game.load.onFileComplete.add(this.fileComplete, this);
+        this.load.onLoadComplete.add(this.loadComplete, this);
 
         var open = 'start';
 
@@ -24,6 +38,7 @@ SceneGame.Preloader.prototype = {
             if (this.scenesJSON.Scenes[i].time == 'start') {
                 var sheetNum = this.scenesJSON.Scenes[i].sheets;
                 for (var j = 0; j < sheetNum; j++) {
+
                     this.load.atlasJSONArray(this.scenesJSON.Scenes[i].name + '-' + j, 'assets/textures/' + this.scenesJSON.Scenes[i].name + '-' + j + '.png', 'assets/textures/' + this.scenesJSON.Scenes[i].name + '-' + j + '.json');
                 }
             }
@@ -35,28 +50,20 @@ SceneGame.Preloader.prototype = {
             }
         }
 
-        this.load.image('lid1', 'assets/image/lid1.png');
-        this.load.image('lid2', 'assets/image/lid2.png');
+        this.load.atlasJSONArray('keys', 'assets/textures/keys.png', 'assets/textures/keys.json');
+        this.load.atlasJSONArray('singleHand', 'assets/textures/hand.png', 'assets/textures/hand.json');
 
-        this.load.audio('purr', 'assets/sound/Purr.wav');
-        this.load.audio('faucet', 'assets/sound/wFaucet.mp3');
-        this.load.audio('writing', 'assets/sound/writing.wav');
+        this.load.image('toplid', 'assets/image/toplid2.png');
+        this.load.image('lowerlid', 'assets/image/lowerlid2.png');
+        this.load.image('midlid', 'assets/image/midlid2.png');
+
         this.load.audio('morning', 'assets/sound/morning.wav');
-        this.load.audio('faucetClick', 'assets/sound/FaucetClick.wav');
-        this.load.audio('wFountain', 'assets/sound/wFountain.wav');
-        this.load.audio('water', 'assets/sound/water.wav');
-        this.load.audio('slurp', 'assets/sound/slurp.wav');
-        this.load.audio('page', 'assets/sound/page.wav');
-        this.load.audio('dog', 'assets/sound/dogWalk.wav');
-        this.load.audio('eggFry', 'assets/sound/eggFry.wav');
-        this.load.audio('juiceShake', 'assets/sound/juiceShake.wav');
-        this.load.audio('fridgeHum', 'assets/sound/fridge.wav');
+        this.load.audio('muffled', 'assets/sound/muffalarm.mp3');
+        this.load.audio('transition', 'assets/sound/alarmtransition.mp3');
 
-        this.load.audio('click1', 'assets/sound/click1.wav');
-        this.load.audio('click2', 'assets/sound/click2.wav');
-        this.load.audio('click3', 'assets/sound/click3.wav');
-        this.load.audio('click4', 'assets/sound/click4.wav');
-        this.load.audio('click5', 'assets/sound/click5.wav');
+        this.load.audio('correct', 'assets/sound/correct.wav');
+        this.load.audio('incorrect', 'assets/sound/incorrect.mp3');
+        this.load.audio('incorrect2', 'assets/sound/incorrect2.wav');
 
         this.load.audio('tone1', 'assets/sound/roomTone1.mp3');
         this.load.audio('tone3', 'assets/sound/roomTone3.wav');
@@ -64,9 +71,48 @@ SceneGame.Preloader.prototype = {
 
     },
 
-    create: function () {
+    fileComplete: function () {
+        this.loadNum += 1;
+        if (this.loadNum % 8 == 0) {
+
+            console.log(this.loadNum);
+            this.skyNum += 1;
+            console.log(this.skyNum);
+            console.log(this.sky._frame.name);
+            this.sky.frame = this.skyNum;
+            if (this.skyNum >= 3) {
+                this.skyNum == 0;
+                this.sheetNum += 1;
+                this.sky.destroy();
+                this.sky = this.add.sprite(0, 0, 'sky-' + this.sheetNum, 0);
+            }
+        }
+
+    },
+
+    loadComplete: function () {
+        this.skyTween = this.add.tween(this.sky).to({
+            alpha: 0
+        }, 1000, Phaser.Easing.Linear.None, true);
+        this.titleTween = this.add.tween(this.loadingLogo).to({
+            alpha: 0
+        }, 1000, Phaser.Easing.Linear.None, true);
+        this.barTween = this.add.tween(this.loadingBar).to({
+            alpha: 0
+        }, 1000, Phaser.Easing.Linear.None, true);
+        this.barTween.onComplete.add(this.startGame, this)
+    },
+
+    startGame: function () {
+        this.load.onLoadComplete.remove(this.loadComplete, this);
         this.ready = true;
+        this.game.load.preloadSprite = null;
         this.state.start('Manager');
+
+    },
+
+    create: function () {
+
     }
 
 };

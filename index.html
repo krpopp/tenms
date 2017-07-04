@@ -1,86 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+
+<head>
     <meta charset="utf-8" />
     <title>10s</title>
-     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="phaser.js"></script>
     <script src="assets/scripts/Boot.js"></script>
     <script src="assets/scripts/Preloader.js"></script>
     <script src="assets/scripts/MainMenu.js"></script>
-    <script src="assets/scripts/LevelOne.js"></script>    
-    <script src="assets/scripts/LevelTwo.js"></script>  
-    <script src="assets/scripts/LevelThree.js"></script>  
-    <script src="assets/scripts/LevelFour.js"></script>  
-    <script src="assets/scripts/LevelFive.js"></script>  
-    <script src="assets/scripts/LevelSix.js"></script> 
-    <script src="assets/scripts/LevelSeven.js"></script> 
-    <script src="assets/scripts/LevelEight.js"></script> 
-    <script src="assets/scripts/LevelNine.js"></script> 
-    <script src="assets/scripts/LevelTen.js"></script> 
+    <script src="assets/scripts/LevelOne.js"></script>
+    <script src="assets/scripts/LevelTwo.js"></script>
+    <script src="assets/scripts/LevelThree.js"></script>
+    <script src="assets/scripts/LevelFour.js"></script>
+    <script src="assets/scripts/LevelFive.js"></script>
+    <script src="assets/scripts/LevelSix.js"></script>
+    <script src="assets/scripts/LevelSeven.js"></script>
+    <script src="assets/scripts/LevelEight.js"></script>
+    <script src="assets/scripts/LevelNine.js"></script>
+    <script src="assets/scripts/LevelTen.js"></script>
     <script src="assets/scripts/LevelEleven.js"></script>
-    <script src="assets/scripts/LevelTwelve.js"></script> 
-    <script src="assets/scripts/Manager.js"></script> 
+    <script src="assets/scripts/LevelTwelve.js"></script>
+    <script src="assets/scripts/Manager.js"></script>
 
-    
-</head> 
-<body> 
-	<body bgcolor="#000000">
-    <div id="content" />
+
+</head>
+
+<body>
+
+    <body bgcolor="#000000">
+        <div id="content" />
+    </body>
 </body>
-</body>
-    
-<div id = "gameContainer"></div>
 
-<script type = "text/javascript">
-    var game = new Phaser.Game(1200, 500, Phaser.AUTO, 'gameContainer');
+<div id="gameContainer"></div>
 
-    window.onload = function(){
-    
-    
+<script type="text/javascript">
+    var game = new Phaser.Game(1200, 800, Phaser.AUTO, 'gameContainer');
+
+    window.onload = function() {
+
+
         game.state.add('Boot', SceneGame.Boot);
         game.state.add('Preloader', SceneGame.Preloader);
         game.state.add('MainMenu', SceneGame.MainMenu);
-        game.state.add('LevelOne', SceneGame.LevelOne);
-        game.state.add('LevelTwo', SceneGame.LevelTwo);
-        game.state.add('LevelThree', SceneGame.LevelThree);
-        game.state.add('LevelFour', SceneGame.LevelFour);
-        game.state.add('LevelFive', SceneGame.LevelFive);
-        game.state.add('LevelSix', SceneGame.LevelSix);
-        game.state.add('LevelSeven', SceneGame.LevelSeven);
-        game.state.add('LevelEight', SceneGame.LevelEight);
-        game.state.add('LevelNine', SceneGame.LevelNine);
-        game.state.add('LevelTen', SceneGame.LevelTen);
-        game.state.add('LevelEleven', SceneGame.LevelEleven);
-        game.state.add('LevelTwelve', SceneGame.LevelTwelve);
         game.state.add('Manager', SceneGame.Manager);
 
-        
-        game.state.start('Boot');
-    
-    }
- 
 
-</script> 
-    
-    <div align = "center">
-        <img id="tutorial" src="assets/image/title.gif">
-        </div>
-    
-    <!--<div align = "center"><button onclick="myFunction()">Dev Comments</button>
+        game.state.start('Boot');
+
+    }
+
+</script>
+
+<div align="center">
+</div>
+
+<!--<div align = "center"><button onclick="myFunction()">Dev Comments</button>
     <p id="demo"></p>
 </div>-->
 
-   
-    <script>
-       
 
-    </script>
-</html>  
+<script>
 
-<body>    
-    
-    
+
+</script>
+
+</html>
+
+<body>
+
+
 
 
 </body>

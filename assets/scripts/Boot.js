@@ -12,14 +12,20 @@ SceneGame.Boot.prototype = {
 
         this.stage.disableVisibilityChange = true;
 
-        if (this.game.device.desktop) {
-            this.scale.pageAlignHorizontally = true;
-            this.scale.pageAlignVertically = true;
-        } else {
+
+        this.input.maxPointers = 1;
+        this.stage.disableVisibilityChange = true;
+        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.scale.pageAlignHorizontally = true;
+        this.scale.pageAlignVertically = true;
+        if (!this.game.device.desktop) {
             this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-            this.scale.setMinMAx(480, 260, 1024, 768);
+            //this.scale.setMinMax(480, 260, 1024, 768);
             this.scale.forceLandscape = true;
             this.scale.pageAlignHorizontally = true;
+            this.scale.setResizeCallback(this.gameResized, this);
+            this.scale.enterIncorrectOrientation.add(this.enterIncorrectOrientation, this);
+            this.scale.leaveIncorrectOrientation.add(this.leaveIncorrectOrientation, this);
         }
 
 
@@ -41,6 +47,17 @@ SceneGame.Boot.prototype = {
 
         this.state.start('Preloader');
 
+    },
+    enterIncorrectOrientation: function () {
+        this.orientated = false;
+        document.getElementById('orientation').style.display = 'none';
+    },
+    leaveIncorrectOrientation: function () {
+        this.orientated = true;
+        document.getElementById('orientation').style.display = 'none';
+    },
+    gameResized: function () {
+        console.log("oi");
     }
 
 }

@@ -9,34 +9,53 @@
     <script src="assets/scripts/Boot.js"></script>
     <script src="assets/scripts/Preloader.js"></script>
     <script src="assets/scripts/MainMenu.js"></script>
-    <script src="assets/scripts/LevelOne.js"></script>
-    <script src="assets/scripts/LevelTwo.js"></script>
-    <script src="assets/scripts/LevelThree.js"></script>
-    <script src="assets/scripts/LevelFour.js"></script>
-    <script src="assets/scripts/LevelFive.js"></script>
-    <script src="assets/scripts/LevelSix.js"></script>
-    <script src="assets/scripts/LevelSeven.js"></script>
-    <script src="assets/scripts/LevelEight.js"></script>
-    <script src="assets/scripts/LevelNine.js"></script>
-    <script src="assets/scripts/LevelTen.js"></script>
-    <script src="assets/scripts/LevelEleven.js"></script>
-    <script src="assets/scripts/LevelTwelve.js"></script>
     <script src="assets/scripts/Manager.js"></script>
+    <script src="gyro.min.js"></script>
 
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden
+        }
+        
+        #frame {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 100%;
+            overflow: hidden
+        }
+        
+        #stage {
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden
+        }
 
+    </style>
 </head>
 
 <body>
 
     <body bgcolor="#000000">
         <div id="content" />
+        <div id="orientation"></div>
     </body>
 </body>
 
-<div id="gameContainer"></div>
+<div id="stage"></div>
 
 <script type="text/javascript">
-    var game = new Phaser.Game(1200, 800, Phaser.AUTO, 'gameContainer');
+    var game = new Phaser.Game(1200, 800, Phaser.AUTO, 'stage');
 
     window.onload = function() {
 

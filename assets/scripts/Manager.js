@@ -42,10 +42,10 @@ SceneGame.Manager.prototype = {
         manager.pressSprites = [];
         manager.hands = [];
         manager.handimation = [];
+        manager.round = 1;
+        manager.reverse = false;
 
         manager.correct = manager.add.audio('correct');
-
-        manager.keyboard = this.game.input.keyboard;
 
         //seperate init loaded scenes from unloaded ones
         for (var i = 0; i < manager.scenesJSON.Scenes.length; i++) {
@@ -99,43 +99,31 @@ SceneGame.Manager.prototype = {
         switch (keyName) {
             case "manager.cursors.up":
                 manager.yellowSprites[num] = manager.add.sprite(620, 570, 'keys', 'yellowkeys-' + num);
-                manager.yellowSprites[num].anchor.setTo(.5, .5);
                 manager.pressSprites[num] = manager.add.sprite(620, 570, 'keys', 'keypress-0');
-                manager.pressSprites[num].anchor.setTo(.5, .5);
-                manager.pressSprites[num].visible = false;
                 manager.PlaceHands(num, 850, 620, 20);
-                manager.world.sendToBack(manager.yellowSprites[num]);
                 break;
             case "manager.cursors.down":
                 manager.yellowSprites[num] = manager.add.sprite(620, 610, 'keys', 'yellowkeys-' + num);
-                manager.yellowSprites[num].anchor.setTo(.5, .5);
                 manager.pressSprites[num] = manager.add.sprite(620, 610, 'keys', 'keypress-0');
-                manager.pressSprites[num].anchor.setTo(.5, .5);
-                manager.pressSprites[num].visible = false;
                 manager.PlaceHands(num, 700, 820, 60);
                 manager.hands[num].scale.y = -1;
-                manager.world.sendToBack(manager.yellowSprites[num]);
                 break;
             case "manager.cursors.right":
                 manager.yellowSprites[num] = manager.add.sprite(700, 610, 'keys', 'yellowkeys-' + num);
                 manager.pressSprites[num] = manager.add.sprite(700, 610, 'keys', 'keypress-0');
-                manager.pressSprites[num].anchor.setTo(.5, .5);
-                manager.pressSprites[num].visible = false;
-                manager.yellowSprites[num].anchor.setTo(.5, .5);
                 manager.PlaceHands(num, 900, 595, 0);
-                manager.world.sendToBack(manager.yellowSprites[num]);
                 break;
             case "manager.cursors.left":
                 manager.yellowSprites[num] = manager.add.sprite(540, 610, 'keys', 'yellowkeys-' + num);
                 manager.pressSprites[num] = manager.add.sprite(540, 610, 'keys', 'keypress-0');
-                manager.pressSprites[num].anchor.setTo(.5, .5);
-                manager.pressSprites[num].visible = false;
-                manager.yellowSprites[num].anchor.setTo(.5, .5);
                 manager.PlaceHands(num, 340, 700, 150);
                 manager.hands[num].scale.y = -1;
-                manager.world.sendToBack(manager.yellowSprites[num]);
                 break;
         }
+        manager.yellowSprites[num].anchor.setTo(0.5, 0.5);
+        manager.pressSprites[num].anchor.setTo(0.5, 0.5);
+        manager.pressSprites[num].visible = false;
+        manager.world.sendToBack(manager.yellowSprites[num]);
     },
 
     RotateOutline: function () {
@@ -147,7 +135,7 @@ SceneGame.Manager.prototype = {
         }
         for (var i = 0; i < manager.currentScene.keySet.length; i++) {
             manager.yellowSprites[i].frame = manager.yellowSpriteFrame;
-        };
+        }
 
         manager.yellowSpriteFrame += 1;
         if (manager.yellowSpriteFrame == 15) {
@@ -158,7 +146,7 @@ SceneGame.Manager.prototype = {
     PlaceHands: function (num, posX, posY, rot) {
         var manager = this;
         manager.hands[num] = manager.add.sprite(posX, posY, 'singleHand', 'hand0');
-        manager.hands[num].anchor.setTo(.5, .5);
+        manager.hands[num].anchor.setTo(0.5, 0.5);
         manager.handimation[num] = manager.hands[num].animations.add('twitch');
         manager.handimation[num].play(10, true);
         manager.hands[num].angle += rot;
@@ -175,21 +163,6 @@ SceneGame.Manager.prototype = {
         }
 
         manager.keySet = getKeys;
-        //        manager.keySet = [];
-        //        console.log(manager.currentScene.keySet)
-        //        getKeys.push(eval(manager.currentScene.keySet[0]));
-        //        manager.keySet = getKeys;
-        //        console.log(manager.keySet);
-        //        if (getKeys[0].length >= 2) {
-        //            var arrayKey = [];
-        //            for (var i = 0; i < getKeys[0].length; i++) {
-        //                arrayKey.push(eval(getKeys[0][i]));
-        //            }
-        //            manager.keySet = arrayKey;
-        //        } else {
-        //            manager.keySet = getKeys;
-        //        }
-
     },
 
     //sets some parameters for the scene
@@ -232,29 +205,21 @@ SceneGame.Manager.prototype = {
         manager.sheetNum = 0;
         manager.spriteNum = 0;
         manager.allKeys = false;
-        //        if (manager.currentScene.name != "wakephone") {
         manager.CreateKeySprite();
         manager.gameReady = true;
         manager.KeyCheckSwitch(manager.currentScene.pattern);
         manager.time.events.add(Phaser.Timer.SECOND * 10, manager.NextScene, this);
-        //        } else if (manager.currentScene.name == "wakephone") {
-        //            manager.MorningScenes();
-        //        }
+        if (manager.currentScene.name == "wakephone") {
+            manager.MorningScenes();
+        }
 
     },
 
     //picks the next scene from the array of already loaded scenes
     NextScene: function () {
         var manager = this;
-        manager.cursors.up.reset();
-        manager.cursors.down.reset();
-        //        for (var i = 0; i < manager.keySet.length; i++) {
-        //            manager.keySet[i].destroy();
-        //        }
-        manager.world.removeAll();
-        manager.time.events.removeAll();
+        manager.RemoveEverything();
         if (manager.preloadedSets.length != 0) {
-            //var nextSet = manager.preloadedSets[Math.floor(Math.random() * manager.unloadedSets.length)];
             var nextSet = manager.preloadedSets.shift();
             for (var i = 0; i < this.scenesJSON.Scenes.length; i++) {
                 if (this.scenesJSON.Scenes[i].name == nextSet) {
@@ -266,8 +231,19 @@ SceneGame.Manager.prototype = {
             }
 
         } else {
+            manager.state.start("Manager");
             console.log("reached end of array");
         }
+    },
+
+    RemoveEverything: function () {
+        var manager = this;
+        manager.cursors.up.reset();
+        manager.cursors.down.reset();
+        manager.cursors.left.reset();
+        manager.cursors.right.reset();
+        manager.world.removeAll();
+        manager.time.events.removeAll();
     },
 
     //here is where i'm running the code to detect input
@@ -282,104 +258,127 @@ SceneGame.Manager.prototype = {
             if (manager.allKeys) {
                 manager.IncreaseInt();
             }
-            //                        if (manager.currentScene.name == "wakephone") {
-            //                            if (manager.topLidDown) {
-            //                                manager.startTween = true;
-            //                                manager.mLidTween = manager.add.tween(manager.mLid).to({
-            //                                    alpha: 0
-            //                                }, 1000, Phaser.Easing.Linear.None, true);
-            //                                manager.tLidTween.pause();
-            //                                manager.bLidTween.pause();
-            //                                manager.world.bringToTop(manager.tLid);
-            //                                manager.world.bringToTop(manager.bLid);
-            //                                manager.tLid.position.y--;
-            //                                manager.bLid.position.y++;
-            //                                manager.morningInt++;
-            //                            }
-            //                            manager.EyelidTweens();
-            //                        }
 
+        }
+        if (manager.currentScene.pattern == 3) {
+            if (manager.keysPressed[0] && !manager.reverse) {
+                manager.IncreaseInt();
+            }
+            if (manager.keysPressed[1] && manager.reverse) {
+                manager.DecreaseInt();
+            }
+        }
+        if (manager.currentScene.name == "wakephone") {
+            if (manager.topLidDown) {
+                manager.startTween = true;
+                manager.mLidTween = manager.add.tween(manager.mLid).to({
+                    alpha: 0
+                }, 1000, Phaser.Easing.Linear.None, true);
+                manager.tLidTween.pause();
+                manager.bLidTween.pause();
+                manager.world.bringToTop(manager.tLid);
+                manager.world.bringToTop(manager.bLid);
+                manager.world.bringToTop(manager.black);
+                for (var i = 0; i < manager.yellowSprites.length; i++) {
+                    manager.world.bringToTop(manager.yellowSprites[i]);
+                }
+                for (var i = 0; i < manager.pressSprites.length; i++) {
+                    manager.world.bringToTop(manager.pressSprites[i]);
+                }
+                manager.world.bringToTop(manager.keySprites);
+                for (var i = 0; i < manager.hands.length; i++) {
+                    manager.world.bringToTop(manager.hands[i]);
+                }
+                manager.tLid.position.y--;
+                manager.bLid.position.y++;
+                manager.morningInt++;
+            }
+            manager.EyelidTweens();
         }
 
     },
 
-    //    MorningScenes: function () {
-    //        var manager = this;
-    //        manager.morningInt = 0;
-    //        console.log("this");
-    //        manager.tLid = manager.add.sprite(0, -100, 'toplid');
-    //        manager.bLid = manager.add.sprite(0, 0, 'lowerlid');
-    //        manager.mLid = manager.add.sprite(0, 0, 'midlid');
-    //        manager.tLidTween = game.add.tween(manager.tLid).to({
-    //            y: manager.tLid.position.y - 20
-    //        }, 3000, Phaser.Easing.Back.Out, true);
-    //        manager.tLidTween.repeat(1000, 1000);
-    //        manager.bLidTween = game.add.tween(manager.bLid).to({
-    //            y: manager.bLid.position.y + 20
-    //        }, 3000, Phaser.Easing.Back.Out, true);
-    //        manager.bLidTween.repeat(1000, 1000);
-    //        manager.tLidTween.yoyo(true, 1000);
-    //        manager.bLidTween.yoyo(true, 1000);
-    //        manager.gameReady = false;
-    //        manager.cursors.up.onDown.add(function () {
-    //            manager.topLidDown = true;
-    //        })
-    //        manager.cursors.up.onUp.add(function () {
-    //            manager.topLidDown = false;
-    //        })
-    //        manager.cursors.down.onDown.add(function () {
-    //            manager.bottomLidDown = true;
-    //            if (manager.morningInt == 100) {
-    //                manager.muffled.stop();
-    //                manager.transtionAlarm = manager.add.audio('transition');
-    //                manager.transtionAlarm.play();
-    //                manager.transtionAlarm.onStop.add(function () {
-    //                    manager.morning = manager.add.audio('morning');
-    //                    manager.morning.play();
-    //                })
-    //                manager.time.events.add(Phaser.Timer.SECOND * 10, manager.NextScene, this);
-    //                manager.gameReady = true;
-    //            }
-    //        })
-    //        manager.cursors.down.onUp.add(function () {
-    //            manager.bottomLidDown = false;
-    //        })
-    //    },
+    MorningScenes: function () {
+        var manager = this;
+        manager.morningInt = 0;
+        console.log("this");
 
-    //    EyelidTweens: function () {
-    //        var manager = this;
-    //        if (!manager.topLidDown) {
-    //            if (manager.tLid.position.y < -120 && manager.startTween) {
-    //                if (manager.tLid.position.y > -180) {
-    //                    manager.tLidReTween = manager.add.tween(manager.tLid).to({
-    //                        y: -100
-    //                    }, 500, Phaser.Easing.Back.Out, true);
-    //                    manager.bLidReTween = manager.add.tween(manager.bLid).to({
-    //                        y: 0
-    //                    }, 500, Phaser.Easing.Back.Out, true);
-    //                    manager.tLidReTween.onComplete.add(function () {
-    //                        manager.tLidTween.resume();
-    //                        manager.bLidTween.resume();
-    //                        manager.startTween = false;
-    //                    })
-    //                } else {
-    //                    manager.tLidTween.stop();
-    //                    manager.bLidTween.stop();
-    //                    manager.tLidTween = game.add.tween(manager.tLid).to({
-    //                        y: manager.tLid.position.y - 20
-    //                    }, 3000, Phaser.Easing.Back.Out, true);
-    //                    manager.tLidTween.repeat(1000, 1000);
-    //                    manager.bLidTween = game.add.tween(manager.bLid).to({
-    //                        y: manager.bLid.position.y + 20
-    //                    }, 3000, Phaser.Easing.Back.Out, true);
-    //                    manager.startTween = false;
-    //                }
-    //            }
-    //        }
-    //        if (manager.sheetNum >= manager.currentScene.sheets) {
-    //            manager.gameReady = false;
-    //        }
-    //    },
+        manager.tLid = manager.add.sprite(0, -100, 'toplid');
+        manager.bLid = manager.add.sprite(0, 0, 'lowerlid');
+        manager.mLid = manager.add.sprite(0, 0, 'midlid');
+        manager.black = manager.add.sprite(0, 501, 'black');
+        for (var i = 0; i < manager.yellowSprites.length; i++) {
+            manager.world.bringToTop(manager.yellowSprites[i]);
+        }
+        manager.world.bringToTop(manager.keySprites);
+        for (var i = 0; i < manager.hands.length; i++) {
+            manager.world.bringToTop(manager.hands[i]);
+        }
+        manager.tLidTween = manager.add.tween(manager.tLid).to({
+            y: manager.tLid.position.y - 20
+        }, 3000, Phaser.Easing.Back.Out, true);
+        manager.tLidTween.repeat(1000, 1000);
+        manager.bLidTween = manager.add.tween(manager.bLid).to({
+            y: manager.bLid.position.y + 20
+        }, 3000, Phaser.Easing.Back.Out, true);
+        manager.bLidTween.repeat(1000, 1000);
+        manager.tLidTween.yoyo(true, 1000);
+        manager.bLidTween.yoyo(true, 1000);
+        manager.cursors.up.onDown.add(function () {
+            manager.topLidDown = true;
+        });
+        manager.cursors.up.onUp.add(function () {
+            manager.topLidDown = false;
+        });
+        manager.cursors.down.onDown.add(function () {
+            manager.bottomLidDown = true;
+            if (manager.morningInt == 100) {
+                manager.muffled.stop();
+                manager.transtionAlarm = manager.add.audio('transition');
+                manager.transtionAlarm.play();
+                manager.transtionAlarm.onStop.add(function () {
+                    manager.morning = manager.add.audio('morning');
+                    manager.morning.play();
+                });
+                manager.gameReady = true;
+            }
+        });
+        manager.cursors.down.onUp.add(function () {
+            manager.bottomLidDown = false;
+        });
+    },
+
+    EyelidTweens: function () {
+        var manager = this;
+        if (!manager.topLidDown) {
+            if (manager.tLid.position.y < -120 && manager.startTween) {
+                if (manager.tLid.position.y > -180) {
+                    manager.tLidReTween = manager.add.tween(manager.tLid).to({
+                        y: -100
+                    }, 500, Phaser.Easing.Back.Out, true);
+                    manager.bLidReTween = manager.add.tween(manager.bLid).to({
+                        y: 0
+                    }, 500, Phaser.Easing.Back.Out, true);
+                    manager.tLidReTween.onComplete.add(function () {
+                        manager.tLidTween.resume();
+                        manager.bLidTween.resume();
+                        manager.startTween = false;
+                    });
+                } else {
+                    manager.tLidTween.stop();
+                    manager.bLidTween.stop();
+                    manager.tLidTween = manager.add.tween(manager.tLid).to({
+                        y: manager.tLid.position.y - 20
+                    }, 3000, Phaser.Easing.Back.Out, true);
+                    manager.tLidTween.repeat(1000, 1000);
+                    manager.bLidTween = manager.add.tween(manager.bLid).to({
+                        y: manager.bLid.position.y + 20
+                    }, 3000, Phaser.Easing.Back.Out, true);
+                    manager.startTween = false;
+                }
+            }
+        }
+    },
 
 
 
@@ -406,18 +405,16 @@ SceneGame.Manager.prototype = {
         }
     },
 
-    ////FROM HERE ON I NEED TO FIX AND COMPLETE THIS CODE
-
     YellowKeyInput: function (num) {
         var manager = this;
         manager.yellowSprites[num].visible = false;
         manager.pressSprites[num].visible = true;
         manager.pressSprites[num].alpha = 1;
-        manager.buttonPressFrame[0] = 0
+        manager.buttonPressFrame[0] = 0;
         manager.time.events.repeat(Phaser.Timer.SECOND / 15, 8, function () {
             manager.pressSprites[num].frame = manager.buttonPressFrame[num];
             manager.buttonPressFrame[num] += 1;
-            manager.pressSprites[num].alpha -= .15;
+            manager.pressSprites[num].alpha -= 0.15;
             if (manager.buttonPressFrame[num] >= 7) {
                 manager.buttonPressFrame[num] = 0;
                 manager.pressSprites[num].frame = manager.buttonPressFrame[num];
@@ -439,132 +436,228 @@ SceneGame.Manager.prototype = {
     HoldKeys: function () {
         var manager = this;
         manager.keySet[0].onDown.add(function () {
-            manager.correct.play();
-            manager.keysPressed[0] = true;
-            manager.YellowKeyInput(0);
-        })
+            manager.HoldKeyPress(0);
+        });
         manager.keySet[0].onUp.add(function () {
-            manager.YellowKeyUp(0);
-            manager.keysPressed[0] = false;
-        })
+            manager.HoldKeyUp(0);
+        });
         if (manager.keySet[1] != null) {
             manager.keySet[1].onDown.add(function () {
-                manager.correct.play();
-                manager.keysPressed[1] = true;
-                manager.YellowKeyInput(1);
-            })
+                manager.HoldKeyPress(1);
+            });
             manager.keySet[1].onUp.add(function () {
-                manager.YellowKeyUp(1);
-                manager.keysPressed[1] = false;
-            })
+                manager.HoldKeyUp(1);
+            });
         }
         if (manager.keySet[2] != null) {
             manager.keySet[2].onDown.add(function () {
-                manager.correct.play();
-                manager.keysPressed[2] = true;
-                manager.YellowKeyInput(2);
-            })
+                manager.correct.HoldKeyPress(2);
+            });
             manager.keySet[2].onUp.add(function () {
-                manager.YellowKeyUp(2);
-                manager.keysPressed[2] = false;
-            })
+                manager.HoldKeyUp(2);
+            });
         }
         if (manager.keySet[3] != null) {
             manager.keySet[3].onDown.add(function () {
-                manager.correct.play();
-                manager.keysPressed[3] = true;
-                manager.YellowKeyInput(3);
-            })
+                manager.HoldKeyPress(3);
+            });
             manager.keySet[3].onUp.add(function () {
-                manager.YellowKeyUp(3);
-                manager.keysPressed[3] = false;
-            })
+                manager.HoldKeyUp(3);
+            });
         }
     },
 
-    //move this
+    HoldKeyPress: function (num) {
+        var manager = this;
+        manager.correct.play();
+        manager.keysPressed[num] = true;
+        manager.YellowKeyInput(num);
+    },
+
+    HoldKeyUp: function (num) {
+        var manager = this;
+        manager.YellowKeyUp(num);
+        manager.keysPressed[num] = false;
+    },
+
     //checks if every bool in an array is true
     AreTrue: function (element, index, array) {
-        var manager = this;
         return element == true;
     },
 
     //for when keys must be pressed in a certain order
     SequentialKeys: function () {
         var manager = this;
-        console.log(manager.keySet.length);
+        for (var i = 1; i < manager.keySet.length; i++) {
+            manager.yellowSprites[i].visible = false;
+        }
         manager.keySet[0].onDown.add(function () {
-            manager.correct.play();
-            manager.YellowKeyInput(0);
-            console.log("up");
+            if (!manager.keysPressed[0]) {
+                manager.SequentialKeyPress(0);
+                manager.YellowKeyUp(1);
+            }
             manager.keysPressed[0] = true;
-        })
+        });
         manager.keySet[1].onDown.add(function () {
-            manager.correct.play();
-            manager.YellowKeyInput(1);
             if (manager.keysPressed[0]) {
-                console.log("left");
+                if (!manager.keysPressed[1]) {
+                    manager.SequentialKeyPress(1);
+                    manager.YellowKeyUp(2);
+                }
                 manager.keysPressed[1] = true;
                 if (manager.keySet.length == 2) {
-                    console.log("why is life");
-                    manager.IncreaseInt();
-                    manager.keysPressed[1] = false;
-                    manager.keysPressed[0] = false;
+                    manager.SetKeysPressedFalse();
 
                 }
+                for (var i = 0; i < manager.hands.length; i++) {
+                    manager.world.bringToTop(manager.hands[i]);
+                }
             }
-        })
+        });
 
         if (manager.keySet.length >= 3) {
             manager.keySet[2].onDown.add(function () {
-                manager.correct.play();
-                manager.YellowKeyInput(2);
                 if (manager.keysPressed[1]) {
-                    console.log("down");
+                    if (!manager.keysPressed[2]) {
+                        manager.SequentialKeyPress(2);
+                    }
                     manager.keysPressed[2] = true;
                 }
                 if (manager.keysPressed[2] && manager.keySet.length == 3) {
-                    manager.IncreaseInt();
-                    manager.keysPressed[1] = false;
-                    manager.keysPressed[0] = false;
-                    manager.keysPressed[2] = false;
+                    manager.SetKeysPressedFalse();
                 }
-            })
+            });
 
         }
         if (manager.keySet.length >= 4) {
             manager.keySet[3].onDown.add(function () {
-                manager.correct.play();
-                manager.YellowKeyInput(3);
                 if (manager.keysPressed[2]) {
+                    if (!manager.keysPressed[3]) {
+                        manager.SequentialKeyPress(3);
+                    }
                     manager.keysPressed[3] = true;
                 }
                 if (manager.keysPressed[3]) {
-                    manager.IncreaseInt();
-                    manager.keysPressed[1] = false;
-                    manager.keysPressed[0] = false;
-                    manager.keysPressed[2] = false;
-                    manager.keysPressed[3] = false;
+                    manager.YellowKeyUp(0);
+                    manager.SetKeysPressedFalse();
                 }
-            })
+            });
 
+        }
+    },
+
+    SequentialKeyPress: function (num) {
+        var manager = this;
+        manager.correct.play();
+        manager.YellowKeyInput(num);
+    },
+
+    SetKeysPressedFalse: function () {
+        var manager = this;
+        manager.IncreaseInt();
+        for (var i = 0; i < manager.keysPressed.length; i++) {
+            manager.keysPressed[i] = false;
+        }
+    },
+
+    SwitchKeys: function () {
+        var manager = this;
+        for (var i = 1; i < manager.keySet.length; i++) {
+            manager.yellowSprites[i].visible = false;
+        }
+        manager.keySet[0].onDown.add(function () {
+            if (!manager.reverse) {
+                manager.YellowKeyInput(0);
+                manager.keysPressed[0] = true;
+            } else {
+                manager.keysPressed[0] = false;
+            }
+        });
+        manager.keySet[0].onUp.add(function () {
+            manager.keysPressed[0] = false;
+        });
+        manager.keySet[1].onDown.add(function () {
+            if (manager.reverse) {
+                manager.YellowKeyInput(1);
+                manager.keysPressed[1] = true;
+            } else {
+                manager.keysPressed[1] = false;
+            }
+        });
+        manager.keySet[1].onUp.add(function () {
+            manager.keysPressed[1] = false;
+        });
+    },
+
+    RestartCheck: function () {
+        var manager = this;
+        if (manager.currentScene.restart) {
+            manager.sheetNum = 0;
+            manager.spriteNum = 0;
+            manager.gameReady = true;
+        }
+    },
+
+    ReverseCheck: function () {
+        var manager = this;
+        if (manager.currentScene.reverse) {
+            if (!manager.reverse) {
+                manager.sheetNum -= 1;
+                manager.spriteNum = 3;
+                manager.YellowKeyUp(1);
+                manager.reverse = true;
+            } else {
+                manager.sheetNum = 0;
+                manager.spriteNum = 0;
+                manager.YellowKeyUp(0);
+                manager.reverse = false;
+            }
         }
     },
 
     //for repeatedly tapping a single key
     TapKeys: function () {
         var manager = this;
-        manager.tap = manager.keySet[0].onDown.add(manager.IncreaseInt, this);
+        manager.keySet[0].onDown.add(function () {
+            manager.correct.play();
+            manager.YellowKeyInput(0);
+            manager.TapIncrease();
+        });
+        manager.keySet[0].onUp.add(function () {
+            manager.YellowKeyUp(0);
+        });
     },
 
     //for when you can press any key :p 
     AnyKey: function () {
         var manager = this;
         manager.input.keyboard.onDownCallback = function () {
-            manager.IncreaseInt();
-        }
+            manager.TapIncrease();
+        };
     },
 
+    DecreaseInt: function () {
+        var manager = this;
+        manager.upInt -= 1;
+        if (manager.upInt != 0) {
+            if (manager.upInt % manager.sceneSpeed == 0) {
+                manager.spriteNum -= 1;
+                if (manager.spriteNum <= -1) {
+                    manager.spriteNum = 3;
+                    manager.sheetNum -= 1;
+                }
+                if (manager.sheetNum <= -1) {
+                    manager.RestartCheck();
+                    manager.ReverseCheck();
+                } else {
+                    var tempSprite = manager.add.sprite(0, 0, manager.currentScene.name + '-' + manager.sheetNum, manager.currentScene.name + manager.sheetNum + manager.spriteNum);
+                }
+                for (var i = 0; i < manager.hands.length; i++) {
+                    manager.world.bringToTop(manager.hands[i]);
+                }
+            }
+        }
+    },
 
     //Int that increases based on input in order to move the photos forward
     IncreaseInt: function () {
@@ -577,12 +670,16 @@ SceneGame.Manager.prototype = {
                     manager.spriteNum = 0;
                     if (manager.sheetNum >= manager.currentScene.sheets) {
                         manager.gameReady = false;
+                        manager.RestartCheck();
+                        manager.ReverseCheck();
                     } else {
                         var tempSprite = manager.add.sprite(0, 0, manager.currentScene.name + '-' + manager.sheetNum, manager.currentScene.name + manager.sheetNum + manager.spriteNum);
                     }
                 } else {
-                    manager.spriteNum += 1;
-                    var tempSprite = manager.add.sprite(0, 0, manager.currentScene.name + '-' + manager.sheetNum, manager.currentScene.name + manager.sheetNum + manager.spriteNum);
+                    if (manager.sheetNum <= manager.currentScene.sheets) {
+                        manager.spriteNum += 1;
+                        var tempSprite = manager.add.sprite(0, 0, manager.currentScene.name + '-' + manager.sheetNum, manager.currentScene.name + manager.sheetNum + manager.spriteNum);
+                    }
                 }
                 for (var i = 0; i < manager.hands.length; i++) {
                     manager.world.bringToTop(manager.hands[i]);

@@ -50,12 +50,14 @@ SceneGame.Preloader.prototype = {
             }
         }
 
+
         this.load.atlasJSONArray('keys', 'assets/textures/keys.png', 'assets/textures/keys.json');
         this.load.atlasJSONArray('singleHand', 'assets/textures/hand.png', 'assets/textures/hand.json');
 
         this.load.image('toplid', 'assets/image/toplid2.png');
         this.load.image('lowerlid', 'assets/image/lowerlid2.png');
         this.load.image('midlid', 'assets/image/midlid2.png');
+        this.load.image('black', 'assets/image/black.png');
 
         this.load.audio('morning', 'assets/sound/morning.wav');
         this.load.audio('muffled', 'assets/sound/muffalarm.mp3');
@@ -73,12 +75,8 @@ SceneGame.Preloader.prototype = {
 
     fileComplete: function () {
         this.loadNum += 1;
-        if (this.loadNum % 8 == 0) {
-
-            console.log(this.loadNum);
+        if (this.loadNum % 10 == 0) {
             this.skyNum += 1;
-            console.log(this.skyNum);
-            console.log(this.sky._frame.name);
             this.sky.frame = this.skyNum;
             if (this.skyNum >= 3) {
                 this.skyNum == 0;
@@ -104,6 +102,7 @@ SceneGame.Preloader.prototype = {
     },
 
     startGame: function () {
+        this.load.onFileComplete.remove(this.fileComplete, this);
         this.load.onLoadComplete.remove(this.loadComplete, this);
         this.ready = true;
         this.game.load.preloadSprite = null;

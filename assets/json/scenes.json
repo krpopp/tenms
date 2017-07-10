@@ -10,86 +10,20 @@
       ],
             "pattern": 0,
             "speed": 10,
-            "hands": 3,
+            "hands": 2,
             "restart": false,
-            "reverse": false
+            "decrease": false
     },
         {
-            "name": "fridge",
-            "sheets": 2,
+            "name": "brushteeth",
+            "sheets": 8,
             "time": "morning",
-            "keySet": [
-        "manager.cursors.right",
-        "manager.cursors.left"
-      ],
-            "pattern": 3,
-            "speed": 10,
-            "hands": 3,
-            "restart": false,
-            "reverse": true
-    },
-        {
-            "name": "write",
-            "sheets": 3,
-            "time": "morning",
-            "keySet": [
-        "manager.cursors.up",
-        "manager.cursors.left",
-        "manager.cursors.down",
-        "manager.cursors.right"
-      ],
-            "pattern": 1,
-            "speed": 1,
-            "hands": 3,
-            "restart": false,
-            "reverse": false
-    },
-        {
-            "name": "egg",
-            "sheets": 3,
-            "time": "morning",
-            "keySet": ["manager.cursors.left"],
-            "pattern": 2,
-            "speed": 30,
-            "hands": 3,
-            "restart": false,
-            "reverse": true
-    },
-        {
-            "name": "juice",
-            "sheets": 3,
-            "time": "morning",
-            "keySet": [
-        "manager.cursors.left",
-        "manager.cursors.right"
-      ],
-            "pattern": 1,
-            "speed": 1,
-            "hands": 3,
-            "restart": true,
-            "reverse": false
-    },
-        {
-            "name": "shower",
-            "sheets": 6,
-            "time": "morning",
-            "keySet": ["manager.cursors.up"],
+            "keySet": ["manager.cursors.right"],
             "pattern": 0,
             "speed": 10,
             "hands": 3,
-            "restart": true,
-            "reverse": false
-    },
-        {
-            "name": "cat",
-            "sheets": 3,
-            "time": "morning",
-            "keySet": ["manager.cursors.up"],
-            "pattern": 0,
-            "speed": 30,
-            "hands": 3,
             "restart": false,
-            "reverse": false
+            "decrease": false
     },
         {
             "name": "coffee",
@@ -100,40 +34,30 @@
             "speed": 30,
             "hands": 3,
             "restart": false,
-            "reverse": true
+            "decrease": true
     },
         {
-            "name": "maggie",
-            "sheets": 4,
-            "time": "midday",
-            "keySet": ["manager.cursors.down"],
-            "pattern": 2,
-            "speed": 30,
-            "hands": 3,
-            "restart": false,
-            "reverse": false
+            "name": "shower",
+            "sheets": 6,
+            "time": "morning",
+            "keySet": ["manager.cursors.left", "manager.cursors.up", "manager.cursors.right"],
+            "pattern": 1,
+            "speed": 1,
+            "hands": 1,
+            "restart": true,
+            "reverse": false,
+            "decrease": false
     },
         {
-            "name": "fountain",
-            "sheets": 2,
-            "time": "midday",
-            "keySet": ["manager.cursors.down"],
+            "name": "cat",
+            "sheets": 3,
+            "time": "morning",
+            "keySet": ["manager.cursors.up"],
             "pattern": 0,
             "speed": 30,
             "hands": 3,
-            "restart": false,
-            "reverse": true
-    },
-        {
-            "name": "book",
-            "sheets": 3,
-            "time": "midday",
-            "keySet": ["manager.cursors.left"],
-            "pattern": 2,
-            "speed": 1,
-            "hands": 3,
-            "restart": false,
-            "reverse": false
+            "restart": true,
+            "decrease": false
     },
         {
             "name": "subway",
@@ -141,10 +65,32 @@
             "time": "morning",
             "keySet": ["manager.cursors.right"],
             "pattern": 0,
+            "speed": 20,
+            "hands": 3,
+            "restart": false,
+            "decrease": false
+    },
+        {
+            "name": "subwayseats",
+            "sheets": 4,
+            "time": "morning",
+            "keySet": [],
+            "pattern": 5,
+            "speed": 10,
+            "hands": 1,
+            "restart": true,
+            "decrease": false
+    },
+        {
+            "name": "computer",
+            "sheets": 6,
+            "time": "morning",
+            "keySet": ["manager.cursors.down", "manager.cursors.up", "manager.cursors.right", "manager.cursors.left"],
+            "pattern": 4,
             "speed": 10,
             "hands": 3,
             "restart": false,
-            "reverse": false
+            "decrease": false
     }
   ]
 }

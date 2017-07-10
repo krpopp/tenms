@@ -50,6 +50,7 @@ SceneGame.Preloader.prototype = {
             }
         }
 
+        this.load.atlasJSONArray('wait', 'assets/textures/wait.png', 'assets/textures/wait.json');
 
         this.load.atlasJSONArray('keys', 'assets/textures/keys.png', 'assets/textures/keys.json');
         this.load.atlasJSONArray('singleHand', 'assets/textures/hand.png', 'assets/textures/hand.json');
@@ -69,6 +70,21 @@ SceneGame.Preloader.prototype = {
 
         this.load.audio('tone1', 'assets/sound/roomTone1.mp3');
         this.load.audio('tone3', 'assets/sound/roomTone3.wav');
+
+        this.load.audio('shower', 'assets/sound/shower.wav');
+        this.load.audio('purr', 'assets/sound/Purr.wav');
+        this.load.audio('coffee', 'assets/sound/slurp.wav');
+
+        this.load.audio('click2', 'assets/sound/click2.wav');
+        this.load.audio('click3', 'assets/sound/click3.wav');
+        this.load.audio('click4', 'assets/sound/click4.wav');
+        this.load.audio('click1', 'assets/sound/click1.wav');
+
+        this.load.audio('brush', 'assets/sound/brush.wav');
+
+        this.load.audio('subwayride', 'assets/sound/subwayride.mp3');
+        this.load.audio('subwayambiant', 'assets/sound/subwayambiant.mp3');
+        this.load.audio('subwayin', 'assets/sound/subwayin.mp3');
 
 
     },

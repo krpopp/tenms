@@ -1,0 +1,100 @@
+{
+    "frames": [
+
+        {
+            "filename": "subwayseats03",
+            "frame": {
+                "x": 1,
+                "y": 1,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+},
+        {
+            "filename": "subwayseats02",
+            "frame": {
+                "x": 1,
+                "y": 503,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+},
+        {
+            "filename": "subwayseats01",
+            "frame": {
+                "x": 1,
+                "y": 1005,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+},
+        {
+            "filename": "subwayseats00",
+            "frame": {
+                "x": 1,
+                "y": 1507,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+}],
+    "meta": {
+        "app": "http://www.codeandweb.com/texturepacker",
+        "version": "1.0",
+        "image": "seats-3.png",
+        "format": "RGBA8888",
+        "size": {
+            "w": 1202,
+            "h": 2008
+        },
+        "scale": "1",
+        "smartupdate": "$TexturePacker:SmartUpdate:58e319c2b84279dd7d8681a25eb1d449:4f871219d5457faf6e62e9c9ee42ef83:0de879702083822245b5c8bf018b94e5$"
+    }
+}

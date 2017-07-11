@@ -10,11 +10,7 @@ SceneGame.Boot.prototype = {
 
         this.input.maxPointers = 1;
 
-        this.stage.disableVisibilityChange = true;
-
-
         this.input.maxPointers = 1;
-        this.stage.disableVisibilityChange = true;
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.scale.pageAlignHorizontally = true;
         this.scale.pageAlignVertically = true;
@@ -23,7 +19,6 @@ SceneGame.Boot.prototype = {
             //this.scale.setMinMax(480, 260, 1024, 768);
             this.scale.forceLandscape = true;
             this.scale.pageAlignHorizontally = true;
-            this.scale.setResizeCallback(this.gameResized, this);
             this.scale.enterIncorrectOrientation.add(this.enterIncorrectOrientation, this);
             this.scale.leaveIncorrectOrientation.add(this.leaveIncorrectOrientation, this);
         }
@@ -56,8 +51,5 @@ SceneGame.Boot.prototype = {
         this.orientated = true;
         document.getElementById('orientation').style.display = 'none';
     },
-    gameResized: function () {
-        console.log("oi");
-    }
 
-}
+};

@@ -70,10 +70,7 @@ SceneGame.Preloader.prototype = {
 
         this.load.audio('correct', 'assets/sound/correct.wav');
         this.load.audio('incorrect', 'assets/sound/incorrect.mp3');
-        this.load.audio('incorrect2', 'assets/sound/incorrect2.wav');
 
-        this.load.audio('tone1', 'assets/sound/roomTone1.mp3');
-        this.load.audio('tone3', 'assets/sound/roomTone3.wav');
     },
 
     fileComplete: function () {

@@ -1,0 +1,100 @@
+{
+    "frames": [
+
+        {
+            "filename": "walkstreet03",
+            "frame": {
+                "x": 1,
+                "y": 1,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+},
+        {
+            "filename": "walkstreet02",
+            "frame": {
+                "x": 1,
+                "y": 503,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+},
+        {
+            "filename": "walkstreet01",
+            "frame": {
+                "x": 1,
+                "y": 1005,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+},
+        {
+            "filename": "walkstreet00",
+            "frame": {
+                "x": 1,
+                "y": 1507,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+}],
+    "meta": {
+        "app": "http://www.codeandweb.com/texturepacker",
+        "version": "1.0",
+        "image": "walkstreet-5.png",
+        "format": "RGBA8888",
+        "size": {
+            "w": 1202,
+            "h": 2008
+        },
+        "scale": "1",
+        "smartupdate": "$TexturePacker:SmartUpdate:89fdd5eb45c962724abe6260ac5dd8f6:7fd5c95771bba603b6d50ca38cdb5f76:a882148adc7de05d59fb94dc4127e3f9$"
+    }
+}

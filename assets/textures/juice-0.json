@@ -1,0 +1,44 @@
+{"frames": [
+
+{
+	"filename": "juice00",
+	"frame": {"x":1,"y":1,"w":1200,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":500},
+	"sourceSize": {"w":1200,"h":500}
+},
+{
+	"filename": "juice01",
+	"frame": {"x":1,"y":503,"w":1200,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":500},
+	"sourceSize": {"w":1200,"h":500}
+},
+{
+	"filename": "juice02",
+	"frame": {"x":1,"y":1005,"w":1200,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":500},
+	"sourceSize": {"w":1200,"h":500}
+},
+{
+	"filename": "juice03",
+	"frame": {"x":1,"y":1507,"w":1200,"h":500},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1200,"h":500},
+	"sourceSize": {"w":1200,"h":500}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "juice-0.png",
+	"format": "RGBA8888",
+	"size": {"w":1202,"h":2008},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:4aa5e697b56a6049ebb8852e5d6fd6b3:ccef8f377617b10183cf925df494a261:bfcf38c238b14680c16c0b9b87556a7f$"
+}
+}

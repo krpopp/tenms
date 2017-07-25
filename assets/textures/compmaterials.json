@@ -1,0 +1,100 @@
+{
+    "frames": [
+
+        {
+            "filename": "emailscreen",
+            "frame": {
+                "x": 1,
+                "y": 482,
+                "w": 943,
+                "h": 480
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 943,
+                "h": 480
+            },
+            "sourceSize": {
+                "w": 943,
+                "h": 480
+            }
+},
+        {
+            "filename": "excel",
+            "frame": {
+                "x": 1,
+                "y": 964,
+                "w": 943,
+                "h": 480
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 943,
+                "h": 480
+            },
+            "sourceSize": {
+                "w": 943,
+                "h": 480
+            }
+},
+        {
+            "filename": "excelcursor",
+            "frame": {
+                "x": 1,
+                "y": 1,
+                "w": 70,
+                "h": 18
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 70,
+                "h": 18
+            },
+            "sourceSize": {
+                "w": 70,
+                "h": 18
+            }
+},
+        {
+            "filename": "loanemail",
+            "frame": {
+                "x": 1,
+                "y": 21,
+                "w": 952,
+                "h": 459
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 952,
+                "h": 459
+            },
+            "sourceSize": {
+                "w": 952,
+                "h": 459
+            }
+}],
+    "meta": {
+        "app": "http://www.codeandweb.com/texturepacker",
+        "version": "1.0",
+        "image": "compmaterials.png",
+        "format": "RGBA8888",
+        "size": {
+            "w": 954,
+            "h": 1445
+        },
+        "scale": "1",
+        "smartupdate": "$TexturePacker:SmartUpdate:581b12609640300e5182dd20ec104a2b:33186b955e50b9f86b2ef757f4b40809:d8d12883748d7054d708bdd1d10bcde8$"
+    }
+}

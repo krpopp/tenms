@@ -88,13 +88,13 @@
     "meta": {
         "app": "http://www.codeandweb.com/texturepacker",
         "version": "1.0",
-        "image": "shower-3.png",
+        "image": "shower-2.png",
         "format": "RGBA8888",
         "size": {
             "w": 1202,
             "h": 2008
         },
         "scale": "1",
-        "smartupdate": "$TexturePacker:SmartUpdate:55e948d147003f29019a5890a2335434:38877a38524abda50a1eeb20e4363dd9:81ccb862f812baa3d411d2f00eb2da09$"
+        "smartupdate": "$TexturePacker:SmartUpdate:e998a10eb64b316664dcca246f1e1c89:f8f7035eee87fceaf42d596a86e58c09:43056074bdae0ce2fc769ac81e80fb7b$"
     }
 }

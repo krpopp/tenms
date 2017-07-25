@@ -38,7 +38,6 @@ SceneGame.Manager.prototype = {
         }
         manager.CreatePausedStuff();
         manager.InitCreateHands();
-
     },
 
     CreatePausedStuff: function () {
@@ -76,44 +75,134 @@ SceneGame.Manager.prototype = {
 
     CreateKeySprite: function () {
         var manager = this;
-        if (manager.currentScene.keySet[0] == "manager.cue") {
+        if (manager.currentScene.pattern == 11) {
+            manager.arrows.visible = false;
             manager.letterKeys = [];
             manager.hasLetters = true;
             manager.keySprites.visible = false;
-            for (var i = 0; i < manager.keySet.length; i++) {
-                manager.letterKeys[i] = manager.add.sprite(480 + (100 * i), 550, "qw", "qwkey0");
-                manager.LetterYellowBG(manager.currentScene.keySet[i], i);
+            manager.bottleXPos = [520, 470, 520, 620, 670, 620];
+            manager.bottleYPos = [580, 500, 420, 420, 500, 580];
+            manager.letterKeys[0] = manager.add.sprite(300, 500, 'qw', 'qwkey0');
+            manager.BottleYellowBG(0);
+            for (var i = 1; i < manager.keySet.length; i++) {
+                manager.letterKeys[i] = manager.add.sprite(manager.bottleXPos[i - 1], manager.bottleYPos[i - 1], "qw", "qwkey0");
+                manager.BottleYellowBG(i, i - 1);
             }
             manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
-        } else if (manager.currentScene.keySet[0] == "manager.em") {
+        } else if (manager.currentScene.pattern == 14) {
+            manager.arrows.visible = false;
             manager.letterKeys = [];
             manager.hasLetters = true;
             manager.keySprites.visible = false;
-            for (var i = 0; i < manager.keySet.length; i++) {
-                manager.letterKeys[i] = manager.add.sprite(440 + (50 * i), 510 + (100 * i), "qw", "qwkey0");
-                manager.LetterYellowBG(manager.currentScene.keySet[i], i);
+            manager.bottleXPos = [520, 470, 520, 620, 670, 620];
+            manager.bottleYPos = [680, 600, 520, 520, 600, 680];
+            for (var i = 1; i < manager.keySet.length; i++) {
+                manager.letterKeys[i - 1] = manager.add.sprite(manager.bottleXPos[i - 1], manager.bottleYPos[i - 1], "qw", "qwkey0");
+                manager.BottleYellowBG(i, i - 1);
             }
             manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
-        } else if (manager.currentScene.keySet[0] == "manager.keyOne") {
+        } else if (manager.currentScene.pattern == 15) {
+            manager.arrows.visible = false;
             manager.letterKeys = [];
-            manager.letterKeys[0] = manager.add.sprite(580, 550, "qw", "qwkey0");
-            manager.EndYellowBG(manager.currentScene.keySet[0], 0);
+            manager.hasLetters = true;
             manager.keySprites.visible = false;
-            manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
-
-        } else if (manager.currentScene.name == "wakephone") {
-            manager.keySprites = manager.add.sprite(500, 550, "keyz", "keys-0");
-            manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.RotateOutline, this);
-            for (var i = 0; i < manager.currentScene.keySet.length; i++) {
-                manager.CreateYellowBG(manager.currentScene.keySet[i], i);
-            }
+            manager.yellowSprites[0] = manager.add.sprite(550, 600, 'morekeys', 'bigYellBG1');
+            manager.letter[0] = manager.add.sprite(560, 610, 'morekeys', 'del1');
+            manager.letterKeys[0] = manager.add.sprite(550, 600, 'morekeys', 'bigkey1');
+            //manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+        } else if (manager.currentScene.pattern == 16) {
+            manager.arrows.visible = false;
+            manager.letterKeys = [];
+            manager.hasLetters = true;
+            manager.keySprites.visible = false;
+            //tab
+            manager.yellowSprites[0] = manager.add.sprite(500, 600, 'midkeys', 'midKeyBG1');
+            manager.yellowSprites[0].visible = false;
+            //ctrl
+            manager.yellowSprites[1] = manager.add.sprite(460, 600, 'midkeys', 'midKeyBG1');
+            manager.CreateLetterYellowBG(1, 660, 630, 660, 630);
+            //tab
+            manager.letter[0] = manager.add.sprite(530, 610, 'morekeys', 'tab1');
+            manager.letter[0].visible = false;
+            //ctrl
+            manager.letter[1] = manager.add.sprite(490, 610, 'morekeys', 'ctrl1');
+            manager.letter[2] = manager.add.sprite(650, 610, 'morekeys', 'v1');
+            //tab
+            manager.letterKeys[0] = manager.add.sprite(500, 600, 'morekeys', 'midkey1');
+            manager.letterKeys[0].visible = false;
+            //ctrl
+            manager.letterKeys[1] = manager.add.sprite(460, 600, 'morekeys', 'midkey1');
+            manager.letterKeys[2] = manager.add.sprite(620, 590, "qw", "qwkey0");
         } else {
-            manager.keySprites.visible = true;
-            manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.RotateOutline, this);
-            for (var i = 0; i < manager.currentScene.keySet.length; i++) {
-                manager.CreateYellowBG(manager.currentScene.keySet[i], i);
+            if (manager.currentScene.keySet[0] == "manager.cue") {
+                manager.letterKeys = [];
+                manager.hasLetters = true;
+                manager.keySprites.visible = false;
+                for (var i = 0; i < manager.keySet.length; i++) {
+                    manager.letterKeys[i] = manager.add.sprite(480 + (100 * i), 550, "qw", "qwkey0");
+                    manager.LetterYellowBG(manager.currentScene.keySet[i], i);
+                }
+                manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+            } else if (manager.currentScene.keySet[0] == "manager.efNine") {
+                manager.letterKeys = [];
+                manager.letterKeys[0] = manager.add.sprite(480, 550, "qw", "qwkey0");
+                manager.letterKeys[1] = manager.add.sprite(600, 550, "qw", "qwkey0");
+                manager.LetterYellowBG("manager.function", 0);
+                manager.LetterYellowBG(manager.currentScene.keySet[0], 1);
+                manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+                manager.arrows.visible = false;
+                manager.keySprites.visible = false;
+            } else if (manager.currentScene.keySet[0] == "manager.em") {
+                manager.letterKeys = [];
+                manager.hasLetters = true;
+                manager.keySprites.visible = false;
+                for (var i = 0; i < manager.keySet.length; i++) {
+                    manager.letterKeys[i] = manager.add.sprite(440 + (50 * i), 510 + (100 * i), "qw", "qwkey0");
+                    manager.LetterYellowBG(manager.currentScene.keySet[i], i);
+                }
+                manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+            } else if (manager.currentScene.keySet[0] == "manager.keyOne") {
+                manager.letterKeys = [];
+                manager.letterKeys[0] = manager.add.sprite(580, 550, "qw", "qwkey0");
+                manager.EndYellowBG(manager.currentScene.keySet[0], 0);
+                manager.keySprites.visible = false;
+                manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+
+            } else if (manager.currentScene.keySet[0] == "manager.keyFive") {
+                manager.letterKeys = [];
+                manager.arrows.visible = false;
+                manager.nextY = 0;
+                manager.nextX = 0;
+                manager.hasLetters = true;
+                manager.keySprites.visible = false;
+                for (var i = 0; i < manager.keySet.length; i++) {
+                    if (i % 2 == 0) {
+                        manager.nextY += 1;
+                        manager.nextX = 0;
+                    } else {
+                        manager.nextX = 1;
+                    }
+                    manager.letterKeys[i] = manager.add.sprite(440 + (200 * manager.nextX), 440 + (80 * manager.nextY), "qw", "qwkey0");
+                    manager.LetterYellowBG(manager.currentScene.keySet[i], i);
+                }
+                manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+            } else if (manager.currentScene.name == "wakephone") {
+                manager.arrows.visible = true;
+                manager.keySprites = manager.add.sprite(500, 550, "keyz", "keys-0");
+                manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.RotateOutline, this);
+                for (var i = 0; i < manager.currentScene.keySet.length; i++) {
+                    manager.CreateYellowBG(manager.currentScene.keySet[i], i);
+                }
+            } else {
+                manager.arrows.visible = true;
+                manager.keySprites.visible = true;
+                manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.RotateOutline, this);
+                for (var i = 0; i < manager.currentScene.keySet.length; i++) {
+                    manager.CreateYellowBG(manager.currentScene.keySet[i], i);
+                }
             }
         }
+
         for (var i = 0; i < manager.hands.length; i++) {
             manager.world.bringToTop(manager.hands[i]);
         }
@@ -127,6 +216,19 @@ SceneGame.Manager.prototype = {
         manager.em = manager.input.keyboard.addKey(Phaser.Keyboard.M);
         manager.jay = manager.input.keyboard.addKey(Phaser.Keyboard.J);
         manager.ewe = manager.input.keyboard.addKey(Phaser.Keyboard.U);
+        manager.tee = manager.input.keyboard.addKey(Phaser.Keyboard.T);
+        manager.why = manager.input.keyboard.addKey(Phaser.Keyboard.Y);
+        manager.gee = manager.input.keyboard.addKey(Phaser.Keyboard.G);
+        manager.ach = manager.input.keyboard.addKey(Phaser.Keyboard.H);
+        manager.bee = manager.input.keyboard.addKey(Phaser.Keyboard.B);
+        manager.en = manager.input.keyboard.addKey(Phaser.Keyboard.N);
+        manager.em = manager.input.keyboard.addKey(Phaser.Keyboard.M);
+        manager.aye = manager.input.keyboard.addKey(Phaser.Keyboard.I);
+        manager.kay = manager.input.keyboard.addKey(Phaser.Keyboard.K);
+        manager.cee = manager.input.keyboard.addKey(Phaser.Keyboard.C);
+        manager.vee = manager.input.keyboard.addKey(Phaser.Keyboard.V);
+        manager.control = manager.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
+        manager.efNine = manager.input.keyboard.addKey(Phaser.Keyboard.F9);
         manager.keyOne = manager.input.keyboard.addKey(Phaser.Keyboard.ONE);
         manager.keyTwo = manager.input.keyboard.addKey(Phaser.Keyboard.TWO);
         manager.keyThree = manager.input.keyboard.addKey(Phaser.Keyboard.THREE);
@@ -137,13 +239,17 @@ SceneGame.Manager.prototype = {
         manager.keyEight = manager.input.keyboard.addKey(Phaser.Keyboard.EIGHT);
         manager.keyNine = manager.input.keyboard.addKey(Phaser.Keyboard.NINE);
         manager.keyZero = manager.input.keyboard.addKey(Phaser.Keyboard.ZERO);
+        manager.shift = manager.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
+        manager.tab = manager.input.keyboard.addKey(Phaser.Keyboard.TAB);
+        manager.enterKey = manager.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+        manager.deleteKey = manager.input.keyboard.addKey(Phaser.Keyboard.BACKSPACE);
     },
 
     EndYellowBG: function (keyName, num) {
         var manager = this;
         switch (num) {
             case 0:
-                manager.PlaceHands(num, 820, 715, 45);
+                manager.PlaceHands(num, 800, 715, 45);
                 for (var i = 1; i < manager.hands.length; i++) {
                     manager.hands[i].visible = false;
                 }
@@ -160,6 +266,35 @@ SceneGame.Manager.prototype = {
         manager.yellowSprites[num] = manager.add.sprite(yellX, yellY, "qw", "qwYellow1");
         manager.pressSprites[num] = manager.add.sprite(pressX, pressY, "keys", "keypress-0");
         manager.SetSpriteData(num);
+    },
+
+    BottleYellowBG: function (num, set) {
+        var manager = this;
+        switch (num) {
+            case 0:
+                manager.letter[num] = manager.add.sprite(320, 515, "down", 0);
+                manager.CreateLetterYellowBG(0, 335, 535, 300, 500);
+                break;
+            case 1:
+                manager.letter[num] = manager.add.sprite(manager.bottleXPos[set] + 25, manager.bottleYPos[set] + 15, "tyghbn", "en1");
+                manager.CreateLetterYellowBG(1, manager.bottleXPos[0] + 35, manager.bottleYPos[0] + 30, 300, 500);
+                break;
+            case 2:
+                manager.letter[num] = manager.add.sprite(manager.bottleXPos[set] + 25, manager.bottleYPos[set] + 15, "tyghbn", "ach1");
+                break;
+            case 3:
+                manager.letter[num] = manager.add.sprite(manager.bottleXPos[set] + 25, manager.bottleYPos[set] + 15, "mju", "U1");
+                break;
+            case 4:
+                manager.letter[num] = manager.add.sprite(manager.bottleXPos[set] + 25, manager.bottleYPos[set] + 15, "morekeys", "aye1");
+                break;
+            case 5:
+                manager.letter[num] = manager.add.sprite(manager.bottleXPos[set] + 25, manager.bottleYPos[set] + 15, "morekeys", "kay1");
+                break;
+            case 6:
+                manager.letter[num] = manager.add.sprite(manager.bottleXPos[set] + 25, manager.bottleYPos[set] + 15, "morekeys", "em1");
+                break;
+        }
     },
 
     LetterYellowBG: function (keyName, num) {
@@ -213,12 +348,92 @@ SceneGame.Manager.prototype = {
                 }
                 manager.CreateLetterYellowBG(num, 480 + (50 * num), 550 + (100 * num), 480 + (50 * num), 550 + (100 * i));
                 break;
+            case "manager.keyFive":
+                manager.arrows.visible = false;
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "numbers", "numbers50");
+                manager.PlaceHands(num, 330, 715, 120);
+                manager.hands[0].scale.y = -1;
+                for (var i = 1; i < manager.hands.length; i++) {
+                    manager.hands[i].visible = false;
+                }
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                break;
+            case "manager.keySix":
+                manager.arrows.visible = false;
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "numbers", "numbers60");
+                //manager.PlaceHands(num, 900, 595, 0);
+                for (var i = 1; i < manager.hands.length; i++) {
+                    manager.hands[i].visible = false;
+                }
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                break;
+            case "manager.tee":
+                manager.arrows.visible = false;
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "tyghbn", "tee3");
+                //manager.PlaceHands(num, 900, 595, 0);
+                for (var i = 1; i < manager.hands.length; i++) {
+                    manager.hands[i].visible = false;
+                }
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                break;
+            case "manager.why":
+                manager.arrows.visible = false;
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "tyghbn", "why3");
+                //manager.PlaceHands(num, 900, 595, 0);
+                for (var i = 1; i < manager.hands.length; i++) {
+                    manager.hands[i].visible = false;
+                }
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                break;
+            case "manager.gee":
+                manager.arrows.visible = false;
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "tyghbn", "gee3");
+                //manager.PlaceHands(num, 900, 595, 0);
+                for (var i = 1; i < manager.hands.length; i++) {
+                    manager.hands[i].visible = false;
+                }
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                break;
+            case "manager.ach":
+                manager.arrows.visible = false;
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "tyghbn", "ach3");
+                //manager.PlaceHands(num, 900, 595, 0);
+                for (var i = 1; i < manager.hands.length; i++) {
+                    manager.hands[i].visible = false;
+                }
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                break;
+            case "manager.bee":
+                manager.arrows.visible = false;
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "tyghbn", "bee3");
+                //manager.PlaceHands(num, 900, 595, 0);
+                for (var i = 1; i < manager.hands.length; i++) {
+                    manager.hands[i].visible = false;
+                }
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                break;
+            case "manager.en":
+                manager.arrows.visible = false;
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "tyghbn", "en3");
+                //manager.PlaceHands(num, 900, 595, 0);
+                for (var i = 1; i < manager.hands.length; i++) {
+                    manager.hands[i].visible = false;
+                }
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                break;
+            case "manager.function":
+                manager.letter[num] = manager.add.sprite(490, 570, "morekeys", "function");
+                manager.CreateLetterYellowBG(num, 520, 590, 530, 580);
+                break;
+            case "manager.efNine":
+                manager.letter[num] = manager.add.sprite(620, 570, "morekeys", "efnine");
+                manager.CreateLetterYellowBG(num, 640, 590, 630, 580);
+                break;
         }
     },
 
     CreateYellowBG: function (keyName, num) {
         var manager = this;
-        manager.arrows.visible = true;
         manager.time.events.loop(Phaser.Timer.SECOND / 7, function () {
             manager.RotateSpriteOutline(manager.arrows, 3, 0);
         }, this);
@@ -226,11 +441,9 @@ SceneGame.Manager.prototype = {
 
         switch (keyName) {
             case "manager.cursors.up":
-                console.log("up");
                 manager.CreateAllSpritesETC(num, 625, 590, 850, 660, 20);
                 break;
             case "manager.cursors.down":
-                console.log("down");
                 manager.CreateAllSpritesETC(num, 625, 670, 700, 880, 60);
                 if (manager.hands[num] != null) {
                     manager.hands[num].scale.y = -1;
@@ -348,6 +561,7 @@ SceneGame.Manager.prototype = {
 
     WaitPlease: function () {
         var manager = this;
+        manager.arrows.visible = false;
         manager.wait = manager.add.sprite(500, 550, "wait", "wait0");
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.RotateWait, this);
     },
@@ -381,6 +595,7 @@ SceneGame.Manager.prototype = {
 
     GuessPlease: function () {
         var manager = this;
+        manager.arrows.visible = false;
         manager.guess = manager.add.sprite(500, 550, "guess", "guess0");
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.RotateGuess, this);
     },
@@ -421,7 +636,7 @@ SceneGame.Manager.prototype = {
         manager.gameReady = true;
         manager.CreateKeySprite();
         manager.KeyCheckSwitch(manager.currentScene.pattern);
-        if (manager.currentScene.name != "sleep") {
+        if (manager.currentScene.name != "sleep" && manager.currentScene.name != "wakephone") {
             manager.time.events.add(Phaser.Timer.SECOND * 10, manager.NextScene, this);
         }
         if (manager.currentScene.name == "wakephone") {
@@ -460,11 +675,16 @@ SceneGame.Manager.prototype = {
                 }
             }
 
+        } else {
+            manager.state.start("Manager");
         }
     },
 
     RemoveEverything: function () {
         var manager = this;
+        //        if (manager.baseSound != null) {
+        //            manager.baseSound.stop();
+        //        }
         manager.cue.reset();
         manager.doubleEwe.reset();
         manager.em.reset();
@@ -494,6 +714,15 @@ SceneGame.Manager.prototype = {
                 manager.letterKeys[i].visible = false;
                 manager.letter[i].visible = false;
             }
+        }
+        if (manager.wait != null) {
+            manager.wait.kill();
+        }
+        if (manager.guess != null) {
+            manager.guess.kill();
+        }
+        if (manager.swipeTween != null) {
+            manager.tweens.remove(manager.swipeTween);
         }
         manager.bLid.kill();
         manager.tLid.kill();
@@ -535,6 +764,9 @@ SceneGame.Manager.prototype = {
                     manager.world.bringToTop(manager.hands[i]);
                 }
                 manager.tLid.position.y--;
+                if (manager.tLid.position.y <= -450) {
+                    manager.NextScene();
+                }
                 manager.bLid.position.y++;
             }
             manager.EyelidTweens();
@@ -577,6 +809,26 @@ SceneGame.Manager.prototype = {
         }
         if (manager.currentScene.pattern == 5) {
             manager.NoInput();
+        }
+        if (manager.currentScene.pattern == 10) {
+            if (manager.upInt >= manager.currentScene.switchInt) {
+                manager.keysPressed[0] = false;
+                manager.keysPressed[1] = false;
+                manager.keySet[0].reset;
+                manager.keySet.shift();
+                manager.ContinueSwitch();
+                manager.currentScene.switchInt = 500;
+            }
+        }
+        if (manager.currentScene.pattern == 13) {
+            if (manager.upInt >= manager.currentScene.switchPoints[0]) {
+                for (var i = 0; i < manager.keysPressed.length; i++) {
+                    manager.keysPressed[i] = false;
+                }
+                manager.letPress = false;
+                manager.shiftPress = true;
+                manager.currentScene.switchPoints.shift();
+            }
         }
         if (manager.eventSoundTime) {
             if (manager.upInt == manager.currentScene.soundFrame) {
@@ -664,7 +916,6 @@ SceneGame.Manager.prototype = {
 
     MorningTweens: function () {
         var manager = this;
-        manager.YTweens(manager.tLid, manager.tLid.position.y - 20, 3000);
         manager.tLidTween = manager.add.tween(manager.tLid).to({
             y: manager.tLid.position.y - 20
         }, 3000, Phaser.Easing.Back.Out, true);
@@ -753,8 +1004,44 @@ SceneGame.Manager.prototype = {
                 break;
             case 6:
                 manager.EndCreate();
+                break;
             case 7:
                 manager.Swipe();
+                break;
+            case 8:
+                manager.TapDifferent();
+                break;
+            case 9:
+                for (var i = 1; i < manager.keySet.length; i++) {
+                    manager.yellowSprites[i].visible = false;
+                }
+                manager.ManyKeyInt = 0;
+                manager.ManyKeySequence();
+                break;
+            case 10:
+                manager.ContinueSwitch();
+                break;
+            case 11:
+                manager.HoldAndSequence();
+                break;
+            case 12:
+                manager.IncreaseEachSequence();
+                break;
+            case 13:
+                manager.HoldAndSwitch();
+                break;
+            case 14:
+                manager.ChangeEach();
+                break;
+            case 15:
+                manager.Delete();
+                break;
+            case 16:
+                manager.Excel();
+                break;
+            case 17:
+                manager.SocMeds();
+                break;
         }
     },
 
@@ -842,6 +1129,7 @@ SceneGame.Manager.prototype = {
 
     CreateLogo: function () {
         var manager = this;
+        manager.time.events.add(Phaser.Timer.SECOND * 3, manager.NextScene, this);
         manager.logo = manager.add.sprite(860, 560, 'logo', 'logo_0000_Layer-3.png');
         var cropRect = new Phaser.Rectangle(0, 0, -550, manager.logo.height);
         manager.logo.alpha = 0;
@@ -904,6 +1192,474 @@ SceneGame.Manager.prototype = {
         manager.time.events.add(Phaser.Timer.SECOND / 5, manager.YellowKeyFlashOne, this);
     },
 
+    TapDifferent: function () {
+        var manager = this;
+        manager.keySet[0].onDown.add(function () {
+            manager.IncreateOneInt(manager.currentScene.name1);
+            manager.notPressed = false;
+        });
+        manager.keySet[0].onUp.add(function () {
+            manager.time.events.add(Phaser.Timer.SECOND / 20, manager.SetPressedFalse, this);
+        });
+        manager.keySet[1].onDown.add(function () {
+            manager.IncreateOneInt(manager.currentScene.name2);
+            manager.notPressed = false;
+        });
+        manager.keySet[1].onDown.add(function () {
+            manager.time.events.add(Phaser.Timer.SECOND / 20, manager.SetPressedFalse, this);
+        });
+        manager.yellowSprites[1].visible = false;
+        manager.hands[0].position.y += 20;
+        manager.currentKey = 0;
+        manager.notPressed = true;
+        manager.time.events.loop(Phaser.Timer.SECOND, manager.HandBackForth, this);
+        manager.time.events.loop(Phaser.Timer.SECOND / 5, manager.FlashYellowBGOne, this);
+        manager.time.events.loop(Phaser.Timer.SECOND / 5, manager.FlashYellowBGTwo, this);
+    },
+
+    SetPressedFalse: function () {
+        var manager = this;
+        if (!manager.notPressed) {
+            manager.notPressed = true;
+        }
+    },
+
+    FlashYellowBGOne: function () {
+        var manager = this;
+        if (manager.currentKey == 0) {
+            if (manager.yellowSprites[0].visible) {
+                manager.yellowSprites[0].visible = false;
+            } else if (!manager.yellowSprites[0].visible) {
+                manager.yellowSprites[0].visible = true;
+            }
+        } else {
+            manager.yellowSprites[0].visible = false;
+        }
+        if (manager.notPressed) {
+            manager.IncreaseInt();
+        }
+    },
+
+    FlashYellowBGTwo: function () {
+        var manager = this;
+        if (manager.currentKey == 1) {
+            if (manager.yellowSprites[1].visible) {
+                manager.yellowSprites[1].visible = false;
+            } else if (!manager.yellowSprites[0].visible) {
+                manager.yellowSprites[1].visible = true;
+            }
+        } else {
+            manager.yellowSprites[1].visible = false;
+        }
+
+    },
+
+    HandBackForth: function () {
+        var manager = this;
+        if (manager.hands[0].position.x < 500) {
+            manager.currentKey = 1;
+            manager.hands[0].position.x = 500;
+        } else {
+            manager.currentKey = 0;
+            manager.hands[0].position.x = 300;
+        }
+    },
+
+    ContinueSwitch: function () {
+        var manager = this;
+        manager.keySet[0].onDown.add(function () {
+            manager.keysPressed[0] = true;
+            manager.keysPressed[1] = true;
+        });
+        manager.keySet[0].onUp.add(function () {
+            manager.keysPressed[0] = false;
+            manager.keysPressed[1] = false;
+        });
+    },
+
+    IncreateOneInt: function (sheet) {
+        var manager = this;
+        manager.upInt += 1;
+        if (manager.currentScene.soundType == 2) {
+            if (manager.upInt == manager.currentScene.soundFrame) {
+                manager.MidSoundManager();
+            }
+        }
+        if (manager.upInt != 0) {
+            if (manager.upInt % manager.sceneSpeed == 0) {
+                if (manager.spriteNum >= 3) {
+                    manager.sheetNum += 1;
+                    manager.spriteNum = 0;
+                    if (manager.sheetNum >= manager.currentScene.sheets) {
+                        manager.gameReady = false;
+                        manager.RestartCheck();
+                        if (manager.currentScene.restartSheet != null) {
+                            manager.SpecificSheetRestart();
+                        }
+                    } else {
+                        manager.currentSet.push(manager.add.sprite(0, 0, sheet + "-" + manager.sheetNum, sheet + manager.sheetNum + manager.spriteNum));
+                    }
+                } else {
+                    if (manager.sheetNum <= manager.currentScene.sheets) {
+                        manager.spriteNum += 1;
+                        manager.currentSet.push(manager.add.sprite(0, 0, sheet + "-" + manager.sheetNum, sheet + manager.sheetNum + manager.spriteNum));
+                    }
+                }
+                for (var i = 0; i < manager.hands.length; i++) {
+                    manager.world.bringToTop(manager.hands[i]);
+                }
+            }
+        }
+
+    },
+
+    SocMeds: function () {
+        var manager = this;
+        manager.screen = manager.add.sprite(150, 0, "socialmedia-0", 0);
+        manager.world.sendToBack(manager.screen);
+        manager.keySet[0].onDown.add(function () {
+            if (manager.screen.frame == 8) {
+
+                manager.screen2 = manager.add.sprite(150, 0, "socialmedia-1", "socialmedia10");
+                manager.world.sendToBack(manager.screen2);
+                manager.world.sendToBack(manager.screen);
+            } else if (manager.screen.frame < 8) {
+                manager.screen.frame += 1;
+
+            }
+        });
+    },
+
+    Excel: function () {
+        var manager = this;
+        manager.gameReady = false;
+        manager.insidePic = manager.add.sprite(150, 0, manager.currentScene.insidePicSheet, manager.currentScene.insidePicSprite);
+        manager.cursor = manager.add.sprite(280, 80, "compmaterials", "excelcursor");
+        var excelText = [];
+        var cell = 0;
+        manager.control.onDown.add(function () {
+            manager.keysPressed[0] = true;
+        });
+        manager.control.onUp.add(function () {
+            manager.keysPressed[0] = false;
+        });
+        manager.vee.onDown.add(function () {
+            if (manager.keysPressed[0]) {
+                excelText[cell] = manager.add.text(290 + (cell * 70), 85, "100", {
+                    font: "10px Arial",
+                    fill: '#000000',
+                });
+                manager.letter[0].visible = true;
+                manager.letterKeys[0].visible = true;
+                manager.yellowSprites[0].visible = true;
+
+                manager.letter[1].visible = false;
+                manager.letterKeys[1].visible = false;
+                manager.yellowSprites[1].visible = false;
+                manager.letter[2].visible = false;
+                manager.letterKeys[2].visible = false;
+                manager.yellowSprites[2].visible = false;
+                manager.keysPressed[1] = true;
+            }
+        });
+        manager.tab.onDown.add(function () {
+            if (manager.keysPressed[1]) {
+                manager.keysPressed[1] = false;
+                manager.letter[0].visible = false;
+                manager.letterKeys[0].visible = false;
+                manager.yellowSprites[0].visible = false;
+
+                manager.letter[1].visible = true;
+                manager.letterKeys[1].visible = true;
+                manager.yellowSprites[1].visible = true;
+                manager.letter[2].visible = true;
+                manager.letterKeys[2].visible = true;
+                manager.yellowSprites[2].visible = true;
+                manager.cursor.position.x += 70;
+                cell += 1;
+                if (cell % 10 == 0) {
+                    manager.cursor.position.y += 18;
+                    manager.cursor.position.x = 280;
+                }
+            }
+        });
+
+        manager.world.sendToBack(excelText);
+        manager.world.sendToBack(manager.cursor);
+        manager.world.sendToBack(manager.insidePic);
+    },
+
+    HoldAndSwitch: function () {
+        var manager = this;
+        manager.letPress = true;
+        manager.shiftPress = false;
+        manager.keySet[0].onDown.add(function () {
+            if (manager.letPress) {
+                for (var i = 0; i < manager.keysPressed.length; i++) {
+                    manager.keysPressed[i] = true;
+                }
+            }
+        });
+        manager.keySet[0].onUp.add(function () {
+            for (var i = 0; i < manager.keysPressed.length; i++) {
+                manager.keysPressed[i] = false;
+            }
+        });
+        manager.keySet[1].onDown.add(function () {
+            if (manager.shiftPress) {
+                manager.IncreaseInt();
+                manager.keySet.shift();
+                manager.keySet.shift();
+                manager.letPress = true;
+                manager.shiftPress = true;
+            }
+        });
+    },
+
+    ChangeEach: function () {
+        var manager = this;
+        manager.gameReady = false;
+        manager.keySet[1].onDown.add(function () {
+            if (!manager.keysPressed[0]) {
+                manager.IncreaseInt();
+                manager.yellowSprites[1].position.x = manager.bottleXPos[1] + 35;
+                manager.yellowSprites[1].position.y = manager.bottleYPos[1] + 30;
+            }
+            manager.keysPressed[0] = true;
+        });
+        manager.keySet[2].onDown.add(function () {
+            if (!manager.keysPressed[1]) {
+                manager.IncreaseInt();
+                manager.yellowSprites[1].position.x = manager.bottleXPos[2] + 35;
+                manager.yellowSprites[1].position.y = manager.bottleYPos[2] + 30;
+            }
+            if (manager.keysPressed[0]) {
+                manager.keysPressed[1] = true;
+            }
+        });
+        manager.keySet[3].onDown.add(function () {
+            if (!manager.keysPressed[2]) {
+                manager.yellowSprites[1].position.x = manager.bottleXPos[3] + 35;
+                manager.yellowSprites[1].position.y = manager.bottleYPos[3] + 30;
+                manager.IncreaseInt();
+            }
+            if (manager.keysPressed[1]) {
+                manager.keysPressed[2] = true;
+            }
+        });
+        manager.keySet[4].onDown.add(function () {
+            if (!manager.keysPressed[3]) {
+                manager.yellowSprites[1].position.x = manager.bottleXPos[4] + 35;
+                manager.yellowSprites[1].position.y = manager.bottleYPos[4] + 30;
+                manager.IncreaseInt();
+            }
+            if (manager.keysPressed[2]) {
+                manager.keysPressed[3] = true;
+            }
+        });
+        manager.keySet[5].onDown.add(function () {
+            if (!manager.keysPressed[4]) {
+                manager.yellowSprites[1].position.x = manager.bottleXPos[5] + 35;
+                manager.yellowSprites[1].position.y = manager.bottleYPos[5] + 30;
+                manager.IncreaseInt();
+            }
+            if (manager.keysPressed[3]) {
+                manager.keysPressed[4] = true;
+            }
+        });
+        manager.keySet[6].onDown.add(function () {
+            if (!manager.keysPressed[5]) {
+                for (var i = 1; i < manager.letterKeys.length; i++) {
+                    manager.letter[i].visible = false;
+                    manager.letterKeys[i].visible = false;
+                }
+                manager.letter[6].visible = false;
+                manager.letterKeys[0].position.x = 550;
+                manager.letterKeys[0].position.y = 600;
+                manager.downSprite = manager.add.sprite(570, 620, 'down', 0);
+                manager.yellowSprites[1].position.x = 590;
+                manager.yellowSprites[1].position.y = 640;
+                manager.IncreaseInt();
+            }
+            if (manager.keysPressed[4]) {
+                manager.keysPressed[5] = true;
+            }
+        });
+        manager.keySet[0].onDown.add(function () {
+            if (manager.keysPressed[5]) {
+                manager.keysPressed[6] = true;
+                manager.gameReady = true;
+            }
+        })
+    },
+
+    IncreaseEachSequence: function () {
+        var manager = this;
+        manager.gameReady = false;
+        manager.keySet[0].onDown.add(function () {
+            manager.keysPressed[0] = true;
+            if (!manager.keysPressed[1]) {
+                if (manager.upInt <= manager.currentScene.switchInt) {
+                    manager.IncreaseInt();
+                }
+            }
+        })
+        manager.keySet[1].onDown.add(function () {
+            manager.keysPressed[1] = true;
+            if (manager.keysPressed[0]) {
+                if (manager.upInt <= manager.currentScene.switchInt) {
+                    manager.IncreaseInt();
+                }
+            }
+        })
+        manager.keySet[2].onDown.add(function () {
+            manager.keysPressed[2] = true;
+            if (manager.keysPressed[1]) {
+                if (manager.upInt <= manager.currentScene.switchInt) {
+                    manager.IncreaseInt();
+                }
+            }
+        })
+        manager.keySet[3].onDown.add(function () {
+            manager.keysPressed[3] = true;
+            if (manager.keysPressed[2]) {
+                if (manager.upInt <= manager.currentScene.switchInt) {
+
+                    manager.IncreaseInt();
+                }
+                for (var i = 0; i < manager.keysPressed.length; i++) {
+                    manager.keysPressed[i] = false;
+                }
+            }
+
+        })
+    },
+
+    HoldAndSequence: function () {
+        var manager = this;
+        manager.gameReady = false;
+
+        manager.keySet[0].onDown.add(function () {
+            manager.keysPressed[0] = true;
+        });
+        manager.keySet[0].onUp.add(function () {
+            manager.keysPressed[0] = false;
+        });
+        manager.keySet[1].onDown.add(function () {
+            if (manager.keysPressed[0]) {
+                manager.IncreaseInt();
+                manager.yellowSprites[1].position.x = manager.bottleXPos[1] + 35;
+                manager.yellowSprites[1].position.y = manager.bottleYPos[1] + 30;
+                manager.keysPressed[1] = true;
+            }
+        });
+        manager.keySet[2].onDown.add(function () {
+            if (manager.keysPressed[0]) {
+                if (manager.keysPressed[1]) {
+                    manager.yellowSprites[1].position.x = manager.bottleXPos[2] + 35;
+                    manager.yellowSprites[1].position.y = manager.bottleYPos[2] + 30;
+                    manager.keysPressed[2] = true;
+                }
+            }
+        });
+        manager.keySet[3].onDown.add(function () {
+            if (manager.keysPressed[0]) {
+                if (manager.keysPressed[2]) {
+                    manager.IncreaseInt();
+                    manager.yellowSprites[1].position.x = manager.bottleXPos[3] + 35;
+                    manager.yellowSprites[1].position.y = manager.bottleYPos[3] + 30;
+                    manager.keysPressed[3] = true;
+                }
+            }
+        });
+        manager.keySet[4].onDown.add(function () {
+            if (manager.keysPressed[0]) {
+                if (manager.keysPressed[3]) {
+                    manager.yellowSprites[1].position.x = manager.bottleXPos[4] + 35;
+                    manager.yellowSprites[1].position.y = manager.bottleYPos[4] + 30;
+                    manager.keysPressed[4] = true;
+                }
+            }
+        });
+        manager.keySet[5].onDown.add(function () {
+            if (manager.keysPressed[0]) {
+                if (manager.keysPressed[4]) {
+                    manager.yellowSprites[1].position.x = manager.bottleXPos[5] + 35;
+                    manager.yellowSprites[1].position.y = manager.bottleYPos[5] + 30;
+                    manager.keysPressed[5] = true;
+                }
+            }
+        });
+        manager.keySet[6].onDown.add(function () {
+            if (manager.keysPressed[0]) {
+                for (var j = 1; j < manager.keysPressed.length; j++) {
+                    manager.keysPressed[j] = false;
+                }
+                manager.yellowSprites[1].position.x = manager.bottleXPos[0] + 35;
+                manager.yellowSprites[1].position.y = manager.bottleYPos[0] + 30;
+                manager.IncreaseInt();
+            }
+        });
+
+
+    },
+
+    ManyKeySequence: function () {
+        var manager = this;
+        manager.keysPressed[0] = false;
+        manager.keySet[manager.ManyKeyInt].onDown.add(function () {
+            manager.IncreaseInt();
+            manager.keysPressed[0] = true;
+            manager.yellowSprites[manager.ManyKeyInt].visible = false;
+            manager.yellowSprites[manager.ManyKeyInt + 1].visible = true;
+            manager.hands[0].position.x += 500;
+            manager.hands[0].scale.y = 1;
+            manager.hands[0].rotation = 45;
+        });
+        var nextKey = manager.ManyKeyInt + 1;
+        manager.keySet[nextKey].onDown.add(function () {
+            if (manager.keysPressed[0]) {
+                manager.hands[0].position.x -= 500;
+                manager.hands[0].position.y += 60;
+                manager.hands[0].scale.y = -1;
+                manager.hands[0].rotation = 40;
+                for (var i = 0; i < manager.letterKeys.length; i++) {
+                    manager.letterKeys[i].position.y -= 20;
+                    manager.letter[i].position.y -= 20;
+                    manager.yellowSprites[i].position.y -= 20;
+                }
+                manager.ButtonMoveKeys(manager.ManyKeyInt, nextKey);
+                manager.IncreaseInt();
+                manager.keySet[manager.ManyKeyInt].reset();
+                manager.keySet[manager.ManyKeyInt + 1].reset();
+                //manager.yellowSprites[manager.ManyKeyInt + 1].visible = false;
+                manager.ManyKeyInt += 2;
+                // manager.yellowSprites[manager.ManyKeyInt].visible = true;
+                if (manager.ManyKeyInt >= manager.keySet.length) {
+                    manager.IncreaseInt();
+                } else {
+                    manager.ManyKeySequence();
+                }
+            }
+        });
+    },
+
+    ButtonMoveKeys: function (key1, key2) {
+        var manager = this;
+        manager.add.tween(manager.letterKeys[key1]).to({
+            x: 520,
+        }, 1000, Phaser.Easing.Linear.None, true);
+        manager.add.tween(manager.letter[key1]).to({
+            x: 550,
+        }, 1000, Phaser.Easing.Linear.None, true);
+        manager.add.tween(manager.letterKeys[key2]).to({
+            x: 600,
+        }, 1000, Phaser.Easing.Linear.None, true);
+        manager.add.tween(manager.letter[key2]).to({
+            x: 630,
+        }, 1000, Phaser.Easing.Linear.None, true);
+    },
+
     HoldKeys: function () {
         var manager = this;
         manager.keySet[0].onDown.add(function () {
@@ -936,6 +1692,20 @@ SceneGame.Manager.prototype = {
                 manager.HoldKeyUp(3);
             });
         }
+    },
+
+    Delete: function () {
+        var manager = this;
+        console.log("aye");
+        manager.gameReady = false;
+        manager.underPic = manager.add.sprite(150, 0, "plainScreen");
+        manager.insidePic = manager.add.sprite(150, 0, manager.currentScene.insidePicSheet, manager.currentScene.insidePicSprite);
+        manager.world.sendToBack(manager.insidePic);
+        manager.world.sendToBack(manager.underPic);
+        manager.deleteKey.onDown.add(function () {
+            console.log("HI");
+            manager.insidePic.visible = false;
+        });
     },
 
     HoldKeyPress: function (num) {
@@ -1031,8 +1801,6 @@ SceneGame.Manager.prototype = {
             manager.currentlyPressed[i] = false;
         }
         manager.keySet[0].onDown.add(function () {
-            console.log("M");
-
             manager.currentlyPressed[0] = true;
             manager.keysPressed[0] = true;
             manager.time.events.add(Phaser.Timer.SECOND * 3, function () {
@@ -1044,8 +1812,6 @@ SceneGame.Manager.prototype = {
             manager.currentlyPressed[0] = false;
         }, this);
         manager.keySet[1].onDown.add(function () {
-            console.log("J");
-
             manager.currentlyPressed[1] = true;
             if (manager.keysPressed[0] && !manager.currentlyPressed[0]) {
                 manager.keysPressed[1] = true;
@@ -1059,8 +1825,6 @@ SceneGame.Manager.prototype = {
             manager.currentlyPressed[1] = false;
         }, this);
         manager.keySet[2].onDown.add(function () {
-            console.log("U");
-
             manager.currentlyPressed[2] = true;
             if (manager.keysPressed[1]) {
                 manager.IncreaseInt();
@@ -1190,15 +1954,51 @@ SceneGame.Manager.prototype = {
     AnyKey: function () {
         var manager = this;
         manager.gameReady = false;
+        manager.underPic = manager.add.sprite(150, 0, "plainScreen");
+        manager.insidePic = manager.add.sprite(150, 0, manager.currentScene.insidePicSheet, manager.currentScene.emailscreen);
+        manager.address = "Sam11221.geemail.com";
+        manager.subject = "dinner?";
+        manager.emailText = "Hey Sam,\nHope all's well with you. It's been a while since we've hung\nout, so I was wondering if you'd like to go out for dinner\nsometime. Totally understand if you can't, though!\nHope to hear from you.";
+        var text0 = manager.add.text(310, 85, manager.address, {
+            font: "10px Arial",
+            fill: '#000000',
+        });
+        var text1 = manager.add.text(310, 105, manager.subject, {
+            font: "10px Arial",
+            fill: '#000000',
+        });
+        manager.text2 = manager.add.text(310, 150, "", {
+            font: "12px Arial",
+            fill: '#000000',
+        });
+        manager.email = [];
+        manager.emailDisplay = "";
+        manager.email = manager.emailText.split("");
+        manager.world.sendToBack(text0);
+        manager.world.sendToBack(text1);
+        manager.world.sendToBack(manager.text2);
+        manager.world.sendToBack(manager.insidePic);
+        manager.world.sendToBack(manager.underPic);
         manager.clicks = [];
         manager.clicks[0] = manager.add.audio("click2.wav");
         manager.clicks[1] = manager.add.audio("click3.wav");
         manager.clicks[2] = manager.add.audio("click4.wav");
         manager.clicks[3] = manager.add.audio("click1.wav");
         manager.input.keyboard.onDownCallback = function () {
-            if (manager.currentScene.name == "computer") {
+            if (manager.currentScene.name == "computerframe") {
                 manager.clicks[manager.rnd.integerInRange(0, 3)].play();
-                manager.IncreaseInt();
+                var nextChar = manager.email.shift();
+                manager.emailDisplay += nextChar;
+                if (nextChar != null) {
+                    manager.text2.text = manager.emailDisplay;
+                } else {
+                    manager.enterKey.onDown.add(function () {
+                        manager.text2.text = "";
+                        manager.insidePic.visible = false;
+
+                    });
+                }
+                // manager.IncreaseInt();
             }
         };
     },

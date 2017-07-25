@@ -1,0 +1,205 @@
+{
+    "frames": [
+
+        {
+            "filename": "socialmedia00",
+            "frame": {
+                "x": 1,
+                "y": 1,
+                "w": 943,
+                "h": 480
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 943,
+                "h": 480
+            },
+            "sourceSize": {
+                "w": 943,
+                "h": 480
+            }
+},
+        {
+            "filename": "socialmedia01",
+            "frame": {
+                "x": 1,
+                "y": 483,
+                "w": 943,
+                "h": 480
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 943,
+                "h": 480
+            },
+            "sourceSize": {
+                "w": 943,
+                "h": 480
+            }
+},
+        {
+            "filename": "socialmedia02",
+            "frame": {
+                "x": 946,
+                "y": 483,
+                "w": 943,
+                "h": 480
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 943,
+                "h": 480
+            },
+            "sourceSize": {
+                "w": 943,
+                "h": 480
+            }
+},
+        {
+            "filename": "socialmedia03",
+            "frame": {
+                "x": 1,
+                "y": 965,
+                "w": 943,
+                "h": 480
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 943,
+                "h": 480
+            },
+            "sourceSize": {
+                "w": 943,
+                "h": 480
+            }
+},
+        {
+            "filename": "socialmedia04",
+            "frame": {
+                "x": 1,
+                "y": 965,
+                "w": 943,
+                "h": 480
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 943,
+                "h": 480
+            },
+            "sourceSize": {
+                "w": 943,
+                "h": 480
+            }
+},
+        {
+            "filename": "socialmedia05",
+            "frame": {
+                "x": 1,
+                "y": 1447,
+                "w": 943,
+                "h": 480
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 943,
+                "h": 480
+            },
+            "sourceSize": {
+                "w": 943,
+                "h": 480
+            }
+},
+        {
+            "filename": "socialmedia06",
+            "frame": {
+                "x": 946,
+                "y": 965,
+                "w": 943,
+                "h": 480
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 943,
+                "h": 480
+            },
+            "sourceSize": {
+                "w": 943,
+                "h": 480
+            }
+},
+        {
+            "filename": "socialmedia07",
+            "frame": {
+                "x": 946,
+                "y": 1447,
+                "w": 943,
+                "h": 480
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 943,
+                "h": 480
+            },
+            "sourceSize": {
+                "w": 943,
+                "h": 480
+            }
+},
+        {
+            "filename": "socialmedia08",
+            "frame": {
+                "x": 946,
+                "y": 1,
+                "w": 943,
+                "h": 480
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 943,
+                "h": 480
+            },
+            "sourceSize": {
+                "w": 943,
+                "h": 480
+            }
+}],
+    "meta": {
+        "app": "http://www.codeandweb.com/texturepacker",
+        "version": "1.0",
+        "image": "socialmedia-0.png",
+        "format": "RGBA8888",
+        "size": {
+            "w": 1890,
+            "h": 1928
+        },
+        "scale": "1",
+        "smartupdate": "$TexturePacker:SmartUpdate:5e97620efc7d889eef8ff5d4d8b809a2:bc23af574d3497f4f11ddf8bb7125835:fe462121cd8cc07453f0c58f0a20a4f4$"
+    }
+}

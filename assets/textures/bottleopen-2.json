@@ -1,0 +1,100 @@
+{
+    "frames": [
+
+        {
+            "filename": "bottleopen23",
+            "frame": {
+                "x": 1,
+                "y": 1,
+                "w": 1200,
+                "h": 414
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 414
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 414
+            }
+},
+        {
+            "filename": "bottleopen22",
+            "frame": {
+                "x": 1,
+                "y": 417,
+                "w": 1200,
+                "h": 414
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 414
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 414
+            }
+},
+        {
+            "filename": "bottleopen21",
+            "frame": {
+                "x": 1,
+                "y": 833,
+                "w": 1200,
+                "h": 414
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 414
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 414
+            }
+},
+        {
+            "filename": "bottleopen20",
+            "frame": {
+                "x": 1,
+                "y": 1249,
+                "w": 1200,
+                "h": 414
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 414
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 414
+            }
+}],
+    "meta": {
+        "app": "http://www.codeandweb.com/texturepacker",
+        "version": "1.0",
+        "image": "bottleopen-1.png",
+        "format": "RGBA8888",
+        "size": {
+            "w": 1202,
+            "h": 1664
+        },
+        "scale": "1",
+        "smartupdate": "$TexturePacker:SmartUpdate:0ccc7fa8e96f4a065025d70023b35017:364c182fc9db52a379135a599e4fb6b2:3ce8f2ace1e936221f32a33542b76169$"
+    }
+}

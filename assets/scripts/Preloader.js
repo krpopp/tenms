@@ -50,6 +50,10 @@ SceneGame.Preloader.prototype = {
                     for (var k = 0; k < this.scenesJSON.Scenes[i].sound.length; k++) {
                         this.load.audio(this.scenesJSON.Scenes[i].sound[k], 'assets/sound/' + this.scenesJSON.Scenes[i].sound[k]);
                     }
+                    if (this.scenesJSON.Scenes[i].name1 != null) {
+                        this.load.atlasJSONArray(this.scenesJSON.Scenes[i].name1 + '-' + j, 'assets/textures/' + this.scenesJSON.Scenes[i].name1 + '-' + j + '.png', 'assets/textures/' + this.scenesJSON.Scenes[i].name1 + '-' + j + '.json');
+                        this.load.atlasJSONArray(this.scenesJSON.Scenes[i].name2 + '-' + j, 'assets/textures/' + this.scenesJSON.Scenes[i].name2 + '-' + j + '.png', 'assets/textures/' + this.scenesJSON.Scenes[i].name2 + '-' + j + '.json');
+                    }
                 }
             }
         }
@@ -57,10 +61,17 @@ SceneGame.Preloader.prototype = {
         this.load.atlasJSONArray('wait', 'assets/textures/wait.png', 'assets/textures/wait.json');
         this.load.atlasJSONArray('guess', 'assets/textures/guess.png', 'assets/textures/guess.json');
         this.load.atlasJSONArray('paused', 'assets/textures/paused.png', 'assets/textures/paused.json');
+        this.load.atlasJSONArray('compmaterials', 'assets/textures/compmaterials.png', 'assets/textures/compmaterials.json');
+        this.load.atlasJSONArray('socialmedia-0', 'assets/textures/socialmedia-0.png', 'assets/textures/socialmedia-0.json');
+        this.load.atlasJSONArray('socialmedia-1', 'assets/textures/socialmedia-1.png', 'assets/textures/socialmedia-1.json');
+        this.load.atlasJSONArray('morekeys', 'assets/textures/morekeys.png', 'assets/textures/morekeys.json');
+        this.load.atlasJSONArray('midkeys', 'assets/textures/midkey.png', 'assets/textures/midkey.json');
+        this.load.atlasJSONArray('down', 'assets/textures/down.png', 'assets/textures/down.json');
 
         this.load.atlasJSONArray('keys', 'assets/textures/keys.png', 'assets/textures/keys.json');
         this.load.atlasJSONArray('keyz', 'assets/textures/keyz.png', 'assets/textures/keyz.json');
         this.load.atlasJSONArray('qw', 'assets/textures/qw.png', 'assets/textures/qw.json');
+        this.load.atlasJSONArray('tyghbn', 'assets/textures/tyghbn.png', 'assets/textures/tyghbn.json');
         this.load.atlasJSONArray('arrows', 'assets/textures/arrows.png', 'assets/textures/arrows.json');
         this.load.atlasJSONArray('numbers', 'assets/textures/num.png', 'assets/textures/num.json');
         this.load.atlasJSONArray('mju', 'assets/textures/mju.png', 'assets/textures/mju.json');
@@ -70,6 +81,7 @@ SceneGame.Preloader.prototype = {
         this.load.image('lowerlid', 'assets/image/lowerlid2.png');
         this.load.image('midlid', 'assets/image/midlid2.png');
         this.load.image('black', 'assets/image/black.png');
+        this.load.image('plainScreen', 'assets/image/plainscreen.png');
 
         this.load.image('stillsubway', 'assets/image/stillsubway.png');
         this.load.image('placeholder', 'assets/image/placeholder.png');

@@ -7,7 +7,7 @@
                 "x": 1,
                 "y": 1,
                 "w": 1200,
-                "h": 414
+                "h": 500
             },
             "rotated": false,
             "trimmed": false,
@@ -15,20 +15,20 @@
                 "x": 0,
                 "y": 0,
                 "w": 1200,
-                "h": 414
+                "h": 500
             },
             "sourceSize": {
                 "w": 1200,
-                "h": 414
+                "h": 500
             }
 },
         {
             "filename": "bottleopen12",
             "frame": {
                 "x": 1,
-                "y": 417,
+                "y": 503,
                 "w": 1200,
-                "h": 414
+                "h": 500
             },
             "rotated": false,
             "trimmed": false,
@@ -36,20 +36,20 @@
                 "x": 0,
                 "y": 0,
                 "w": 1200,
-                "h": 414
+                "h": 500
             },
             "sourceSize": {
                 "w": 1200,
-                "h": 414
+                "h": 500
             }
 },
         {
             "filename": "bottleopen11",
             "frame": {
                 "x": 1,
-                "y": 833,
+                "y": 1005,
                 "w": 1200,
-                "h": 414
+                "h": 500
             },
             "rotated": false,
             "trimmed": false,
@@ -57,20 +57,20 @@
                 "x": 0,
                 "y": 0,
                 "w": 1200,
-                "h": 414
+                "h": 500
             },
             "sourceSize": {
                 "w": 1200,
-                "h": 414
+                "h": 500
             }
 },
         {
             "filename": "bottleopen10",
             "frame": {
                 "x": 1,
-                "y": 1249,
+                "y": 1507,
                 "w": 1200,
-                "h": 414
+                "h": 500
             },
             "rotated": false,
             "trimmed": false,
@@ -78,11 +78,11 @@
                 "x": 0,
                 "y": 0,
                 "w": 1200,
-                "h": 414
+                "h": 500
             },
             "sourceSize": {
                 "w": 1200,
-                "h": 414
+                "h": 500
             }
 }],
     "meta": {
@@ -92,9 +92,9 @@
         "format": "RGBA8888",
         "size": {
             "w": 1202,
-            "h": 1664
+            "h": 2008
         },
         "scale": "1",
-        "smartupdate": "$TexturePacker:SmartUpdate:0ccc7fa8e96f4a065025d70023b35017:364c182fc9db52a379135a599e4fb6b2:3ce8f2ace1e936221f32a33542b76169$"
+        "smartupdate": "$TexturePacker:SmartUpdate:23ed91afdafba3e0afc5acd5e0e249ac:c6fac323beac799b73b2965571bfdc69:3ce8f2ace1e936221f32a33542b76169$"
     }
 }

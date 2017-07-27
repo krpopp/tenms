@@ -233,7 +233,7 @@
             }
 },
         {
-            "filename": "f93",
+            "filename": "efnine3",
             "frame": {
                 "x": 170,
                 "y": 774,
@@ -275,27 +275,6 @@
             }
 },
         {
-            "filename": "f92",
-            "frame": {
-                "x": 138,
-                "y": 580,
-                "w": 53,
-                "h": 37
-            },
-            "rotated": false,
-            "trimmed": false,
-            "spriteSourceSize": {
-                "x": 0,
-                "y": 0,
-                "w": 53,
-                "h": 37
-            },
-            "sourceSize": {
-                "w": 53,
-                "h": 37
-            }
-},
-        {
             "filename": "midkey2",
             "frame": {
                 "x": 1,
@@ -314,27 +293,6 @@
             "sourceSize": {
                 "w": 130,
                 "h": 59
-            }
-},
-        {
-            "filename": "f91",
-            "frame": {
-                "x": 1,
-                "y": 840,
-                "w": 53,
-                "h": 35
-            },
-            "rotated": false,
-            "trimmed": false,
-            "spriteSourceSize": {
-                "x": 0,
-                "y": 0,
-                "w": 53,
-                "h": 35
-            },
-            "sourceSize": {
-                "w": 53,
-                "h": 35
             }
 },
         {
@@ -359,7 +317,49 @@
             }
 },
         {
-            "filename": "del3",
+            "filename": "efnine2",
+            "frame": {
+                "x": 138,
+                "y": 580,
+                "w": 53,
+                "h": 37
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 53,
+                "h": 37
+            },
+            "sourceSize": {
+                "w": 53,
+                "h": 37
+            }
+},
+        {
+            "filename": "efnine",
+            "frame": {
+                "x": 1,
+                "y": 840,
+                "w": 53,
+                "h": 35
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 53,
+                "h": 35
+            },
+            "sourceSize": {
+                "w": 53,
+                "h": 35
+            }
+},
+        {
+            "filename": "del1",
             "frame": {
                 "x": 1,
                 "y": 464,
@@ -401,7 +401,7 @@
             }
 },
         {
-            "filename": "del1",
+            "filename": "del3",
             "frame": {
                 "x": 1,
                 "y": 541,
@@ -548,7 +548,7 @@
             }
 },
         {
-            "filename": "k3",
+            "filename": "kay3",
             "frame": {
                 "x": 219,
                 "y": 229,
@@ -569,7 +569,7 @@
             }
 },
         {
-            "filename": "k2",
+            "filename": "kay2",
             "frame": {
                 "x": 218,
                 "y": 736,
@@ -590,7 +590,7 @@
             }
 },
         {
-            "filename": "k1",
+            "filename": "kay1",
             "frame": {
                 "x": 220,
                 "y": 153,
@@ -611,7 +611,7 @@
             }
 },
         {
-            "filename": "i3",
+            "filename": "aye3",
             "frame": {
                 "x": 225,
                 "y": 1,
@@ -632,7 +632,7 @@
             }
 },
         {
-            "filename": "i2",
+            "filename": "aye2",
             "frame": {
                 "x": 236,
                 "y": 1,
@@ -653,7 +653,7 @@
             }
 },
         {
-            "filename": "i1",
+            "filename": "aye1",
             "frame": {
                 "x": 225,
                 "y": 38,
@@ -737,7 +737,7 @@
             }
 },
         {
-            "filename": "fn3",
+            "filename": "function2",
             "frame": {
                 "x": 195,
                 "y": 493,
@@ -758,7 +758,7 @@
             }
 },
         {
-            "filename": "fn2",
+            "filename": "function",
             "frame": {
                 "x": 195,
                 "y": 531,
@@ -779,7 +779,7 @@
             }
 },
         {
-            "filename": "fn1",
+            "filename": "function2",
             "frame": {
                 "x": 194,
                 "y": 569,
@@ -800,7 +800,7 @@
             }
 },
         {
-            "filename": "m3",
+            "filename": "em3",
             "frame": {
                 "x": 211,
                 "y": 418,
@@ -821,7 +821,7 @@
             }
 },
         {
-            "filename": "m3",
+            "filename": "em3",
             "frame": {
                 "x": 211,
                 "y": 455,
@@ -842,7 +842,7 @@
             }
 },
         {
-            "filename": "m1",
+            "filename": "em1",
             "frame": {
                 "x": 215,
                 "y": 343,
@@ -863,7 +863,7 @@
             }
 },
         {
-            "filename": "tab3",
+            "filename": "tab1",
             "frame": {
                 "x": 133,
                 "y": 736,
@@ -905,7 +905,7 @@
             }
 },
         {
-            "filename": "tab1",
+            "filename": "tab3",
             "frame": {
                 "x": 85,
                 "y": 801,

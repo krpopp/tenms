@@ -2,7 +2,7 @@
     "frames": [
 
         {
-            "filename": "bottleopen03",
+            "filename": "callmom33",
             "frame": {
                 "x": 1,
                 "y": 1,
@@ -23,7 +23,7 @@
             }
 },
         {
-            "filename": "bottleopen02",
+            "filename": "callmom32",
             "frame": {
                 "x": 1,
                 "y": 503,
@@ -44,7 +44,7 @@
             }
 },
         {
-            "filename": "bottleopen01",
+            "filename": "callmom31",
             "frame": {
                 "x": 1,
                 "y": 1005,
@@ -65,7 +65,7 @@
             }
 },
         {
-            "filename": "bottleopen00",
+            "filename": "callmom30",
             "frame": {
                 "x": 1,
                 "y": 1507,
@@ -88,13 +88,13 @@
     "meta": {
         "app": "http://www.codeandweb.com/texturepacker",
         "version": "1.0",
-        "image": "bottleopen-3.png",
+        "image": "callmom-1.png",
         "format": "RGBA8888",
         "size": {
             "w": 1202,
             "h": 2008
         },
         "scale": "1",
-        "smartupdate": "$TexturePacker:SmartUpdate:23ed91afdafba3e0afc5acd5e0e249ac:c6fac323beac799b73b2965571bfdc69:3ce8f2ace1e936221f32a33542b76169$"
+        "smartupdate": "$TexturePacker:SmartUpdate:bd3e5c2b782408e7b696e209b6233fd5:d0e7c4324e47a5c8272a6917816c94eb:bd7896a36aed236fea0bb4dd511e1592$"
     }
 }

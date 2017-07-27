@@ -75,6 +75,7 @@ SceneGame.Preloader.prototype = {
         this.load.atlasJSONArray('arrows', 'assets/textures/arrows.png', 'assets/textures/arrows.json');
         this.load.atlasJSONArray('numbers', 'assets/textures/num.png', 'assets/textures/num.json');
         this.load.atlasJSONArray('mju', 'assets/textures/mju.png', 'assets/textures/mju.json');
+        this.load.atlasJSONArray('oh', 'assets/textures/oh.png', 'assets/textures/oh.json');
         this.load.atlasJSONArray('singleHand', 'assets/textures/hand.png', 'assets/textures/hand.json');
 
         this.load.image('toplid', 'assets/image/toplid2.png');
@@ -87,6 +88,7 @@ SceneGame.Preloader.prototype = {
         this.load.image('placeholder', 'assets/image/placeholder.png');
 
         this.load.audio('music', 'assets/sound/adultmom4.mp3');
+        this.load.audio('phonevibrate', 'assets/sound/phonevibrate.wav');
 
     },
 

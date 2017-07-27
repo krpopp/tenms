@@ -92,7 +92,7 @@
     },
         {
             "name": "button",
-            "sheests": 3,
+            "sheets": 3,
             "sound": [],
             "loop": false,
             "soundType": 3,

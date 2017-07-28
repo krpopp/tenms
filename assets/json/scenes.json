@@ -75,9 +75,9 @@
         {
             "name": "closet",
             "sheets": 8,
-            "sound": [],
+            "sound": ["hangers.mp3"],
             "loop": false,
-            "soundType": 3,
+            "soundType": 0,
             "soundFrame": 90,
             "time": "morning",
             "keySet": ["manager.cursors.left", "manager.cursors.down"],
@@ -332,24 +332,7 @@
             "decrease": false,
             "startframe": null
         },
-        {
-            "name": "computerframeexcel",
-            "insidePicSheet": "compmaterials",
-            "insidePicSprite": "excel",
-            "sheets": 1,
-            "sound": ["click2.wav", "click3.wav", "click4.wav", "click1.wav"],
-            "soundType": 3,
-            "loop": false,
-            "time": "midday",
-            "keySet": ["manager.vee", "manager.control", "manager.tab"],
-            "pattern": 16,
-            "speed": 1,
-            "hands": 3,
-            "restartSheet": null,
-            "restart": false,
-            "decrease": false,
-            "startframe": null
-  },
+
         {
             "name": "computerframeloan",
             "insidePicSheet": "compmaterials",
@@ -403,6 +386,24 @@
             "decrease": false,
             "startframe": null
         },
+        {
+            "name": "computerframeexcel",
+            "insidePicSheet": "compmaterials",
+            "insidePicSprite": "excel",
+            "sheets": 1,
+            "sound": ["click2.wav", "click3.wav", "click4.wav", "click1.wav"],
+            "soundType": 3,
+            "loop": false,
+            "time": "midday",
+            "keySet": ["manager.vee", "manager.control", "manager.tab"],
+            "pattern": 16,
+            "speed": 1,
+            "hands": 3,
+            "restartSheet": null,
+            "restart": false,
+            "decrease": false,
+            "startframe": null
+  },
         {
             "name": "subwayseats",
             "sheets": 4,

@@ -1,0 +1,205 @@
+{
+    "frames": [
+
+        {
+            "filename": "spaceOL1",
+            "frame": {
+                "x": 1,
+                "y": 167,
+                "w": 315,
+                "h": 79
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 315,
+                "h": 79
+            },
+            "sourceSize": {
+                "w": 315,
+                "h": 79
+            }
+},
+        {
+            "filename": "spaceOL2",
+            "frame": {
+                "x": 1,
+                "y": 85,
+                "w": 314,
+                "h": 80
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 314,
+                "h": 80
+            },
+            "sourceSize": {
+                "w": 314,
+                "h": 80
+            }
+},
+        {
+            "filename": "spaceOL3",
+            "frame": {
+                "x": 1,
+                "y": 408,
+                "w": 314,
+                "h": 79
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 314,
+                "h": 79
+            },
+            "sourceSize": {
+                "w": 314,
+                "h": 79
+            }
+},
+        {
+            "filename": "spaceW1",
+            "frame": {
+                "x": 315,
+                "y": 1,
+                "w": 138,
+                "h": 48
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 138,
+                "h": 48
+            },
+            "sourceSize": {
+                "w": 138,
+                "h": 48
+            }
+},
+        {
+            "filename": "spaceW2",
+            "frame": {
+                "x": 317,
+                "y": 100,
+                "w": 137,
+                "h": 47
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 137,
+                "h": 47
+            },
+            "sourceSize": {
+                "w": 137,
+                "h": 47
+            }
+},
+        {
+            "filename": "spaceW3",
+            "frame": {
+                "x": 317,
+                "y": 51,
+                "w": 138,
+                "h": 47
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 138,
+                "h": 47
+            },
+            "sourceSize": {
+                "w": 138,
+                "h": 47
+            }
+},
+        {
+            "filename": "spaceY1",
+            "frame": {
+                "x": 1,
+                "y": 248,
+                "w": 315,
+                "h": 79
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 315,
+                "h": 79
+            },
+            "sourceSize": {
+                "w": 315,
+                "h": 79
+            }
+},
+        {
+            "filename": "spaceY2",
+            "frame": {
+                "x": 1,
+                "y": 1,
+                "w": 312,
+                "h": 82
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 312,
+                "h": 82
+            },
+            "sourceSize": {
+                "w": 312,
+                "h": 82
+            }
+},
+        {
+            "filename": "spaceY3",
+            "frame": {
+                "x": 1,
+                "y": 329,
+                "w": 315,
+                "h": 77
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 315,
+                "h": 77
+            },
+            "sourceSize": {
+                "w": 315,
+                "h": 77
+            }
+}],
+    "meta": {
+        "app": "http://www.codeandweb.com/texturepacker",
+        "version": "1.0",
+        "image": "space.png",
+        "format": "RGBA8888",
+        "size": {
+            "w": 456,
+            "h": 488
+        },
+        "scale": "1",
+        "smartupdate": "$TexturePacker:SmartUpdate:c06ba2e56e1b934acb014f776e5a0d77:a74f0fcdd212b3800e7f6bd1b6ea1c6a:5c66d13d521b19a155e36d6dbcb34ba3$"
+    }
+}

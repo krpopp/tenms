@@ -2,7 +2,7 @@
     "frames": [
 
         {
-            "filename": "treez13",
+            "filename": "finalcallmom03",
             "frame": {
                 "x": 1,
                 "y": 1,
@@ -23,10 +23,10 @@
             }
 },
         {
-            "filename": "treez12",
+            "filename": "finalcallmom02",
             "frame": {
                 "x": 1,
-                "y": 483,
+                "y": 503,
                 "w": 1200,
                 "h": 500
             },
@@ -44,10 +44,10 @@
             }
 },
         {
-            "filename": "treez11",
+            "filename": "finalcallmom01",
             "frame": {
                 "x": 1,
-                "y": 980,
+                "y": 1005,
                 "w": 1200,
                 "h": 500
             },
@@ -65,10 +65,10 @@
             }
 },
         {
-            "filename": "treez10",
+            "filename": "finalcallmom00",
             "frame": {
                 "x": 1,
-                "y": 1480,
+                "y": 1507,
                 "w": 1200,
                 "h": 500
             },
@@ -88,13 +88,13 @@
     "meta": {
         "app": "http://www.codeandweb.com/texturepacker",
         "version": "1.0",
-        "image": "treez-1.png",
+        "image": "finalcallmom-4.png",
         "format": "RGBA8888",
         "size": {
             "w": 1202,
             "h": 2008
         },
         "scale": "1",
-        "smartupdate": "$TexturePacker:SmartUpdate:6bcb4742cd05faae57428856690e50ac:3bc5dac0a3e14f3cfd5e4495bfce8f2e:63d794e3784bd0ba5aee899be6939dc3$"
+        "smartupdate": "$TexturePacker:SmartUpdate:7818ed4480e4a1657e62a353707d153f:52d395560348576d69a179f2e00cb516:ccb6669fb13a43f4e10261d12db1d942$"
     }
 }

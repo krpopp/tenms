@@ -67,6 +67,10 @@ SceneGame.Preloader.prototype = {
         this.load.atlasJSONArray('morekeys', 'assets/textures/morekeys.png', 'assets/textures/morekeys.json');
         this.load.atlasJSONArray('midkeys', 'assets/textures/midkey.png', 'assets/textures/midkey.json');
         this.load.atlasJSONArray('down', 'assets/textures/down.png', 'assets/textures/down.json');
+        this.load.atlasJSONArray('space', 'assets/textures/space.png', 'assets/textures/space.json');
+        this.load.atlasJSONArray('newkeys', 'assets/textures/newkeys.png', 'assets/textures/newkeys.json');
+
+        this.load.atlasJSONArray('computerframeexcel-0', 'assets/textures/computerframeexcel-0.png', 'assets/textures/computerframeexcel-0.json');
 
         this.load.atlasJSONArray('keys', 'assets/textures/keys.png', 'assets/textures/keys.json');
         this.load.atlasJSONArray('keyz', 'assets/textures/keyz.png', 'assets/textures/keyz.json');
@@ -89,12 +93,12 @@ SceneGame.Preloader.prototype = {
 
         this.load.audio('music', 'assets/sound/adultmom4.mp3');
         this.load.audio('phonevibrate', 'assets/sound/phonevibrate.wav');
-
+        this.hadHit = false;
     },
 
     fileComplete: function () {
         this.loadNum += 1;
-        if (this.loadNum % 15 == 0) {
+        if (this.loadNum % 18 == 0) {
             this.skyNum += 1;
             this.sky.frame = this.skyNum;
             if (this.skyNum >= 3) {
@@ -108,16 +112,117 @@ SceneGame.Preloader.prototype = {
     },
 
     loadComplete: function () {
-        this.skyTween = this.add.tween(this.sky).to({
-            alpha: 0
-        }, 1000, Phaser.Easing.Linear.None, true);
-        this.titleTween = this.add.tween(this.loadingLogo).to({
-            alpha: 0
-        }, 1000, Phaser.Easing.Linear.None, true);
-        this.barTween = this.add.tween(this.loadingBar).to({
-            alpha: 0
-        }, 1000, Phaser.Easing.Linear.None, true);
-        this.barTween.onComplete.add(this.startGame, this);
+        //        this.skyTween = this.add.tween(this.sky).to({
+        //            alpha: 0
+        //        }, 1000, Phaser.Easing.Linear.None, true);
+
+
+        this.CreateLids();
+        this.tLidTween.onComplete.add(this.startGame, this);
+    },
+
+
+    CreateLids: function () {
+        this.keySpriteFrame = 0;
+        this.hands = [];
+        this.handimation = [];
+        this.yellowSprites = [];
+
+        this.time.events.add(Phaser.Timer.SECOND * 2, function () {
+            this.titleTween = this.add.tween(this.loadingLogo).to({
+                alpha: 0
+            }, 1000, Phaser.Easing.Linear.None, true);
+            this.barTween = this.add.tween(this.loadingBar).to({
+                alpha: 0
+            }, 1000, Phaser.Easing.Linear.None, true);
+
+        }, this);
+
+        this.time.events.add(Phaser.Timer.SECOND * 4, function () {
+            for (var i = 0; i < 2; i++) {
+                this.hands.push(this.add.sprite(500, 500, "singleHand", "hand0"));
+                this.hands[i].anchor.setTo(0.5, 0.5);
+                this.handimation.push(this.hands[i].animations.add("twitch"));
+                this.yellowSprites[i] = this.add.sprite(-100, -100, "qw", "qwYellow1");
+                this.world.sendToBack(this.yellowSprites[i]);
+                this.handimation[i].play(10, true);
+            }
+            this.keySprites = this.add.sprite(500, 550, "keyz", "keys-0");
+
+            this.arrows = this.add.sprite(520, 570, 'arrows');
+            this.yellowSprites[0].position.x = 590;
+            this.yellowSprites[0].position.y = 550;
+            this.yellowSprites[1].position.x = 590;
+            this.yellowSprites[1].position.y = 640;
+            this.add.tween(this.hands[0]).from({
+                alpha: 0
+            }, 2000, Phaser.Easing.Linear.None, true);
+            this.add.tween(this.hands[1]).from({
+                alpha: 0
+            }, 2000, Phaser.Easing.Linear.None, true);
+            this.add.tween(this.arrows).from({
+                alpha: 0
+            }, 2000, Phaser.Easing.Linear.None, true);
+            this.add.tween(this.yellowSprites[0]).from({
+                alpha: 0
+            }, 2000, Phaser.Easing.Linear.None, true);
+            this.add.tween(this.yellowSprites[1]).from({
+                alpha: 0
+            }, 2000, Phaser.Easing.Linear.None, true);
+            this.add.tween(this.keySprites).from({
+                alpha: 0
+            }, 2000, Phaser.Easing.Linear.None, true);
+            this.world.bringToTop(this.hands[0]);
+            this.world.bringToTop(this.hands[1]);
+            this.world.bringToTop(this.tLid);
+
+            this.world.bringToTop(this.bLid);
+            this.hands[0].angle = 60;
+            this.hands[0].position.x = 700;
+            this.hands[0].position.y = 880;
+            this.hands[0].scale.y = -1;
+            this.hands[1].angle = 20;
+            this.hands[1].position.x = 850;
+            this.hands[1].position.y = 660;
+            this.yellowSpriteFrame = 12;
+            this.time.events.loop(Phaser.Timer.SECOND / 7, function () {
+                this.RotateSpriteOutline(this.arrows, 3, 0);
+            }, this);
+        }, this);
+
+        this.tLid = this.add.sprite(0, 0, "toplid");
+        this.bLid = this.add.sprite(0, 0, "lowerlid");
+        this.tLidTween = this.add.tween(this.tLid).from({
+            y: -500
+        }, 8000, Phaser.Easing.Linear.None, true);
+        this.add.tween(this.bLid).from({
+            y: 600
+        }, 8000, Phaser.Easing.Linear.None, true);
+
+    },
+
+    RotateSpriteOutline: function (frameNumber, endFrame, startFrame) {
+        if (frameNumber.frame == endFrame) {
+            frameNumber.frame = startFrame;
+        } else {
+            frameNumber.frame += 1;
+        }
+        this.keySprites.frame = this.keySpriteFrame;
+        this.keySpriteFrame += 1;
+        if (this.keySpriteFrame == 3) {
+            this.keySpriteFrame = 0;
+        }
+        this.YellowSpriteRotate();
+    },
+
+    YellowSpriteRotate: function () {
+        for (var i = 0; i < this.yellowSprites.length; i++) {
+            this.yellowSprites[i].frame = this.yellowSpriteFrame;
+        }
+        this.yellowSpriteFrame += 1;
+        if (this.yellowSpriteFrame == 15) {
+            this.yellowSpriteFrame = 12;
+        }
     },
 
     startGame: function () {

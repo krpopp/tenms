@@ -17,7 +17,27 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": true
+    },
+        {
+            "name": "eatramen",
+            "sheets": 3,
+            "sound": ["noodleslurp.mp3"],
+            "loop": false,
+            "soundType": 1,
+            "soundFrame": 7,
+            "time": "morning",
+            "keySet": ["manager.cursors.down", "manager.en", "manager.ach", "manager.ewe", "manager.aye", "manager.kay", "manager.em"],
+            "switchPoints": [1, 2, 3, 4, 5],
+            "pattern": 14,
+            "speed": 1,
+            "hands": 1,
+            "restartSheet": null,
+            "restart": false,
+            "decrease": false,
+            "startframe": null,
+            "updateCheck": false
     },
         {
             "name": "musicplay",
@@ -34,7 +54,8 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": false
     },
         {
             "name": "jog",
@@ -51,7 +72,8 @@
             "restartSheet": null,
             "restart": true,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": false
     },
         {
             "name": "shower",
@@ -70,7 +92,8 @@
             "restart": true,
             "reverse": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": false
     },
         {
             "name": "closet",
@@ -88,7 +111,8 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": true
     },
         {
             "name": "button",
@@ -105,7 +129,8 @@
             "restartSheet": null,
             "restart": true,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": false
     },
         {
             "name": "fridge",
@@ -123,7 +148,8 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": true
     },
         {
             "name": "coffee",
@@ -140,7 +166,8 @@
             "restartSheet": null,
             "restart": false,
             "decrease": true,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": true
     },
         {
             "name": "bottleopen",
@@ -157,7 +184,8 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": false
     },
         {
             "name": "pill",
@@ -173,7 +201,8 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": false
     },
         {
             "name": "brush-morn",
@@ -190,7 +219,8 @@
             "restartSheet": null,
             "restart": true,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": false
     },
         {
             "name": "sleep",
@@ -208,7 +238,62 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": true
+    },
+        {
+            "name": "finalcallmom",
+            "sheets": 5,
+            "sound": ["iphonetype.mp3"],
+            "loop": false,
+            "soundType": 3,
+            "soundFrame": 5,
+            "time": "midday",
+            "keySet": ["manager.em", "manager.oh", "manager.em"],
+            "pattern": 18,
+            "switchInt": 15,
+            "speed": 1,
+            "hands": 1,
+            "restartSheet": null,
+            "restart": false,
+            "decrease": false,
+            "startframe": null,
+            "updateCheck": true
+    },
+        {
+            "name": "cantsleep",
+            "sheets": 5,
+            "sound": [],
+            "soundType": 3,
+            "loop": false,
+            "time": "midday",
+            "keySet": [],
+            "pattern": 19,
+            "speed": 1,
+            "hands": 3,
+            "restartSheet": null,
+            "restart": true,
+            "decrease": false,
+            "startframe": null,
+            "updateCheck": false
+        },
+        {
+            "name": "bigO",
+            "sheets": 3,
+            "sound": ["vibrations.mp3"],
+            "loop": false,
+            "soundType": 0,
+            "soundFrame": 18,
+            "time": "midday",
+            "keySet": ["manager.oh"],
+            "pattern": 2,
+            "speed": 1,
+            "hands": 1,
+            "restartSheet": null,
+            "restart": true,
+            "decrease": false,
+            "startframe": null,
+            "updateCheck": true
     },
         {
             "name": "brush-nigh",
@@ -225,7 +310,8 @@
             "restartSheet": null,
             "restart": true,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": false
     },
         {
             "name": "shirtput",
@@ -243,7 +329,8 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": false
     },
         {
             "name": "eatramen",
@@ -261,7 +348,8 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": false
     },
         {
             "name": "ramen",
@@ -279,7 +367,8 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": true
     },
         {
             "name": "subwayseats",
@@ -295,7 +384,8 @@
             "restartSheet": null,
             "restart": true,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": true
     },
         {
             "name": "subway",
@@ -312,7 +402,8 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": "stillsubway"
+            "startframe": "stillsubway",
+            "updateCheck": false
     },
         {
             "name": "computerframe",
@@ -330,9 +421,28 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": false
         },
-
+        {
+            "name": "treez",
+            "insidePicSheet": "compmaterials",
+            "insidePicSprite": "excel",
+            "sheets": 2,
+            "sound": ["click2.wav", "click3.wav", "click4.wav", "click1.wav"],
+            "soundType": 3,
+            "loop": false,
+            "time": "midday",
+            "keySet": ["manager.space"],
+            "pattern": 20,
+            "speed": 5,
+            "hands": 3,
+            "restartSheet": null,
+            "restart": true,
+            "decrease": false,
+            "startframe": null,
+            "updateCheck": true
+  },
         {
             "name": "computerframeloan",
             "insidePicSheet": "compmaterials",
@@ -349,9 +459,9 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": false
         },
-
         {
             "name": "workcallmom",
             "sheets": 4,
@@ -368,7 +478,8 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": true
     },
         {
             "name": "computerframesocial",
@@ -384,7 +495,8 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": false
         },
         {
             "name": "computerframeexcel",
@@ -402,7 +514,8 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": false
   },
         {
             "name": "subwayseats",
@@ -418,7 +531,8 @@
             "restartSheet": null,
             "restart": true,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": true
     },
         {
             "name": "subway",
@@ -435,7 +549,8 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": "stillsubway"
+            "startframe": "stillsubway",
+            "updateCheck": false
     },
         {
             "name": "walkstreet",
@@ -451,7 +566,8 @@
             "restartSheet": null,
             "restart": false,
             "decrease": false,
-            "startframe": null
+            "startframe": null,
+            "updateCheck": false
     }
 
   ]

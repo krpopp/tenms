@@ -12,7 +12,6 @@ SceneGame.Manager = function (game) {
     this.state;
     this.world;
     this.rnd;
-
 };
 
 SceneGame.Manager.prototype = {
@@ -66,7 +65,6 @@ SceneGame.Manager.prototype = {
         manager.buttonPressFrame = [];
         manager.yellowSpriteFrame = 12;
         manager.buttonPressFrameSets = [];
-        manager.pressSprites = [];
         manager.handimation = [];
         manager.letter = [];
         manager.letterFrame = [];
@@ -81,6 +79,15 @@ SceneGame.Manager.prototype = {
         manager.deleteFrame = 17;
         manager.deleteKeyFrame = 4;
         manager.deleteYellowFrame = 0;
+        manager.ripple = [];
+        manager.bursts = [];
+
+        manager.burstsX = [520, 580, 640, 520, 580, 640];
+        manager.burstsY = [730, 680, 770, 770, 800, 720];
+        manager.burstsRot = [-90, 0, 90, -90, 90, 90];
+
+        manager.rndSprite = [];
+        manager.rndSheet = [];
     },
 
     CreateKeySprite: function () {
@@ -88,152 +95,60 @@ SceneGame.Manager.prototype = {
         var allDone = false;
         switch (manager.currentScene.pattern) {
             case 11:
-                manager.LetterReset();
-                manager.bottleXPos = [420, 370, 420, 520, 570, 520];
-                manager.CreateLetterKeys(0, 770, 620);
-                manager.BottleYellowBG(0);
-                for (var i = 1; i < manager.keySet.length; i++) {
-                    manager.CreateLetterKeys(i, manager.bottleXPos[i - 1], manager.bottleYPos[i - 1]);
-                    manager.BottleYellowBG(i, i - 1);
-                }
-                manager.PlaceHands(0, 980, 800, 45);
-                manager.PlaceHands(1, 290, 900, 120);
-                manager.hands[1].scale.y = -1;
-                manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+                manager.CreateHoldAndSequence();
                 allDone = true;
                 break;
             case 12:
-                manager.LetterReset();
-                for (var i = 0; i < manager.keySet.length; i++) {
-                    manager.CreateLetterKeys(i, 440 + (50 * i), 510 + (100 * i));
-                    manager.ShirtLetterBG(i);
-                }
-                manager.PlaceHands(0, 600, 600, 45);
-                manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+                manager.CreateIncreaseEachSequence();
                 allDone = true;
                 break;
             case 13:
-                manager.LetterReset();
-                manager.shiftLetter = manager.add.sprite(530, 610, 'morekeys', 'shift1');
-                manager.shiftLetterYellow = manager.add.sprite(500, 600, 'midkeys', 'midKeyBG1');
-                manager.shiftLetterKey = manager.add.sprite(500, 600, 'morekeys', 'midkey1');
-                manager.shiftLetter.visible = false;
-                manager.shiftLetterYellow.visible = false;
-                manager.shiftLetterKey.visible = false;
-                manager.CreateLetterYellowBG(0, 660, 630, 660, 630);
-                manager.letter[0] = manager.add.sprite(650, 610, 'down', 0);
-                manager.CreateLetterKeys(0, 620, 590);
-                manager.PlaceHands(0, 800, 800, 45);
+                manager.CreateHoldAndSwitch();
                 allDone = true;
                 break;
             case 14:
-                manager.baseSound = manager.add.audio("phonevibrate");
-                manager.baseSound.play();
-                manager.LetterReset();
-                manager.CreateLetterKeys(0, 550, 620);
-                manager.BottleYellowBG(0);
-                manager.letter[0].visible = false;
-                manager.letterKeys[0].visible = false;
-                manager.yellowSprites[0].visible = false;
-                manager.bottleXPos = [520, 470, 520, 620, 670, 620];
-                for (var i = 1; i < manager.keySet.length; i++) {
-                    manager.CreateLetterKeys(i, manager.bottleXPos[i - 1], manager.bottleYPos[i - 1]);
-                    manager.BottleYellowBG(i, i - 1);
-                }
-                manager.PlaceHands(0, 430, 910, 120);
-                manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+                manager.CreateChangeEach();
                 allDone = true;
                 break;
             case 15:
-                manager.LetterReset();
-                manager.bigyellowSprites = manager.add.sprite(550, 600, 'morekeys', 'bigYellBG1');
-                manager.bigletter = manager.add.sprite(560, 610, 'morekeys', 'del1');
-                manager.bigletterKeys = manager.add.sprite(550, 600, 'morekeys', 'bigkey1');
-                manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.DeleteRotateOutline, this);
+                manager.CreateDelete();
                 allDone = true;
                 break;
             case 16:
-                manager.LetterReset();
-                manager.TabKeyCreate();
-                manager.ControlKeyCreate();
-                manager.CreateLetterKeys(0, 620, 590);
-                manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
-                manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.TabRotateOutline, this);
+                manager.CreateExcel();
                 allDone = true;
                 break;
             case 18:
-                manager.LetterReset();
-                for (var i = 0; i < manager.keySet.length; i++) {
-                    manager.CreateLetterKeys(i, 550 + (100 * i), 600);
-                    manager.CreateLetterYellowBG(i, 580 + (100 * i), 640, 550 + (100 * i), 600);
-                }
-                manager.letter[0] = manager.add.sprite(570, 620, 'mju', 'M1');
-                manager.letter[1] = manager.add.sprite(670, 620, 'oh', 'o1');
-                manager.letter[2] = manager.add.sprite(770, 620, 'mju', 'M1');
-                manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+                manager.CreateMOM();
+                allDone = true;
+                break;
+            case 20:
+                manager.CreateSpace();
                 allDone = true;
                 break;
         }
         if (!allDone) {
             switch (manager.currentScene.keySet[0]) {
                 case "manager.cue":
-                    manager.LetterReset();
-                    for (var i = 0; i < manager.keySet.length; i++) {
-                        manager.CreateLetterKeys(i, 480 + (100 * i), 550);
-                        manager.LetterYellowBG(manager.currentScene.keySet[i], i);
-                    }
-                    manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+                    manager.CreateJog();
                     break;
                 case "manager.efNine":
-                    manager.LetterReset();
-                    manager.CreateLetterKeys(0, 480, 550);
-                    manager.CreateLetterKeys(1, 600, 550);
-                    manager.PlaceHands(0, 830, 750, 45);
-                    manager.PlaceHands(1, 380, 800, 120);
-                    manager.hands[1].scale.y = -1;
-                    manager.LetterYellowBG("manager.function", 0);
-                    manager.LetterYellowBG(manager.currentScene.keySet[0], 1);
-                    manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
-                    manager.arrows.visible = false;
-                    manager.keySprites.visible = false;
+                    manager.CreatePill();
                     break;
                 case "manager.em":
-                    manager.LetterReset();
-                    manager.keySprites.visible = false;
-                    for (var i = 0; i < manager.keySet.length; i++) {
-                        manager.CreateLetterKeys(i, 440 + (50 * i), 510 + (100 * i));
-                        manager.LetterYellowBG(manager.currentScene.keySet[i], i);
-                    }
-                    manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+                    manager.CreateMusicPlay();
                     break;
                 case "manager.keyOne":
-                    manager.LetterReset();
-                    manager.CreateLetterKeys(0, 580, 550);
-                    manager.EndYellowBG(manager.currentScene.keySet[0], 0);
-                    manager.keySprites.visible = false;
-                    manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+                    manager.CreateSleep();
                     break;
                 case "manager.keyFive":
-                    manager.LetterReset();
-                    manager.nextY = 0;
-                    manager.nextX = 0;
-                    manager.hasLetters = true;
-                    manager.keySprites.visible = false;
-                    for (var i = 0; i < manager.keySet.length; i++) {
-                        if (i % 2 == 0) {
-                            manager.nextY += 1;
-                            manager.nextX = 0;
-                        } else {
-                            manager.nextX = 1;
-                        }
-                        manager.letterKeys[i] = manager.add.sprite(440 + (200 * manager.nextX), 440 + (80 * manager.nextY), "qw", "qwkey0");
-                        manager.LetterYellowBG(manager.currentScene.keySet[i], i);
-                    }
-                    manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+                    manager.CreateButton();
+                    break;
+                case "manager.oh":
+                    manager.CreateBigO();
                     break;
                 default:
                     if (manager.keySprites != null) {
-                        console.log("this should not happen either!");
                         manager.arrows.visible = true;
                         manager.keySprites.visible = true;
                         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.RotateOutline, this);
@@ -246,9 +161,202 @@ SceneGame.Manager.prototype = {
                     break;
             }
         }
-
         for (var i = 0; i < manager.hands.length; i++) {
             manager.world.bringToTop(manager.hands[i]);
+        }
+    },
+
+    CreateHoldAndSequence: function () {
+        var manager = this;
+        manager.LetterReset();
+        manager.bottleXPos = [420, 370, 420, 520, 570, 520];
+        manager.CreateLetterKeys(0, 770, 620);
+        manager.BottleYellowBG(0);
+        for (var i = 1; i < manager.keySet.length; i++) {
+            manager.CreateLetterKeys(i, manager.bottleXPos[i - 1], manager.bottleYPos[i - 1]);
+            manager.BottleYellowBG(i, i - 1);
+        }
+        manager.PlaceHands(0, 980, 800, 45);
+        manager.PlaceHands(1, 290, 900, 120);
+        manager.hands[1].scale.y = -1;
+        manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+    },
+
+    CreateIncreaseEachSequence: function () {
+        var manager = this;
+        manager.LetterReset();
+        for (var i = 0; i < manager.keySet.length; i++) {
+            manager.CreateLetterKeys(i, 440 + (50 * i), 510 + (100 * i));
+            manager.ShirtLetterBG(i);
+        }
+        manager.PlaceHands(0, 600, 600, 45);
+        manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+    },
+
+    CreateHoldAndSwitch: function () {
+        var manager = this;
+        manager.LetterReset();
+        manager.shiftLetter = manager.add.sprite(530, 610, 'morekeys', 'shift1');
+        manager.shiftLetterYellow = manager.add.sprite(500, 600, 'midkeys', 'midKeyBG1');
+        manager.shiftLetterKey = manager.add.sprite(500, 600, 'morekeys', 'midkey1');
+        manager.shiftLetter.visible = false;
+        manager.shiftLetterYellow.visible = false;
+        manager.shiftLetterKey.visible = false;
+        manager.CreateLetterYellowBG(0, 660, 630, 660, 630);
+        manager.letter[0] = manager.add.sprite(650, 610, 'down', 0);
+        manager.CreateLetterKeys(0, 620, 590);
+        manager.PlaceHands(0, 800, 800, 45);
+    },
+
+    CreateChangeEach: function () {
+        var manager = this;
+        manager.baseSound = manager.add.audio("phonevibrate");
+        manager.baseSound.play();
+        manager.LetterReset();
+        manager.CreateLetterKeys(0, 550, 620);
+        manager.BottleYellowBG(0);
+        manager.letter[0].visible = false;
+        manager.letterKeys[0].visible = false;
+        manager.yellowSprites[0].visible = false;
+        manager.bottleXPos = [520, 470, 520, 620, 670, 620];
+        for (var i = 1; i < manager.keySet.length; i++) {
+            manager.CreateLetterKeys(i, manager.bottleXPos[i - 1], manager.bottleYPos[i - 1]);
+            manager.BottleYellowBG(i, i - 1);
+        }
+        manager.PlaceHands(0, 430, 910, 120);
+        manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+    },
+
+    CreateDelete: function () {
+        var manager = this;
+        manager.LetterReset();
+        manager.bigyellowSprites = manager.add.sprite(550, 600, 'morekeys', 'bigYellBG1');
+        manager.bigletter = manager.add.sprite(560, 610, 'morekeys', 'del1');
+        manager.bigletterKeys = manager.add.sprite(550, 600, 'morekeys', 'bigkey1');
+        manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.DeleteRotateOutline, this);
+    },
+
+    CreateExcel: function () {
+        var manager = this;
+        manager.LetterReset();
+        manager.TabKeyCreate();
+        manager.ControlKeyCreate();
+        manager.CreateLetterKeys(0, 620, 590);
+        manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+        manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.TabRotateOutline, this);
+    },
+
+    CreateMOM: function () {
+        var manager = this;
+        manager.LetterReset();
+        for (var i = 0; i < manager.keySet.length; i++) {
+            manager.CreateLetterKeys(i, 550 + (100 * i), 600);
+            manager.CreateLetterYellowBG(i, 580 + (100 * i), 640, 550 + (100 * i), 600);
+        }
+        manager.letter[0] = manager.add.sprite(570, 620, 'mju', 'M1');
+        manager.letter[1] = manager.add.sprite(670, 620, 'oh', 'o1');
+        manager.letter[2] = manager.add.sprite(770, 620, 'mju', 'M1');
+        manager.PlaceHands(0, 780, 800, 45);
+        manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+    },
+
+    CreateJog: function () {
+        var manager = this;
+        manager.LetterReset();
+        for (var i = 0; i < manager.keySet.length; i++) {
+            manager.CreateLetterKeys(i, 480 + (100 * i), 550);
+            manager.LetterYellowBG(manager.currentScene.keySet[i], i);
+        }
+        manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+    },
+
+    CreatePill: function () {
+        var manager = this;
+        manager.LetterReset();
+        manager.CreateLetterKeys(0, 480, 550);
+        manager.CreateLetterKeys(1, 600, 550);
+        manager.PlaceHands(0, 830, 750, 45);
+        manager.PlaceHands(1, 380, 800, 120);
+        manager.hands[1].scale.y = -1;
+        manager.LetterYellowBG("manager.function", 0);
+        manager.LetterYellowBG(manager.currentScene.keySet[0], 1);
+        manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+        manager.arrows.visible = false;
+        manager.keySprites.visible = false;
+    },
+
+    CreateMusicPlay: function () {
+        var manager = this;
+        manager.LetterReset();
+        manager.keySprites.visible = false;
+        for (var i = 0; i < manager.keySet.length; i++) {
+            manager.CreateLetterKeys(i, 440 + (50 * i), 510 + (100 * i));
+            manager.LetterYellowBG(manager.currentScene.keySet[i], i);
+        }
+        manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+    },
+
+    CreateSleep: function () {
+        var manager = this;
+        manager.LetterReset();
+        manager.CreateLetterKeys(0, 580, 550);
+        manager.EndYellowBG(manager.currentScene.keySet[0], 0);
+        manager.keySprites.visible = false;
+        manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+    },
+
+    CreateButton: function () {
+        var manager = this;
+        manager.LetterReset();
+        manager.nextY = 0;
+        manager.nextX = 0;
+        manager.hasLetters = true;
+        manager.keySprites.visible = false;
+        for (var i = 0; i < manager.keySet.length; i++) {
+            if (i % 2 == 0) {
+                manager.nextY += 1;
+                manager.nextX = 0;
+            } else {
+                manager.nextX = 1;
+            }
+            manager.letterKeys[i] = manager.add.sprite(440 + (200 * manager.nextX), 440 + (80 * manager.nextY), "qw", "qwkey0");
+            manager.LetterYellowBG(manager.currentScene.keySet[i], i);
+        }
+        manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+    },
+
+    CreateBigO: function () {
+        var manager = this;
+        manager.LetterReset();
+        manager.yellowSprites[0] = manager.add.sprite(550, 600, "qw", "qwYellow1");
+        manager.letter[0] = manager.add.sprite(570, 620, 'oh', 'o1');
+        manager.letterKeys[0] = manager.add.sprite(550, 600, "qw", "qwkey0");
+    },
+
+    CreateSpace: function () {
+        var manager = this;
+        manager.LetterReset();
+        manager.spaceYellowNum = 6;
+        manager.spaceKeyNum = 3;
+        manager.spaceOutlineNum = 0;
+        manager.spaceYellow = manager.add.sprite(480, 600, 'space', 'spaceY1');
+        manager.spaceKey = manager.add.sprite(550, 610, 'space', 'spaceW1');
+        manager.spaceOutline = manager.add.sprite(480, 600, 'space', 'spaceOL1');
+        manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.SpaceRotate, this);
+    },
+
+    SpaceRotate: function () {
+        var manager = this;
+        manager.spaceOutline.frame = manager.spaceOutlineNum;
+        manager.spaceKey.frame = manager.spaceKeyNum;
+        manager.spaceYellow.frame = manager.spaceYellowNum;
+        manager.spaceOutlineNum += 1;
+        manager.spaceKeyNum += 1;
+        manager.spaceYellowNum += 1;
+        if (manager.spaceOutlineNum == 2) {
+            manager.spaceYellowNum = 6;
+            manager.spaceKeyNum = 3;
+            manager.spaceOutlineNum = 0;
         }
     },
 
@@ -268,6 +376,153 @@ SceneGame.Manager.prototype = {
         manager.letterKeys = [];
         manager.hasLetters = true;
         manager.keySprites.visible = false;
+    },
+
+    ResetKeyboard: function () {
+        var manager = this;
+        manager.cue.reset();
+        manager.doubleEwe.reset();
+        manager.em.reset();
+        manager.jay.reset();
+        manager.ewe.reset();
+        manager.tee.reset();
+        manager.why.reset();
+        manager.gee.reset();
+        manager.ach.reset();
+        manager.bee.reset();
+        manager.en.reset();
+        manager.em.reset();
+        manager.aye.reset();
+        manager.kay.reset();
+        manager.cee.reset();
+        manager.vee.reset();
+        manager.oh.reset();
+        manager.control.reset();
+        manager.efNine.reset();
+        manager.keyOne.reset();
+        manager.keyTwo.reset();
+        manager.keyThree.reset();
+        manager.keyFour.reset();
+        manager.keyFive.reset();
+        manager.keySix.reset();
+        manager.keySeven.reset();
+        manager.keyEight.reset();
+        manager.keyNine.reset();
+        manager.keyZero.reset();
+        manager.shift.reset();
+        manager.tab.reset();
+        manager.enterKey.reset();
+        manager.deleteKey.reset();
+        manager.cursors.up.reset();
+        manager.cursors.down.reset();
+        manager.cursors.left.reset();
+        manager.cursors.right.reset();
+    },
+
+    RemoveEverything: function () {
+        var manager = this;
+        manager.ResetKeyboard();
+        manager.tweens.removeAll();
+        manager.keysPressed = [];
+        if (manager.currentSound != null) {
+            manager.currentSound.stop();
+        }
+        for (var i = 0; i < manager.currentSet.length; i++) {
+            manager.currentSet[i].destroy();
+        }
+        for (var i = 0; i < manager.hands.length; i++) {
+            manager.hands[i].visible = false;
+        }
+        for (var i = 0; i < manager.yellowSprites.length; i++) {
+            manager.yellowSprites[i].visible = false;
+        }
+        if (manager.hasLetters) {
+            for (var i = 0; i < manager.letterKeys.length; i++) {
+                if (manager.letterKeys[i] != null) {
+                    manager.letterKeys[i].visible = false;
+                }
+                if (manager.letter[i] != null) {
+                    manager.letter[i].visible = false;
+                }
+            }
+        }
+        if (manager.baseSound != null) {
+            manager.baseSound.destroy();
+        }
+        if (manager.ripple[0] != null) {
+            for (var i = 0; i < manager.ripple.length; i++) {
+                manager.ripple[i].visible = false;
+            }
+        }
+        if (manager.wait != null) {
+            manager.wait.destroy();
+        }
+        if (manager.guess != null) {
+            manager.guess.destroy();
+        }
+        if (manager.swipeTween != null) {
+            manager.tweens.remove(manager.swipeTween);
+        }
+        if (manager.startFrame != null) {
+            manager.startFrame.destroy();
+        }
+        if (manager.downSprite != null) {
+            manager.downSprite.destroy();
+        }
+        if (manager.underPic != null) {
+            manager.underPic.destroy();
+        }
+        if (manager.insidePic != null) {
+            manager.insidePic.destroy();
+        }
+        if (manager.cursor != null) {
+            manager.cursor.destroy();
+        }
+        if (manager.screen != null) {
+            manager.screen.destroy();
+        }
+        if (manager.text0 != null) {
+            manager.text0.destroy();
+        }
+        if (manager.text1 != null) {
+            manager.text1.destroy();
+        }
+        if (manager.text2 != null) {
+            manager.text2.destroy();
+        }
+        if (manager.spaceOutline != null) {
+            manager.spaceYellow.destroy();
+            manager.spaceKey.destroy();
+            manager.spaceOutline.destroy();
+        }
+        if (manager.shiftLetter != null) {
+            manager.shiftLetter.destroy();
+            manager.shiftLetterYellow.destroy();
+            manager.shiftLetterKey.destroy();
+        }
+        if (manager.excelText != null) {
+            for (var i = 0; i < manager.excelText.length; i++) {
+                manager.excelText[i].destroy();
+            }
+        }
+        if (manager.tabYellow) {
+            manager.tabYellow.destroy();
+            manager.tabLetter.destroy();
+            manager.tabLetterKeys.destroy();
+            manager.ctrlYellow.destroy();
+            manager.ctrlLetter.destroy();
+            manager.ctrlLetterKeys.destroy();
+        }
+        if (manager.bigletter != null) {
+            manager.bigyellowSprites.destroy();
+            manager.bigletterKeys.destroy();
+            manager.bigletter.destroy();
+        }
+        manager.bLid.destroy();
+        manager.tLid.destroy();
+        manager.black.destroy();
+        manager.hasLetters = false;
+        manager.time.events.removeAll();
     },
 
     CreateKeys: function () {
@@ -306,6 +561,7 @@ SceneGame.Manager.prototype = {
         manager.tab = manager.input.keyboard.addKey(Phaser.Keyboard.TAB);
         manager.enterKey = manager.input.keyboard.addKey(Phaser.Keyboard.ENTER);
         manager.deleteKey = manager.input.keyboard.addKey(Phaser.Keyboard.BACKSPACE);
+        manager.space = manager.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     },
 
     EndYellowBG: function (keyName, num) {
@@ -362,7 +618,6 @@ SceneGame.Manager.prototype = {
     CreateLetterYellowBG: function (num, yellX, yellY, pressX, pressY) {
         var manager = this;
         manager.yellowSprites[num] = manager.add.sprite(yellX, yellY, "qw", "qwYellow1");
-        manager.pressSprites[num] = manager.add.sprite(pressX, pressY, "keys", "keypress-0");
         manager.SetSpriteData(num);
     },
 
@@ -371,15 +626,15 @@ SceneGame.Manager.prototype = {
         switch (num) {
             case 0:
                 manager.letter[num] = manager.add.sprite(460, 530, "mju", "U3");
-                manager.CreateLetterYellowBG(0, 480, 550, 480, 550);
+                manager.CreateLetterYellowBG(num, 480, 550, 480, 550);
                 break;
             case 1:
                 manager.letter[num] = manager.add.sprite(505, 630, "mju", "J3");
-                manager.CreateLetterYellowBG(0, 525, 650, 525, 650);
+                manager.CreateLetterYellowBG(num, 525, 650, 525, 650);
                 break;
             case 2:
                 manager.letter[num] = manager.add.sprite(570, 730, "mju", "M3");
-                manager.CreateLetterYellowBG(0, 580, 750, 580, 750);
+                manager.CreateLetterYellowBG(num, 580, 750, 580, 750);
                 break;
         }
     },
@@ -531,7 +786,6 @@ SceneGame.Manager.prototype = {
             manager.RotateSpriteOutline(manager.arrows, 3, 0);
         }, this);
 
-
         switch (keyName) {
             case "manager.cursors.up":
                 manager.CreateAllSpritesETC(num, 625, 590, 850, 660, 20);
@@ -566,8 +820,6 @@ SceneGame.Manager.prototype = {
             manager.hands[i].visible = false;
             manager.yellowSprites[i] = manager.add.sprite(-100, -100, "qw", "qwYellow1");
             manager.yellowSprites[i].visible = false;
-            manager.pressSprites[i] = manager.add.sprite(-100, -100, "keys", "keypress-0");
-            manager.pressSprites[i].visible = false;
         }
         manager.PhotoLoader();
     },
@@ -575,8 +827,6 @@ SceneGame.Manager.prototype = {
     SetSpriteData: function (num) {
         var manager = this;
         manager.yellowSprites[num].anchor.setTo(0.5, 0.5);
-        manager.pressSprites[num].anchor.setTo(0.5, 0.5);
-        manager.pressSprites[num].visible = false;
         manager.world.sendToBack(manager.yellowSprites[num]);
     },
 
@@ -585,9 +835,9 @@ SceneGame.Manager.prototype = {
         manager.yellowSprites[num].position.x = posX;
         manager.yellowSprites[num].position.y = posY;
         manager.yellowSprites[num].visible = true;
-        manager.pressSprites[num].position.x = posX;
-        manager.pressSprites[num].position.y = posY;
-        manager.pressSprites[num].visible = false;
+        manager.yellowSprites[num].alpha = 1;
+        manager.yellowSprites[num].scale.x = 1;
+        manager.yellowSprites[num].scale.y = 1;
         manager.PlaceHands(num, handX, handY, handRot);
         if (manager.currentScene.hands == 1) {
             for (var i = 1; i < manager.hands.length; i++) {
@@ -665,7 +915,6 @@ SceneGame.Manager.prototype = {
             manager.deleteFrame = 17;
         } else {
             manager.deleteFrame += 1;
-            console.log(manager.deleteFrame);
         }
         if (manager.deleteKeyFrame == 7) {
             manager.deleteKeyFrame = 4;
@@ -797,7 +1046,7 @@ SceneGame.Manager.prototype = {
         manager.CreateKeySprite();
         manager.KeyCheckSwitch(manager.currentScene.pattern);
         if (manager.currentScene.name != "sleep" && manager.currentScene.name != "wakephone") {
-            manager.time.events.add(Phaser.Timer.SECOND * 10, manager.NextScene, this);
+            manager.time.events.add(Phaser.Timer.SECOND * 5, manager.NextScene, this);
         }
         if (manager.currentScene.name == "wakephone") {
             manager.MorningScenes();
@@ -836,119 +1085,104 @@ SceneGame.Manager.prototype = {
             }
 
         } else {
-            manager.state.start("Manager");
+            location.reload();
         }
     },
 
-    RemoveEverything: function () {
+    TopLidDownThings: function () {
         var manager = this;
-        manager.cue.reset();
-        manager.doubleEwe.reset();
-        manager.em.reset();
-        manager.jay.reset();
-        manager.ewe.reset();
-        manager.cursors.up.reset();
-        manager.cursors.down.reset();
-        manager.cursors.left.reset();
-        manager.cursors.right.reset();
-        manager.tweens.removeAll();
-        manager.keysPressed = [];
-        if (manager.currentSound != null) {
-            manager.currentSound.stop();
-        }
-        for (var i = 0; i < manager.currentSet.length; i++) {
-            manager.currentSet[i].destroy();
-        }
-        for (var i = 0; i < manager.hands.length; i++) {
-            manager.hands[i].visible = false;
+        manager.startTween = true;
+        manager.AlphaTweens(manager.mLid, 0, 1000);
+        manager.tLidTween.pause();
+        manager.bLidTween.pause();
+        manager.world.bringToTop(manager.tLid);
+        manager.world.bringToTop(manager.bLid);
+        manager.world.bringToTop(manager.black);
+        for (var i = 0; i < manager.ripple.length; i++) {
+            manager.world.bringToTop(manager.ripple[i]);
         }
         for (var i = 0; i < manager.yellowSprites.length; i++) {
-            manager.yellowSprites[i].visible = false;
-            manager.pressSprites[i].visible = false;
+            manager.world.bringToTop(manager.yellowSprites[i]);
         }
-        if (manager.hasLetters) {
-            for (var i = 0; i < manager.letterKeys.length; i++) {
-                if (manager.letterKeys[i] != null) {
-                    manager.letterKeys[i].visible = false;
-                }
-                if (manager.letter[i] != null) {
-                    manager.letter[i].visible = false;
-                }
+        manager.world.bringToTop(manager.arrows);
+        manager.world.bringToTop(manager.keySprites);
+        for (var i = 0; i < manager.hands.length; i++) {
+            manager.world.bringToTop(manager.hands[i]);
+        }
+        manager.tLid.position.y--;
+        if (manager.tLid.position.y <= -450) {
+            manager.NextScene();
+        }
+        manager.bLid.position.y++;
+    },
+
+    PatternThreeThings: function () {
+        var manager = this;
+        if (!manager.goDown && manager.upInt >= manager.currentScene.switchInt) {
+            manager.goDown = true;
+            manager.SequentialKeyPress(0);
+            manager.MoveHand(1);
+            manager.YellowKeyUp(1);
+        }
+        if (manager.goDown && manager.upInt <= 0) {
+            manager.goDown = false;
+            manager.SequentialKeyPress(1);
+            manager.MoveHand(0);
+            manager.YellowKeyUp(0);
+        }
+        if (manager.keysPressed[0]) {
+            if (!manager.goDown) {
+                manager.IncreaseInt();
             }
         }
-        if (manager.baseSound != null) {
-            manager.baseSound.destroy();
-        }
-        if (manager.wait != null) {
-            manager.wait.destroy();
-        }
-        if (manager.guess != null) {
-            manager.guess.destroy();
-        }
-        if (manager.swipeTween != null) {
-            manager.tweens.remove(manager.swipeTween);
-        }
-        if (manager.startFrame != null) {
-            manager.startFrame.destroy();
-        }
-        if (manager.downSprite != null) {
-            manager.downSprite.destroy();
-        }
-        if (manager.underPic != null) {
-            manager.underPic.destroy();
-        }
-        if (manager.insidePic != null) {
-            console.log("why i not happen");
-            manager.insidePic.destroy();
-        }
-        if (manager.cursor != null) {
-            manager.cursor.destroy();
-        }
-        if (manager.screen != null) {
-            console.log("hmmm");
-            manager.screen.destroy();
-        }
-        if (manager.text0 != null) {
-            manager.text0.destroy();
-        }
-        if (manager.text1 != null) {
-            manager.text1.destroy();
-        }
-        if (manager.text2 != null) {
-            manager.text2.destroy();
-        }
-        if (manager.shiftLetter != null) {
-            manager.shiftLetter.destroy();
-            manager.shiftLetterYellow.destroy();
-            manager.shiftLetterKey.destroy();
-        }
-        if (manager.excelText != null) {
-            for (var i = 0; i < manager.excelText.length; i++) {
-                manager.excelText[i].destroy();
+        if (manager.keysPressed[1]) {
+            if (manager.goDown) {
+                manager.DecreaseInt();
             }
         }
-        if (manager.tabYellow) {
-            manager.tabYellow.destroy();
-            manager.tabLetter.destroy();
-            manager.tabLetterKeys.destroy();
-            manager.ctrlYellow.destroy();
-            manager.ctrlLetter.destroy();
-            manager.ctrlLetterKeys.destroy();
+    },
+
+    PatternTenThings: function () {
+        var manager = this;
+        if (manager.upInt >= manager.currentScene.switchInt) {
+            manager.yellowSprites[0].visible = false;
+            manager.yellowSprites[1].visible = true;
+            manager.keysPressed[0] = false;
+            manager.keysPressed[1] = false;
+            manager.keySet[0].reset;
+            manager.keySet.shift();
+            manager.yellowSprites.shift();
+            manager.NewHandPos(700, 880, 60);
+            manager.ContinueSwitch();
+            manager.currentScene.switchInt = 500;
         }
-        if (manager.bigletter != null) {
-            manager.bigyellowSprites.destroy();
-            manager.bigletterKeys.destroy();
-            manager.bigletter.destroy();
+    },
+
+    PatternThirteenThings: function () {
+        var manager = this;
+        if (manager.upInt >= manager.currentScene.switchPoints[0]) {
+            for (var i = 0; i < manager.keysPressed.length; i++) {
+                manager.keysPressed[i] = false;
+            }
+            manager.shiftLetter.visible = true;
+            manager.shiftLetterYellow.visible = true;
+            manager.shiftLetterKey.visible = true;
+            manager.world.bringToTop(manager.shiftLetter);
+            manager.letter[0].visible = false;
+            manager.letterKeys[0].visible = false;
+            manager.yellowSprites[0].visible = false;
+            manager.currentScene.switchPoints.shift();
+            manager.letPress = false;
+            manager.shiftPress = true;
         }
-        manager.bLid.destroy();
-        manager.tLid.destroy();
-        manager.black.destroy();
-        manager.hasLetters = false;
-        manager.time.events.removeAll();
     },
 
     update: function () {
         var manager = this;
+        console.log(manager.hands[0].position.x);
+        console.log(manager.hands[0].position.y);
+        console.log(manager.hands[0].position.rotation);
+
         if (manager.gameReady) {
             if (manager.keysPressed.every(manager.AreTrue)) {
                 manager.allKeys = true;
@@ -959,31 +1193,22 @@ SceneGame.Manager.prototype = {
                 manager.IncreaseInt();
             }
         }
+        if (manager.currentScene.updateCheck) {
+            manager.UpdateCheck();
+        }
+        if (manager.eventSoundTime) {
+            if (manager.upInt == manager.currentScene.soundFrame) {
+                manager.eventSound.play();
+                manager.eventSoundTime = false;
+            }
+        }
+    },
+
+    UpdateCheck: function () {
+        var manager = this;
         if (manager.currentScene.name == "wakephone") {
-            if (manager.topLidDown) {
-                manager.startTween = true;
-                manager.AlphaTweens(manager.mLid, 0, 1000);
-                manager.tLidTween.pause();
-                manager.bLidTween.pause();
-                manager.world.bringToTop(manager.tLid);
-                manager.world.bringToTop(manager.bLid);
-                manager.world.bringToTop(manager.black);
-                for (var i = 0; i < manager.yellowSprites.length; i++) {
-                    manager.world.bringToTop(manager.yellowSprites[i]);
-                }
-                for (var i = 0; i < manager.pressSprites.length; i++) {
-                    manager.world.bringToTop(manager.pressSprites[i]);
-                }
-                manager.world.bringToTop(manager.arrows);
-                manager.world.bringToTop(manager.keySprites);
-                for (var i = 0; i < manager.hands.length; i++) {
-                    manager.world.bringToTop(manager.hands[i]);
-                }
-                manager.tLid.position.y--;
-                if (manager.tLid.position.y <= -450) {
-                    manager.NextScene();
-                }
-                manager.bLid.position.y++;
+            if (manager.topLidDown && manager.bottomLidDown) {
+                manager.TopLidDownThings();
             }
             manager.EyelidTweens();
         }
@@ -993,28 +1218,7 @@ SceneGame.Manager.prototype = {
             }
         }
         if (manager.currentScene.pattern == 3) {
-            if (!manager.goDown && manager.upInt >= manager.currentScene.switchInt) {
-                manager.goDown = true;
-                manager.SequentialKeyPress(0);
-                manager.MoveHand(1);
-                manager.YellowKeyUp(1);
-            }
-            if (manager.goDown && manager.upInt <= 0) {
-                manager.goDown = false;
-                manager.SequentialKeyPress(1);
-                manager.MoveHand(0);
-                manager.YellowKeyUp(0);
-            }
-            if (manager.keysPressed[0]) {
-                if (!manager.goDown) {
-                    manager.IncreaseInt();
-                }
-            }
-            if (manager.keysPressed[1]) {
-                if (manager.goDown) {
-                    manager.DecreaseInt();
-                }
-            }
+            manager.PatternThreeThings();
         }
         if (manager.currentScene.decrease) {
             if (manager.upInt > 0) {
@@ -1027,35 +1231,10 @@ SceneGame.Manager.prototype = {
             manager.NoInput();
         }
         if (manager.currentScene.pattern == 10) {
-            if (manager.upInt >= manager.currentScene.switchInt) {
-                manager.yellowSprites[0].visible = false;
-                manager.yellowSprites[1].visible = true;
-                manager.keysPressed[0] = false;
-                manager.keysPressed[1] = false;
-                manager.keySet[0].reset;
-                manager.keySet.shift();
-                manager.NewHandPos(700, 880, 60);
-                manager.ContinueSwitch();
-                manager.currentScene.switchInt = 500;
-            }
+            manager.PatternTenThings();
         }
         if (manager.currentScene.pattern == 13) {
-            if (manager.upInt >= manager.currentScene.switchPoints[0]) {
-                for (var i = 0; i < manager.keysPressed.length; i++) {
-                    manager.keysPressed[i] = false;
-                }
-                manager.shiftLetter.visible = true;
-                manager.shiftLetterYellow.visible = true;
-                manager.shiftLetterKey.visible = true;
-                manager.world.bringToTop(manager.shiftLetter);
-                manager.letter[0].visible = false;
-                manager.letterKeys[0].visible = false;
-                manager.yellowSprites[0].visible = false;
-
-                manager.currentScene.switchPoints.shift();
-                manager.letPress = false;
-                manager.shiftPress = true;
-            }
+            manager.PatternThirteenThings();
         }
         if (manager.currentScene.pattern == 18) {
             if (manager.keysPressed[2]) {
@@ -1063,23 +1242,32 @@ SceneGame.Manager.prototype = {
                 manager.keysPressed[2] = false;
             }
         }
-        if (manager.eventSoundTime) {
-            if (manager.upInt == manager.currentScene.soundFrame) {
-                manager.eventSound.play();
-                manager.eventSoundTime = false;
+
+        if (manager.currentScene.name == "sleep") {
+            manager.SleepThings();
+        }
+        if (manager.currentScene.pattern == 20) {
+            if (manager.pressedSpace) {
+                manager.IncreaseInt();
+                manager.upperPic.scale.x -= .001;
+                manager.upperPic.scale.y -= .001;
+                manager.insidePic.scale.x -= .001;
+                manager.insidePic.scale.y -= .001;
+                manager.world.bringToTop(manager.insidePic);
+                manager.world.bringToTop(manager.upperPic);
             }
         }
-        if (manager.currentScene.name == "sleep") {
-            if (manager.onePress && manager.zeroPress) {
-                manager.moveNum = manager.add.tween(manager.endNumber).to({
-                    x: 565
-                }, 1000, Phaser.Easing.Linear.None, true);
-                manager.endTween = manager.AlphaTweens(manager.logo, 1, 1000);
-                manager.time.events.add(Phaser.Timer.SECOND * 10, function () {
-                    // manager.state.start("Dreams");
-                }, this);
-                manager.onePress = false;
-            }
+
+    },
+
+    SleepThings: function () {
+        var manager = this;
+        if (manager.onePress && manager.zeroPress) {
+            manager.moveNum = manager.add.tween(manager.endNumber).to({
+                x: 565
+            }, 1000, Phaser.Easing.Linear.None, true);
+            manager.endTween = manager.AlphaTweens(manager.logo, 1, 1000);
+            manager.onePress = false;
         }
     },
 
@@ -1281,6 +1469,12 @@ SceneGame.Manager.prototype = {
             case 18:
                 manager.MOM();
                 break;
+            case 19:
+                manager.CantSleep();
+                break;
+            case 20:
+                manager.SpaceOut();
+                break;
         }
     },
 
@@ -1389,17 +1583,11 @@ SceneGame.Manager.prototype = {
     YellowKeyInput: function (num) {
         var manager = this;
         manager.yellowSprites[num].visible = false;
-        manager.pressSprites[num].visible = true;
-        manager.pressSprites[num].alpha = 1;
         manager.buttonPressFrame[0] = 0;
         manager.time.events.repeat(Phaser.Timer.SECOND / 15, 8, function () {
-            manager.pressSprites[num].frame = manager.buttonPressFrame[num];
             manager.buttonPressFrame[num] += 1;
-            manager.pressSprites[num].alpha -= 0.15;
             if (manager.buttonPressFrame[num] >= 7) {
                 manager.buttonPressFrame[num] = 0;
-                manager.pressSprites[num].frame = manager.buttonPressFrame[num];
-                manager.pressSprites[num].visible = false;
             }
         }, this);
     },
@@ -1434,6 +1622,12 @@ SceneGame.Manager.prototype = {
     TapDifferent: function () {
         var manager = this;
         manager.keySet[0].onDown.add(function () {
+            if (manager.flashOne != null) {
+                manager.time.events.remove(manager.flashOne);
+                manager.time.events.remove(manager.flashTwo);
+                manager.yellowSprites[0].visible = false;
+                manager.yellowSprites[1].visible = false;
+            }
             manager.IncreateOneInt(manager.currentScene.name1);
             manager.notPressed = false;
         });
@@ -1452,8 +1646,8 @@ SceneGame.Manager.prototype = {
         manager.currentKey = 0;
         manager.notPressed = true;
         manager.time.events.loop(Phaser.Timer.SECOND, manager.HandBackForth, this);
-        manager.time.events.loop(Phaser.Timer.SECOND / 5, manager.FlashYellowBGOne, this);
-        manager.time.events.loop(Phaser.Timer.SECOND / 5, manager.FlashYellowBGTwo, this);
+        manager.flashOne = manager.time.events.loop(Phaser.Timer.SECOND / 5, manager.FlashYellowBGOne, this);
+        manager.flashTwo = manager.time.events.loop(Phaser.Timer.SECOND / 5, manager.FlashYellowBGTwo, this);
     },
 
     SetPressedFalse: function () {
@@ -1507,10 +1701,17 @@ SceneGame.Manager.prototype = {
     ContinueSwitch: function () {
         var manager = this;
         manager.keySet[0].onDown.add(function () {
+            manager.HoldKeysFeedback(0);
+            manager.yellowSprites[0].alpha = .5;
+            manager.yellowSprites[0].scale.x = .9;
+            manager.yellowSprites[0].scale.y = .9;
             manager.keysPressed[0] = true;
             manager.keysPressed[1] = true;
         });
         manager.keySet[0].onUp.add(function () {
+            manager.yellowSprites[0].alpha = 1;
+            manager.yellowSprites[0].scale.x = 1;
+            manager.yellowSprites[0].scale.y = 1;
             manager.keysPressed[0] = false;
             manager.keysPressed[1] = false;
         });
@@ -1562,6 +1763,30 @@ SceneGame.Manager.prototype = {
                 manager.screen.frame += 1;
             }
         });
+        manager.YellowKeyFlashOne();
+    },
+
+    SpaceOut: function () {
+        var manager = this;
+        manager.gameReady = false;
+        manager.insidePic = manager.add.sprite(manager.world.centerX, 0, manager.currentScene.insidePicSheet, manager.currentScene.insidePicSprite);
+        manager.upperPic = manager.add.sprite(manager.world.centerX, 0, 'computerframeexcel-0', 'computerframeexcel01');
+        manager.upperPic.anchor.setTo(0.5, 0.5);
+        manager.upperPic.position.x = manager.world.centerX;
+        manager.upperPic.position.y = manager.upperPic.height / 2;
+        manager.insidePic.position.y = manager.insidePic.height / 2;
+        manager.insidePic.anchor.setTo(0.5, 0.5);
+        manager.hasPasted = false;
+        manager.world.sendToBack(manager.insidePic);
+        for (var i = 0; i < manager.currentSet.length; i++) {
+            manager.world.sendToBack(manager.currentSet[i]);
+        }
+        manager.keySet[0].onDown.add(function () {
+            manager.pressedSpace = true;
+        });
+        manager.keySet[0].onUp.add(function () {
+            manager.pressedSpace = false;
+        })
     },
 
     MOM: function (num) {
@@ -1573,6 +1798,8 @@ SceneGame.Manager.prototype = {
             if (!manager.keysPressed[0]) {
                 manager.IncreaseInt();
                 manager.currentSound.play();
+                manager.yellowSprites[0].visible = false;
+                manager.hands[0].position.x += 50;
                 manager.keysPressed[0] = true;
             }
         });
@@ -1580,6 +1807,8 @@ SceneGame.Manager.prototype = {
             if (manager.keysPressed[0] && !manager.keysPressed[1]) {
                 manager.IncreaseInt();
                 manager.currentSound.play();
+                manager.yellowSprites[1].visible = false;
+                manager.hands[0].position.x += 50;
                 manager.keysPressed[1] = true;
             }
         });
@@ -1587,6 +1816,8 @@ SceneGame.Manager.prototype = {
             if (manager.keysPressed[1] && !manager.keysPressed[2]) {
                 manager.IncreaseInt();
                 manager.currentSound.play();
+                manager.yellowSprites[2].visible = false;
+                manager.hands[0].position.x += 50;
                 manager.keysPressed[2] = true;
             }
         });
@@ -1594,7 +1825,6 @@ SceneGame.Manager.prototype = {
 
     MOMAutoPlay: function () {
         var manager = this;
-        console.log(manager.IncreaseInt);
         manager.IncreaseInt();
     },
 
@@ -1675,6 +1905,10 @@ SceneGame.Manager.prototype = {
         manager.shiftPress = false;
         manager.keySet[0].onDown.add(function () {
             if (manager.letPress) {
+                manager.HoldKeysFeedback(0);
+                manager.yellowSprites[0].alpha = .5;
+                manager.yellowSprites[0].scale.x = .9;
+                manager.yellowSprites[0].scale.y = .9;
                 for (var i = 0; i < manager.keysPressed.length; i++) {
                     manager.keysPressed[i] = true;
                 }
@@ -1682,6 +1916,9 @@ SceneGame.Manager.prototype = {
         });
         manager.keySet[0].onUp.add(function () {
             for (var i = 0; i < manager.keysPressed.length; i++) {
+                manager.yellowSprites[0].alpha = 1;
+                manager.yellowSprites[0].scale.x = 1;
+                manager.yellowSprites[0].scale.y = 1;
                 manager.keysPressed[i] = false;
             }
         });
@@ -1783,24 +2020,39 @@ SceneGame.Manager.prototype = {
         });
         manager.keySet[0].onDown.add(function () {
             if (manager.keysPressed[5]) {
+                manager.HoldKeysFeedback(0);
+                manager.yellowSprites[0].alpha = .5;
+                manager.yellowSprites[0].scale.x = .9;
+                manager.yellowSprites[0].scale.y = .9;
                 manager.keysPressed[6] = true;
                 manager.gameReady = true;
             }
+        })
+        manager.keySet[0].onUp.add(function () {
+            manager.yellowSprites[0].alpha = 1;
+            manager.yellowSprites[0].scale.x = 1;
+            manager.yellowSprites[0].scale.y = 1;
         })
     },
 
     IncreaseEachSequence: function () {
         var manager = this;
         manager.gameReady = false;
+        manager.increaseYellowNum = 0;
         manager.swipeTween = manager.add.tween(manager.hands[0]).to({
             x: 720,
             y: 920
         }, 1000, Phaser.Easing.Linear.None, true);
         manager.swipeTween.repeat(12, 1000);
-
         manager.keySet[0].onDown.add(function () {
             manager.keysPressed[0] = true;
             if (!manager.keysPressed[1]) {
+                if (manager.increaseEachYellowTime != null) {
+                    manager.time.events.remove(manager.increaseEachYellowTime);
+                    manager.yellowSprites[0].visible = false;
+                    manager.yellowSprites[1].visible = true;
+                    manager.yellowSprites[2].visible = false;
+                }
                 if (manager.upInt <= manager.currentScene.switchInt) {
                     manager.IncreaseInt();
                 }
@@ -1810,6 +2062,9 @@ SceneGame.Manager.prototype = {
             manager.keysPressed[1] = true;
             if (manager.keysPressed[0]) {
                 if (manager.upInt <= manager.currentScene.switchInt) {
+                    manager.yellowSprites[0].visible = false;
+                    manager.yellowSprites[2].visible = true;
+                    manager.yellowSprites[1].visible = false;
                     manager.IncreaseInt();
                 }
             }
@@ -1819,12 +2074,43 @@ SceneGame.Manager.prototype = {
             if (manager.keysPressed[1]) {
                 if (manager.upInt <= manager.currentScene.switchInt) {
                     manager.IncreaseInt();
+                    manager.yellowSprites[1].visible = false;
+                    manager.yellowSprites[0].visible = true;
+                    manager.yellowSprites[2].visible = false;
                 }
                 for (var i = 0; i < manager.keysPressed.length; i++) {
                     manager.keysPressed[i] = false;
                 }
             }
         })
+        manager.increaseEachYellowTime = manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.IncreaseEachPreTouch, this);
+
+    },
+
+    IncreaseEachPreTouch: function () {
+        var manager = this;
+        if (manager.increaseYellowNum > 2) {
+            manager.increaseYellowNum = 0;
+        } else {
+            manager.increaseYellowNum += 1;
+        }
+        manager.yellowSprites[manager.increaseYellowNum].visible = false;
+        if (manager.increaseYellowNum == 3) {
+            manager.yellowSprites[0].visible = true;
+        } else {
+            manager.yellowSprites[manager.increaseYellowNum + 1].visible = true;
+        }
+    },
+
+
+    CantSleep: function () {
+        var manager = this;
+        manager.gameReady = false;
+        manager.input.keyboard.onDownCallback = function () {
+            if (manager.currentScene.name == "cantsleep") {
+                manager.CantSleepIncreaseInt();
+            }
+        }
     },
 
     HoldAndSequence: function () {
@@ -1833,9 +2119,16 @@ SceneGame.Manager.prototype = {
 
         manager.keySet[0].onDown.add(function () {
             manager.keysPressed[0] = true;
+            manager.HoldKeysFeedback(0);
+            manager.yellowSprites[0].alpha = .5;
+            manager.yellowSprites[0].scale.x = .9;
+            manager.yellowSprites[0].scale.y = .9;
         });
         manager.keySet[0].onUp.add(function () {
             manager.keysPressed[0] = false;
+            manager.yellowSprites[0].alpha = 1;
+            manager.yellowSprites[0].scale.x = 1;
+            manager.yellowSprites[0].scale.y = 1;
         });
         manager.keySet[1].onDown.add(function () {
             if (manager.keysPressed[0]) {
@@ -1962,36 +2255,81 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.keySet[0].onDown.add(function () {
             manager.HoldKeyPress(0);
+            manager.HoldKeysFeedback(0);
             if (manager.currentScene.name == "pill") {
                 manager.HoldKeyPress(1);
+                manager.HoldKeysFeedback(1);
+                manager.yellowSprites[1].alpha = .5;
+                manager.yellowSprites[1].scale.x = .9;
+                manager.yellowSprites[1].scale.y = .9;
             }
         });
         manager.keySet[0].onUp.add(function () {
             manager.HoldKeyUp(0);
+            manager.yellowSprites[0].scale.x = 1;
+            manager.yellowSprites[0].scale.y = 1;
+            if (manager.currentScene.name == "pill") {
+                manager.yellowSprites[1].alpha = 1;
+                manager.yellowSprites[1].scale.x = 1;
+                manager.yellowSprites[1].scale.y = 1;
+            }
         });
         if (manager.keySet[1] != null) {
             manager.keySet[1].onDown.add(function () {
+                manager.HoldKeysFeedback(1);
                 manager.HoldKeyPress(1);
             });
             manager.keySet[1].onUp.add(function () {
+                manager.yellowSprites[1].scale.x = 1;
+                manager.yellowSprites[1].scale.y = 1;
                 manager.HoldKeyUp(1);
             });
         }
         if (manager.keySet[2] != null) {
             manager.keySet[2].onDown.add(function () {
+                manager.HoldKeysFeedback(2);
                 manager.correct.HoldKeyPress(2);
             });
             manager.keySet[2].onUp.add(function () {
+                manager.yellowSprites[2].scale.x += .1;
+                manager.yellowSprites[2].scale.y += .1;
                 manager.HoldKeyUp(2);
             });
         }
         if (manager.keySet[3] != null) {
             manager.keySet[3].onDown.add(function () {
+                manager.HoldKeysFeedback(3);
                 manager.HoldKeyPress(3);
             });
             manager.keySet[3].onUp.add(function () {
+                manager.yellowSprites[3].scale.x += .1;
+                manager.yellowSprites[3].scale.y += .1;
                 manager.HoldKeyUp(3);
             });
+        }
+    },
+
+    HoldKeysFeedback: function (num) {
+        var manager = this;
+        manager.yellowSprites[num].scale.x -= .1;
+        manager.yellowSprites[num].scale.y -= .1;
+        if (manager.ripple[num] != null) {
+            manager.ripple[num].visible = true;
+            manager.ripple[num].position.x = manager.yellowSprites[num].position.x;
+            manager.ripple[num].position.y = manager.yellowSprites[num].position.y;
+        } else {
+            manager.ripple[num] = manager.add.sprite(manager.yellowSprites[num].position.x, manager.yellowSprites[num].position.y, 'newkeys', 14);
+            manager.ripple[num].anchor.setTo(0.5, 0.5);
+        }
+        manager.time.events.repeat(Phaser.Timer.SECOND / 8, 4, manager.RippleAnim, this, num);
+    },
+
+    RippleAnim: function (num) {
+        var manager = this;
+        manager.ripple[num].frame += 1;
+        if (manager.ripple[num].frame == 18) {
+            manager.ripple[num].frame = 14;
+            manager.ripple[num].visible = false;
         }
     },
 
@@ -2004,7 +2342,6 @@ SceneGame.Manager.prototype = {
         manager.world.sendToBack(manager.insidePic);
         manager.world.sendToBack(manager.underPic);
         manager.deleteKey.onDown.add(function () {
-            console.log("HI");
             manager.insidePic.visible = false;
         });
     },
@@ -2013,12 +2350,15 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.keysPressed[num] = true;
         manager.YellowKeyInput(num);
+        manager.yellowSprites[num].alpha = 0.5;
+        manager.yellowSprites[num].visible = true;
     },
 
     HoldKeyUp: function (num) {
         var manager = this;
         manager.YellowKeyUp(num);
         manager.keysPressed[num] = false;
+        manager.yellowSprites[num].alpha = 1;
     },
 
     AreTrue: function (element, index, array) {
@@ -2095,6 +2435,7 @@ SceneGame.Manager.prototype = {
             x: 700,
             y: 520
         }, 1000, Phaser.Easing.Linear.None, true);
+        manager.swipeYellowNum = 3;
         manager.gameReady = false;
         manager.swipeTween.repeat(12, 1000);
         manager.currentlyPressed = [];
@@ -2102,6 +2443,16 @@ SceneGame.Manager.prototype = {
             manager.currentlyPressed[i] = false;
         }
         manager.keySet[0].onDown.add(function () {
+            //manager.TapBurst(2);
+            if (manager.swipeYellowTime != null) {
+                manager.yellowSprites[2].visible = false;
+                manager.yellowSprites[0].visible = false;
+                manager.time.events.remove(manager.swipeYellowTime);
+            }
+            if (!manager.keysPressed[0]) {
+                manager.yellowSprites[2].visible = false;
+                manager.yellowSprites[1].visible = true;
+            }
             manager.currentlyPressed[0] = true;
             manager.keysPressed[0] = true;
             manager.time.events.add(Phaser.Timer.SECOND * 3, function () {
@@ -2115,6 +2466,9 @@ SceneGame.Manager.prototype = {
         manager.keySet[1].onDown.add(function () {
             manager.currentlyPressed[1] = true;
             if (manager.keysPressed[0] && !manager.currentlyPressed[0]) {
+                manager.yellowSprites[2].visible = false;
+                manager.yellowSprites[1].visible = false;
+                manager.yellowSprites[0].visible = true;
                 manager.keysPressed[1] = true;
                 manager.IncreaseInt();
                 manager.time.events.add(Phaser.Timer.SECOND * 3, function () {
@@ -2128,12 +2482,97 @@ SceneGame.Manager.prototype = {
         manager.keySet[2].onDown.add(function () {
             manager.currentlyPressed[2] = true;
             if (manager.keysPressed[1]) {
+                manager.keysPressed[0] = false;
+                manager.yellowSprites[1].visible = false;
+                manager.yellowSprites[0].visible = false;
+                manager.yellowSprites[2].visible = true;
                 manager.IncreaseInt();
             }
         }, this);
         manager.keySet[2].onUp.add(function () {
             manager.currentlyPressed[2] = false;
         }, this);
+        manager.yellowSprites[0].visible = false;
+        manager.yellowSprites[1].visible = false;
+        manager.yellowSprites[2].visible = true;
+        manager.swipeYellowTime = manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.SwipePreTouch, this);
+    },
+
+    TapBurst: function (num) {
+        var manager = this;
+
+        if (manager.bursts[num] != null) {
+            for (var i = 0; i < 6; i++) {
+                manager.bursts[i].position.x = manager.burstsX[i];
+                manager.bursts[i].position.y = manager.burstsY[i];
+                manager.bursts[i].visible = true;
+                manager.world.bringToTop(manager.bursts[i]);
+                manager.bursts[i].rotation = manager.burstsRot[i];
+            }
+
+        } else {
+            for (var i = 0; i < 6; i++) {
+                manager.bursts[i] = manager.add.sprite(manager.burstsX[i], manager.burstsY[i], 'newkeys', 'burst1.1');
+                manager.world.bringToTop(manager.bursts[i]);
+                manager.bursts[i].rotation = manager.burstsRot[i];
+            }
+        }
+        manager.time.events.repeat(Phaser.Timer.SECOND / 10, 7, manager.RotateBursts, this, num);
+    },
+
+    RotateBursts: function (num) {
+        var manager = this;
+        for (var i = 0; i < 6; i++) {
+            manager.bursts[i].frame += 1;
+            if (i == 0) {
+                manager.bursts[i].position.y += 2;
+                manager.bursts[i].position.x -= 5;
+            }
+            if (i == 3) {
+                manager.bursts[i].position.y -= 2;
+                manager.bursts[i].position.x -= 5;
+            }
+            if (i == 1) {
+                manager.bursts[i].position.y -= 5;
+                manager.bursts[i].position.x -= 1;
+            }
+            if (i == 4) {
+                manager.bursts[i].position.y -= 2;
+                manager.bursts[i].position.x += 5;
+            }
+            if (i == 2) {
+                manager.bursts[i].position.y += 5;
+                manager.bursts[i].position.x += 5;
+            }
+            if (i == 5) {
+                manager.bursts[i].position.y += 5;
+                manager.bursts[i].position.x += 5;
+            }
+        }
+
+        for (var i = 0; i < 6; i++) {}
+        if (manager.bursts[0].frame >= 6) {
+            for (var i = 0; i < 6; i++) {
+                manager.bursts[i].frame = 0;
+                manager.bursts[i].visible = false;
+            }
+
+        }
+    },
+
+    SwipePreTouch: function () {
+        var manager = this;
+        if (manager.swipeYellowNum <= 0) {
+            manager.swipeYellowNum = 2;
+        } else {
+            manager.swipeYellowNum -= 1;
+        }
+        manager.yellowSprites[manager.swipeYellowNum].visible = false;
+        if (manager.swipeYellowNum == 0) {
+            manager.yellowSprites[2].visible = true;
+        } else {
+            manager.yellowSprites[manager.swipeYellowNum - 1].visible = true;
+        }
     },
 
     MoveHand: function (key) {
@@ -2186,17 +2625,29 @@ SceneGame.Manager.prototype = {
             manager.yellowSprites[i].visible = false;
         }
         manager.keySet[0].onDown.add(function () {
+            manager.HoldKeysFeedback(0);
+            manager.yellowSprites[0].alpha = .5;
+            manager.yellowSprites[0].scale.x = .9;
+            manager.yellowSprites[0].scale.y = .9;
             manager.keysPressed[0] = true;
         });
         manager.keySet[0].onUp.add(function () {
-
+            manager.yellowSprites[0].alpha = 1;
+            manager.yellowSprites[0].scale.x = 1;
+            manager.yellowSprites[0].scale.y = 1;
             manager.keysPressed[0] = false;
         });
         manager.keySet[1].onDown.add(function () {
+            manager.HoldKeysFeedback(1);
+            manager.yellowSprites[1].alpha = .5;
+            manager.yellowSprites[1].scale.x = .9;
+            manager.yellowSprites[1].scale.y = .9;
             manager.keysPressed[1] = true;
         });
         manager.keySet[1].onUp.add(function () {
-
+            manager.yellowSprites[1].alpha = 1;
+            manager.yellowSprites[1].scale.x = 1;
+            manager.yellowSprites[1].scale.y = 1;
             manager.keysPressed[1] = false;
         });
     },
@@ -2301,7 +2752,6 @@ SceneGame.Manager.prototype = {
 
                     });
                 }
-                // manager.IncreaseInt();
             }
         };
     },
@@ -2392,6 +2842,8 @@ SceneGame.Manager.prototype = {
                             }
                         } else {
                             manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.currentScene.name + manager.sheetNum + manager.spriteNum));
+                            manager.rndSheet.push(manager.currentScene.name + "-" + manager.sheetNum);
+                            manager.rndSprite.push(manager.currentScene.name + manager.sheetNum + manager.spriteNum);
                         }
                     } else {
                         if (manager.sheetNum <= manager.currentScene.sheets) {
@@ -2402,11 +2854,55 @@ SceneGame.Manager.prototype = {
                     for (var i = 0; i < manager.hands.length; i++) {
                         manager.world.bringToTop(manager.hands[i]);
                     }
-
                 }
             }
         }
+    },
 
+    CantSleepIncreaseInt: function () {
+        var manager = this;
+        manager.upInt += 1;
+        var beRand = manager.rnd.integerInRange(0, 1);
+        if (beRand == 1) {
+            var nextSet = manager.rnd.integerInRange(0, manager.rndSprite.length);
+            manager.CantSleepRnd = manager.add.sprite(0, 0, manager.rndSheet[nextSet], manager.rndSprite[nextSet]);
+        } else {
+            if (manager.currentScene.name != "computerframe") {
+                if (manager.currentScene.soundType == 2) {
+                    if (manager.upInt == manager.currentScene.soundFrame) {
+                        manager.MidSoundManager();
+                    }
+                }
+                if (manager.upInt != 0) {
+                    if (manager.upInt % manager.sceneSpeed == 0) {
+                        if (manager.spriteNum >= 3) {
+                            manager.sheetNum += 1;
+                            manager.spriteNum = 0;
+                            if (manager.sheetNum >= manager.currentScene.sheets) {
+                                manager.gameReady = false;
+                                manager.RestartCheck();
+                                if (manager.currentScene.restartSheet != null) {
+                                    manager.SpecificSheetRestart();
+                                }
+                            } else {
+                                manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.currentScene.name + manager.sheetNum + manager.spriteNum));
+                                manager.rndSheet.push(manager.currentScene.name + "-" + manager.sheetNum);
+                                manager.rndSprite.push(manager.currentScene.name + manager.sheetNum + manager.spriteNum);
+
+                            }
+                        } else {
+                            if (manager.sheetNum <= manager.currentScene.sheets) {
+                                manager.spriteNum += 1;
+                                manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.currentScene.name + manager.sheetNum + manager.spriteNum));
+                            }
+                        }
+                        for (var i = 0; i < manager.hands.length; i++) {
+                            manager.world.bringToTop(manager.hands[i]);
+                        }
+                    }
+                }
+            }
+        }
 
     }
 

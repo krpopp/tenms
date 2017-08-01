@@ -122,6 +122,10 @@ SceneGame.Manager.prototype = {
                 manager.CreateMOM();
                 allDone = true;
                 break;
+            case 19:
+                manager.CreateCantSleep();
+                allDone = true;
+                break;
             case 20:
                 manager.CreateSpace();
                 allDone = true;
@@ -258,6 +262,50 @@ SceneGame.Manager.prototype = {
         manager.letter[2] = manager.add.sprite(770, 620, 'mju', 'M1');
         manager.PlaceHands(0, 780, 800, 45);
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+    },
+
+    CreateCantSleep: function () {
+        var manager = this;
+        manager.LetterReset();
+        manager.PlaceHands(0, 780, 800, 45);
+        manager.sleepArray = ['s1', 'l1', 'e1', 'e1', 'p1'];
+        manager.thinkArray = ['t1', 'ach1', 'aye1', 'en1', 'kay1'];
+        manager.cantSleepArray = [0, 1, 2, 3, 4];
+        Phaser.ArrayUtils.shuffle(manager.cantSleepArray);
+        for (var i = 0; i < 5; i++) {
+            manager.CreateLetterKeys(i, 550 + (100 * i), 600);
+            manager.CreateLetterYellowBG(i, 580 + (100 * i), 640, 550 + (100 * i), 600);
+            manager.letter[i] = manager.add.sprite(570 + (100 * i), 620, 'sleep', manager.sleepArray[i]);
+        }
+        manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
+    },
+
+    ChangeCantSleepLetters: function () {
+        var manager = this;
+        var num = manager.cantSleepArray.pop();
+        manager.letter[num].destroy();
+        switch (num) {
+            case 0:
+                manager.yellowSprites[num].visible = false;
+                manager.letter[num] = manager.add.sprite(570 + (100 * num), 620, 'sleep', manager.thinkArray[num]);
+                break;
+            case 1:
+                manager.yellowSprites[num].visible = false;
+                manager.letter[num] = manager.add.sprite(570 + (100 * num), 620, 'tyghbn', manager.thinkArray[num]);
+                break;
+            case 2:
+                manager.yellowSprites[num].visible = false;
+                manager.letter[num] = manager.add.sprite(570 + (100 * num), 620, 'morekeys', manager.thinkArray[num]);
+                break;
+            case 3:
+                manager.yellowSprites[num].visible = false;
+                manager.letter[num] = manager.add.sprite(570 + (100 * num), 620, 'tyghbn', manager.thinkArray[num]);
+                break;
+            case 4:
+                manager.yellowSprites[num].visible = false;
+                manager.letter[num] = manager.add.sprite(570 + (100 * num), 620, 'morekeys', manager.thinkArray[num]);
+                break;
+        }
     },
 
     CreateJog: function () {
@@ -1046,7 +1094,7 @@ SceneGame.Manager.prototype = {
         manager.CreateKeySprite();
         manager.KeyCheckSwitch(manager.currentScene.pattern);
         if (manager.currentScene.name != "sleep" && manager.currentScene.name != "wakephone") {
-            manager.time.events.add(Phaser.Timer.SECOND * 5, manager.NextScene, this);
+            manager.time.events.add(Phaser.Timer.SECOND * 10, manager.NextScene, this);
         }
         if (manager.currentScene.name == "wakephone") {
             manager.MorningScenes();
@@ -1179,10 +1227,6 @@ SceneGame.Manager.prototype = {
 
     update: function () {
         var manager = this;
-        console.log(manager.hands[0].position.x);
-        console.log(manager.hands[0].position.y);
-        console.log(manager.hands[0].position.rotation);
-
         if (manager.gameReady) {
             if (manager.keysPressed.every(manager.AreTrue)) {
                 manager.allKeys = true;
@@ -2012,6 +2056,8 @@ SceneGame.Manager.prototype = {
                 manager.downSprite = manager.add.sprite(570, 620, 'down', 0);
                 manager.yellowSprites[1].position.x = 590;
                 manager.yellowSprites[1].position.y = 640;
+                manager.world.bringToTop(manager.letterKeys[0]);
+                manager.letterKeys[0].visible = true;
                 manager.IncreaseInt();
             }
             if (manager.keysPressed[4]) {
@@ -2020,18 +2066,18 @@ SceneGame.Manager.prototype = {
         });
         manager.keySet[0].onDown.add(function () {
             if (manager.keysPressed[5]) {
-                manager.HoldKeysFeedback(0);
-                manager.yellowSprites[0].alpha = .5;
-                manager.yellowSprites[0].scale.x = .9;
-                manager.yellowSprites[0].scale.y = .9;
+                manager.HoldKeysFeedback(1);
+                manager.yellowSprites[1].alpha = .5;
+                manager.yellowSprites[1].scale.x = .9;
+                manager.yellowSprites[1].scale.y = .9;
                 manager.keysPressed[6] = true;
                 manager.gameReady = true;
             }
         })
         manager.keySet[0].onUp.add(function () {
-            manager.yellowSprites[0].alpha = 1;
-            manager.yellowSprites[0].scale.x = 1;
-            manager.yellowSprites[0].scale.y = 1;
+            manager.yellowSprites[1].alpha = 1;
+            manager.yellowSprites[1].scale.x = 1;
+            manager.yellowSprites[1].scale.y = 1;
         })
     },
 
@@ -2039,6 +2085,9 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.gameReady = false;
         manager.increaseYellowNum = 0;
+        for (var i = 0; i < 4; i++) {
+            manager.yellowSprites[i].visible = false;
+        }
         manager.swipeTween = manager.add.tween(manager.hands[0]).to({
             x: 720,
             y: 920
@@ -2089,13 +2138,13 @@ SceneGame.Manager.prototype = {
 
     IncreaseEachPreTouch: function () {
         var manager = this;
-        if (manager.increaseYellowNum > 2) {
+        if (manager.increaseYellowNum >= 2) {
             manager.increaseYellowNum = 0;
         } else {
             manager.increaseYellowNum += 1;
         }
         manager.yellowSprites[manager.increaseYellowNum].visible = false;
-        if (manager.increaseYellowNum == 3) {
+        if (manager.increaseYellowNum == 2) {
             manager.yellowSprites[0].visible = true;
         } else {
             manager.yellowSprites[manager.increaseYellowNum + 1].visible = true;
@@ -2106,11 +2155,44 @@ SceneGame.Manager.prototype = {
     CantSleep: function () {
         var manager = this;
         manager.gameReady = false;
+        manager.blanketNum = 0;
+        manager.blanketSheet = 0;
+        manager.blanket = [];
         manager.input.keyboard.onDownCallback = function () {
             if (manager.currentScene.name == "cantsleep") {
-                manager.CantSleepIncreaseInt();
+                manager.hands[0].position.x += 100;
+                if (manager.hands[0].position.x >= 1200) {
+                    manager.hands[0].position.x = 780;
+                }
+                if (manager.upInt >= 10) {
+                    if (manager.upInt > 20) {
+                        manager.BlanketOver();
+                    } else {
+                        manager.CantSleepIncreaseInt();
+                    }
+                    if (manager.upInt % 2 == 0) {
+                        if (manager.sleepArray[0] != null) {
+                            manager.ChangeCantSleepLetters();
+                        }
+                    }
+                } else {
+                    manager.IncreaseInt();
+                }
             }
         }
+    },
+
+    BlanketOver: function () {
+        var manager = this;
+        if (manager.blanketNum < 4) {
+            manager.blanket.push(manager.add.sprite(0, 0, 'blanketover-' + manager.blanketSheet, 'blanketover' + manager.blanketSheet + manager.blanketNum));
+            manager.blanketNum += 1;
+            if (manager.blanketNum == 4 && manager.blanketSheet == 0) {
+                manager.blanketNum = 0;
+                manager.blanketSheet = 1;
+            }
+        }
+
     },
 
     HoldAndSequence: function () {
@@ -2455,9 +2537,6 @@ SceneGame.Manager.prototype = {
             }
             manager.currentlyPressed[0] = true;
             manager.keysPressed[0] = true;
-            manager.time.events.add(Phaser.Timer.SECOND * 3, function () {
-                manager.keysPressed[0] = false;
-            }, this);
 
         }, this);
         manager.keySet[0].onUp.add(function () {
@@ -2471,9 +2550,6 @@ SceneGame.Manager.prototype = {
                 manager.yellowSprites[0].visible = true;
                 manager.keysPressed[1] = true;
                 manager.IncreaseInt();
-                manager.time.events.add(Phaser.Timer.SECOND * 3, function () {
-                    manager.keysPressed[1] = false;
-                }, this);
             }
         }, this);
         manager.keySet[1].onUp.add(function () {

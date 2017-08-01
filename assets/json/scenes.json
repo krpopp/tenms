@@ -21,23 +21,23 @@
             "updateCheck": true
     },
         {
-            "name": "eatramen",
-            "sheets": 3,
-            "sound": ["noodleslurp.mp3"],
+            "name": "tieshoes",
+            "sheets": 7,
+            "sound": ["hangers.mp3"],
             "loop": false,
-            "soundType": 1,
-            "soundFrame": 7,
+            "soundType": 0,
+            "soundFrame": 90,
             "time": "morning",
-            "keySet": ["manager.cursors.down", "manager.en", "manager.ach", "manager.ewe", "manager.aye", "manager.kay", "manager.em"],
-            "switchPoints": [1, 2, 3, 4, 5],
-            "pattern": 14,
-            "speed": 1,
+            "keySet": ["manager.cursors.left", "manager.cursors.right"],
+            "pattern": 10,
+            "switchInt": 60,
+            "speed": 5,
             "hands": 1,
             "restartSheet": null,
             "restart": false,
             "decrease": false,
             "startframe": null,
-            "updateCheck": false
+            "updateCheck": true
     },
         {
             "name": "musicplay",
@@ -291,6 +291,25 @@
             "hands": 1,
             "restartSheet": null,
             "restart": true,
+            "decrease": false,
+            "startframe": null,
+            "updateCheck": true
+    },
+        {
+            "name": "nightread",
+            "sheets": 5,
+            "sound": [],
+            "loop": false,
+            "soundType": 0,
+            "time": "midday",
+            "keySet": [
+        "manager.cursors.left"
+      ],
+            "pattern": 0,
+            "speed": 10,
+            "hands": 2,
+            "restartSheet": null,
+            "restart": false,
             "decrease": false,
             "startframe": null,
             "updateCheck": true

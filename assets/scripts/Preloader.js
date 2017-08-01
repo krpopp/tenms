@@ -69,8 +69,11 @@ SceneGame.Preloader.prototype = {
         this.load.atlasJSONArray('down', 'assets/textures/down.png', 'assets/textures/down.json');
         this.load.atlasJSONArray('space', 'assets/textures/space.png', 'assets/textures/space.json');
         this.load.atlasJSONArray('newkeys', 'assets/textures/newkeys.png', 'assets/textures/newkeys.json');
+        this.load.atlasJSONArray('sleep', 'assets/textures/sleep.png', 'assets/textures/sleep.json');
 
         this.load.atlasJSONArray('computerframeexcel-0', 'assets/textures/computerframeexcel-0.png', 'assets/textures/computerframeexcel-0.json');
+        this.load.atlasJSONArray('blanketover-0', 'assets/textures/blanketover-0.png', 'assets/textures/blanketover-0.json');
+        this.load.atlasJSONArray('blanketover-1', 'assets/textures/blanketover-1.png', 'assets/textures/blanketover-1.json');
 
         this.load.atlasJSONArray('keys', 'assets/textures/keys.png', 'assets/textures/keys.json');
         this.load.atlasJSONArray('keyz', 'assets/textures/keyz.png', 'assets/textures/keyz.json');

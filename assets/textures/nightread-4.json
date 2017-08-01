@@ -1,0 +1,100 @@
+{
+    "frames": [
+
+        {
+            "filename": "nightread43",
+            "frame": {
+                "x": 1,
+                "y": 1,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+},
+        {
+            "filename": "nightread42",
+            "frame": {
+                "x": 1,
+                "y": 503,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+},
+        {
+            "filename": "nightread41",
+            "frame": {
+                "x": 1,
+                "y": 1005,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+},
+        {
+            "filename": "nightread40",
+            "frame": {
+                "x": 1,
+                "y": 1507,
+                "w": 1200,
+                "h": 500
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 1200,
+                "h": 500
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+}],
+    "meta": {
+        "app": "http://www.codeandweb.com/texturepacker",
+        "version": "1.0",
+        "image": "nightread-0.png",
+        "format": "RGBA8888",
+        "size": {
+            "w": 1202,
+            "h": 2008
+        },
+        "scale": "1",
+        "smartupdate": "$TexturePacker:SmartUpdate:40937e72910a828a810e1d38f94c0fd3:b6cdb4e2127cc2af976ff6fd9e0710e7:4274da197c85a13bb93c03c8a541b297$"
+    }
+}

@@ -23,7 +23,7 @@
         {
             "name": "tieshoes",
             "sheets": 7,
-            "sound": ["hangers.mp3"],
+            "sound": [""],
             "loop": false,
             "soundType": 0,
             "soundFrame": 90,

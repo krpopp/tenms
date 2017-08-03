@@ -95,13 +95,14 @@ SceneGame.Preloader.prototype = {
         this.load.image('placeholder', 'assets/image/placeholder.png');
 
         this.load.audio('music', 'assets/sound/adultmom4.mp3');
+        this.load.audio('sink', 'assets/sound/sink.mp3');
         this.load.audio('phonevibrate', 'assets/sound/phonevibrate.wav');
         this.hadHit = false;
     },
 
     fileComplete: function () {
         this.loadNum += 1;
-        if (this.loadNum % 18 == 0) {
+        if (this.loadNum % 20 == 0) {
             this.skyNum += 1;
             this.sky.frame = this.skyNum;
             if (this.skyNum >= 3) {
@@ -151,7 +152,6 @@ SceneGame.Preloader.prototype = {
                 this.handimation[i].play(10, true);
             }
             this.keySprites = this.add.sprite(500, 550, "keyz", "keys-0");
-
             this.arrows = this.add.sprite(520, 570, 'arrows');
             this.yellowSprites[0].position.x = 590;
             this.yellowSprites[0].position.y = 550;
@@ -175,8 +175,9 @@ SceneGame.Preloader.prototype = {
             this.add.tween(this.keySprites).from({
                 alpha: 0
             }, 2000, Phaser.Easing.Linear.None, true);
-            this.world.bringToTop(this.hands[0]);
             this.world.bringToTop(this.hands[1]);
+
+            this.world.bringToTop(this.hands[0]);
             this.world.bringToTop(this.tLid);
 
             this.world.bringToTop(this.bLid);

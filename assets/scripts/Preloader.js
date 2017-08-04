@@ -98,6 +98,14 @@ SceneGame.Preloader.prototype = {
         this.load.audio('music', 'assets/sound/adultmom4.wav');
         this.load.audio('sink', 'assets/sound/sink.wav');
         this.load.audio('phonevibrate', 'assets/sound/phonevibrate.wav');
+        this.load.audio('roomtone', 'assets/sound/roomTone1.mp3');
+        this.load.audio('office', 'assets/sound/office.mp3');
+        this.load.audio('street', 'assets/sound/street.mp3');
+        this.load.audio('sleep', 'assets/sound/sleep.mp3');
+        this.load.audio('oneClick', 'assets/sound/click2.wav');
+        this.load.audio('twoClick', 'assets/sound/click3.wav');
+        this.load.audio('threeClick', 'assets/sound/click1.wav');
+        this.load.audio('shortCall', 'assets/sound/shortCall.mp3');
         this.hadHit = false;
     },
 

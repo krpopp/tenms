@@ -63,7 +63,6 @@ SceneGame.Preloader.prototype = {
         this.load.atlasJSONArray('paused', 'assets/textures/paused.png', 'assets/textures/paused.json');
         this.load.atlasJSONArray('compmaterials', 'assets/textures/compmaterials.png', 'assets/textures/compmaterials.json');
         this.load.atlasJSONArray('socialmedia-0', 'assets/textures/socialmedia-0.png', 'assets/textures/socialmedia-0.json');
-        this.load.atlasJSONArray('socialmedia-1', 'assets/textures/socialmedia-1.png', 'assets/textures/socialmedia-1.json');
         this.load.atlasJSONArray('morekeys', 'assets/textures/morekeys.png', 'assets/textures/morekeys.json');
         this.load.atlasJSONArray('midkeys', 'assets/textures/midkey.png', 'assets/textures/midkey.json');
         this.load.atlasJSONArray('down', 'assets/textures/down.png', 'assets/textures/down.json');
@@ -71,7 +70,6 @@ SceneGame.Preloader.prototype = {
         this.load.atlasJSONArray('newkeys', 'assets/textures/newkeys.png', 'assets/textures/newkeys.json');
         this.load.atlasJSONArray('sleep', 'assets/textures/sleep.png', 'assets/textures/sleep.json');
 
-        this.load.atlasJSONArray('computerframeexcel-0', 'assets/textures/computerframeexcel-0.png', 'assets/textures/computerframeexcel-0.json');
         this.load.atlasJSONArray('blanketover-0', 'assets/textures/blanketover-0.png', 'assets/textures/blanketover-0.json');
         this.load.atlasJSONArray('blanketover-1', 'assets/textures/blanketover-1.png', 'assets/textures/blanketover-1.json');
 
@@ -85,6 +83,9 @@ SceneGame.Preloader.prototype = {
         this.load.atlasJSONArray('oh', 'assets/textures/oh.png', 'assets/textures/oh.json');
         this.load.atlasJSONArray('singleHand', 'assets/textures/hand.png', 'assets/textures/hand.json');
 
+        this.load.atlasJSONArray('allkeys', 'assets/textures/allkeys.png', 'assets/textures/allkeys.json');
+
+
         this.load.image('toplid', 'assets/image/toplid2.png');
         this.load.image('lowerlid', 'assets/image/lowerlid2.png');
         this.load.image('midlid', 'assets/image/midlid2.png');
@@ -92,10 +93,9 @@ SceneGame.Preloader.prototype = {
         this.load.image('plainScreen', 'assets/image/plainscreen.png');
 
         this.load.image('stillsubway', 'assets/image/stillsubway.png');
-        this.load.image('placeholder', 'assets/image/placeholder.png');
 
-        this.load.audio('music', 'assets/sound/adultmom4.mp3');
-        this.load.audio('sink', 'assets/sound/sink.mp3');
+        this.load.audio('music', 'assets/sound/adultmom4.wav');
+        this.load.audio('sink', 'assets/sound/sink.wav');
         this.load.audio('phonevibrate', 'assets/sound/phonevibrate.wav');
         this.hadHit = false;
     },

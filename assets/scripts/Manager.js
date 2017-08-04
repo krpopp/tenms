@@ -309,7 +309,6 @@ SceneGame.Manager.prototype = {
                 manager.letter[num] = manager.add.sprite(570 + (100 * num), 620, 'morekeys', manager.thinkArray[num]);
                 break;
         }
-        manager.letter[num].alpha = 1;
     },
 
     CreateJog: function () {
@@ -638,7 +637,6 @@ SceneGame.Manager.prototype = {
             manager.letterKeys.position.x = posX;
             manager.letterKeys.position.y = posY;
             manager.letterKeys.visible = true;
-            manager.letterKeys.alpha = 1;
         } else {
             manager.letterKeys[num] = manager.add.sprite(posX, posY, 'qw', 'qwkey0');
         }
@@ -690,7 +688,6 @@ SceneGame.Manager.prototype = {
                 manager.CreateLetterYellowBG(num, 580, 750, 580, 750);
                 break;
         }
-        manager.letter[num].alpha = 1;
     },
 
     BottleYellowBG: function (num, set) {
@@ -720,7 +717,6 @@ SceneGame.Manager.prototype = {
                 manager.letter[num] = manager.add.sprite(manager.bottleXPos[set] + 25, manager.bottleYPos[set] + 15, "morekeys", "em1");
                 break;
         }
-        manager.letter[num].alpha = 1;
     },
 
     LetterYellowBG: function (keyName, num) {
@@ -833,7 +829,6 @@ SceneGame.Manager.prototype = {
                 manager.CreateLetterYellowBG(num, 640, 590, 630, 580);
                 break;
         }
-        manager.letter[num].alpha = 1;
     },
 
     CreateYellowBG: function (keyName, num) {
@@ -1017,6 +1012,7 @@ SceneGame.Manager.prototype = {
     FindKeys: function () {
         var manager = this;
         var getKeys = [];
+        console.log(manager.currentScene);
         for (var i = 0; i < manager.currentScene.keySet.length; i++) {
             var tempVar = eval(manager.currentScene.keySet[i]);
             getKeys.push(tempVar);
@@ -1096,13 +1092,13 @@ SceneGame.Manager.prototype = {
         }
         manager.upInt = 0;
         manager.sheetNum = 0;
-        manager.spriteNum = 0;
+        manager.spriteNum = 3;
         manager.allKeys = false;
         manager.gameReady = true;
         manager.CreateKeySprite();
         manager.KeyCheckSwitch(manager.currentScene.pattern);
         if (manager.currentScene.name != "sleep" && manager.currentScene.name != "wakephone") {
-            manager.time.events.add(Phaser.Timer.SECOND * 10, manager.NextScene, this);
+            manager.time.events.add(Phaser.Timer.SECOND * 2, manager.NextScene, this);
         }
         if (manager.currentScene.name == "wakephone") {
             manager.MorningScenes();
@@ -1829,7 +1825,7 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.gameReady = false;
         manager.insidePic = manager.add.sprite(manager.world.centerX, 0, manager.currentScene.insidePicSheet, manager.currentScene.insidePicSprite);
-        manager.upperPic = manager.add.sprite(manager.world.centerX, 0, 'computerframeexcel-0', 'computerframeexcel01');
+        manager.upperPic = manager.add.sprite(manager.world.centerX, 0, 'computerframe-0', 'computerframe01');
         manager.upperPic.anchor.setTo(0.5, 0.5);
         manager.upperPic.position.x = manager.world.centerX;
         manager.upperPic.position.y = manager.upperPic.height / 2;
@@ -2750,33 +2746,15 @@ SceneGame.Manager.prototype = {
             manager.spriteNum = 0;
             manager.gameReady = true;
         } else {
-            manager.ResetKeyboard();
-            for (var i = 0; i < manager.hands.length; i++) {
-                if (manager.hands[i].visible) {
-                    manager.add.tween(manager.hands[i]).to({
-                        y: 1500
-                    }, 4000, Phaser.Easing.Linear.None, true);
+            if (!manager.currentScene.decrease) {
+                manager.tweens.removeAll();
+                manager.ResetKeyboard();
+                for (var i = 0; i < manager.yellowSprites.length; i++) {
+                    var thisTween = manager.AlphaTweens(manager.yellowSprites[i], 0, 1000);
+                    manager.yellowSprites[i].visible = false;
                 }
-            }
-            for (var i = 0; i < manager.yellowSprites.length; i++) {
-                var thisTween = manager.AlphaTweens(manager.yellowSprites[i], 0, 1000);
-                manager.yellowSprites[i].visible = false;
-            }
-            for (var i = 0; i < manager.ripple.length; i++) {
-                manager.ripple[i].visible = false;
-            }
-            if (manager.keySprites.visible) {
-                manager.AlphaTweens(manager.keySprites, 0, 1000);
-            }
-            if (manager.arrows.visible) {
-                manager.AlphaTweens(manager.arrows, 0, 1000);
-            }
-            if (manager.hasLetters) {
-                for (var i = 0; i < manager.letter.length; i++) {
-                    manager.AlphaTweens(manager.letter[i], 0, 1000);
-                }
-                for (var i = 0; i < manager.letterKeys.length; i++) {
-                    manager.AlphaTweens(manager.letterKeys[i], 0, 1000);
+                for (var i = 0; i < manager.ripple.length; i++) {
+                    manager.ripple[i].visible = false;
                 }
             }
         }
@@ -2952,9 +2930,9 @@ SceneGame.Manager.prototype = {
             }
             if (manager.upInt != 0) {
                 if (manager.upInt % manager.sceneSpeed == 0) {
-                    if (manager.spriteNum >= 3) {
+                    if (manager.spriteNum <= 0) {
                         manager.sheetNum += 1;
-                        manager.spriteNum = 0;
+                        manager.spriteNum = 3;
                         if (manager.sheetNum >= manager.currentScene.sheets) {
                             manager.gameReady = false;
                             manager.RestartCheck();
@@ -2962,14 +2940,14 @@ SceneGame.Manager.prototype = {
                                 manager.SpecificSheetRestart();
                             }
                         } else {
-                            manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.currentScene.name + manager.sheetNum + manager.spriteNum));
+                            manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.spriteNum));
                             manager.rndSheet.push(manager.currentScene.name + "-" + manager.sheetNum);
                             manager.rndSprite.push(manager.currentScene.name + manager.sheetNum + manager.spriteNum);
                         }
                     } else {
                         if (manager.sheetNum <= manager.currentScene.sheets) {
-                            manager.spriteNum += 1;
-                            manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.currentScene.name + manager.sheetNum + manager.spriteNum));
+                            manager.spriteNum -= 1;
+                            manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.spriteNum));
                         }
                     }
                     for (var i = 0; i < manager.hands.length; i++) {
@@ -2996,9 +2974,9 @@ SceneGame.Manager.prototype = {
                 }
                 if (manager.upInt != 0) {
                     if (manager.upInt % manager.sceneSpeed == 0) {
-                        if (manager.spriteNum >= 3) {
+                        if (manager.spriteNum <= 0) {
                             manager.sheetNum += 1;
-                            manager.spriteNum = 0;
+                            manager.spriteNum = 3;
                             if (manager.sheetNum >= manager.currentScene.sheets) {
                                 manager.gameReady = false;
                                 manager.RestartCheck();
@@ -3013,8 +2991,8 @@ SceneGame.Manager.prototype = {
                             }
                         } else {
                             if (manager.sheetNum <= manager.currentScene.sheets) {
-                                manager.spriteNum += 1;
-                                manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.currentScene.name + manager.sheetNum + manager.spriteNum));
+                                manager.spriteNum -= 1;
+                                manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.spriteNum));
                             }
                         }
                         for (var i = 0; i < manager.hands.length; i++) {

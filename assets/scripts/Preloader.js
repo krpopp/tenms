@@ -37,7 +37,7 @@ SceneGame.Preloader.prototype = {
                 var sheetNum = this.scenesJSON.Scenes[i].sheets;
                 for (var j = 0; j < sheetNum; j++) {
 
-                    this.load.atlasJSONArray(this.scenesJSON.Scenes[i].name + '-' + j, 'assets/textures/' + this.scenesJSON.Scenes[i].name + '-' + j + '.png', 'assets/textures/' + this.scenesJSON.Scenes[i].name + '-' + j + '.json');
+                    this.load.atlasJSONArray(this.scenesJSON.Scenes[i].name + '-' + j, 'assets/textures/' + this.scenesJSON.Scenes[i].name + '-' + j + '.png', 'assets/textures/Universal.json');
                     for (var k = 0; k < this.scenesJSON.Scenes[i].sound.length; k++) {
                         this.load.audio(this.scenesJSON.Scenes[i].sound[k], 'assets/sound/' + this.scenesJSON.Scenes[i].sound[k]);
                     }
@@ -46,7 +46,7 @@ SceneGame.Preloader.prototype = {
             if (this.scenesJSON.Scenes[i].time == 'morning') {
                 var sheetNum = this.scenesJSON.Scenes[i].sheets;
                 for (var j = 0; j < sheetNum; j++) {
-                    this.load.atlasJSONArray(this.scenesJSON.Scenes[i].name + '-' + j, 'assets/textures/' + this.scenesJSON.Scenes[i].name + '-' + j + '.png', 'assets/textures/' + this.scenesJSON.Scenes[i].name + '-' + j + '.json');
+                    this.load.atlasJSONArray(this.scenesJSON.Scenes[i].name + '-' + j, 'assets/textures/' + this.scenesJSON.Scenes[i].name + '-' + j + '.png', 'assets/textures/Universal.json');
                     for (var k = 0; k < this.scenesJSON.Scenes[i].sound.length; k++) {
                         this.load.audio(this.scenesJSON.Scenes[i].sound[k], 'assets/sound/' + this.scenesJSON.Scenes[i].sound[k]);
                     }
@@ -72,6 +72,7 @@ SceneGame.Preloader.prototype = {
 
         this.load.atlasJSONArray('blanketover-0', 'assets/textures/blanketover-0.png', 'assets/textures/blanketover-0.json');
         this.load.atlasJSONArray('blanketover-1', 'assets/textures/blanketover-1.png', 'assets/textures/blanketover-1.json');
+        this.load.atlasJSONArray('computerframeplain-0', 'assets/textures/computerframeplain-0.png', 'assets/textures/computerframeplain-0.json');
 
         this.load.atlasJSONArray('keys', 'assets/textures/keys.png', 'assets/textures/keys.json');
         this.load.atlasJSONArray('keyz', 'assets/textures/keyz.png', 'assets/textures/keyz.json');

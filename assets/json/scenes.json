@@ -83,12 +83,32 @@
             "soundType": 1,
             "soundFrame": 2,
             "time": "morning",
-            "keySet": ["manager.cursors.right", "manager.cursors.up"],
+            "keySet": ["manager.cursors.right"],
             "pattern": 0,
             "speed": 1,
             "hands": 1,
             "restartSheet": 3,
             "restart": true,
+            "decrease": false,
+            "startframe": null,
+            "updateCheck": false
+    },
+        {
+            "name": "shower",
+            "name1": "washleft",
+            "name2": "washright",
+            "sheets": 3,
+            "sound": ["shower.wav"],
+            "loop": false,
+            "soundType": 0,
+            "time": "midday",
+            "keySet": ["manager.cursors.left", "manager.cursors.right"],
+            "pattern": 8,
+            "speed": 1,
+            "hands": 1,
+            "restartSheet": null,
+            "restart": true,
+            "reverse": false,
             "decrease": false,
             "startframe": null,
             "updateCheck": false
@@ -315,7 +335,7 @@
             "updateCheck": false
     },
         {
-            "name": "computerframe",
+            "name": "computerframeplain",
             "insidePicSheet": "compmaterials",
             "insidePicSprite": "emailscreen",
             "sheets": 1,
@@ -353,7 +373,7 @@
             "updateCheck": true
   },
         {
-            "name": "computerframe",
+            "name": "computerframeloan",
             "insidePicSheet": "compmaterials",
             "insidePicSprite": "loanemail",
             "sheets": 1,
@@ -391,7 +411,7 @@
             "updateCheck": true
     },
         {
-            "name": "computerframe",
+            "name": "computerframesocial",
             "sheets": 1,
             "sound": ["click2.wav", "click3.wav", "click4.wav", "click1.wav"],
             "soundType": 3,
@@ -408,7 +428,7 @@
             "updateCheck": false
         },
         {
-            "name": "computerframe",
+            "name": "computerframeexcel",
             "insidePicSheet": "compmaterials",
             "insidePicSprite": "excel",
             "sheets": 1,
@@ -604,26 +624,6 @@
             "decrease": false,
             "startframe": null,
             "updateCheck": true
-    },
-        {
-            "name": "shower",
-            "name1": "washleft",
-            "name2": "washright",
-            "sheets": 3,
-            "sound": ["shower.wav"],
-            "loop": false,
-            "soundType": 0,
-            "time": "midday",
-            "keySet": ["manager.cursors.left", "manager.cursors.right"],
-            "pattern": 8,
-            "speed": 1,
-            "hands": 1,
-            "restartSheet": null,
-            "restart": true,
-            "reverse": false,
-            "decrease": false,
-            "startframe": null,
-            "updateCheck": false
     }
 
   ]

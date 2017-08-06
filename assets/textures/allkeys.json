@@ -107,7 +107,7 @@
             }
 },
         {
-            "filename": "keys_0000_bigkey2.png",
+            "filename": "bigkey1",
             "frame": {
                 "x": 1,
                 "y": 700,
@@ -127,6 +127,48 @@
                 "h": 56
             }
 },
+        {
+            "filename": "bigkey2",
+            "frame": {
+                "x": 1,
+                "y": 758,
+                "w": 208,
+                "h": 56
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 208,
+                "h": 56
+            },
+            "sourceSize": {
+                "w": 208,
+                "h": 56
+            }
+},
+        {
+            "filename": "bigkey3",
+            "frame": {
+                "x": 1,
+                "y": 641,
+                "w": 217,
+                "h": 57
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 217,
+                "h": 57
+            },
+            "sourceSize": {
+                "w": 217,
+                "h": 57
+            }
+    },
         {
             "filename": "keys_0000_down4.png",
             "frame": {
@@ -189,28 +231,8 @@
                 "w": 111,
                 "h": 37
             }
-},
-        {
-            "filename": "keys_0001_bigkey3.png",
-            "frame": {
-                "x": 1,
-                "y": 758,
-                "w": 208,
-                "h": 56
-            },
-            "rotated": false,
-            "trimmed": false,
-            "spriteSourceSize": {
-                "x": 0,
-                "y": 0,
-                "w": 208,
-                "h": 56
-            },
-            "sourceSize": {
-                "w": 208,
-                "h": 56
-            }
-},
+
+    },
         {
             "filename": "keys_0001_down3.png",
             "frame": {
@@ -231,7 +253,7 @@
                 "w": 34,
                 "h": 28
             }
-},
+    },
 
         {
             "filename": "keys_0001_shift2.png",
@@ -253,28 +275,7 @@
                 "w": 111,
                 "h": 37
             }
-},
-        {
-            "filename": "keys_0002_bigkey1.png",
-            "frame": {
-                "x": 1,
-                "y": 641,
-                "w": 217,
-                "h": 57
-            },
-            "rotated": false,
-            "trimmed": false,
-            "spriteSourceSize": {
-                "x": 0,
-                "y": 0,
-                "w": 217,
-                "h": 57
-            },
-            "sourceSize": {
-                "w": 217,
-                "h": 57
-            }
-},
+    },
         {
             "filename": "keys_0002_down2.png",
             "frame": {
@@ -295,7 +296,7 @@
                 "w": 34,
                 "h": 29
             }
-},
+    },
         {
             "filename": "keys_0002_Frame-2.png",
             "frame": {
@@ -316,7 +317,7 @@
                 "w": 248,
                 "h": 158
             }
-},
+    },
         {
             "filename": "keys_0002_shift1.png",
             "frame": {
@@ -337,7 +338,7 @@
                 "w": 111,
                 "h": 37
             }
-},
+    },
         {
             "filename": "keys_0003_down1.png",
             "frame": {
@@ -358,7 +359,7 @@
                 "w": 31,
                 "h": 27
             }
-},
+    },
         {
             "filename": "keys_0003_f93.png",
             "frame": {
@@ -379,7 +380,7 @@
                 "w": 52,
                 "h": 36
             }
-},
+    },
         {
             "filename": "keys_0003_Frame-1.png",
             "frame": {
@@ -400,7 +401,7 @@
                 "w": 249,
                 "h": 160
             }
-},
+    },
         {
             "filename": "keys_0003_midkey1.png",
             "frame": {
@@ -421,7 +422,7 @@
                 "w": 135,
                 "h": 59
             }
-},
+    },
         {
             "filename": "keys_0004_f92.png",
             "frame": {
@@ -442,7 +443,7 @@
                 "w": 53,
                 "h": 37
             }
-},
+    },
         {
             "filename": "keys_0004_midkey2.png",
             "frame": {
@@ -463,7 +464,7 @@
                 "w": 130,
                 "h": 59
             }
-},
+    },
         {
             "filename": "keys_0005_f91.png",
             "frame": {
@@ -484,7 +485,7 @@
                 "w": 53,
                 "h": 35
             }
-},
+    },
         {
             "filename": "keys_0005_midkey3.png",
             "frame": {
@@ -505,9 +506,9 @@
                 "w": 131,
                 "h": 59
             }
-},
+    },
         {
-            "filename": "keys_0006_del3.png",
+            "filename": "del1",
             "frame": {
                 "x": 1,
                 "y": 1287,
@@ -526,9 +527,9 @@
                 "w": 192,
                 "h": 37
             }
-},
+    },
         {
-            "filename": "keys_0007_del2.png",
+            "filename": "del2",
             "frame": {
                 "x": 1,
                 "y": 1326,
@@ -547,9 +548,9 @@
                 "w": 192,
                 "h": 36
             }
-},
+    },
         {
-            "filename": "keys_0008_del1.png",
+            "filename": "del3",
             "frame": {
                 "x": 1,
                 "y": 1364,
@@ -568,7 +569,7 @@
                 "w": 191,
                 "h": 37
             }
-},
+    },
         {
             "filename": "keys_0009_v3.png",
             "frame": {
@@ -589,7 +590,7 @@
                 "w": 32,
                 "h": 36
             }
-},
+    },
         {
             "filename": "keys_0010_v2.png",
             "frame": {
@@ -610,7 +611,7 @@
                 "w": 31,
                 "h": 36
             }
-},
+    },
         {
             "filename": "keys_0011_v1.png",
             "frame": {
@@ -631,7 +632,7 @@
                 "w": 31,
                 "h": 35
             }
-},
+    },
         {
             "filename": "keys_0012_m3.png",
             "frame": {
@@ -652,7 +653,7 @@
                 "w": 34,
                 "h": 36
             }
-},
+    },
         {
             "filename": "keys_0013_m2.png",
             "frame": {
@@ -673,7 +674,7 @@
                 "w": 35,
                 "h": 35
             }
-},
+    },
         {
             "filename": "keys_0014_m1.png",
             "frame": {
@@ -694,7 +695,7 @@
                 "w": 36,
                 "h": 36
             }
-},
+    },
         {
             "filename": "keys_0015_k3.png",
             "frame": {
@@ -715,7 +716,7 @@
                 "w": 32,
                 "h": 36
             }
-},
+    },
         {
             "filename": "keys_0016_k2.png",
             "frame": {
@@ -736,7 +737,7 @@
                 "w": 32,
                 "h": 36
             }
-},
+    },
         {
             "filename": "keys_0017_k1.png",
             "frame": {
@@ -757,7 +758,7 @@
                 "w": 31,
                 "h": 36
             }
-},
+    },
         {
             "filename": "keys_0018_i3.png",
             "frame": {
@@ -778,7 +779,7 @@
                 "w": 9,
                 "h": 35
             }
-},
+    },
         {
             "filename": "keys_0019_i2.png",
             "frame": {
@@ -799,7 +800,7 @@
                 "w": 9,
                 "h": 35
             }
-},
+    },
         {
             "filename": "keys_0020_i1.png",
             "frame": {
@@ -820,7 +821,7 @@
                 "w": 9,
                 "h": 35
             }
-},
+    },
         {
             "filename": "keys_0021_ctrl3.png",
             "frame": {
@@ -841,7 +842,7 @@
                 "w": 82,
                 "h": 37
             }
-},
+    },
         {
             "filename": "keys_0022_ctrl2.png",
             "frame": {
@@ -862,7 +863,7 @@
                 "w": 82,
                 "h": 36
             }
-},
+    },
         {
             "filename": "keys_0023_ctrl1.png",
             "frame": {
@@ -883,7 +884,7 @@
                 "w": 82,
                 "h": 36
             }
-},
+    },
         {
             "filename": "keys_0024_fn3.png",
             "frame": {
@@ -904,7 +905,7 @@
                 "w": 54,
                 "h": 36
             }
-},
+    },
         {
             "filename": "keys_0025_fn2.png",
             "frame": {
@@ -925,7 +926,7 @@
                 "w": 54,
                 "h": 36
             }
-},
+    },
         {
             "filename": "keys_0026_fn1.png",
             "frame": {
@@ -946,7 +947,7 @@
                 "w": 54,
                 "h": 36
             }
-},
+    },
         {
             "filename": "keys_0030_tab3.png",
             "frame": {
@@ -967,7 +968,7 @@
                 "w": 83,
                 "h": 36
             }
-},
+    },
         {
             "filename": "keys_0031_tab2.png",
             "frame": {
@@ -988,7 +989,7 @@
                 "w": 83,
                 "h": 36
             }
-},
+    },
         {
             "filename": "keys_0032_tab1.png",
             "frame": {
@@ -1009,7 +1010,7 @@
                 "w": 83,
                 "h": 36
             }
-},
+    },
         {
             "filename": "letters_0000_tee1.png",
             "frame": {
@@ -1030,7 +1031,7 @@
                 "w": 28,
                 "h": 35
             }
-},
+    },
         {
             "filename": "letters_0001_J3.png",
             "frame": {
@@ -1051,7 +1052,7 @@
                 "w": 22,
                 "h": 36
             }
-},
+    },
         {
             "filename": "letters_0001_why1.png",
             "frame": {
@@ -1072,7 +1073,7 @@
                 "w": 30,
                 "h": 36
             }
-},
+    },
         {
             "filename": "letters_0002_gee1.png",
             "frame": {
@@ -1093,7 +1094,7 @@
                 "w": 33,
                 "h": 37
             }
-},
+    },
         {
             "filename": "letters_0002_U3.png",
             "frame": {
@@ -1114,7 +1115,7 @@
                 "w": 27,
                 "h": 35
             }
-},
+    },
         {
             "filename": "letters_0003_ach1.png",
             "frame": {
@@ -1135,7 +1136,7 @@
                 "w": 27,
                 "h": 34
             }
-},
+    },
         {
             "filename": "letters_0004_bee1.png",
             "frame": {
@@ -1156,7 +1157,7 @@
                 "w": 29,
                 "h": 35
             }
-},
+    },
         {
             "filename": "letters_0004_J2.png",
             "frame": {
@@ -1177,7 +1178,7 @@
                 "w": 22,
                 "h": 35
             }
-},
+    },
         {
             "filename": "letters_0005_en1.png",
             "frame": {
@@ -1198,7 +1199,7 @@
                 "w": 29,
                 "h": 35
             }
-},
+    },
         {
             "filename": "letters_0005_U2.png",
             "frame": {
@@ -1219,7 +1220,7 @@
                 "w": 28,
                 "h": 35
             }
-},
+    },
         {
             "filename": "letters_0006_tee2.png",
             "frame": {
@@ -1240,7 +1241,7 @@
                 "w": 28,
                 "h": 34
             }
-},
+    },
         {
             "filename": "letters_0007_gee2.png",
             "frame": {
@@ -1261,7 +1262,7 @@
                 "w": 32,
                 "h": 36
             }
-},
+    },
         {
             "filename": "letters_0007_J1.png",
             "frame": {
@@ -1282,7 +1283,7 @@
                 "w": 22,
                 "h": 36
             }
-},
+    },
         {
             "filename": "letters_0008_ach2.png",
             "frame": {
@@ -1303,7 +1304,7 @@
                 "w": 28,
                 "h": 35
             }
-},
+    },
         {
             "filename": "letters_0008_U1.png",
             "frame": {
@@ -1324,7 +1325,7 @@
                 "w": 29,
                 "h": 36
             }
-},
+    },
         {
             "filename": "letters_0009_bee2.png",
             "frame": {
@@ -1345,7 +1346,7 @@
                 "w": 29,
                 "h": 35
             }
-},
+    },
         {
             "filename": "letters_0010_why2.png",
             "frame": {
@@ -1366,7 +1367,7 @@
                 "w": 30,
                 "h": 35
             }
-},
+    },
         {
             "filename": "letters_0011_en2.png",
             "frame": {
@@ -1387,7 +1388,7 @@
                 "w": 29,
                 "h": 35
             }
-},
+    },
         {
             "filename": "letters_0012_tee3.png",
             "frame": {
@@ -1408,7 +1409,7 @@
                 "w": 28,
                 "h": 35
             }
-},
+    },
         {
             "filename": "letters_0013_why3.png",
             "frame": {
@@ -1429,7 +1430,7 @@
                 "w": 28,
                 "h": 34
             }
-},
+    },
         {
             "filename": "letters_0014_gee3.png",
             "frame": {
@@ -1450,7 +1451,7 @@
                 "w": 32,
                 "h": 36
             }
-},
+    },
         {
             "filename": "letters_0015_ach3.png",
             "frame": {
@@ -1471,7 +1472,7 @@
                 "w": 28,
                 "h": 35
             }
-},
+    },
         {
             "filename": "letters_0016_bee3.png",
             "frame": {
@@ -1492,7 +1493,7 @@
                 "w": 29,
                 "h": 35
             }
-},
+    },
         {
             "filename": "letters_0017_en3.png",
             "frame": {
@@ -1513,7 +1514,7 @@
                 "w": 28,
                 "h": 35
             }
-},
+    },
         {
             "filename": "o1.png",
             "frame": {
@@ -1534,7 +1535,7 @@
                 "w": 34,
                 "h": 37
             }
-},
+    },
         {
             "filename": "o2.png",
             "frame": {
@@ -1555,7 +1556,7 @@
                 "w": 34,
                 "h": 37
             }
-},
+    },
         {
             "filename": "o3.png",
             "frame": {
@@ -1576,7 +1577,7 @@
                 "w": 34,
                 "h": 37
             }
-},
+    },
         {
             "filename": "qw_0000_Layer-4.png",
             "frame": {
@@ -1597,7 +1598,7 @@
                 "w": 76,
                 "h": 75
             }
-},
+    },
         {
             "filename": "qw_0001_Layer-3.png",
             "frame": {
@@ -1618,7 +1619,7 @@
                 "w": 77,
                 "h": 74
             }
-},
+    },
         {
             "filename": "qw_0002_Layer-2.png",
             "frame": {
@@ -1639,7 +1640,7 @@
                 "w": 75,
                 "h": 74
             }
-},
+    },
         {
             "filename": "qw_0003_Layer-1.png",
             "frame": {
@@ -1660,7 +1661,7 @@
                 "w": 74,
                 "h": 74
             }
-},
+    },
         {
             "filename": "qw_0004_Layer-16.png",
             "frame": {
@@ -1681,7 +1682,7 @@
                 "w": 44,
                 "h": 36
             }
-},
+    },
         {
             "filename": "qw_0005_Layer-8.png",
             "frame": {
@@ -1702,7 +1703,7 @@
                 "w": 33,
                 "h": 37
             }
-},
+    },
         {
             "filename": "qw_0006_Layer-15.png",
             "frame": {
@@ -1723,7 +1724,7 @@
                 "w": 43,
                 "h": 36
             }
-},
+    },
         {
             "filename": "qw_0007_Layer-7.png",
             "frame": {
@@ -1744,7 +1745,7 @@
                 "w": 33,
                 "h": 37
             }
-},
+    },
         {
             "filename": "qw_0008_Layer-14.png",
             "frame": {
@@ -1765,7 +1766,7 @@
                 "w": 43,
                 "h": 36
             }
-},
+    },
         {
             "filename": "qw_0009_Layer-6.png",
             "frame": {
@@ -1786,7 +1787,7 @@
                 "w": 33,
                 "h": 37
             }
-},
+    },
         {
             "filename": "qw_0010_Layer-13.png",
             "frame": {
@@ -1807,7 +1808,7 @@
                 "w": 44,
                 "h": 36
             }
-},
+    },
         {
             "filename": "qw_0011_Layer-5.png",
             "frame": {
@@ -1828,7 +1829,7 @@
                 "w": 33,
                 "h": 38
             }
-},
+    },
         {
             "filename": "qw_0012_Layer-12.png",
             "frame": {
@@ -1849,7 +1850,7 @@
                 "w": 69,
                 "h": 70
             }
-},
+    },
         {
             "filename": "qw_0013_Layer-11.png",
             "frame": {
@@ -1870,7 +1871,7 @@
                 "w": 71,
                 "h": 68
             }
-},
+    },
         {
             "filename": "qw_0014_Layer-10.png",
             "frame": {
@@ -1891,7 +1892,7 @@
                 "w": 68,
                 "h": 73
             }
-},
+    },
         {
             "filename": "qw_0015_Layer-9.png",
             "frame": {
@@ -1912,7 +1913,7 @@
                 "w": 69,
                 "h": 72
             }
-}],
+    }],
     "meta": {
         "app": "http://www.codeandweb.com/texturepacker",
         "version": "1.0",

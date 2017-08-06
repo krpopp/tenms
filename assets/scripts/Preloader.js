@@ -36,24 +36,24 @@ SceneGame.Preloader.prototype = {
             if (this.scenesJSON.Scenes[i].time == 'start') {
                 var sheetNum = this.scenesJSON.Scenes[i].sheets;
                 for (var j = 0; j < sheetNum; j++) {
-
                     this.load.atlasJSONArray(this.scenesJSON.Scenes[i].name + '-' + j, 'assets/textures/' + this.scenesJSON.Scenes[i].name + '-' + j + '.png', 'assets/textures/Universal.json');
-                    for (var k = 0; k < this.scenesJSON.Scenes[i].sound.length; k++) {
-                        this.load.audio(this.scenesJSON.Scenes[i].sound[k], 'assets/sound/' + this.scenesJSON.Scenes[i].sound[k]);
-                    }
+                }
+                for (var k = 0; k < this.scenesJSON.Scenes[i].sound.length; k++) {
+                    this.load.audio(this.scenesJSON.Scenes[i].sound[k], 'assets/sound/' + this.scenesJSON.Scenes[i].sound[k] + ".mp3", 'assets/sound/' + this.scenesJSON.Scenes[i].sound[k] + ".ogg");
                 }
             }
             if (this.scenesJSON.Scenes[i].time == 'morning') {
+
                 var sheetNum = this.scenesJSON.Scenes[i].sheets;
                 for (var j = 0; j < sheetNum; j++) {
                     this.load.atlasJSONArray(this.scenesJSON.Scenes[i].name + '-' + j, 'assets/textures/' + this.scenesJSON.Scenes[i].name + '-' + j + '.png', 'assets/textures/Universal.json');
-                    for (var k = 0; k < this.scenesJSON.Scenes[i].sound.length; k++) {
-                        this.load.audio(this.scenesJSON.Scenes[i].sound[k], 'assets/sound/' + this.scenesJSON.Scenes[i].sound[k]);
-                    }
                     if (this.scenesJSON.Scenes[i].name1 != null) {
                         this.load.atlasJSONArray(this.scenesJSON.Scenes[i].name1 + '-' + j, 'assets/textures/' + this.scenesJSON.Scenes[i].name1 + '-' + j + '.png', 'assets/textures/' + this.scenesJSON.Scenes[i].name1 + '-' + j + '.json');
                         this.load.atlasJSONArray(this.scenesJSON.Scenes[i].name2 + '-' + j, 'assets/textures/' + this.scenesJSON.Scenes[i].name2 + '-' + j + '.png', 'assets/textures/' + this.scenesJSON.Scenes[i].name2 + '-' + j + '.json');
                     }
+                }
+                for (var k = 0; k < this.scenesJSON.Scenes[i].sound.length; k++) {
+                    this.load.audio(this.scenesJSON.Scenes[i].sound[k], 'assets/sound/' + this.scenesJSON.Scenes[i].sound[k] + ".mp3", 'assets/sound/' + this.scenesJSON.Scenes[i].sound[k] + ".ogg");
                 }
             }
         }
@@ -95,17 +95,17 @@ SceneGame.Preloader.prototype = {
 
         this.load.image('stillsubway', 'assets/image/stillsubway.png');
 
-        this.load.audio('music', 'assets/sound/adultmom4.wav');
-        this.load.audio('sink', 'assets/sound/sink.wav');
-        this.load.audio('phonevibrate', 'assets/sound/phonevibrate.wav');
-        this.load.audio('roomtone', 'assets/sound/roomTone1.mp3');
-        this.load.audio('office', 'assets/sound/office.mp3');
-        this.load.audio('street', 'assets/sound/street.mp3');
-        this.load.audio('sleep', 'assets/sound/sleep.mp3');
-        this.load.audio('oneClick', 'assets/sound/click2.wav');
-        this.load.audio('twoClick', 'assets/sound/click3.wav');
-        this.load.audio('threeClick', 'assets/sound/click1.wav');
-        this.load.audio('shortCall', 'assets/sound/shortCall.mp3');
+        this.load.audio('music', 'assets/sound/adultmom4.mp3', 'assets/sound/adultmom4.ogg');
+        this.load.audio('sink', 'assets/sound/sink.mp3', 'assets/sound/sink.ogg');
+        this.load.audio('phonevibrate', 'assets/sound/phonevibrate.mp3', 'assets/sound/phonevibrate.ogg');
+        this.load.audio('roomtone', 'assets/sound/roomTone1.mp3', 'assets/sound/roomTone1.ogg');
+        this.load.audio('office', 'assets/sound/office.mp3', 'assets/sound/office.ogg');
+        this.load.audio('street', 'assets/sound/street.mp3', 'assets/sound/street.ogg');
+        this.load.audio('sleep', 'assets/sound/sleep.mp3', 'assets/sound/sleep.ogg');
+        this.load.audio('oneClick', 'assets/sound/click2.mp3', 'assets/sound/click2.ogg');
+        this.load.audio('twoClick', 'assets/sound/click3.mp3', 'assets/sound/click3.ogg');
+        this.load.audio('threeClick', 'assets/sound/click1.mp3', 'assets/sound/click1.ogg');
+        this.load.audio('shortCall', 'assets/sound/shortcall.mp3', 'assets/sound/shortcall.ogg');
         this.hadHit = false;
     },
 
@@ -125,11 +125,6 @@ SceneGame.Preloader.prototype = {
     },
 
     loadComplete: function () {
-        //        this.skyTween = this.add.tween(this.sky).to({
-        //            alpha: 0
-        //        }, 1000, Phaser.Easing.Linear.None, true);
-
-
         this.CreateLids();
         this.tLidTween.onComplete.add(this.startGame, this);
     },

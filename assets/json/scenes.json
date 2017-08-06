@@ -3,7 +3,7 @@
         {
             "name": "wakephone",
             "sheets": 7,
-            "sound": ["morning.wav", "muffled.mp3", "transition.mp3"],
+            "sound": ["morning", "muffled", "transition"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 0,
@@ -24,7 +24,7 @@
         {
             "name": "tieshoes",
             "sheets": 7,
-            "sound": ["tie.mp3"],
+            "sound": ["tie"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 0,
@@ -44,7 +44,7 @@
         {
             "name": "musicplay",
             "sheets": 5,
-            "sound": ["adultmom1.wav"],
+            "sound": ["adultmom1"],
             "tone": "street",
             "loop": false,
             "soundType": 1,
@@ -63,7 +63,7 @@
         {
             "name": "jog",
             "sheets": 7,
-            "sound": ["adultmom2.wav"],
+            "sound": ["adultmom2"],
             "tone": "street",
             "loop": false,
             "soundType": 0,
@@ -82,7 +82,7 @@
         {
             "name": "voicemailmorning",
             "sheets": 5,
-            "sound": ["loanpayment.wav"],
+            "sound": ["loanpayment"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 1,
@@ -103,7 +103,7 @@
             "name1": "washleft",
             "name2": "washright",
             "sheets": 3,
-            "sound": ["shower.wav"],
+            "sound": ["shower"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 0,
@@ -122,7 +122,7 @@
         {
             "name": "sleep",
             "sheets": 4,
-            "sound": ["sleep.mp3"],
+            "sound": ["sleep"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 0,
@@ -142,7 +142,7 @@
         {
             "name": "leavevoicemail",
             "sheets": 1,
-            "sound": ["endcall.mp3"],
+            "sound": ["endcall"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 1,
@@ -162,7 +162,7 @@
         {
             "name": "finalcallmom",
             "sheets": 5,
-            "sound": ["iphonetype.mp3"],
+            "sound": ["iphonetype"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 3,
@@ -182,7 +182,7 @@
         {
             "name": "cantsleep",
             "sheets": 5,
-            "sound": ["toss.mp3"],
+            "sound": ["toss"],
             "tone": "sleep",
             "soundType": 0,
             "loop": false,
@@ -200,7 +200,7 @@
         {
             "name": "bigO",
             "sheets": 3,
-            "sound": ["vibrations.mp3"],
+            "sound": ["vibrations"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 0,
@@ -219,10 +219,10 @@
         {
             "name": "nightread",
             "sheets": 5,
-            "sound": [],
-            "tone": "sleep.mp3",
+            "sound": ["page"],
+            "tone": "sleep",
             "loop": false,
-            "soundType": 0,
+            "soundType": 5,
             "time": "midday",
             "keySet": [
         "manager.cursors.left"
@@ -230,6 +230,7 @@
             "pattern": 0,
             "speed": 10,
             "hands": 2,
+            "soundMult": 30,
             "restartSheet": null,
             "restart": false,
             "decrease": false,
@@ -239,7 +240,7 @@
         {
             "name": "brush-nigh",
             "sheets": 2,
-            "sound": ["brush.wav"],
+            "sound": ["brush"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 0,
@@ -258,7 +259,7 @@
         {
             "name": "shirtput",
             "sheets": 4,
-            "sound": ["shirtput.mp3"],
+            "sound": ["shirtput"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 1,
@@ -278,7 +279,7 @@
         {
             "name": "eatramen",
             "sheets": 3,
-            "sound": ["noodleslurp.mp3"],
+            "sound": ["noodleslurp"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 1,
@@ -298,7 +299,7 @@
         {
             "name": "ramen",
             "sheets": 10,
-            "sound": ["potfill.mp3", "stoveon.mp3", "boil.mp3", "boil.mp3"],
+            "sound": ["potfill", "stoveon", "boil", "boil"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 0,
@@ -318,7 +319,7 @@
         {
             "name": "subwayseats",
             "sheets": 4,
-            "sound": ["qsubway.mp3"],
+            "sound": ["qsubway"],
             "tone": "roomtone",
             "soundType": 0,
             "loop": true,
@@ -336,7 +337,7 @@
         {
             "name": "subway",
             "sheets": 6,
-            "sound": ["subwayambiant.mp3", "subwayin.mp3"],
+            "sound": ["subwayambiant", "subwayin"],
             "tone": "roomtone",
             "loop": true,
             "soundType": 2,
@@ -357,7 +358,7 @@
             "insidePicSheet": "compmaterials",
             "insidePicSprite": "emailscreen",
             "sheets": 1,
-            "sound": ["click2.wav", "click3.wav", "click4.wav", "click1.wav"],
+            "sound": ["click2", "click3", "click4", "click1"],
             "tone": "office",
             "soundType": 3,
             "loop": false,
@@ -377,7 +378,7 @@
             "insidePicSheet": "compmaterials",
             "insidePicSprite": "excel",
             "sheets": 2,
-            "sound": ["nature.mp3"],
+            "sound": ["nature"],
             "tone": "office",
             "soundType": 3,
             "loop": false,
@@ -397,7 +398,7 @@
             "insidePicSheet": "compmaterials",
             "insidePicSprite": "loanemail",
             "sheets": 1,
-            "sound": ["voicemail.mp3"],
+            "sound": ["voicemail"],
             "tone": "office",
             "soundType": 0,
             "loop": false,
@@ -415,7 +416,7 @@
         {
             "name": "workcallmom",
             "sheets": 4,
-            "sound": ["iphonetype.mp3"],
+            "sound": ["iphonetype"],
             "tone": "office",
             "loop": false,
             "soundType": 3,
@@ -435,7 +436,7 @@
         {
             "name": "computerframesocial",
             "sheets": 1,
-            "sound": ["click2.wav", "click3.wav", "click4.wav", "click1.wav"],
+            "sound": ["click2", "click3", "click4", "click1"],
             "tone": "office",
             "soundType": 3,
             "loop": false,
@@ -455,7 +456,7 @@
             "insidePicSheet": "compmaterials",
             "insidePicSprite": "excel",
             "sheets": 1,
-            "sound": ["click2.wav", "click3.wav", "click4.wav", "click1.wav"],
+            "sound": ["click2", "click3", "click4", "click1"],
             "tone": "office",
             "soundType": 3,
             "loop": false,
@@ -473,7 +474,7 @@
         {
             "name": "subwayseats",
             "sheets": 4,
-            "sound": ["subwayride.mp3"],
+            "sound": ["subwayride"],
             "tone": "roomtone",
             "soundType": 0,
             "loop": true,
@@ -491,7 +492,7 @@
         {
             "name": "subway",
             "sheets": 6,
-            "sound": ["subwayambiant.mp3", "subwayin.mp3"],
+            "sound": ["subwayambiant", "subwayin"],
             "tone": "roomtone",
             "loop": true,
             "soundType": 2,
@@ -510,7 +511,7 @@
         {
             "name": "walkstreet",
             "sheets": 6,
-            "sound": ["street.mp3"],
+            "sound": ["street"],
             "soundType": 0,
             "loop": false,
             "time": "midday",
@@ -527,7 +528,7 @@
         {
             "name": "brush-morn",
             "sheets": 2,
-            "sound": ["brush.wav"],
+            "sound": ["brush"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 0,
@@ -564,7 +565,7 @@
         {
             "name": "bottleopen",
             "sheets": 4,
-            "sound": ["bottleopen.mp3"],
+            "sound": ["bottleopen"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 1,
@@ -583,7 +584,7 @@
         {
             "name": "coffee",
             "sheets": 2,
-            "sound": ["coffee.wav"],
+            "sound": ["coffee"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 1,
@@ -602,7 +603,7 @@
         {
             "name": "fridge",
             "sheets": 2,
-            "sound": ["fridge.wav"],
+            "sound": ["fridge"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 0,
@@ -641,7 +642,7 @@
         {
             "name": "closet",
             "sheets": 8,
-            "sound": ["hangers.mp3"],
+            "sound": ["hangers"],
             "tone": "roomtone",
             "loop": false,
             "soundType": 0,

@@ -1144,7 +1144,7 @@ SceneGame.Manager.prototype = {
         }
         manager.upInt = 0;
         manager.sheetNum = 0;
-        manager.spriteNum = 4;
+        manager.spriteNum = 0;
         manager.allKeys = false;
         manager.gameReady = true;
         manager.CreateKeySprite();
@@ -2085,7 +2085,6 @@ SceneGame.Manager.prototype = {
     ChangeEach: function () {
         var manager = this;
         manager.gameReady = false;
-        console.log(manager.keySet);
         manager.keySet[1].onDown.add(function () {
             if (!manager.keysPressed[0]) {
                 manager.PlaceHands(0, 410, 870, 120);
@@ -2864,9 +2863,9 @@ SceneGame.Manager.prototype = {
         manager.upInt += 10;
         if (manager.upInt != 0) {
             if (manager.upInt % manager.sceneSpeed == 0) {
-                if (manager.spriteNum <= 0) {
+                if (manager.spriteNum >= 3) {
                     manager.sheetNum += 1;
-                    manager.spriteNum = 3;
+                    manager.spriteNum = 0;
                     if (manager.sheetNum >= manager.currentScene.sheets) {
                         manager.gameReady = false;
                         manager.RestartCheck();
@@ -2875,7 +2874,7 @@ SceneGame.Manager.prototype = {
                     }
                 } else {
                     if (manager.sheetNum <= manager.currentScene.sheets) {
-                        manager.spriteNum -= 1;
+                        manager.spriteNum += 1;
                         manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.spriteNum));
                     }
                 }
@@ -2944,9 +2943,9 @@ SceneGame.Manager.prototype = {
         manager.upInt += 1;
         if (manager.upInt != 0) {
             if (manager.upInt % manager.sceneSpeed == 0) {
-                if (manager.spriteNum <= 0) {
+                if (manager.spriteNum >= 3) {
                     manager.sheetNum += 1;
-                    manager.spriteNum = 3;
+                    manager.spriteNum = 0;
                     if (manager.sheetNum >= manager.currentScene.sheets) {
                         manager.gameReady = false;
                         manager.RestartCheck();
@@ -2955,7 +2954,7 @@ SceneGame.Manager.prototype = {
                     }
                 } else {
                     if (manager.sheetNum <= manager.currentScene.sheets) {
-                        manager.spriteNum -= 1;
+                        manager.spriteNum += 1;
                         manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.spriteNum));
                     }
                 }
@@ -2978,9 +2977,9 @@ SceneGame.Manager.prototype = {
         manager.upInt -= 1;
         if (manager.upInt >= 1) {
             if (manager.upInt % manager.sceneSpeed == 0) {
-                manager.spriteNum += 1;
-                if (manager.spriteNum >= 4) {
-                    manager.spriteNum = 0;
+                manager.spriteNum -= 1;
+                if (manager.spriteNum <= -1) {
+                    manager.spriteNum = 3;
                     manager.sheetNum -= 1;
                 }
                 if (manager.sheetNum <= -1) {
@@ -3006,7 +3005,7 @@ SceneGame.Manager.prototype = {
     IncreaseInt: function () {
         var manager = this;
         manager.upInt += 1;
-        if (manager.currentScene.name != "computerframeplain") {
+        if (manager.currentScene.name != "computerframe") {
             if (manager.currentScene.soundType == 2) {
                 if (manager.upInt == manager.currentScene.soundFrame) {
                     manager.MidSoundManager();
@@ -3014,9 +3013,9 @@ SceneGame.Manager.prototype = {
             }
             if (manager.upInt != 0) {
                 if (manager.upInt % manager.sceneSpeed == 0) {
-                    if (manager.spriteNum <= 0) {
+                    if (manager.spriteNum >= 3) {
                         manager.sheetNum += 1;
-                        manager.spriteNum = 3;
+                        manager.spriteNum = 0;
                         if (manager.sheetNum >= manager.currentScene.sheets) {
                             manager.gameReady = false;
                             manager.RestartCheck();
@@ -3025,24 +3024,22 @@ SceneGame.Manager.prototype = {
                             }
                         } else {
                             manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.spriteNum));
-                            console.log(manager.spriteNum);
-                            manager.rndSheet.push(manager.currentScene.name + "-" + manager.sheetNum);
-                            manager.rndSprite.push(manager.currentScene.name + manager.sheetNum + manager.spriteNum);
                         }
                     } else {
                         if (manager.sheetNum <= manager.currentScene.sheets) {
-                            manager.spriteNum -= 1;
-                            console.log(manager.spriteNum);
-
+                            manager.spriteNum += 1;
                             manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.spriteNum));
                         }
                     }
                     for (var i = 0; i < manager.hands.length; i++) {
                         manager.world.bringToTop(manager.hands[i]);
                     }
+
                 }
             }
         }
+
+
     },
 
     CantSleepIncreaseInt: function () {
@@ -3061,9 +3058,9 @@ SceneGame.Manager.prototype = {
                 }
                 if (manager.upInt != 0) {
                     if (manager.upInt % manager.sceneSpeed == 0) {
-                        if (manager.spriteNum <= 0) {
+                        if (manager.spriteNum >= 3) {
                             manager.sheetNum += 1;
-                            manager.spriteNum = 3;
+                            manager.spriteNum = 0;
                             if (manager.sheetNum >= manager.currentScene.sheets) {
                                 manager.gameReady = false;
                                 manager.RestartCheck();

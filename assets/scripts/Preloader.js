@@ -85,6 +85,7 @@ SceneGame.Preloader.prototype = {
         this.load.atlasJSONArray('singleHand', 'assets/textures/hand.png', 'assets/textures/hand.json');
 
         this.load.atlasJSONArray('allkeys', 'assets/textures/allkeys.png', 'assets/textures/allkeys.json');
+        this.load.atlasJSONArray('line', 'assets/textures/line.png', 'assets/textures/line.json');
 
 
         this.load.image('toplid', 'assets/image/toplid2.png');

@@ -22,6 +22,7 @@ SceneGame.Boot.prototype = {
     },
 
     preload: function () {
+
         this.load.json('scenes', 'assets/json/scenes.json');
         for (var i = 0; i < 4; i++) {
             this.load.atlasJSONArray('sky-' + i, 'assets/textures/sky-' + i + '.png', 'assets/textures/sky-' + i + '.json');

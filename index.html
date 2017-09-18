@@ -54,33 +54,20 @@
 </body>
 
 <div id="stage"></div>
-    
+
 
 
 <script type="text/javascript">
     var game = new Phaser.Game(1200, 500, Phaser.CANVAS, 'stage');
 
-<<<<<<< HEAD
 
-    window.onclick = function() {
-        console.log("NEEE");
-        window.focus();
-    }
 
     window.onload = function() {
         window.focus();
         console.log("Yooooo");
-=======
 
-window.onclick = function(){
-    console.log("NEEE");
-    window.focus();
-}
-    
-    window.onload = function() {
-    window.focus();
- console.log("Yooooo");
->>>>>>> origin/master
+        window.focus();
+        console.log("Yooooo");
         game.state.add('Boot', SceneGame.Boot);
         game.state.add('Preloader', SceneGame.Preloader);
         game.state.add('MainMenu', SceneGame.MainMenu);
@@ -88,6 +75,7 @@ window.onclick = function(){
 
 
         game.state.start('Boot');
+
 
     }
 

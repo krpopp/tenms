@@ -37,10 +37,12 @@ SceneGame.Manager.prototype = {
                 manager.unloadedSets.push(manager.scenesJSON.Scenes[i].name);
             }
         }
-        manager.CreatePausedStuff();
-        manager.InitCreateHands();
-    },
+        manager.greyscale = manager.add.sprite(0, 0, 'greyscale');
+        manager.greyscale.blendMode = 14;
 
+<<<<<<< HEAD
+        manager.InitCreateHands();
+=======
 
     CreatePausedStuff: function () {
         var manager = this;
@@ -54,6 +56,7 @@ SceneGame.Manager.prototype = {
         manager.game.onFocus.add(function () {
             manager.paused.visible = false;
         }, this);
+>>>>>>> origin/master
     },
 
     CreateVariables: function () {
@@ -68,10 +71,9 @@ SceneGame.Manager.prototype = {
         manager.buttonPressFrame = [];
         manager.yellowSpriteFrame = 12;
         manager.buttonPressFrameSets = [];
-        manager.handimation = [];
         manager.letter = [];
         manager.letterFrame = [];
-        manager.bottleYPos = [680, 600, 520, 520, 600, 680];
+        manager.bottleYPos = [460, 380, 300, 300, 380, 460];
         manager.hasLetters = false;
         manager.tabYellowFrame = 0;
         manager.tabLetterFrame = 41;
@@ -158,14 +160,12 @@ SceneGame.Manager.prototype = {
                             manager.CreateYellowBG(manager.currentScene.keySet[i], i);
                         }
                     } else {
-                        manager.PlainArrowCreate(500, 550);
+                        manager.PlainArrowCreate(500, 330);
                     }
                     break;
             }
         }
-        for (var i = 0; i < manager.hands.length; i++) {
-            manager.world.bringToTop(manager.hands[i]);
-        }
+        manager.ArrowsandHandsToTop();
     },
 
     CreateHoldAndSequence: function () {
@@ -178,9 +178,6 @@ SceneGame.Manager.prototype = {
             manager.CreateLetterKeys(i, manager.bottleXPos[i - 1], manager.bottleYPos[i - 1]);
             manager.BottleYellowBG(i, i - 1);
         }
-        manager.PlaceHands(0, 980, 800, 45);
-        manager.PlaceHands(1, 290, 900, 120);
-        manager.hands[1].scale.y = -1;
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
     },
 
@@ -188,24 +185,28 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.LetterReset();
         for (var i = 0; i < manager.keySet.length; i++) {
-            manager.CreateLetterKeys(i, 440 + (50 * i), 510 + (100 * i));
+
+            manager.CreateLetterKeys(i, 440 + (50 * i), 210 + (100 * i));
             manager.ShirtLetterBG(i);
         }
-        manager.PlaceHands(0, 600, 600, 45);
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
     },
 
     CreateHoldAndSwitch: function () {
         var manager = this;
         manager.LetterReset();
-        manager.shiftLetter = manager.add.sprite(515, 610, 'morekeys', 'shift1');
-        manager.shiftLetterYellow = manager.add.sprite(500, 600, 'midkeys', 'midKeyBG1');
-        manager.shiftLetterKey = manager.add.sprite(500, 600, 'morekeys', 'midkey1');
+        manager.shiftLetter = manager.add.sprite(515, 390, 'morekeys', 'shift1');
+        manager.shiftLetterYellow = manager.add.sprite(500, 380, 'midkeys', 'midKeyBG1');
+        manager.shiftLetterKey = manager.add.sprite(500, 380, 'morekeys', 'midkey1');
         manager.shiftLetter.visible = false;
         manager.shiftLetterYellow.visible = false;
         manager.shiftLetterKey.visible = false;
         manager.ArrowsandKeysVisible();
+<<<<<<< HEAD
+        manager.CreateAllSpritesETC(0, 630, 445, 800, 600, 45);
+=======
         manager.CreateAllSpritesETC(0, 630, 665, 800, 820, 45);
+>>>>>>> origin/master
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.RotateShift, this);
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.RotateOutline, this);
@@ -235,7 +236,7 @@ SceneGame.Manager.prototype = {
         manager.baseSound = manager.add.audio('phonevibrate');
         manager.baseSound.play();
         manager.LetterReset();
-        manager.CreateLetterKeys(0, 550, 620);
+        manager.CreateLetterKeys(0, 550, 420);
         manager.BottleYellowBG(0);
         manager.letter[0].visible = false;
         manager.letterKeys[0].visible = false;
@@ -245,16 +246,15 @@ SceneGame.Manager.prototype = {
             manager.CreateLetterKeys(i, manager.bottleXPos[i - 1], manager.bottleYPos[i - 1]);
             manager.BottleYellowBG(i, i - 1);
         }
-        manager.PlaceHands(0, 430, 910, 120);
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
     },
 
     CreateDelete: function () {
         var manager = this;
         manager.LetterReset();
-        manager.bigyellowSprites = manager.add.sprite(550, 600, 'morekeys', 'bigYellBG1');
-        manager.bigletter = manager.add.sprite(560, 610, 'morekeys', 'del1');
-        manager.bigletterKeys = manager.add.sprite(550, 600, 'morekeys', 'bigkey1');
+        manager.bigyellowSprites = manager.add.sprite(550, 380, 'morekeys', 'bigYellBG1');
+        manager.bigletter = manager.add.sprite(560, 390, 'morekeys', 'del1');
+        manager.bigletterKeys = manager.add.sprite(550, 380, 'morekeys', 'bigkey1');
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.DeleteRotateOutline, this);
     },
 
@@ -263,7 +263,7 @@ SceneGame.Manager.prototype = {
         manager.LetterReset();
         manager.TabKeyCreate();
         manager.ControlKeyCreate();
-        manager.CreateLetterKeys(0, 620, 590);
+        manager.CreateLetterKeys(0, 620, 420);
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.TabRotateOutline, this);
     },
@@ -272,28 +272,26 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.LetterReset();
         for (var i = 0; i < manager.keySet.length; i++) {
-            manager.CreateLetterKeys(i, 450 + (100 * i), 600);
-            manager.CreateLetterYellowBG(i, 480 + (100 * i), 640, 550 + (100 * i), 600);
+            manager.CreateLetterKeys(i, 450 + (100 * i), 380);
+            manager.CreateLetterYellowBG(i, 480 + (100 * i), 420, 530 + (100 * i), 380);
         }
-        manager.letter[0] = manager.add.sprite(470, 620, 'mju', 'M1');
-        manager.letter[1] = manager.add.sprite(570, 620, 'oh', 'o1');
-        manager.letter[2] = manager.add.sprite(670, 620, 'mju', 'M1');
-        manager.PlaceHands(0, 680, 800, 45);
+        manager.letter[0] = manager.add.sprite(470, 400, 'mju', 'M1');
+        manager.letter[1] = manager.add.sprite(570, 400, 'oh', 'o1');
+        manager.letter[2] = manager.add.sprite(670, 400, 'mju', 'M1');
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
     },
 
     CreateCantSleep: function () {
         var manager = this;
         manager.LetterReset();
-        manager.PlaceHands(0, 780, 800, 45);
         manager.sleepArray = ['s1', 'l1', 'e1', 'e1', 'p1'];
         manager.thinkArray = ['t1', 'ach1', 'aye1', 'en1', 'kay1'];
         manager.cantSleepArray = [0, 1, 2, 3, 4];
         Phaser.ArrayUtils.shuffle(manager.cantSleepArray);
         for (var i = 0; i < 5; i++) {
-            manager.CreateLetterKeys(i, 550 + (100 * i), 600);
-            manager.CreateLetterYellowBG(i, 580 + (100 * i), 640, 550 + (100 * i), 600);
-            manager.letter[i] = manager.add.sprite(570 + (100 * i), 620, 'sleep', manager.sleepArray[i]);
+            manager.CreateLetterKeys(i, 550 + (100 * i), 380);
+            manager.CreateLetterYellowBG(i, 580 + (100 * i), 620, 550 + (100 * i), 380);
+            manager.letter[i] = manager.add.sprite(570 + (100 * i), 400, 'sleep', manager.sleepArray[i]);
         }
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
     },
@@ -305,19 +303,19 @@ SceneGame.Manager.prototype = {
         manager.yellowSprites[num].visible = false;
         switch (num) {
             case 0:
-                manager.letter[num] = manager.add.sprite(570 + (100 * num), 620, 'sleep', manager.thinkArray[num]);
+                manager.letter[num] = manager.add.sprite(570 + (100 * num), 400, 'sleep', manager.thinkArray[num]);
                 break;
             case 1:
-                manager.letter[num] = manager.add.sprite(570 + (100 * num), 620, 'tyghbn', manager.thinkArray[num]);
+                manager.letter[num] = manager.add.sprite(570 + (100 * num), 400, 'tyghbn', manager.thinkArray[num]);
                 break;
             case 2:
-                manager.letter[num] = manager.add.sprite(570 + (100 * num), 620, 'morekeys', manager.thinkArray[num]);
+                manager.letter[num] = manager.add.sprite(570 + (100 * num), 400, 'morekeys', manager.thinkArray[num]);
                 break;
             case 3:
-                manager.letter[num] = manager.add.sprite(570 + (100 * num), 620, 'tyghbn', manager.thinkArray[num]);
+                manager.letter[num] = manager.add.sprite(570 + (100 * num), 400, 'tyghbn', manager.thinkArray[num]);
                 break;
             case 4:
-                manager.letter[num] = manager.add.sprite(570 + (100 * num), 620, 'morekeys', manager.thinkArray[num]);
+                manager.letter[num] = manager.add.sprite(570 + (100 * num), 400, 'morekeys', manager.thinkArray[num]);
                 break;
         }
     },
@@ -326,7 +324,7 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.LetterReset();
         for (var i = 0; i < manager.keySet.length; i++) {
-            manager.CreateLetterKeys(i, 480 + (100 * i), 550);
+            manager.CreateLetterKeys(i, 480 + (100 * i), 330);
             manager.LetterYellowBG(manager.currentScene.keySet[i], i);
         }
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
@@ -335,11 +333,8 @@ SceneGame.Manager.prototype = {
     CreatePill: function () {
         var manager = this;
         manager.LetterReset();
-        manager.CreateLetterKeys(0, 480, 550);
-        manager.CreateLetterKeys(1, 600, 550);
-        manager.PlaceHands(0, 830, 750, 45);
-        manager.PlaceHands(1, 380, 800, 120);
-        manager.hands[1].scale.y = -1;
+        manager.CreateLetterKeys(0, 480, 330);
+        manager.CreateLetterKeys(1, 600, 330);
         manager.LetterYellowBG('manager.function', 0);
         manager.LetterYellowBG(manager.currentScene.keySet[0], 1);
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
@@ -352,7 +347,7 @@ SceneGame.Manager.prototype = {
         manager.LetterReset();
         manager.keySprites.visible = false;
         for (var i = 0; i < manager.keySet.length; i++) {
-            manager.CreateLetterKeys(i, 440 + (50 * i), 510 + (100 * i));
+            manager.CreateLetterKeys(i, 440 + (50 * i), 210 + (100 * i));
             manager.LetterYellowBG(manager.currentScene.keySet[i], i);
         }
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
@@ -361,7 +356,7 @@ SceneGame.Manager.prototype = {
     CreateSleep: function () {
         var manager = this;
         manager.LetterReset();
-        manager.CreateLetterKeys(0, 580, 550);
+        manager.CreateLetterKeys(0, 580, 330);
         manager.EndYellowBG(manager.currentScene.keySet[0], 0);
         manager.keySprites.visible = false;
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
@@ -381,7 +376,7 @@ SceneGame.Manager.prototype = {
             } else {
                 manager.nextX = 1;
             }
-            manager.letterKeys[i] = manager.add.sprite(440 + (200 * manager.nextX), 440 + (80 * manager.nextY), 'qw', 'qwkey0');
+            manager.letterKeys[i] = manager.add.sprite(440 + (200 * manager.nextX), 120 + (80 * manager.nextY), 'qw', 'qwkey0');
             manager.LetterYellowBG(manager.currentScene.keySet[i], i);
         }
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.LetterRotateOutline, this);
@@ -390,9 +385,9 @@ SceneGame.Manager.prototype = {
     CreateBigO: function () {
         var manager = this;
         manager.LetterReset();
-        manager.yellowSprites[0] = manager.add.sprite(550, 600, 'qw', 'qwYellow1');
-        manager.letter[0] = manager.add.sprite(570, 620, 'oh', 'o1');
-        manager.letterKeys[0] = manager.add.sprite(550, 600, 'qw', 'qwkey0');
+        manager.yellowSprites[0] = manager.add.sprite(550, 380, 'qw', 'qwYellow1');
+        manager.letter[0] = manager.add.sprite(570, 400, 'oh', 'o1');
+        manager.letterKeys[0] = manager.add.sprite(550, 380, 'qw', 'qwkey0');
     },
 
     CreateSpace: function () {
@@ -401,16 +396,16 @@ SceneGame.Manager.prototype = {
         manager.spaceYellowNum = 6;
         manager.spaceKeyNum = 3;
         manager.spaceOutlineNum = 0;
-        manager.spaceYellow = manager.add.sprite(640, 640, 'space', 'spaceY1');
-        manager.spaceKey = manager.add.sprite(550, 610, 'space', 'spaceW1');
+        manager.spaceYellow = manager.add.sprite(640, 420, 'space', 'spaceY1');
+        manager.spaceKey = manager.add.sprite(550, 390, 'space', 'spaceW1');
         manager.spaceYellow.anchor.setTo(0.5, 0.5);
-        manager.ohLetter = manager.add.sprite(550, 610, 'oh', 'o1');
-        manager.eweLetter = manager.add.sprite(590, 610, 'mju', 'U1');
-        manager.teeLetter = manager.add.sprite(630, 610, 'tyghbn', 'tee3');
+        manager.ohLetter = manager.add.sprite(550, 390, 'oh', 'o1');
+        manager.eweLetter = manager.add.sprite(590, 390, 'mju', 'U1');
+        manager.teeLetter = manager.add.sprite(630, 390, 'tyghbn', 'tee3');
         manager.ohLetter.alpha = 0;
         manager.eweLetter.alpha = 0;
         manager.teeLetter.alpha = 0;
-        manager.spaceOutline = manager.add.sprite(480, 600, 'space', 'spaceOL1');
+        manager.spaceOutline = manager.add.sprite(480, 380, 'space', 'spaceOL1');
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.SpaceRotate, this);
     },
 
@@ -450,26 +445,73 @@ SceneGame.Manager.prototype = {
     ResetKeyboard: function () {
         var manager = this;
         manager.input.keyboard.reset();
+<<<<<<< HEAD
+=======
+    },
+    
+    
+       PinchOut: function () {
+        var manager = this;
+        manager.myElement = document.getElementById("content");
+        manager.hammertime = new Hammer(manager.myElement);
+        manager.hammertime.get('pinch').set({
+            enable: true
+        });
+        manager.hammertime.on('pinchout', function (ev) {
+            manager.topLidDown = true;
+            manager.IncreaseInt();
+        });
+
+        manager.hammertime.on('pinchend', function (ev) {
+            manager.topLidDown = false;
+        })
+    },
+
+    FingerSwipe: function () {
+        var manager = this;
+        manager.myElement = document.getElementById("content");
+        manager.hammertime = new Hammer(manager.myElement);
+        manager.hammertime.get('pan').set({
+            direction: Hammer.DIRECTION_UP
+        });
+        manager.hammertime.on('panup', function (ev) {
+            console.log("in event");
+            manager.IncreaseInt();
+        });
+>>>>>>> origin/master
     },
 
     RemoveEverything: function () {
         var manager = this;
         manager.ResetKeyboard();
         manager.tweens.removeAll();
+<<<<<<< HEAD
+        if (!this.game.device.desktop) {
+            manager.hammertime.destroy();
+        }
+=======
         manager.hammertime.destroy();
+>>>>>>> origin/master
         manager.keysPressed = [];
         if (manager.currentSound != null) {
             manager.currentSound.stop();
         }
+<<<<<<< HEAD
+        if (manager.graphics != null) {
+            manager.graphics.destroy();
+        }
+        //        if (gyro != null) {
+        //            gyro.destroy();
+        //        }
+=======
+>>>>>>> origin/master
         if (manager.muffled != null) {
             manager.muffled.stop();
             manager.muffled.destroy();
         }
         for (var i = 0; i < manager.currentSet.length; i++) {
             manager.currentSet[i].destroy();
-        }
-        for (var i = 0; i < manager.hands.length; i++) {
-            manager.hands[i].visible = false;
+            console.log(manager.currentSet[i]);
         }
         for (var i = 0; i < manager.yellowSprites.length; i++) {
             manager.yellowSprites[i].visible = false;
@@ -505,9 +547,6 @@ SceneGame.Manager.prototype = {
         }
         if (manager.guess != null) {
             manager.guess.destroy();
-        }
-        if (manager.swipeTween != null) {
-            manager.tweens.remove(manager.swipeTween);
         }
         if (manager.startFrame != null) {
             manager.startFrame.destroy();
@@ -576,7 +615,7 @@ SceneGame.Manager.prototype = {
         }
         manager.bLid.destroy();
         manager.tLid.destroy();
-        manager.black.destroy();
+        //manager.black.destroy();
         manager.hasLetters = false;
         manager.time.events.removeAll();
     },
@@ -624,14 +663,10 @@ SceneGame.Manager.prototype = {
         var manager = this;
         switch (num) {
             case 0:
-                manager.PlaceHands(num, 800, 715, 45);
-                for (var i = 1; i < manager.hands.length; i++) {
-                    manager.hands[i].visible = false;
-                }
-                manager.CreateLetterYellowBG(num, 620, 580, 720, 580);
+                manager.CreateLetterYellowBG(num, 620, 360, 720, 360);
                 break;
             case 1:
-                manager.CreateLetterYellowBG(num, 540, 580, 640, 580);
+                manager.CreateLetterYellowBG(num, 540, 360, 640, 360);
                 break;
         }
     },
@@ -651,12 +686,12 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.tabLetterKeys = manager.add.sprite(posX, posY, 'morekeys', 'midkey1');
         manager.tabYellow = manager.add.sprite(yellowPosX, yellowPosY, 'midkeys', 'midKeyBG1');
-        manager.tabLetter = manager.add.sprite(530, 610, 'morekeys', 'tab1');
+        manager.tabLetter = manager.add.sprite(530, 590, 'morekeys', 'tab1');
     },
 
     TabKeyCreate: function () {
         var manager = this;
-        manager.MidKeyCreate(500, 600, 500, 600);
+        manager.MidKeyCreate(500, 380, 500, 380);
         manager.tabYellow.visible = false;
         manager.tabLetter.visible = false;
         manager.tabLetterKeys.visible = false;
@@ -664,11 +699,11 @@ SceneGame.Manager.prototype = {
 
     ControlKeyCreate: function () {
         var manager = this;
-        manager.ctrlYellow = manager.add.sprite(460, 600, 'midkeys', 'midKeyBG1');
-        manager.CreateLetterYellowBG(0, 660, 630, 660, 630);
-        manager.ctrlLetter = manager.add.sprite(490, 610, 'morekeys', 'ctrl1');
-        manager.letter[0] = manager.add.sprite(650, 610, 'morekeys', 'v1');
-        manager.ctrlLetterKeys = manager.add.sprite(460, 600, 'morekeys', 'midkey1');
+        manager.ctrlYellow = manager.add.sprite(460, 420, 'midkeys', 'midKeyBG1');
+        manager.CreateLetterYellowBG(0, 660, 410, 660, 410);
+        manager.ctrlLetter = manager.add.sprite(490, 430, 'morekeys', 'ctrl1');
+        manager.letter[0] = manager.add.sprite(650, 430, 'morekeys', 'v1');
+        manager.ctrlLetterKeys = manager.add.sprite(460, 420, 'morekeys', 'midkey1');
     },
 
     CreateLetterYellowBG: function (num, yellX, yellY, pressX, pressY) {
@@ -682,16 +717,16 @@ SceneGame.Manager.prototype = {
         var manager = this;
         switch (num) {
             case 0:
-                manager.letter[num] = manager.add.sprite(460, 530, 'mju', 'U3');
-                manager.CreateLetterYellowBG(num, 480, 550, 480, 550);
+                manager.letter[num] = manager.add.sprite(460, 230, 'mju', 'U3');
+                manager.CreateLetterYellowBG(num, 520, 350, 420, 550);
                 break;
             case 1:
-                manager.letter[num] = manager.add.sprite(505, 630, 'mju', 'J3');
-                manager.CreateLetterYellowBG(num, 525, 650, 525, 650);
+                manager.letter[num] = manager.add.sprite(505, 310, 'mju', 'J3');
+                manager.CreateLetterYellowBG(num, 565, 450, 465, 650);
                 break;
             case 2:
-                manager.letter[num] = manager.add.sprite(570, 730, 'mju', 'M3');
-                manager.CreateLetterYellowBG(num, 580, 750, 580, 750);
+                manager.letter[num] = manager.add.sprite(570, 410, 'mju', 'M3');
+                manager.CreateLetterYellowBG(num, 620, 550, 520, 650);
                 break;
         }
     },
@@ -700,8 +735,8 @@ SceneGame.Manager.prototype = {
         var manager = this;
         switch (num) {
             case 0:
-                manager.letter[num] = manager.add.sprite(790, 640, 'down', 0);
-                manager.CreateLetterYellowBG(0, 810, 660, 770, 620);
+                manager.letter[num] = manager.add.sprite(790, 420, 'down', 0);
+                manager.CreateLetterYellowBG(0, 810, 640, 770, 600);
                 break;
             case 1:
                 manager.letter[num] = manager.add.sprite(manager.bottleXPos[set] + 25, manager.bottleYPos[set] + 15, 'tyghbn', 'en1');
@@ -729,110 +764,64 @@ SceneGame.Manager.prototype = {
         var manager = this;
         switch (keyName) {
             case "manager.cue":
-                manager.letter[num] = manager.add.sprite(500 + (100 * num), 560, "qw", "qwQ1");
-                manager.PlaceHands(num, 340, 700, 150);
-                for (var i = 1; i < manager.hands.length; i++) {
-                    manager.hands[i].visible = false;
-                }
-                manager.CreateLetterYellowBG(num, 520 + (100 * num), 580, 520 + (100 * num), 580);
+                manager.letter[num] = manager.add.sprite(500 + (100 * num), 340, "qw", "qwQ1");
+                manager.CreateLetterYellowBG(num, 520 + (100 * num), 360, 320 + (100 * num), 360);
                 break;
             case "manager.doubleEwe":
-                manager.letter[num] = manager.add.sprite(500 + (100 * num), 560, "qw", "qwW1");
-                manager.PlaceHands(num, 900, 595, 0);
-                for (var i = 1; i < manager.hands.length; i++) {
-                    manager.hands[i].visible = false;
-                }
-                manager.CreateLetterYellowBG(num, 520 + (100 * num), 580, 520 + (100 * num), 580);
+                manager.letter[num] = manager.add.sprite(500 + (100 * num), 340, "qw", "qwW1");
+                manager.CreateLetterYellowBG(num, 520 + (100 * num), 360, 320 + (100 * num), 360);
                 break;
             case "manager.em":
-                manager.letter[num] = manager.add.sprite(460 + (50 * 2), 530 + (100 * 2), "mju", "M3");
-                manager.PlaceHands(num, 800, 725, 0);
-                for (var i = 1; i < manager.hands.length; i++) {
-                    manager.hands[i].visible = false;
-                }
-                manager.CreateLetterYellowBG(num, 480 + (50 * num), 550 + (100 * num), 480 + (50 * num), 550 + (100 * i));
+                manager.letter[num] = manager.add.sprite(460 + (50 * 2), 230 + (100 * 2), "mju", "M3");
+                manager.CreateLetterYellowBG(num, 480 + (50 * num), 250 + (100 * num), 480 + (50 * num), 250 + (100 * num));
                 break;
             case "manager.jay":
-                manager.letter[num] = manager.add.sprite(465 + (50 * num), 530 + (100 * num), "mju", "J3");
-                manager.PlaceHands(num, 900, 595, 0);
-                for (var i = 1; i < manager.hands.length; i++) {
-                    manager.hands[i].visible = false;
-                }
-                manager.CreateLetterYellowBG(num, 480 + (50 * num), 550 + (100 * num), 480 + (50 * num), 550 + (100 * i));
+                manager.letter[num] = manager.add.sprite(465 + (50 * num), 230 + (100 * num), "mju", "J3");
+                manager.CreateLetterYellowBG(num, 480 + (50 * num), 250 + (100 * num), 480 + (50 * num), 250 + (100 * num));
                 break;
             case "manager.ewe":
-                manager.letter[num] = manager.add.sprite(470 + (50 * 0), 530 + (100 * 0), "mju", "U3");
-                manager.PlaceHands(num, 900, 595, 0);
-                for (var i = 1; i < manager.hands.length; i++) {
-                    manager.hands[i].visible = false;
-                }
-                manager.CreateLetterYellowBG(num, 480 + (50 * num), 550 + (100 * num), 480 + (50 * num), 550 + (100 * i));
+                manager.letter[num] = manager.add.sprite(470 + (50 * 0), 230 + (100 * 0), "mju", "U3");
+                manager.CreateLetterYellowBG(num, 480 + (50 * num), 250 + (100 * num), 480 + (50 * num), 250 + (100 * num));
                 break;
             case "manager.keyFive":
-                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "numbers", "numbers50");
-                manager.PlaceHands(num, 330, 715, 120);
-                manager.hands[0].scale.y = -1;
-                for (var i = 1; i < manager.hands.length; i++) {
-                    manager.hands[i].visible = false;
-                }
-                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 140 + (80 * manager.nextY), "numbers", "numbers50");
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 150 + (80 * manager.nextY), 480 + (50 * num), 230 + (100 * num));
                 break;
             case "manager.keySix":
-                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "numbers", "numbers60");
-                for (var i = 1; i < manager.hands.length; i++) {
-                    manager.hands[i].visible = false;
-                }
-                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 140 + (80 * manager.nextY), "numbers", "numbers60");
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 150 + (80 * manager.nextY), 480 + (50 * num), 230 + (100 * num));
                 break;
             case "manager.tee":
-                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "tyghbn", "tee3");
-                for (var i = 1; i < manager.hands.length; i++) {
-                    manager.hands[i].visible = false;
-                }
-                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 140 + (80 * manager.nextY), "tyghbn", "tee3");
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 150 + (80 * manager.nextY), 480 + (50 * num), 230 + (100 * num));
                 break;
             case "manager.why":
-                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "tyghbn", "why3");
-                for (var i = 1; i < manager.hands.length; i++) {
-                    manager.hands[i].visible = false;
-                }
-                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 140 + (80 * manager.nextY), "tyghbn", "why3");
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 150 + (80 * manager.nextY), 480 + (50 * num), 230 + (100 * num));
                 break;
             case "manager.gee":
-                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "tyghbn", "gee3");
-                for (var i = 1; i < manager.hands.length; i++) {
-                    manager.hands[i].visible = false;
-                }
-                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 140 + (80 * manager.nextY), "tyghbn", "gee3");
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 150 + (80 * manager.nextY), 480 + (50 * num), 230 + (100 * num));
                 break;
             case "manager.ach":
-                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "tyghbn", "ach3");
-                for (var i = 1; i < manager.hands.length; i++) {
-                    manager.hands[i].visible = false;
-                }
-                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 140 + (80 * manager.nextY), "tyghbn", "ach3");
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 150 + (80 * manager.nextY), 480 + (50 * num), 230 + (100 * num));
                 break;
             case "manager.bee":
-                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "tyghbn", "bee3");
-                for (var i = 1; i < manager.hands.length; i++) {
-                    manager.hands[i].visible = false;
-                }
-                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 140 + (80 * manager.nextY), "tyghbn", "bee3");
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 150 + (80 * manager.nextY), 480 + (50 * num), 230 + (100 * num));
                 break;
             case "manager.en":
-                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 460 + (80 * manager.nextY), "tyghbn", "en3");
-                for (var i = 1; i < manager.hands.length; i++) {
-                    manager.hands[i].visible = false;
-                }
-                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 470 + (80 * manager.nextY), 480 + (50 * num), 550 + (100 * i));
+                manager.letter[num] = manager.add.sprite(470 + (200 * manager.nextX), 140 + (80 * manager.nextY), "tyghbn", "en3");
+                manager.CreateLetterYellowBG(num, 480 + (200 * manager.nextX), 150 + (80 * manager.nextY), 480 + (50 * num), 230 + (100 * num));
                 break;
             case "manager.function":
-                manager.letter[num] = manager.add.sprite(490, 570, "morekeys", "function");
-                manager.CreateLetterYellowBG(num, 520, 590, 530, 580);
+                manager.letter[num] = manager.add.sprite(490, 350, "morekeys", "function");
+                manager.CreateLetterYellowBG(num, 520, 370, 530, 360);
                 break;
             case "manager.efNine":
-                manager.letter[num] = manager.add.sprite(620, 570, "morekeys", "efnine");
-                manager.CreateLetterYellowBG(num, 640, 590, 630, 580);
+                manager.letter[num] = manager.add.sprite(620, 350, "morekeys", "efnine");
+                manager.CreateLetterYellowBG(num, 640, 370, 630, 360);
                 break;
         }
     },
@@ -845,22 +834,16 @@ SceneGame.Manager.prototype = {
 
         switch (keyName) {
             case "manager.cursors.up":
-                manager.CreateAllSpritesETC(num, 625, 590, 850, 660, 20);
+                manager.CreateAllSpritesETC(num, 625, 370, 850, 440, 20);
                 break;
             case "manager.cursors.down":
-                manager.CreateAllSpritesETC(num, 625, 670, 700, 880, 60);
-                if (manager.hands[num] != null) {
-                    manager.hands[num].scale.y = -1;
-                }
+                manager.CreateAllSpritesETC(num, 625, 450, 700, 660, 60);
                 break;
             case "manager.cursors.right":
-                manager.CreateAllSpritesETC(num, 700, 670, 820, 885, 60);
+                manager.CreateAllSpritesETC(num, 700, 450, 820, 665, 60);
                 break;
             case "manager.cursors.left":
-                manager.CreateAllSpritesETC(num, 540, 670, 340, 750, 150);
-                if (manager.hands[num] != null) {
-                    manager.hands[num].scale.y = -1;
-                }
+                manager.CreateAllSpritesETC(num, 540, 450, 340, 530, 150);
                 break;
         }
         manager.SetSpriteData(num);
@@ -868,13 +851,8 @@ SceneGame.Manager.prototype = {
 
     InitCreateHands: function () {
         var manager = this;
-        manager.hands = [];
-        manager.arrows = manager.add.sprite(520, 570, 'arrows');
-        for (var i = 0; i < 4; i++) {
-            manager.hands.push(manager.add.sprite(-100, -100, "singleHand", "hand0"));
-            manager.hands[i].anchor.setTo(0.5, 0.5);
-            manager.handimation.push(manager.hands[i].animations.add("twitch"));
-            manager.hands[i].visible = false;
+        manager.arrows = manager.add.sprite(520, 360, 'arrows');
+        for (var i = 0; i < 10; i++) {
             manager.yellowSprites[i] = manager.add.sprite(-100, -100, "qw", "qwYellow1");
             manager.yellowSprites[i].visible = false;
         }
@@ -895,12 +873,6 @@ SceneGame.Manager.prototype = {
         manager.yellowSprites[num].alpha = 1;
         manager.yellowSprites[num].scale.x = 1;
         manager.yellowSprites[num].scale.y = 1;
-        manager.PlaceHands(num, handX, handY, handRot);
-        if (manager.currentScene.hands == 1) {
-            for (var i = 1; i < manager.hands.length; i++) {
-                manager.hands[i].visible = false;
-            }
-        }
     },
 
     RotateOutline: function () {
@@ -1004,15 +976,6 @@ SceneGame.Manager.prototype = {
         manager.YellowSpriteRotate();
     },
 
-    PlaceHands: function (num, posX, posY, rot) {
-        var manager = this;
-        manager.hands[num].visible = true;
-        manager.hands[num].position.x = posX;
-        manager.hands[num].position.y = posY;
-        manager.handimation[num].play(10, true);
-        manager.hands[num].angle = rot;
-    },
-
     FindKeys: function () {
         var manager = this;
         var getKeys = [];
@@ -1026,7 +989,7 @@ SceneGame.Manager.prototype = {
     WaitPlease: function () {
         var manager = this;
         manager.arrows.visible = false;
-        manager.wait = manager.add.sprite(500, 550, "wait", "wait0");
+        manager.wait = manager.add.sprite(500, 530, "wait", "wait0");
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.RotateWait, this);
     },
 
@@ -1060,7 +1023,7 @@ SceneGame.Manager.prototype = {
     GuessPlease: function () {
         var manager = this;
         manager.arrows.visible = false;
-        manager.guess = manager.add.sprite(500, 550, "guess", "guess0");
+        manager.guess = manager.add.sprite(500, 330, "guess", "guess0");
         manager.time.events.loop(Phaser.Timer.SECOND / 7, manager.RotateGuess, this);
     },
 
@@ -1100,7 +1063,9 @@ SceneGame.Manager.prototype = {
 
     PhotoCreate: function () {
         var manager = this;
+
         manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + "0", 0));
+
         manager.keysPressed = [];
         for (var i = 0; i < manager.keySet.length; i++) {
             manager.keysPressed[i] = false;
@@ -1117,18 +1082,20 @@ SceneGame.Manager.prototype = {
             manager.KeyCheckSwitch(manager.currentScene.pattern);
         }
         if (manager.currentScene.name != "sleep" && manager.currentScene.name != "wakephone") {
-            manager.StartNextScene = manager.time.events.add(Phaser.Timer.SECOND * 10, manager.NextScene, this);
+<<<<<<< HEAD
+            manager.StartNextScene = manager.time.events.add(Phaser.Timer.SECOND * 5, manager.NextScene, this);
+=======
+            manager.StartNextScene = manager.time.events.add(Phaser.Timer.SECOND * 4, manager.NextScene, this);
+>>>>>>> origin/master
         }
         if (manager.currentScene.name == "wakephone") {
             manager.MorningScenes();
         }
         if (manager.currentScene.startframe != null) {
             manager.startFrame = manager.add.sprite(0, 0, manager.currentScene.startframe);
-            for (var i = 0; i < manager.hands.length; i++) {
-                manager.world.bringToTop(manager.hands[i]);
-            }
         }
         manager.RoomToneStart();
+        manager.ArrowsandHandsToTop();
     },
 
     NextScene: function () {
@@ -1159,6 +1126,7 @@ SceneGame.Manager.prototype = {
         } else {
             location.reload();
         }
+        manager.greyscale.alpha = 1;
     },
 
     TopLidDownThings: function () {
@@ -1184,18 +1152,17 @@ SceneGame.Manager.prototype = {
         if (!manager.goDown && manager.upInt >= manager.currentScene.switchInt) {
             manager.goDown = true;
             manager.SequentialKeyPress(0);
-            manager.MoveHand(1);
             manager.YellowKeyUp(1);
         }
         if (manager.goDown && manager.upInt <= 0) {
             manager.goDown = false;
             manager.SequentialKeyPress(1);
-            manager.MoveHand(0);
             manager.YellowKeyUp(0);
         }
         if (manager.keysPressed[0]) {
             if (!manager.goDown) {
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
             }
         }
         if (manager.keysPressed[1]) {
@@ -1215,7 +1182,6 @@ SceneGame.Manager.prototype = {
             manager.keySet[0].reset;
             manager.keySet.shift();
             manager.yellowSprites.shift();
-            manager.MoveHand(0);
             manager.ContinueSwitch();
             manager.currentScene.switchInt = 500;
         }
@@ -1249,7 +1215,10 @@ SceneGame.Manager.prototype = {
                 manager.allKeys = false;
             }
             if (manager.allKeys) {
+                console.log("uhhh");
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+                manager.ArrowsandHandsToTop();
             }
         }
         if (manager.currentScene.updateCheck) {
@@ -1261,6 +1230,7 @@ SceneGame.Manager.prototype = {
                 manager.eventSoundTime = false;
             }
         }
+        manager.DecreaseBlend();
     },
 
     UpdateCheck: function () {
@@ -1307,6 +1277,7 @@ SceneGame.Manager.prototype = {
         if (manager.currentScene.pattern == 20) {
             if (manager.pressedSpace) {
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
                 manager.upperPic.scale.x += .001;
                 manager.upperPic.scale.y += .001;
                 manager.insidePic.alpha -= .01;
@@ -1318,6 +1289,9 @@ SceneGame.Manager.prototype = {
                 }
                 manager.world.bringToTop(manager.insidePic);
                 manager.world.bringToTop(manager.upperPic);
+                manager.world.bringToTop(manager.spaceYellow);
+                manager.world.bringToTop(manager.spaceOutline);
+                manager.world.bringToTop(manager.spaceKey);
             }
         }
 
@@ -1375,6 +1349,20 @@ SceneGame.Manager.prototype = {
         }
     },
 
+    IncreaseBlend: function () {
+        var manager = this;
+        if (manager.greyscale.alpha > 0.1) {
+            manager.greyscale.alpha -= 0.05;
+        }
+    },
+
+    DecreaseBlend: function () {
+        var manager = this;
+        if (manager.greyscale.alpha < 1) {
+            manager.greyscale.alpha += 0.01;
+        }
+    },
+
     SubwaySound: function () {
         var manager = this;
         manager.baseSound = manager.add.audio("subwayambiant");
@@ -1401,7 +1389,7 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.tLid = manager.add.sprite(0, tY, "toplid");
         manager.bLid = manager.add.sprite(0, bY, "lowerlid");
-        manager.black = manager.add.sprite(0, blY, "black");
+        // manager.black = manager.add.sprite(0, blY, "black");
     },
 
     MorningTweens: function () {
@@ -1552,9 +1540,19 @@ SceneGame.Manager.prototype = {
                 manager.PinchOut();
                 break;
             case 1:
+                manager.TieShoes();
                 break;
             case 2:
-                manager.FingerSwiper();
+                manager.FingerSwipe();
+                break;
+            case 3:
+                manager.SipCoffee();
+                break;
+            case 4:
+                manager.FridgeLook();
+                break;
+            case 5:
+                manager.ButtonShirt();
                 break;
         }
     },
@@ -1569,11 +1567,33 @@ SceneGame.Manager.prototype = {
         manager.hammertime.on('pinchout', function (ev) {
             manager.topLidDown = true;
             manager.IncreaseInt();
+            manager.IncreaseBlend();
         });
 
         manager.hammertime.on('pinchend', function (ev) {
             manager.topLidDown = false;
         })
+    },
+
+    TieShoes: function () {
+        var manager = this;
+        var tieShoeSymbolX = [390, 500, 600, 650, 500, 290, 160, 200, 270, 400, 460, 400, 350];
+        var tieShoeSymbolY = [150, 200, 300, 400, 500, 500, 400, 300, 200, 300, 360, 430, 350];
+        manager.graphics = manager.add.graphics(0, 0);
+        manager.graphics.beginFill(0xFF0000, 1);
+        for (var i = 0; i < tieShoeSymbolX.length; i++) {
+            manager.graphics.drawCircle(tieShoeSymbolX[i], tieShoeSymbolY[i], 30);
+        }
+        manager.graphics.inputEnabled = true;
+        manager.graphics.events.onInputOver.add(manager.onDown, this);
+    },
+
+    onDown: function () {
+        var manager = this;
+        manager.IncreaseInt();
+        manager.IncreaseBlend();
+        manager.world.bringToTop(manager.graphics);
+        console.log("sooooo");
     },
 
     FingerSwipe: function () {
@@ -1586,21 +1606,72 @@ SceneGame.Manager.prototype = {
         manager.hammertime.on('panup', function (ev) {
             console.log("in event");
             manager.IncreaseInt();
+            manager.IncreaseBlend();
         });
+    },
+
+    SipCoffee: function () {
+        var manager = this;
+        gyro.startTracking(function (o) {
+            o.alpha;
+            if (o.alpha >= 2) {
+                console.log(o.alpha);
+                manager.IncreaseInt();
+                manager.IncreaseBlend();
+            }
+        });
+    },
+
+    FridgeLook: function () {
+        var manager = this;
+        gyro.startTracking(function (o) {
+            o.alpha;
+            if (o.alpha >= 2) {
+                console.log(o.beta);
+                manager.IncreaseInt();
+                manager.IncreaseBlend();
+            }
+        });
+    },
+
+    ButtonShirt: function () {
+        var manager = this;
+
     },
 
     EndCreate: function () {
         var manager = this;
         manager.number = 0;
         manager.LidCreate(-450, 300, 501);
-        manager.endNumber = manager.add.sprite(610, 560, 'numbers', 'numbers' + (manager.number + 1) + '0');
-        manager.world.bringToTop(manager.hands[0]);
+        manager.endNumber = manager.add.sprite(610, 340, 'numbers', 'numbers' + (manager.number + 1) + '0');
         manager.EndBringToTop();
         manager.EndGame(0);
     },
 
     ArrowsandHandsToTop: function () {
         var manager = this;
+<<<<<<< HEAD
+        manager.world.bringToTop(manager.greyscale);
+
+        for (var i = 0; i < manager.yellowSprites.length; i++) {
+            manager.world.bringToTop(manager.yellowSprites[i]);
+        }
+        if (manager.letterKeys != null) {
+            for (var i = 0; i < manager.letterKeys.length; i++) {
+                manager.world.bringToTop(manager.letterKeys[i]);
+            }
+        }
+        if (manager.letter != null) {
+            for (var i = 0; i < manager.letter.length; i++) {
+                manager.world.bringToTop(manager.letter[i]);
+            }
+        }
+        for (var i = 0; i < manager.ripple.length; i++) {
+            manager.world.bringToTop(manager.ripple[i]);
+        }
+        manager.world.bringToTop(manager.arrows);
+        manager.world.bringToTop(manager.keySprites);
+=======
         for (var i = 0; i < manager.yellowSprites.length; i++) {
             manager.world.bringToTop(manager.yellowSprites[i]);
         }
@@ -1609,13 +1680,18 @@ SceneGame.Manager.prototype = {
         for (var i = 0; i < manager.hands.length; i++) {
             manager.world.bringToTop(manager.hands[i]);
         }
+>>>>>>> origin/master
     },
 
     LidsBringToTop: function () {
         var manager = this;
         manager.world.bringToTop(manager.tLid);
         manager.world.bringToTop(manager.bLid);
+<<<<<<< HEAD
+        //manager.world.bringToTop(manager.black);
+=======
         manager.world.bringToTop(manager.black);
+>>>>>>> origin/master
     },
 
     EndBringToTop: function () {
@@ -1624,13 +1700,13 @@ SceneGame.Manager.prototype = {
         manager.world.bringToTop(manager.yellowSprites[0]);
         manager.world.bringToTop(manager.letterKeys[0]);
         manager.world.bringToTop(manager.endNumber);
-        manager.world.bringToTop(manager.hands[0]);
     },
 
     EndGame: function (number) {
         var manager = this;
         manager.keySet[number].onDown.add(function () {
             manager.IncreaseInt();
+            manager.IncreaseBlend();
             manager.EndBringToTop();
             manager.AlphaTweens(manager.endNumber, 0, 200);
             manager.AlphaTweens(manager.yellowSprites[0], 0, 200);
@@ -1663,6 +1739,7 @@ SceneGame.Manager.prototype = {
     EndIncreaseInt: function () {
         var manager = this;
         manager.IncreaseInt();
+        manager.IncreaseBlend();
         manager.EndBringToTop();
         manager.keySet[manager.number].reset();
         manager.number += 1;
@@ -1670,7 +1747,6 @@ SceneGame.Manager.prototype = {
         manager.AlphaTweens(manager.yellowSprites[0], 1, 200);
         manager.endNumber.frame += 3;
         if (manager.number < 9) {
-            manager.YTweens(manager.hands[0], 1500, 30000)
             manager.EndGame(manager.number);
         } else {
             manager.yellowSprites[0].alpha = 1;
@@ -1692,7 +1768,7 @@ SceneGame.Manager.prototype = {
     CreateLogo: function () {
         var manager = this;
         manager.time.events.add(Phaser.Timer.SECOND * 3, manager.NextScene, this);
-        manager.logo = manager.add.sprite(860, 560, 'logo', 'logo_0000_Layer-3.png');
+        manager.logo = manager.add.sprite(860, 340, 'logo', 'logo_0000_Layer-3.png');
         var cropRect = new Phaser.Rectangle(0, 0, -550, manager.logo.height);
         manager.logo.alpha = 0;
         manager.logo.scale.x = .5;
@@ -1702,8 +1778,8 @@ SceneGame.Manager.prototype = {
 
     FinalLetterCreate: function () {
         var manager = this;
-        manager.finalOne = manager.add.sprite(540, 560, 'numbers', 'numbers10');
-        manager.letterKeys[1] = manager.add.sprite(500, 550, "qw", "qwkey0");
+        manager.finalOne = manager.add.sprite(540, 340, 'numbers', 'numbers10');
+        manager.letterKeys[1] = manager.add.sprite(500, 330, "qw", "qwkey0");
         manager.EndYellowBG(manager.currentScene.keySet[0], 1);
         manager.world.bringToTop(manager.yellowSprites[1]);
         manager.world.bringToTop(manager.finalOne);
@@ -1758,6 +1834,8 @@ SceneGame.Manager.prototype = {
                 manager.yellowSprites[1].visible = false;
             }
             manager.IncreateOneInt(manager.currentScene.name1);
+            manager.ArrowsandHandsToTop();
+            manager.IncreaseBlend();
             manager.notPressed = false;
         });
         manager.keySet[0].onUp.add(function () {
@@ -1765,16 +1843,16 @@ SceneGame.Manager.prototype = {
         });
         manager.keySet[1].onDown.add(function () {
             manager.IncreateOneInt(manager.currentScene.name2);
+            manager.ArrowsandHandsToTop();
+            manager.IncreaseBlend();
             manager.notPressed = false;
         });
-        manager.keySet[1].onDown.add(function () {
+        manager.keySet[1].onUp.add(function () {
             manager.time.events.add(Phaser.Timer.SECOND / 20, manager.SetPressedFalse, this);
         });
         manager.yellowSprites[1].visible = false;
-        manager.hands[0].position.y += 20;
         manager.currentKey = 0;
         manager.notPressed = true;
-        manager.time.events.loop(Phaser.Timer.SECOND, manager.HandBackForth, this);
         manager.flashOne = manager.time.events.loop(Phaser.Timer.SECOND / 5, manager.FlashYellowBGOne, this);
         manager.flashTwo = manager.time.events.loop(Phaser.Timer.SECOND / 5, manager.FlashYellowBGTwo, this);
     },
@@ -1791,12 +1869,15 @@ SceneGame.Manager.prototype = {
         manager.FlashYellowBackgroun(0);
         if (manager.notPressed) {
             manager.IncreaseInt();
+            manager.IncreaseBlend();
         }
     },
 
     FlashYellowBGTwo: function () {
         var manager = this;
         manager.FlashYellowBackgroun(1);
+<<<<<<< HEAD
+=======
     },
 
     FlashYellowBackgroun: function (num) {
@@ -1810,16 +1891,19 @@ SceneGame.Manager.prototype = {
         } else {
             manager.yellowSprites[num].visible = false;
         }
+>>>>>>> origin/master
     },
 
-    HandBackForth: function () {
+    FlashYellowBackgroun: function (num) {
         var manager = this;
-        if (manager.hands[0].position.x < 500) {
-            manager.currentKey = 1;
-            manager.hands[0].position.x = 500;
+        if (manager.currentKey == num) {
+            if (manager.yellowSprites[num].visible) {
+                manager.yellowSprites[num].visible = false;
+            } else if (!manager.yellowSprites[num].visible) {
+                manager.yellowSprites[num].visible = true;
+            }
         } else {
-            manager.currentKey = 0;
-            manager.hands[0].position.x = 300;
+            manager.yellowSprites[num].visible = false;
         }
     },
 
@@ -1871,16 +1955,13 @@ SceneGame.Manager.prototype = {
                         manager.rndSheet.push(manager.currentScene.name + "-" + manager.sheetNum);
                     }
                 }
-                for (var i = 0; i < manager.hands.length; i++) {
-                    manager.world.bringToTop(manager.hands[i]);
-                }
             }
         }
+        manager.ArrowsandHandsToTop();
     },
 
     SocMeds: function () {
         var manager = this;
-        manager.PlaceHands(0, 780, 850, 45);
         manager.screen = manager.add.sprite(150, 0, "socialmedia-0", 0);
         manager.world.sendToBack(manager.screen);
         manager.CreateClicks();
@@ -1915,6 +1996,10 @@ SceneGame.Manager.prototype = {
         for (var i = 0; i < manager.currentSet.length; i++) {
             manager.world.sendToBack(manager.currentSet[i]);
         }
+        manager.world.bringToTop(manager.spaceYellow);
+        manager.world.bringToTop(manager.spaceOutline);
+        manager.world.bringToTop(manager.spaceKey);
+
         manager.currentSound = manager.add.audio(manager.currentScene.sound);
         manager.keySet[0].onDown.add(function () {
             manager.pressedSpace = true;
@@ -1942,14 +2027,20 @@ SceneGame.Manager.prototype = {
         manager.keySet[0].onDown.add(function () {
             if (!manager.keysPressed[0]) {
                 manager.MOMThings(0, 1);
+<<<<<<< HEAD
+=======
                 manager.hands[0].position.x += 80;
+>>>>>>> origin/master
                 manager.keysPressed[0] = true;
             }
         });
         manager.keySet[1].onDown.add(function () {
             if (manager.keysPressed[0] && !manager.keysPressed[1]) {
                 manager.MOMThings(1, 2);
+<<<<<<< HEAD
+=======
                 manager.hands[0].position.x += 80;
+>>>>>>> origin/master
                 manager.keysPressed[1] = true;
             }
         });
@@ -1957,6 +2048,7 @@ SceneGame.Manager.prototype = {
             if (manager.keysPressed[1]) {
                 if (!manager.keysPressed[2]) {
                     manager.IncreaseInt();
+                    manager.IncreaseBlend();
                     manager.currentSound.play();
                     manager.yellowSprites[2].visible = false;
                     manager.keysPressed[2] = true;
@@ -1971,6 +2063,10 @@ SceneGame.Manager.prototype = {
     MOMThings: function (offSprite, onSprite) {
         var manager = this;
         manager.IncreaseInt();
+<<<<<<< HEAD
+        manager.IncreaseBlend();
+=======
+>>>>>>> origin/master
         manager.currentSound.play();
         manager.yellowSprites[offSprite].visible = false;
         manager.yellowSprites[onSprite].visible = true;
@@ -1979,6 +2075,7 @@ SceneGame.Manager.prototype = {
     MOMAutoPlay: function () {
         var manager = this;
         manager.IncreaseInt();
+        manager.IncreaseBlend();
     },
 
     Excel: function () {
@@ -1988,8 +2085,11 @@ SceneGame.Manager.prototype = {
         manager.hasPasted = false;
         manager.cursor = manager.add.sprite(280, 80, "compmaterials", "excelcursor");
         manager.excelText = [];
+<<<<<<< HEAD
+=======
         manager.PlaceHands(0, 830, 800, 45);
         manager.PlaceHands(1, 380, 830, 120);
+>>>>>>> origin/master
         manager.CreateClicks();
         manager.threeClick = manager.add.audio('threeClick');
         var cell = 0;
@@ -2003,7 +2103,6 @@ SceneGame.Manager.prototype = {
         manager.vee.onDown.add(function () {
             manager.twoClick.play();
             if (manager.keysPressed[0] && !manager.hasPasted) {
-                manager.hands[0].visible = false;
                 manager.excelText[cell] = manager.add.text(manager.cursor.position.x + 10, manager.cursor.position.y + 5, "100", {
                     font: "10px Arial",
                     fill: '#000000',
@@ -2025,7 +2124,6 @@ SceneGame.Manager.prototype = {
         manager.tab.onDown.add(function () {
             if (manager.keysPressed[1]) {
                 manager.threeClick.play();
-                manager.hands[0].visible = true;
                 manager.keysPressed[1] = false;
                 manager.letter[0].visible = true;
                 manager.letterKeys[0].visible = true;
@@ -2075,6 +2173,7 @@ SceneGame.Manager.prototype = {
                 manager.currentSound = manager.add.audio(manager.currentScene.sound[0]);
                 manager.currentSound.play();
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
                 manager.keySet.shift();
                 manager.keySet.shift();
                 manager.shiftLetter.visible = false;
@@ -2099,14 +2198,20 @@ SceneGame.Manager.prototype = {
         manager.gameReady = false;
         manager.keySet[1].onDown.add(function () {
             if (!manager.keysPressed[0]) {
+<<<<<<< HEAD
+=======
                 manager.PlaceHands(0, 410, 870, 120);
+>>>>>>> origin/master
                 manager.ChangeEachMoveYellow(1, 1);
             }
             manager.keysPressed[0] = true;
         });
         manager.keySet[2].onDown.add(function () {
             if (!manager.keysPressed[1]) {
+<<<<<<< HEAD
+=======
                 manager.PlaceHands(0, 440, 785, 120);
+>>>>>>> origin/master
                 manager.ChangeEachMoveYellow(1, 2);
             }
             if (manager.keysPressed[0]) {
@@ -2115,7 +2220,10 @@ SceneGame.Manager.prototype = {
         });
         manager.keySet[3].onDown.add(function () {
             if (!manager.keysPressed[2]) {
+<<<<<<< HEAD
+=======
                 manager.PlaceHands(0, 550, 785, 120);
+>>>>>>> origin/master
                 manager.ChangeEachMoveYellow(1, 3);
             }
             if (manager.keysPressed[1]) {
@@ -2124,7 +2232,10 @@ SceneGame.Manager.prototype = {
         });
         manager.keySet[4].onDown.add(function () {
             if (!manager.keysPressed[3]) {
+<<<<<<< HEAD
+=======
                 manager.PlaceHands(0, 590, 860, 120);
+>>>>>>> origin/master
                 manager.ChangeEachMoveYellow(1, 4);
             }
             if (manager.keysPressed[2]) {
@@ -2133,7 +2244,10 @@ SceneGame.Manager.prototype = {
         });
         manager.keySet[5].onDown.add(function () {
             if (!manager.keysPressed[4]) {
+<<<<<<< HEAD
+=======
                 manager.PlaceHands(0, 550, 900, 120);
+>>>>>>> origin/master
                 manager.ChangeEachMoveYellow(1, 5);
             }
             if (manager.keysPressed[3]) {
@@ -2142,15 +2256,19 @@ SceneGame.Manager.prototype = {
         });
         manager.keySet[6].onDown.add(function () {
             if (!manager.keysPressed[5]) {
-                manager.PlaceHands(0, 500, 870, 120);
                 for (var i = 1; i < manager.letterKeys.length; i++) {
                     manager.letter[i].visible = false;
                     manager.letterKeys[i].visible = false;
                 }
                 manager.letter[6].visible = false;
                 manager.ArrowsandKeysVisible();
+<<<<<<< HEAD
+                manager.CreateAllSpritesETC(1, 630, 445, 800, 600, 45);
+=======
                 manager.CreateAllSpritesETC(1, 630, 665, 800, 820, 45);
+>>>>>>> origin/master
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
             }
             if (manager.keysPressed[4]) {
                 manager.keysPressed[5] = true;
@@ -2171,6 +2289,10 @@ SceneGame.Manager.prototype = {
     ChangeEachMoveYellow: function (spriteNum, posNum) {
         var manager = this;
         manager.IncreaseInt();
+<<<<<<< HEAD
+        manager.IncreaseBlend();
+=======
+>>>>>>> origin/master
         manager.yellowSprites[spriteNum].position.x = manager.bottleXPos[posNum] + 35;
         manager.yellowSprites[spriteNum].position.y = manager.bottleYPos[posNum] + 30;
     },
@@ -2182,11 +2304,6 @@ SceneGame.Manager.prototype = {
         for (var i = 0; i < 4; i++) {
             manager.yellowSprites[i].visible = false;
         }
-        manager.swipeTween = manager.add.tween(manager.hands[0]).to({
-            x: 720,
-            y: 920
-        }, 1000, Phaser.Easing.Linear.None, true);
-        manager.swipeTween.repeat(12, 1000);
         manager.keySet[0].onDown.add(function () {
             manager.keysPressed[0] = true;
             if (!manager.keysPressed[1]) {
@@ -2196,6 +2313,7 @@ SceneGame.Manager.prototype = {
                 }
                 if (manager.upInt <= manager.currentScene.switchInt) {
                     manager.IncreaseInt();
+                    manager.IncreaseBlend();
                 }
             }
         })
@@ -2205,6 +2323,7 @@ SceneGame.Manager.prototype = {
                 if (manager.upInt <= manager.currentScene.switchInt) {
                     manager.SwipeThingsVisibilities(0, 1, 2);
                     manager.IncreaseInt();
+                    manager.IncreaseBlend();
                 }
             }
         })
@@ -2213,6 +2332,10 @@ SceneGame.Manager.prototype = {
             if (manager.keysPressed[1]) {
                 if (manager.upInt <= manager.currentScene.switchInt) {
                     manager.IncreaseInt();
+<<<<<<< HEAD
+                    manager.IncreaseBlend();
+=======
+>>>>>>> origin/master
                     manager.SwipeThingsVisibilities(1, 2, 0);
                 }
                 for (var i = 0; i < manager.keysPressed.length; i++) {
@@ -2246,15 +2369,13 @@ SceneGame.Manager.prototype = {
         manager.blanket = [];
         manager.input.keyboard.onDownCallback = function () {
             if (manager.currentScene.name == "cantsleep") {
-                manager.hands[0].position.x += 100;
-                if (manager.hands[0].position.x >= 1200) {
-                    manager.hands[0].position.x = 780;
-                }
+
                 if (manager.upInt >= 10) {
                     if (manager.upInt > 20) {
                         manager.BlanketOver();
                     } else {
                         manager.CantSleepIncreaseInt();
+                        manager.IncreaseBlend();
                     }
                     if (manager.upInt % 2 == 0) {
                         if (manager.sleepArray[0] != null) {
@@ -2263,6 +2384,7 @@ SceneGame.Manager.prototype = {
                     }
                 } else {
                     manager.IncreaseInt();
+                    manager.IncreaseBlend();
                 }
             }
         }
@@ -2293,7 +2415,10 @@ SceneGame.Manager.prototype = {
         });
         manager.keySet[1].onDown.add(function () {
             if (manager.keysPressed[0]) {
+<<<<<<< HEAD
+=======
                 manager.PlaceHands(1, 270, 850, 120);
+>>>>>>> origin/master
                 manager.ChangeEachMoveYellow(1, 1);
                 manager.keysPressed[1] = true;
             }
@@ -2301,7 +2426,6 @@ SceneGame.Manager.prototype = {
         manager.keySet[2].onDown.add(function () {
             if (manager.keysPressed[0]) {
                 if (manager.keysPressed[1]) {
-                    manager.PlaceHands(1, 270, 680, 150);
                     manager.yellowSprites[1].position.x = manager.bottleXPos[2] + 35;
                     manager.yellowSprites[1].position.y = manager.bottleYPos[2] + 30;
                     manager.keysPressed[2] = true;
@@ -2311,7 +2435,10 @@ SceneGame.Manager.prototype = {
         manager.keySet[3].onDown.add(function () {
             if (manager.keysPressed[0]) {
                 if (manager.keysPressed[2]) {
+<<<<<<< HEAD
+=======
                     manager.PlaceHands(1, 310, 680, 150);
+>>>>>>> origin/master
                     manager.ChangeEachMoveYellow(1, 3);
                     manager.keysPressed[3] = true;
                 }
@@ -2320,7 +2447,6 @@ SceneGame.Manager.prototype = {
         manager.keySet[4].onDown.add(function () {
             if (manager.keysPressed[0]) {
                 if (manager.keysPressed[3]) {
-                    manager.PlaceHands(1, 370, 710, 150);
                     manager.yellowSprites[1].position.x = manager.bottleXPos[4] + 35;
                     manager.yellowSprites[1].position.y = manager.bottleYPos[4] + 30;
                     manager.keysPressed[4] = true;
@@ -2330,7 +2456,6 @@ SceneGame.Manager.prototype = {
         manager.keySet[5].onDown.add(function () {
             if (manager.keysPressed[0]) {
                 if (manager.keysPressed[4]) {
-                    manager.PlaceHands(1, 310, 840, 150);
                     manager.yellowSprites[1].position.x = manager.bottleXPos[5] + 35;
                     manager.yellowSprites[1].position.y = manager.bottleYPos[5] + 30;
                     manager.keysPressed[5] = true;
@@ -2339,7 +2464,6 @@ SceneGame.Manager.prototype = {
         });
         manager.keySet[6].onDown.add(function () {
             if (manager.keysPressed[0]) {
-                manager.PlaceHands(1, 290, 900, 120);
                 for (var j = 1; j < manager.keysPressed.length; j++) {
                     manager.keysPressed[j] = false;
                 }
@@ -2353,20 +2477,14 @@ SceneGame.Manager.prototype = {
         manager.keysPressed[0] = false;
         manager.keySet[manager.ManyKeyInt].onDown.add(function () {
             manager.IncreaseInt();
+            manager.IncreaseBlend();
             manager.keysPressed[0] = true;
             manager.yellowSprites[manager.ManyKeyInt].visible = false;
             manager.yellowSprites[manager.ManyKeyInt + 1].visible = true;
-            manager.hands[0].position.x += 500;
-            manager.hands[0].scale.y = 1;
-            manager.hands[0].rotation = 45;
         });
         var nextKey = manager.ManyKeyInt + 1;
         manager.keySet[nextKey].onDown.add(function () {
             if (manager.keysPressed[0]) {
-                manager.hands[0].position.x -= 500;
-                manager.hands[0].position.y += 60;
-                manager.hands[0].scale.y = -1;
-                manager.hands[0].rotation = 40;
                 for (var i = 0; i < manager.letterKeys.length; i++) {
                     manager.letterKeys[i].position.y -= 20;
                     manager.letter[i].position.y -= 20;
@@ -2374,12 +2492,14 @@ SceneGame.Manager.prototype = {
                 }
                 manager.ButtonMoveKeys(manager.ManyKeyInt, nextKey);
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
                 manager.keySet[manager.ManyKeyInt].reset();
                 manager.keySet[manager.ManyKeyInt + 1].reset();
                 manager.yellowSprites[manager.ManyKeyInt + 1].visible = false;
                 manager.ManyKeyInt += 2;
                 if (manager.ManyKeyInt >= manager.keySet.length) {
                     manager.IncreaseInt();
+                    manager.IncreaseBlend();
                 } else {
                     manager.yellowSprites[manager.ManyKeyInt].visible = true;
                     manager.ManyKeySequence();
@@ -2478,7 +2598,6 @@ SceneGame.Manager.prototype = {
 
     Delete: function () {
         var manager = this;
-        manager.PlaceHands(0, 780, 800, 45);
         manager.gameReady = false;
         manager.CreateClicks();
         manager.underPic = manager.add.sprite(150, 0, "plainScreen");
@@ -2525,7 +2644,6 @@ SceneGame.Manager.prototype = {
             if (!manager.keysPressed[0]) {
                 manager.SequentialKeyPress(0);
                 manager.YellowKeyUp(1);
-                manager.MoveHand(1);
             }
             manager.keysPressed[0] = true;
         });
@@ -2539,7 +2657,6 @@ SceneGame.Manager.prototype = {
                     manager.SequentialKeyFinish(0);
                 } else {
                     manager.YellowKeyUp(2);
-                    manager.MoveHand(2);
                 }
             }
         });
@@ -2553,7 +2670,6 @@ SceneGame.Manager.prototype = {
                         manager.SequentialKeyFinish(0);
                     } else {
                         manager.YellowKeyUp(3);
-                        manager.MoveHand(3);
                     }
                 }
             });
@@ -2575,20 +2691,14 @@ SceneGame.Manager.prototype = {
 
     SequentialKeyFinish: function (num) {
         var manager = this;
-        manager.MoveHand(num);
         manager.YellowKeyUp(num);
         manager.SetKeysPressedFalse();
     },
 
     Swipe: function () {
         var manager = this;
-        manager.swipeTween = manager.add.tween(manager.hands[0]).to({
-            x: 700,
-            y: 520
-        }, 1000, Phaser.Easing.Linear.None, true);
         manager.swipeYellowNum = 3;
         manager.gameReady = false;
-        manager.swipeTween.repeat(12, 1000);
         manager.currentlyPressed = [];
         for (var i = 0; i < manager.keySet.length; i++) {
             manager.currentlyPressed[i] = false;
@@ -2596,11 +2706,16 @@ SceneGame.Manager.prototype = {
         manager.keySet[0].onDown.add(function () {
             if (manager.swipeYellowTime != null) {
                 manager.time.events.remove(manager.swipeYellowTime);
+<<<<<<< HEAD
+                manager.ArrowsandHandsToTop();
+=======
+>>>>>>> origin/master
                 manager.yellowSprites[2].visible = false;
                 manager.yellowSprites[0].visible = false;
             }
             if (!manager.keysPressed[0]) {
                 manager.yellowSprites[2].visible = false;
+                manager.ArrowsandHandsToTop();
                 manager.yellowSprites[1].visible = true;
             }
             manager.currentlyPressed[0] = true;
@@ -2616,6 +2731,8 @@ SceneGame.Manager.prototype = {
                 manager.SwipeThingsVisibilities(2, 1, 0);
                 manager.keysPressed[1] = true;
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+                manager.ArrowsandHandsToTop();
             }
         }, this);
         manager.keySet[1].onUp.add(function () {
@@ -2627,6 +2744,8 @@ SceneGame.Manager.prototype = {
                 manager.keysPressed[0] = false;
                 manager.SwipeThingsVisibilities(1, 0, 2);
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+                manager.ArrowsandHandsToTop();
             }
         }, this);
         manager.keySet[2].onUp.add(function () {
@@ -2658,36 +2777,6 @@ SceneGame.Manager.prototype = {
         }
     },
 
-    MoveHand: function (key) {
-        var manager = this;
-        switch (manager.keySet[key]) {
-            case manager.cursors.left:
-                manager.NewHandPos(340, 780, 150);
-                break;
-            case manager.cursors.right:
-                manager.NewHandPos(820, 900, 60);
-                break;
-            case manager.cursors.up:
-                manager.NewHandPos(850, 660, 20);
-                break;
-            case manager.cursors.down:
-                manager.NewHandPos(700, 880, 60);
-                break;
-            case manager.cue:
-                manager.NewHandPos(620, 810, 60);
-                break;
-            case manager.doubleEwe:
-                manager.NewHandPos(590, 830, 90);
-                break;
-        }
-    },
-
-    NewHandPos: function (posX, posY, rot) {
-        var manager = this;
-        manager.hands[0].position.x = posX;
-        manager.hands[0].position.y = posY;
-        manager.hands[0].angle = rot;
-    },
 
     SequentialKeyPress: function (num) {
         var manager = this;
@@ -2697,6 +2786,7 @@ SceneGame.Manager.prototype = {
     SetKeysPressedFalse: function () {
         var manager = this;
         manager.IncreaseInt();
+        manager.IncreaseBlend();
         for (var i = 0; i < manager.keysPressed.length; i++) {
             manager.keysPressed[i] = false;
         }
@@ -2775,11 +2865,9 @@ SceneGame.Manager.prototype = {
                         manager.PushNewSet();
                     }
                 }
-                for (var i = 0; i < manager.hands.length; i++) {
-                    manager.world.bringToTop(manager.hands[i]);
-                }
             }
         }
+        manager.ArrowsandHandsToTop();
     },
 
     AnyKey: function () {
@@ -2839,6 +2927,10 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.spriteNum));
         manager.rndSheet.push(manager.currentScene.name + "-" + manager.sheetNum);
+<<<<<<< HEAD
+        manager.ArrowsandHandsToTop();
+=======
+>>>>>>> origin/master
     },
 
     ResetSpriteNumbers: function () {
@@ -2866,11 +2958,9 @@ SceneGame.Manager.prototype = {
                         manager.PushNewSet();
                     }
                 }
-                for (var i = 0; i < manager.hands.length; i++) {
-                    manager.world.bringToTop(manager.hands[i]);
-                }
             }
         }
+        manager.ArrowsandHandsToTop();
     },
 
     SpecificSheetRestart: function () {
@@ -2894,10 +2984,14 @@ SceneGame.Manager.prototype = {
                     manager.RestartCheck();
                 } else {
                     manager.PushNewSet();
+<<<<<<< HEAD
+=======
                 }
                 for (var i = 0; i < manager.hands.length; i++) {
                     manager.world.bringToTop(manager.hands[i]);
+>>>>>>> origin/master
                 }
+
             }
         }
         if (manager.currentScene.soundType == 1) {
@@ -2908,6 +3002,7 @@ SceneGame.Manager.prototype = {
         if (manager.upInt == 0) {
             manager.gameReady = true;
         }
+        manager.ArrowsandHandsToTop();
     },
 
     IncreaseInt: function () {
@@ -2936,13 +3031,12 @@ SceneGame.Manager.prototype = {
                             }
                         }
                     }
-                    for (var i = 0; i < manager.hands.length; i++) {
-                        manager.world.bringToTop(manager.hands[i]);
-                    }
+
 
                 }
             }
         }
+        manager.ArrowsandHandsToTop();
     },
 
     CantSleepIncreaseInt: function () {
@@ -2979,13 +3073,12 @@ SceneGame.Manager.prototype = {
                                 manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.spriteNum));
                             }
                         }
-                        for (var i = 0; i < manager.hands.length; i++) {
-                            manager.world.bringToTop(manager.hands[i]);
-                        }
+
                     }
                 }
             }
         }
+        manager.ArrowsandHandsToTop();
     }
 
 

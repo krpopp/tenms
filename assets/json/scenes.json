@@ -42,8 +42,7 @@
             "decrease": false,
             "startframe": null,
             "updateCheck": true
-    },
-        {
+        }, {
             "name": "musicplay",
             "sheets": 5,
             "sound": ["adultmom1"],
@@ -62,8 +61,7 @@
             "decrease": false,
             "startframe": null,
             "updateCheck": false
-    },
-        {
+        }, {
             "name": "jog",
             "sheets": 7,
             "sound": ["adultmom2"],
@@ -81,8 +79,7 @@
             "decrease": false,
             "startframe": null,
             "updateCheck": false
-    },
-        {
+        }, {
             "name": "voicemailmorning",
             "sheets": 5,
             "sound": ["loanpayment"],
@@ -100,8 +97,7 @@
             "decrease": false,
             "startframe": null,
             "updateCheck": false
-    },
-        {
+        }, {
             "name": "shower",
             "name1": "washleft",
             "name2": "washright",
@@ -121,7 +117,7 @@
             "decrease": false,
             "startframe": null,
             "updateCheck": false
-    },
+        },
         {
             "name": "sleep",
             "sheets": 4,
@@ -595,6 +591,7 @@
             "time": "midday",
             "keySet": ["manager.cursors.down"],
             "pattern": 0,
+            "mobilePattern": 3,
             "speed": 10,
             "hands": 3,
             "restartSheet": null,
@@ -614,6 +611,7 @@
             "time": "midday",
             "keySet": ["manager.cursors.right", "manager.cursors.left"],
             "pattern": 3,
+            "mobilePattern": 4,
             "switchInt": 12,
             "speed": 5,
             "hands": 1,

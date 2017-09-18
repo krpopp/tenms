@@ -10,6 +10,8 @@
     <script src="assets/scripts/Boot.js"></script>
     <script src="assets/scripts/Preloader.js"></script>
     <script src="assets/scripts/Manager.js"></script>
+    <script src="hammer.min.js"></script>
+    <script src="gyro.min.js"></script>
 
     <style>
         body {
@@ -54,9 +56,21 @@
 <div id="stage"></div>
     
 
-<script type="text/javascript">
-    var game = new Phaser.Game(1200, 800, Phaser.AUTO, 'stage');
 
+<script type="text/javascript">
+    var game = new Phaser.Game(1200, 500, Phaser.CANVAS, 'stage');
+
+<<<<<<< HEAD
+
+    window.onclick = function() {
+        console.log("NEEE");
+        window.focus();
+    }
+
+    window.onload = function() {
+        window.focus();
+        console.log("Yooooo");
+=======
 
 window.onclick = function(){
     console.log("NEEE");
@@ -66,6 +80,7 @@ window.onclick = function(){
     window.onload = function() {
     window.focus();
  console.log("Yooooo");
+>>>>>>> origin/master
         game.state.add('Boot', SceneGame.Boot);
         game.state.add('Preloader', SceneGame.Preloader);
         game.state.add('MainMenu', SceneGame.MainMenu);

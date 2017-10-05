@@ -2,7 +2,7 @@
     "frames": [
 
         {
-            "filename": "washleft03",
+            "filename": "washleft00",
             "frame": {
                 "x": 1,
                 "y": 1,
@@ -23,7 +23,7 @@
             }
 },
         {
-            "filename": "washleft02",
+            "filename": "washleft01",
             "frame": {
                 "x": 1,
                 "y": 503,
@@ -44,7 +44,7 @@
             }
 },
         {
-            "filename": "washleft01",
+            "filename": "washleft02",
             "frame": {
                 "x": 1,
                 "y": 1005,
@@ -65,7 +65,7 @@
             }
 },
         {
-            "filename": "washleft00",
+            "filename": "washleft03",
             "frame": {
                 "x": 1,
                 "y": 1507,
@@ -88,13 +88,13 @@
     "meta": {
         "app": "http://www.codeandweb.com/texturepacker",
         "version": "1.0",
-        "image": "washleft-0.png",
+        "image": "shower-left.png",
         "format": "RGBA8888",
         "size": {
             "w": 1202,
             "h": 2008
         },
         "scale": "1",
-        "smartupdate": "$TexturePacker:SmartUpdate:8fc30eea9bfeda6bc65765f96911d2a4:b2f1acf8622a65283e44378fd67c8b08:d3f0d1fdbdd70dc92d6ed791290bbb1c$"
+        "smartupdate": "$TexturePacker:SmartUpdate:94ca4d0b6a0f52111111902b5bce37da:a024c630aad91b330a79862f86fbc2e2:d7c0dac37344824d977b833281cb533a$"
     }
 }

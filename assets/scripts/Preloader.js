@@ -89,9 +89,10 @@ SceneGame.Preloader.prototype = {
 
         this.load.image('toplid', 'assets/image/toplid2.png');
         this.load.image('lowerlid', 'assets/image/lowerlid2.png');
-        this.load.image('midlid', 'assets/image/midlid2.png');
         this.load.image('black', 'assets/image/black.png');
         this.load.image('plainScreen', 'assets/image/plainscreen.png');
+
+        this.load.image('greyscale', 'assets/image/greyscale.png');
 
         this.load.image('stillsubway', 'assets/image/stillsubway.png');
 

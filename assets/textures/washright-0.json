@@ -2,7 +2,7 @@
     "frames": [
 
         {
-            "filename": "washright03",
+            "filename": "washright00",
             "frame": {
                 "x": 1,
                 "y": 1,
@@ -23,7 +23,7 @@
             }
 },
         {
-            "filename": "washright02",
+            "filename": "washright01",
             "frame": {
                 "x": 1,
                 "y": 503,
@@ -44,7 +44,7 @@
             }
 },
         {
-            "filename": "washright01",
+            "filename": "washright02",
             "frame": {
                 "x": 1,
                 "y": 1005,
@@ -65,7 +65,7 @@
             }
 },
         {
-            "filename": "washright00",
+            "filename": "washright03",
             "frame": {
                 "x": 1,
                 "y": 1507,
@@ -88,13 +88,13 @@
     "meta": {
         "app": "http://www.codeandweb.com/texturepacker",
         "version": "1.0",
-        "image": "washright-0.png",
+        "image": "showerright.png",
         "format": "RGBA8888",
         "size": {
             "w": 1202,
             "h": 2008
         },
         "scale": "1",
-        "smartupdate": "$TexturePacker:SmartUpdate:cb690ec53f400543ef58f88595657cf5:4770dbf60c00ca8fcae681bd1a921a96:895919edca8905657db31263e7f88f05$"
+        "smartupdate": "$TexturePacker:SmartUpdate:316e6367058e7b831691e568fc2ba8bf:6da25fff177721a9e6447e36b507f006:fe663f2ed166532f98db74f03dafbcb0$"
     }
 }

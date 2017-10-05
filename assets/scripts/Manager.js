@@ -22,7 +22,7 @@ SceneGame.Manager.prototype = {
         manager.muffled = manager.add.audio('muffled');
         manager.muffled.play();
         manager.currentSound = manager.muffled;
-        if(!this.game.device.firefox){
+        if (!this.game.device.firefox) {
             manager.muffled.loopFull();
         }
         manager.CreateKeys();
@@ -37,6 +37,9 @@ SceneGame.Manager.prototype = {
                 manager.unloadedSets.push(manager.scenesJSON.Scenes[i].name);
             }
         }
+
+        manager.greyscale = manager.add.sprite(0, 0, 'greyscale');
+        manager.greyscale.blendMode = 14;
         manager.CreatePausedStuff();
         manager.InitCreateHands();
     },
@@ -497,7 +500,7 @@ SceneGame.Manager.prototype = {
         if (manager.currentSound != null) {
             manager.currentSound.stop();
         }
-        if(manager.muffled != null){
+        if (manager.muffled != null) {
             manager.muffled.stop();
             manager.muffled.destroy();
         }
@@ -1111,11 +1114,11 @@ SceneGame.Manager.prototype = {
                 if (manager.scenesJSON.Scenes[i].name == nextSet) {
                     var sheetNum = manager.scenesJSON.Scenes[i].sheets;
                     for (var j = 0; j < sheetNum; j++) {
-                        if(manager.scenesJSON.Scenes[i].name.includes("computerframe")){
+                        if (manager.scenesJSON.Scenes[i].name.includes("computerframe")) {
                             this.load.atlasJSONArray(manager.scenesJSON.Scenes[i].name + "-" + j, "assets/textures/" + manager.scenesJSON.Scenes[i].name + "-" + j + ".png", "assets/textures/" + manager.scenesJSON.Scenes[i].name + "-" + j + ".json");
-                           }else{
-                               this.load.atlasJSONArray(manager.scenesJSON.Scenes[i].name + "-" + j, "assets/textures/" + manager.scenesJSON.Scenes[i].name + "-" + j + ".png", 'assets/textures/Universal.json');
-                           }
+                        } else {
+                            this.load.atlasJSONArray(manager.scenesJSON.Scenes[i].name + "-" + j, "assets/textures/" + manager.scenesJSON.Scenes[i].name + "-" + j + ".png", 'assets/textures/Universal.json');
+                        }
                         for (var k = 0; k < this.scenesJSON.Scenes[i].sound.length; k++) {
                             this.load.audio(this.scenesJSON.Scenes[i].sound[k], "assets/sound/" + this.scenesJSON.Scenes[i].sound[k] + ".mp3", "assets/sound/" + this.scenesJSON.Scenes[i].sound[k] + ".ogg");
                         }
@@ -1164,6 +1167,33 @@ SceneGame.Manager.prototype = {
         manager.RoomToneStart();
     },
 
+    IncreaseBlend: function () {
+        var manager = this;
+        manager.pressingButt = true;
+
+        if (manager.greyscale.alpha <= 0) {
+            manager.greyscale.alpha = 0;
+        } else {
+            if (manager.greyscale.alpha > 0.1) {
+                manager.greyscale.alpha -= manager.currentScene.greySpeed;
+            }
+        }
+    },
+
+    DecreaseBlend: function () {
+        var manager = this;
+        if (manager.greyscale.alpha < 1) {
+
+            if (!manager.pressingButt) {
+                if (manager.greyscale.alpha >= 1) {
+                    manager.greyscale.alpha = 1;
+                } else {
+                    manager.greyscale.alpha += 0.01;
+                }
+            }
+        }
+    },
+
     NextScene: function () {
         var manager = this;
         manager.RemoveEverything();
@@ -1192,14 +1222,15 @@ SceneGame.Manager.prototype = {
         } else {
             location.reload();
         }
+        manager.greyscale.alpha = 1;
     },
 
     TopLidDownThings: function () {
         var manager = this;
         manager.startTween = true;
-        manager.AlphaTweens(manager.mLid, 0, 1000);
         manager.tLidTween.pause();
         manager.bLidTween.pause();
+
         manager.world.bringToTop(manager.tLid);
         manager.world.bringToTop(manager.bLid);
         manager.world.bringToTop(manager.black);
@@ -1215,7 +1246,7 @@ SceneGame.Manager.prototype = {
             manager.world.bringToTop(manager.hands[i]);
         }
         manager.tLid.position.y--;
-        if (manager.tLid.position.y <= -450) {
+        if (manager.tLid.position.y <= -600) {
             manager.NextScene();
         }
         manager.bLid.position.y++;
@@ -1239,6 +1270,8 @@ SceneGame.Manager.prototype = {
             if (!manager.goDown) {
                 manager.IncreaseInt();
             }
+        } else {
+            manager.pressingButt = false;
         }
         if (manager.keysPressed[1]) {
             if (manager.goDown) {
@@ -1292,6 +1325,9 @@ SceneGame.Manager.prototype = {
             }
             if (manager.allKeys) {
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+            } else {
+                manager.pressingButt = false;
             }
         }
         if (manager.currentScene.updateCheck) {
@@ -1303,6 +1339,9 @@ SceneGame.Manager.prototype = {
                 manager.eventSoundTime = false;
             }
         }
+        manager.DecreaseBlend();
+        manager.world.bringToTop(manager.greyscale);
+
     },
 
     UpdateCheck: function () {
@@ -1360,6 +1399,8 @@ SceneGame.Manager.prototype = {
                 }
                 manager.world.bringToTop(manager.insidePic);
                 manager.world.bringToTop(manager.upperPic);
+            } else {
+                manager.pressingButt = false;
             }
         }
 
@@ -1411,7 +1452,7 @@ SceneGame.Manager.prototype = {
                 break;
         }
         if (manager.currentScene.loop) {
-            if(!this.game.device.firefox){
+            if (!this.game.device.firefox) {
                 manager.baseSound.loopFull();
             }
         }
@@ -1434,8 +1475,7 @@ SceneGame.Manager.prototype = {
 
     MorningCreate: function () {
         var manager = this;
-        manager.LidCreate(-100, 0, 501);
-        manager.mLid = manager.add.sprite(0, 0, "midlid");
+        manager.LidCreate(-150, 50, 501);
         for (var i = 0; i < manager.yellowSprites.length; i++) {
             manager.world.bringToTop(manager.yellowSprites[i]);
         }
@@ -1619,6 +1659,8 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.keySet[number].onDown.add(function () {
             manager.IncreaseInt();
+            manager.IncreaseBlend();
+
             manager.EndBringToTop();
             manager.AlphaTweens(manager.endNumber, 0, 200);
             manager.AlphaTweens(manager.yellowSprites[0], 0, 200);
@@ -1651,6 +1693,8 @@ SceneGame.Manager.prototype = {
     EndIncreaseInt: function () {
         var manager = this;
         manager.IncreaseInt();
+        manager.IncreaseBlend();
+
         manager.EndBringToTop();
         manager.keySet[manager.number].reset();
         manager.number += 1;
@@ -1746,17 +1790,23 @@ SceneGame.Manager.prototype = {
                 manager.yellowSprites[1].visible = false;
             }
             manager.IncreateOneInt(manager.currentScene.name1);
+            manager.IncreaseBlend();
+
             manager.notPressed = false;
         });
         manager.keySet[0].onUp.add(function () {
             manager.time.events.add(Phaser.Timer.SECOND / 20, manager.SetPressedFalse, this);
+            manager.pressingButt = false;
         });
         manager.keySet[1].onDown.add(function () {
             manager.IncreateOneInt(manager.currentScene.name2);
+            manager.IncreaseBlend();
+
             manager.notPressed = false;
         });
-        manager.keySet[1].onDown.add(function () {
+        manager.keySet[1].onUp.add(function () {
             manager.time.events.add(Phaser.Timer.SECOND / 20, manager.SetPressedFalse, this);
+            manager.pressingButt = false;
         });
         manager.yellowSprites[1].visible = false;
         manager.hands[0].position.y += 20;
@@ -1786,6 +1836,8 @@ SceneGame.Manager.prototype = {
             manager.yellowSprites[0].visible = false;
         }
         if (manager.notPressed) {
+            manager.IncreaseBlend();
+
             manager.IncreaseInt();
         }
     },
@@ -1844,7 +1896,6 @@ SceneGame.Manager.prototype = {
         if (manager.upInt != 0) {
             if (manager.upInt % manager.sceneSpeed == 0) {
                 if (manager.spriteNum >= 3) {
-                    manager.sheetNum += 1;
                     manager.spriteNum = 0;
                     if (manager.sheetNum >= manager.currentScene.sheets) {
                         manager.gameReady = false;
@@ -1929,6 +1980,8 @@ SceneGame.Manager.prototype = {
         manager.keySet[0].onDown.add(function () {
             if (!manager.keysPressed[0]) {
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+
                 manager.currentSound.play();
                 manager.yellowSprites[0].visible = false;
                 manager.yellowSprites[1].visible = true;
@@ -1939,6 +1992,8 @@ SceneGame.Manager.prototype = {
         manager.keySet[1].onDown.add(function () {
             if (manager.keysPressed[0] && !manager.keysPressed[1]) {
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+
                 manager.currentSound.play();
                 manager.yellowSprites[1].visible = false;
                 manager.yellowSprites[2].visible = true;
@@ -1950,6 +2005,8 @@ SceneGame.Manager.prototype = {
             if (manager.keysPressed[1]) {
                 if (!manager.keysPressed[2]) {
                     manager.IncreaseInt();
+                    manager.IncreaseBlend();
+
                     manager.currentSound.play();
                     manager.yellowSprites[2].visible = false;
                     manager.keysPressed[2] = true;
@@ -1964,6 +2021,7 @@ SceneGame.Manager.prototype = {
     MOMAutoPlay: function () {
         var manager = this;
         manager.IncreaseInt();
+
     },
 
     Excel: function () {
@@ -2058,6 +2116,7 @@ SceneGame.Manager.prototype = {
                 manager.yellowSprites[0].scale.y = 1;
                 manager.keysPressed[i] = false;
             }
+            manager.pressingButt = false;
         });
         manager.keySet[1].onDown.add(function () {
             if (manager.shiftPress) {
@@ -2066,6 +2125,8 @@ SceneGame.Manager.prototype = {
                 manager.currentSound = manager.add.audio(manager.currentScene.sound[0]);
                 manager.currentSound.play();
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+
                 manager.keySet.shift();
                 manager.keySet.shift();
                 manager.shiftLetter.visible = false;
@@ -2087,6 +2148,10 @@ SceneGame.Manager.prototype = {
             if (!manager.keysPressed[0]) {
                 manager.PlaceHands(0, 410, 870, 120);
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+
+                manager.IncreaseBlend();
+
                 manager.yellowSprites[1].position.x = manager.bottleXPos[1] + 35;
                 manager.yellowSprites[1].position.y = manager.bottleYPos[1] + 30;
             }
@@ -2096,6 +2161,8 @@ SceneGame.Manager.prototype = {
             if (!manager.keysPressed[1]) {
                 manager.PlaceHands(0, 440, 785, 120);
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+
                 manager.yellowSprites[1].position.x = manager.bottleXPos[2] + 35;
                 manager.yellowSprites[1].position.y = manager.bottleYPos[2] + 30;
             }
@@ -2109,6 +2176,8 @@ SceneGame.Manager.prototype = {
                 manager.yellowSprites[1].position.x = manager.bottleXPos[3] + 35;
                 manager.yellowSprites[1].position.y = manager.bottleYPos[3] + 30;
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+
             }
             if (manager.keysPressed[1]) {
                 manager.keysPressed[2] = true;
@@ -2120,6 +2189,8 @@ SceneGame.Manager.prototype = {
                 manager.yellowSprites[1].position.x = manager.bottleXPos[4] + 35;
                 manager.yellowSprites[1].position.y = manager.bottleYPos[4] + 30;
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+
             }
             if (manager.keysPressed[2]) {
                 manager.keysPressed[3] = true;
@@ -2131,6 +2202,9 @@ SceneGame.Manager.prototype = {
                 manager.yellowSprites[1].position.x = manager.bottleXPos[5] + 35;
                 manager.yellowSprites[1].position.y = manager.bottleYPos[5] + 30;
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+
+
             }
             if (manager.keysPressed[3]) {
                 manager.keysPressed[4] = true;
@@ -2148,6 +2222,8 @@ SceneGame.Manager.prototype = {
                 manager.arrows.visible = true;
                 manager.CreateAllSpritesETC(1, 630, 665, 800, 820, 45);
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+
             }
             if (manager.keysPressed[4]) {
                 manager.keysPressed[5] = true;
@@ -2193,6 +2269,8 @@ SceneGame.Manager.prototype = {
                 }
                 if (manager.upInt <= manager.currentScene.switchInt) {
                     manager.IncreaseInt();
+                    manager.IncreaseBlend();
+
                 }
             }
         })
@@ -2204,6 +2282,8 @@ SceneGame.Manager.prototype = {
                     manager.yellowSprites[2].visible = true;
                     manager.yellowSprites[1].visible = false;
                     manager.IncreaseInt();
+                    manager.IncreaseBlend();
+
                 }
             }
         })
@@ -2212,6 +2292,8 @@ SceneGame.Manager.prototype = {
             if (manager.keysPressed[1]) {
                 if (manager.upInt <= manager.currentScene.switchInt) {
                     manager.IncreaseInt();
+                    manager.IncreaseBlend();
+
                     manager.yellowSprites[1].visible = false;
                     manager.yellowSprites[0].visible = true;
                     manager.yellowSprites[2].visible = false;
@@ -2256,6 +2338,8 @@ SceneGame.Manager.prototype = {
                         manager.BlanketOver();
                     } else {
                         manager.CantSleepIncreaseInt();
+                        manager.IncreaseBlend();
+
                     }
                     if (manager.upInt % 2 == 0) {
                         if (manager.sleepArray[0] != null) {
@@ -2264,6 +2348,8 @@ SceneGame.Manager.prototype = {
                     }
                 } else {
                     manager.IncreaseInt();
+                    manager.IncreaseBlend();
+
                 }
             }
         }
@@ -2300,6 +2386,8 @@ SceneGame.Manager.prototype = {
         manager.keySet[1].onDown.add(function () {
             if (manager.keysPressed[0]) {
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+
                 manager.PlaceHands(1, 270, 850, 120);
                 manager.yellowSprites[1].position.x = manager.bottleXPos[1] + 35;
                 manager.yellowSprites[1].position.y = manager.bottleYPos[1] + 30;
@@ -2321,6 +2409,8 @@ SceneGame.Manager.prototype = {
                 if (manager.keysPressed[2]) {
                     manager.PlaceHands(1, 310, 680, 150);
                     manager.IncreaseInt();
+                    manager.IncreaseBlend();
+
                     manager.yellowSprites[1].position.x = manager.bottleXPos[3] + 35;
                     manager.yellowSprites[1].position.y = manager.bottleYPos[3] + 30;
                     manager.keysPressed[3] = true;
@@ -2356,6 +2446,8 @@ SceneGame.Manager.prototype = {
                 manager.yellowSprites[1].position.x = manager.bottleXPos[0] + 35;
                 manager.yellowSprites[1].position.y = manager.bottleYPos[0] + 30;
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+
             }
         });
     },
@@ -2365,6 +2457,8 @@ SceneGame.Manager.prototype = {
         manager.keysPressed[0] = false;
         manager.keySet[manager.ManyKeyInt].onDown.add(function () {
             manager.IncreaseInt();
+            manager.IncreaseBlend();
+
             manager.keysPressed[0] = true;
             manager.yellowSprites[manager.ManyKeyInt].visible = false;
             manager.yellowSprites[manager.ManyKeyInt + 1].visible = true;
@@ -2386,6 +2480,8 @@ SceneGame.Manager.prototype = {
                 }
                 manager.ButtonMoveKeys(manager.ManyKeyInt, nextKey);
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+
                 manager.keySet[manager.ManyKeyInt].reset();
                 manager.keySet[manager.ManyKeyInt + 1].reset();
                 manager.yellowSprites[manager.ManyKeyInt + 1].visible = false;
@@ -2393,6 +2489,8 @@ SceneGame.Manager.prototype = {
                 manager.yellowSprites[manager.ManyKeyInt].visible = true;
                 if (manager.ManyKeyInt >= manager.keySet.length) {
                     manager.IncreaseInt();
+                    manager.IncreaseBlend();
+
                 } else {
                     manager.ManyKeySequence();
                 }
@@ -2636,6 +2734,8 @@ SceneGame.Manager.prototype = {
                 manager.yellowSprites[0].visible = true;
                 manager.keysPressed[1] = true;
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+
             }
         }, this);
         manager.keySet[1].onUp.add(function () {
@@ -2649,6 +2749,8 @@ SceneGame.Manager.prototype = {
                 manager.yellowSprites[0].visible = false;
                 manager.yellowSprites[2].visible = true;
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
+
             }
         }, this);
         manager.keySet[2].onUp.add(function () {
@@ -2775,6 +2877,8 @@ SceneGame.Manager.prototype = {
     SetKeysPressedFalse: function () {
         var manager = this;
         manager.IncreaseInt();
+        manager.IncreaseBlend();
+
         for (var i = 0; i < manager.keysPressed.length; i++) {
             manager.keysPressed[i] = false;
         }
@@ -2821,6 +2925,8 @@ SceneGame.Manager.prototype = {
             manager.gameReady = true;
         } else {
             if (!manager.currentScene.decrease) {
+                manager.time.events.removeAll();
+                manager.time.events.add(Phaser.Timer.SECOND, manager.NextScene, this);
                 manager.tweens.removeAll();
                 manager.ResetKeyboard();
                 for (var i = 0; i < manager.yellowSprites.length; i++) {

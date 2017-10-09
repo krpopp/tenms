@@ -500,6 +500,12 @@ SceneGame.Manager.prototype = {
         if (manager.currentSound != null) {
             manager.currentSound.stop();
         }
+        if (manager.endNumber != null) {
+            manager.endNumber.destroy();
+        }
+        if (manager.finalOne != null) {
+            manager.finalOne.destroy();
+        }
         if (manager.muffled != null) {
             manager.muffled.stop();
             manager.muffled.destroy();
@@ -1153,7 +1159,7 @@ SceneGame.Manager.prototype = {
         manager.CreateKeySprite();
         manager.KeyCheckSwitch(manager.currentScene.pattern);
         if (manager.currentScene.name != "sleep" && manager.currentScene.name != "wakephone") {
-            manager.time.events.add(Phaser.Timer.SECOND * 10, manager.NextScene, this);
+            manager.time.events.add(Phaser.Timer.SECOND * 3, manager.NextScene, this);
         }
         if (manager.currentScene.name == "wakephone") {
             manager.MorningScenes();
@@ -1197,6 +1203,7 @@ SceneGame.Manager.prototype = {
     NextScene: function () {
         var manager = this;
         manager.RemoveEverything();
+
         if (manager.preloadedSets.length != 0) {
             var nextSet = manager.preloadedSets.shift();
             for (var i = 0; i < this.scenesJSON.Scenes.length; i++) {
@@ -1220,7 +1227,34 @@ SceneGame.Manager.prototype = {
                 }
             }
         } else {
-            location.reload();
+            var manager = this;
+            manager.scenesJSON = manager.cache.getJSON('scenes');
+            manager.muffled = manager.add.audio('muffled');
+            manager.muffled.play();
+            manager.currentSound = manager.muffled;
+            if (!this.game.device.firefox) {
+                manager.muffled.loopFull();
+            }
+            manager.CreateKeys();
+            manager.CreateVariables();
+            for (var i = 0; i < manager.scenesJSON.Scenes.length; i++) {
+                if (manager.scenesJSON.Scenes[i].time == 'morning') {
+                    manager.preloadedSets.push(manager.scenesJSON.Scenes[i].name);
+                } else if (manager.scenesJSON.Scenes[i].time == 'start') {
+                    manager.currentScene = manager.scenesJSON.Scenes[i];
+                    manager.FindKeys();
+                } else {
+                    manager.unloadedSets.push(manager.scenesJSON.Scenes[i].name);
+                }
+            }
+
+            manager.greyscale = manager.add.sprite(0, 0, 'greyscale');
+            manager.greyscale.blendMode = 14;
+            manager.CreatePausedStuff();
+            manager.InitCreateHands();
+
+
+
         }
         manager.greyscale.alpha = 1;
     },
@@ -1235,7 +1269,7 @@ SceneGame.Manager.prototype = {
         manager.world.bringToTop(manager.bLid);
         manager.world.bringToTop(manager.black);
         for (var i = 0; i < manager.ripple.length; i++) {
-            manager.world.bringToTop(manager.ripple[i]);
+            //manager.world.bringToTop(manager.ripple[i]);
         }
         for (var i = 0; i < manager.yellowSprites.length; i++) {
             manager.world.bringToTop(manager.yellowSprites[i]);
@@ -1246,7 +1280,7 @@ SceneGame.Manager.prototype = {
             manager.world.bringToTop(manager.hands[i]);
         }
         manager.tLid.position.y--;
-        if (manager.tLid.position.y <= -600) {
+        if (manager.tLid.position.y <= -400) {
             manager.NextScene();
         }
         manager.bLid.position.y++;
@@ -1269,6 +1303,7 @@ SceneGame.Manager.prototype = {
         if (manager.keysPressed[0]) {
             if (!manager.goDown) {
                 manager.IncreaseInt();
+                manager.IncreaseBlend();
             }
         } else {
             manager.pressingButt = false;
@@ -1390,7 +1425,11 @@ SceneGame.Manager.prototype = {
                 manager.IncreaseInt();
                 manager.upperPic.scale.x += .001;
                 manager.upperPic.scale.y += .001;
-                manager.insidePic.alpha -= .01;
+                manager.greyscale.scale.x += .001;
+                manager.greyscale.scale.y += .001;
+                if (manager.insidePic.alpha > 0) {
+                    manager.insidePic.alpha -= .01;
+                }
                 manager.spaceKey.alpha -= .01;
                 if (manager.ohLetter.alpha < 1) {
                     manager.ohLetter.alpha += .01;
@@ -1637,7 +1676,7 @@ SceneGame.Manager.prototype = {
     EndCreate: function () {
         var manager = this;
         manager.number = 0;
-        manager.LidCreate(-450, 300, 501);
+        manager.LidCreate(-550, 400, 501);
         manager.endNumber = manager.add.sprite(610, 560, 'numbers', 'numbers' + (manager.number + 1) + '0');
         manager.world.bringToTop(manager.hands[0]);
         manager.EndBringToTop();
@@ -1664,14 +1703,10 @@ SceneGame.Manager.prototype = {
             manager.EndBringToTop();
             manager.AlphaTweens(manager.endNumber, 0, 200);
             manager.AlphaTweens(manager.yellowSprites[0], 0, 200);
-            console.log("called end game");
-            if (manager.number > 7) {
-                manager.AlphaTweens(manager.tLid, 0, 1000);
-                manager.AlphaTweens(manager.bLid, 0, 1000);
-            } else {
-                manager.YTweens(manager.tLid, '+50', 1000);
-                manager.YTweens(manager.bLid, '-50', 1000);
-            }
+
+            manager.YTweens(manager.tLid, '+80', 1000);
+            manager.YTweens(manager.bLid, '-80', 1000);
+
             manager.time.events.add(Phaser.Timer.SECOND / 10, manager.EndIncreaseInt, this);
         }, this);
     },
@@ -1708,14 +1743,18 @@ SceneGame.Manager.prototype = {
             manager.yellowSprites[0].alpha = 1;
             manager.FinalLetterCreate();
             manager.keyOne.onDown.add(function () {
-                manager.CreateLogo();
                 manager.AlphaTweens(manager.letterKeys[1], 0, 1000);
                 manager.AlphaTweens(manager.yellowSprites[1], 0, 1000);
+                manager.YTweens(manager.tLid, '+100', 1000);
+                manager.YTweens(manager.bLid, '-100', 1000);
                 manager.onePress = true;
             }, this);
             manager.keyZero.onDown.add(function () {
+                manager.CreateLogo();
                 manager.AlphaTweens(manager.letterKeys[0], 0, 1000);
                 manager.AlphaTweens(manager.yellowSprites[0], 0, 1000);
+                manager.YTweens(manager.tLid, '+100', 1000);
+                manager.YTweens(manager.bLid, '-100', 1000);
                 manager.zeroPress = true;
             }, this);
         }
@@ -1784,10 +1823,10 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.keySet[0].onDown.add(function () {
             if (manager.flashOne != null) {
-                manager.time.events.remove(manager.flashOne);
-                manager.time.events.remove(manager.flashTwo);
-                manager.yellowSprites[0].visible = false;
-                manager.yellowSprites[1].visible = false;
+                //manager.time.events.remove(manager.flashOne);
+                //manager.time.events.remove(manager.flashTwo);
+                //manager.yellowSprites[0].visible = false;
+                //manager.yellowSprites[1].visible = false;
             }
             manager.IncreateOneInt(manager.currentScene.name1);
             manager.IncreaseBlend();
@@ -1932,7 +1971,10 @@ SceneGame.Manager.prototype = {
         manager.keySet[0].onDown.add(function () {
             manager.oneClick.play();
             if (manager.screen.frame < 8) {
+                manager.IncreaseBlend();
                 manager.screen.frame += 1;
+            } else {
+                manager.NextScene();
             }
         });
         manager.YellowKeyFlashOne();
@@ -1956,6 +1998,7 @@ SceneGame.Manager.prototype = {
         manager.currentSound = manager.add.audio(manager.currentScene.sound);
         manager.keySet[0].onDown.add(function () {
             manager.pressedSpace = true;
+            manager.IncreaseBlend();
             manager.currentSound.play();
             manager.spaceYellow.alpha = .8;
             manager.spaceYellow.scale.x = .9;
@@ -2028,6 +2071,7 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.gameReady = false;
         manager.insidePic = manager.add.sprite(150, 0, manager.currentScene.insidePicSheet, manager.currentScene.insidePicSprite);
+        manager.insidePic.alpha = 1;
         manager.hasPasted = false;
         manager.cursor = manager.add.sprite(280, 80, "compmaterials", "excelcursor");
         manager.excelText = [];
@@ -2047,6 +2091,7 @@ SceneGame.Manager.prototype = {
         manager.vee.onDown.add(function () {
             manager.twoClick.play();
             if (manager.keysPressed[0] && !manager.hasPasted) {
+                manager.IncreaseBlend();
                 manager.hands[0].visible = false;
                 manager.excelText[cell] = manager.add.text(manager.cursor.position.x + 10, manager.cursor.position.y + 5, "100", {
                     font: "10px Arial",
@@ -2068,6 +2113,7 @@ SceneGame.Manager.prototype = {
         });
         manager.tab.onDown.add(function () {
             if (manager.keysPressed[1]) {
+                manager.IncreaseBlend();
                 manager.threeClick.play();
                 manager.hands[0].visible = true;
                 manager.keysPressed[1] = false;
@@ -2486,12 +2532,13 @@ SceneGame.Manager.prototype = {
                 manager.keySet[manager.ManyKeyInt + 1].reset();
                 manager.yellowSprites[manager.ManyKeyInt + 1].visible = false;
                 manager.ManyKeyInt += 2;
-                manager.yellowSprites[manager.ManyKeyInt].visible = true;
                 if (manager.ManyKeyInt >= manager.keySet.length) {
                     manager.IncreaseInt();
                     manager.IncreaseBlend();
-
+                    manager.time.events.removeAll();
+                    manager.NextScene();
                 } else {
+                    manager.yellowSprites[manager.ManyKeyInt].visible = true;
                     manager.ManyKeySequence();
                 }
             }
@@ -2609,6 +2656,7 @@ SceneGame.Manager.prototype = {
         manager.world.sendToBack(manager.underPic);
         manager.deleteKey.onDown.add(function () {
             manager.threeClick.play();
+            manager.IncreaseBlend();
             manager.insidePic.visible = false;
         });
     },
@@ -2924,7 +2972,7 @@ SceneGame.Manager.prototype = {
             manager.spriteNum = 0;
             manager.gameReady = true;
         } else {
-            if (!manager.currentScene.decrease) {
+            if (!manager.currentScene.decrease && manager.currentScene.name != "sleep") {
                 manager.time.events.removeAll();
                 manager.time.events.add(Phaser.Timer.SECOND, manager.NextScene, this);
                 manager.tweens.removeAll();
@@ -3019,6 +3067,7 @@ SceneGame.Manager.prototype = {
         manager.clicks[3] = manager.add.audio("click1");
         manager.input.keyboard.onDownCallback = function () {
             if (manager.currentScene.name == "computerframeplain") {
+                manager.IncreaseBlend();
                 manager.clicks[manager.rnd.integerInRange(0, 3)].play();
                 var nextChar = manager.email.shift();
                 manager.emailDisplay += nextChar;
@@ -3136,6 +3185,9 @@ SceneGame.Manager.prototype = {
                     } else {
                         if (manager.sheetNum <= manager.currentScene.sheets) {
                             manager.spriteNum += 1;
+                            //why are you getting here. you shouldn't 
+                            //you horrible computer
+                            //this is the point that it's breaking in the end
                             manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + manager.sheetNum, manager.spriteNum));
                         }
                     }

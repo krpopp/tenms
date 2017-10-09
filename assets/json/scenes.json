@@ -22,6 +22,7 @@
             "startframe": null,
             "updateCheck": true
     },
+
         {
             "name": "tieshoes",
             "sheets": 7,
@@ -127,7 +128,7 @@
     },
         {
             "name": "sleep",
-            "sheets": 4,
+            "sheets": 3,
             "sound": ["sleep"],
             "tone": "roomtone",
             "loop": false,
@@ -465,7 +466,7 @@
             "time": "midday",
             "keySet": ["manager.cursors.down"],
             "pattern": 17,
-            "greySpeed": 0.05,
+            "greySpeed": 0.1,
             "speed": 1,
             "hands": 3,
             "restartSheet": null,
@@ -486,7 +487,7 @@
             "time": "midday",
             "keySet": ["manager.vee", "manager.control", "manager.tab"],
             "pattern": 16,
-            "greySpeed": 0.05,
+            "greySpeed": 0.1,
             "speed": 1,
             "hands": 3,
             "restartSheet": null,
@@ -663,7 +664,7 @@
             "time": "midday",
             "keySet": ["manager.keyFive", "manager.keySix", "manager.tee", "manager.why", "manager.gee", "manager.ach", "manager.bee", "manager.en"],
             "pattern": 9,
-            "greySpeed": 0.05,
+            "greySpeed": 0.1,
             "speed": 1,
             "hands": 1,
             "restartSheet": null,

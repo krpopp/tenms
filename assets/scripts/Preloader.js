@@ -85,6 +85,7 @@ SceneGame.Preloader.prototype = {
 
         this.load.atlasJSONArray('allkeys', 'assets/textures/allkeys.png', 'assets/textures/allkeys.json');
         this.load.atlasJSONArray('line', 'assets/textures/line.png', 'assets/textures/line.json');
+        this.load.atlasJSONArray('singleHand', 'assets/textures/hand.png', 'assets/textures/hand.json');
 
         this.load.script('gray', 'https://cdn.rawgit.com/photonstorm/phaser/master/v2/filters/Gray.js');
 
@@ -135,6 +136,8 @@ SceneGame.Preloader.prototype = {
 
     CreateLids: function () {
         this.keySpriteFrame = 0;
+        this.hands = [];
+        this.handimation = [];
         this.yellowSprites = [];
 
         this.time.events.add(Phaser.Timer.SECOND * 2, function () {
@@ -148,12 +151,55 @@ SceneGame.Preloader.prototype = {
         }, this);
 
         this.time.events.add(Phaser.Timer.SECOND * 4, function () {
+            for (var i = 0; i < 2; i++) {
+                this.hands.push(this.add.sprite(500, 500, "singleHand", "hand0"));
+                this.hands[i].anchor.setTo(0.5, 0.5);
+                this.handimation.push(this.hands[i].animations.add("twitch"));
+                this.yellowSprites[i] = this.add.sprite(-100, -100, "qw", "qwYellow1");
+                this.world.sendToBack(this.yellowSprites[i]);
+                this.handimation[i].play(10, true);
+            }
+            this.keySprites = this.add.sprite(500, 550, "keyz", "keys-0");
+            this.arrows = this.add.sprite(520, 570, 'arrows');
+            this.yellowSprites[0].position.x = 590;
+            this.yellowSprites[0].position.y = 550;
+            this.yellowSprites[1].position.x = 590;
+            this.yellowSprites[1].position.y = 640;
+            this.add.tween(this.hands[0]).from({
+                alpha: 0
+            }, 2000, Phaser.Easing.Linear.None, true);
+            this.add.tween(this.hands[1]).from({
+                alpha: 0
+            }, 2000, Phaser.Easing.Linear.None, true);
+            this.add.tween(this.arrows).from({
+                alpha: 0
+            }, 2000, Phaser.Easing.Linear.None, true);
+            this.add.tween(this.yellowSprites[0]).from({
+                alpha: 0
+            }, 2000, Phaser.Easing.Linear.None, true);
+            this.add.tween(this.yellowSprites[1]).from({
+                alpha: 0
+            }, 2000, Phaser.Easing.Linear.None, true);
+            this.add.tween(this.keySprites).from({
+                alpha: 0
+            }, 2000, Phaser.Easing.Linear.None, true);
+            this.world.bringToTop(this.hands[1]);
 
-
+            this.world.bringToTop(this.hands[0]);
             this.world.bringToTop(this.tLid);
 
             this.world.bringToTop(this.bLid);
-
+            this.hands[0].angle = 60;
+            this.hands[0].position.x = 700;
+            this.hands[0].position.y = 880;
+            this.hands[0].scale.y = -1;
+            this.hands[1].angle = 20;
+            this.hands[1].position.x = 850;
+            this.hands[1].position.y = 660;
+            this.yellowSpriteFrame = 12;
+            this.time.events.loop(Phaser.Timer.SECOND / 7, function () {
+                this.RotateSpriteOutline(this.arrows, 3, 0);
+            }, this);
         }, this);
 
         this.tLid = this.add.sprite(0, 0, "toplid");
@@ -162,7 +208,7 @@ SceneGame.Preloader.prototype = {
             y: -500
         }, 8000, Phaser.Easing.Linear.None, true);
         this.add.tween(this.bLid).from({
-            y: 400
+            y: 600
         }, 8000, Phaser.Easing.Linear.None, true);
 
     },

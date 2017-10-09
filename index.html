@@ -69,6 +69,15 @@
 
     }
 
+    function handleMouseDown(evt) {
+        window.focus();
+        evt.preventDefault();
+        evt.stopPropagation();
+        evt.target.style.cursor = 'default';
+    }
+    document.getElementById('embed-game.GwtDefinition').addEventListener('mousedown',
+        handleMouseDown, false);
+
 </script>
 
 <div align="center">

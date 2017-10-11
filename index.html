@@ -56,7 +56,12 @@
 <script type="text/javascript">
     var game = new Phaser.Game(1200, 800, Phaser.CANVAS, 'stage');
 
+    window.onclick = function() {
+        window.focus();
+    }
+
     window.onload = function() {
+        window.focus();
 
 
         game.state.add('Boot', SceneGame.Boot);
@@ -68,15 +73,6 @@
         game.state.start('Boot');
 
     }
-
-    function handleMouseDown(evt) {
-        window.focus();
-        evt.preventDefault();
-        evt.stopPropagation();
-        evt.target.style.cursor = 'default';
-    }
-    document.getElementById('embed-game.GwtDefinition').addEventListener('mousedown',
-        handleMouseDown, false);
 
 </script>
 

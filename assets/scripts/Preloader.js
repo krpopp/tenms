@@ -106,6 +106,8 @@ SceneGame.Preloader.prototype = {
         this.load.audio('sink', 'assets/sound/sink.mp3', 'assets/sound/sink.ogg');
         this.load.audio('phonevibrate', 'assets/sound/phonevibrate.mp3', 'assets/sound/phonevibrate.ogg');
         this.load.audio('roomtone', 'assets/sound/roomTone1.mp3', 'assets/sound/roomTone1.ogg');
+        this.load.audio('closedfridge', 'assets/sound/closedfridge.mp3', 'assets/sound/closedfridge.ogg');
+        this.load.audio('steps', 'assets/sound/steps.mp3', 'assets/sound/steps.ogg');
         this.load.audio('office', 'assets/sound/office.mp3', 'assets/sound/office.ogg');
         this.load.audio('street', 'assets/sound/street.mp3', 'assets/sound/street.ogg');
         this.load.audio('sleep', 'assets/sound/sleep.mp3', 'assets/sound/sleep.ogg');

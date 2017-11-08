@@ -254,6 +254,48 @@
             }
 },
         {
+            "filename": "efnine2",
+            "frame": {
+                "x": 138,
+                "y": 580,
+                "w": 53,
+                "h": 37
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 53,
+                "h": 37
+            },
+            "sourceSize": {
+                "w": 53,
+                "h": 37
+            }
+},
+        {
+            "filename": "efnine",
+            "frame": {
+                "x": 1,
+                "y": 840,
+                "w": 53,
+                "h": 35
+            },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": {
+                "x": 0,
+                "y": 0,
+                "w": 53,
+                "h": 35
+            },
+            "sourceSize": {
+                "w": 53,
+                "h": 35
+            }
+},
+        {
             "filename": "midkey1",
             "frame": {
                 "x": 1,
@@ -316,48 +358,7 @@
                 "h": 59
             }
 },
-        {
-            "filename": "efnine2",
-            "frame": {
-                "x": 138,
-                "y": 580,
-                "w": 53,
-                "h": 37
-            },
-            "rotated": false,
-            "trimmed": false,
-            "spriteSourceSize": {
-                "x": 0,
-                "y": 0,
-                "w": 53,
-                "h": 37
-            },
-            "sourceSize": {
-                "w": 53,
-                "h": 37
-            }
-},
-        {
-            "filename": "efnine",
-            "frame": {
-                "x": 1,
-                "y": 840,
-                "w": 53,
-                "h": 35
-            },
-            "rotated": false,
-            "trimmed": false,
-            "spriteSourceSize": {
-                "x": 0,
-                "y": 0,
-                "w": 53,
-                "h": 35
-            },
-            "sourceSize": {
-                "w": 53,
-                "h": 35
-            }
-},
+
         {
             "filename": "del1",
             "frame": {

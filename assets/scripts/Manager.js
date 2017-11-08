@@ -443,9 +443,6 @@ SceneGame.Manager.prototype = {
         if (manager.swipeTween != null) {
             manager.tweens.remove(manager.swipeTween);
         }
-        if (manager.startFrame != null) {
-            manager.startFrame.destroy();
-        }
         if (manager.downSprite != null) {
             manager.downSprite.destroy();
         }
@@ -488,8 +485,11 @@ SceneGame.Manager.prototype = {
             manager.shiftLetterYellow.destroy();
             manager.shiftLetterKey.destroy();
         }
-        manager.roomTone.stop();
-        manager.roomTone.destroy();
+        if (manager.roomTone != null) {
+            manager.roomTone.stop();
+            manager.roomTone.destroy();
+        }
+
         if (manager.excelText != null) {
             for (var i = 0; i < manager.excelText.length; i++) {
                 manager.excelText[i].destroy();
@@ -1074,6 +1074,7 @@ SceneGame.Manager.prototype = {
             spriteNumber += 1;
         }
         manager.currentSet.push(manager.add.sprite(0, 0, manager.currentScene.name + "-" + "0", spriteNumber));
+        manager.currentSetTracking.push(manager.currentScene.name + "-" + "0" + spriteNumber);
         manager.keysPressed = [];
         for (var i = 0; i < manager.keySet.length; i++) {
             manager.keysPressed[i] = false;
@@ -1085,18 +1086,11 @@ SceneGame.Manager.prototype = {
         manager.gameReady = true;
         manager.KeyCheckSwitch(manager.currentScene.pattern);
         if (manager.currentScene.name != "sleep" && manager.currentScene.name != "wakephone") {
-            manager.time.events.add(Phaser.Timer.SECOND * 10, manager.NextScene, this);
+            manager.time.events.add(Phaser.Timer.SECOND * 3, manager.NextScene, this);
         }
         if (manager.currentScene.name == "wakephone") {
             manager.MorningScenes();
         }
-        if (manager.currentScene.startframe != null) {
-            manager.startFrame = manager.add.sprite(0, 0, manager.currentScene.startframe);
-            for (var i = 0; i < manager.hands.length; i++) {
-                manager.world.bringToTop(manager.hands[i]);
-            }
-        }
-        manager.RoomToneStart();
     },
 
     IncreaseBlend: function () {
@@ -1127,7 +1121,7 @@ SceneGame.Manager.prototype = {
 
     NextScene: function () {
         var manager = this;
-
+        manager.pressingButt = false;
         manager.RemoveEverything();
         manager.currentSetTracking.length = 0;
         manager.currentSetTracking = [];
@@ -1140,14 +1134,10 @@ SceneGame.Manager.prototype = {
                     manager.currentScene = manager.scenesJSON.Scenes[i];
                     manager.switchSound = null;
                     manager.currentSound = null;
+                    manager.RoomToneStart();
                     manager.TempSoundManager();
                     manager.FindKeys();
                     manager.PhotoLoader();
-                    if (manager.currentScene.name == "closet") {
-                        manager.music = manager.add.audio('music');
-                        manager.music.volume = .3;
-                        manager.music.play();
-                    }
                     if (manager.currentScene.name == "subway") {
                         manager.music.stop();
                         manager.music.destroy();
@@ -1283,7 +1273,8 @@ SceneGame.Manager.prototype = {
 
     PatternThirteenThings: function () {
         var manager = this;
-        if (manager.upInt >= manager.currentScene.switchPoints[0]) {
+        console.log(manager.currentScene.switchPoints[0]);
+        if (manager.upInt >= manager.tempSwitchPoints[0]) {
             for (var i = 0; i < manager.keysPressed.length; i++) {
                 manager.keysPressed[i] = false;
             }
@@ -1297,7 +1288,7 @@ SceneGame.Manager.prototype = {
             //manager.keySprites.visible = false;
             //manager.arrows.visible = false;
             //manager.yellowSprites[0].visible = false;
-            manager.currentScene.switchPoints.shift();
+            manager.tempSwitchPoints.shift();
             manager.letPress = false;
             manager.shiftPress = true;
         }
@@ -1370,6 +1361,7 @@ SceneGame.Manager.prototype = {
             }
         }
         if (manager.currentScene.pattern == 5 || manager.currentScene.pattern == 22) {
+            manager.gameReady = true;
             manager.NoInput();
         }
         if (manager.currentScene.pattern == 10) {
@@ -1619,6 +1611,10 @@ SceneGame.Manager.prototype = {
                 allDone = true;
                 break;
             case 23:
+                manager.tempSwitchPoints = [];
+                for (var i = 0; i < manager.currentScene.switchPoints.length; i++) {
+                    manager.tempSwitchPoints[i] = manager.currentScene.switchPoints[i];
+                }
                 manager.HoldAndSwitch();
                 if (manager.keySprites != null) {
                     manager.arrows.visible = true;
@@ -2005,6 +2001,7 @@ SceneGame.Manager.prototype = {
         manager.upperPic.position.y = manager.upperPic.height / 2;
         manager.insidePic.position.y = manager.insidePic.height / 2;
         manager.insidePic.anchor.setTo(0.5, 0.5);
+        manager.insidePic.alpha = 1;
         manager.hasPasted = false;
         manager.world.sendToBack(manager.insidePic);
         for (var i = 0; i < manager.currentSet.length; i++) {
@@ -2032,6 +2029,7 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.gameReady = false;
         manager.insidePic = manager.add.sprite(150, 0, manager.currentScene.insidePicSheet, manager.currentScene.insidePicSprite);
+        manager.world.bringToTop(manager.insidePic);
         manager.insidePic.alpha = 1;
         manager.hasPasted = false;
         manager.cursor = manager.add.sprite(280, 80, "compmaterials", "excelcursor");
@@ -2125,6 +2123,7 @@ SceneGame.Manager.prototype = {
         });
         manager.keySet[0].onUp.add(function () {
             for (var i = 0; i < manager.keysPressed.length; i++) {
+
                 manager.inputSound.pause();
                 manager.yellowSprites[0].alpha = 1;
                 manager.yellowSprites[0].scale.x = 1;
@@ -2314,11 +2313,12 @@ SceneGame.Manager.prototype = {
 
     HoldKeys: function () {
         var manager = this;
+        manager.inputHasPlayed = false;
         manager.keySet[0].onDown.add(function () {
             if (manager.currentScene.name == "pill") {
                 if (!this.game.device.windows) {
                     manager.HoldKeyPress(1);
-                    manager.HoldKeysFeedback(0);
+                    manager.HoldKeyPress(0);
                     manager.keysPressed[0] = true;
                     manager.keysPressed[1] = true;
                 } else {
@@ -2333,13 +2333,21 @@ SceneGame.Manager.prototype = {
                 manager.HoldKeysFeedback(0);
             }
             if (manager.currentScene.soundType == 6) {
-                manager.inputSound.play();
+                if (!manager.inputHasPlayed) {
+                    manager.inputSound.play();
+                    manager.inputHasPlayed = true;
+                } else {
+                    manager.inputSound.resume();
+                }
             }
 
         });
         manager.keySet[0].onUp.add(function () {
             if (manager.currentScene.name == "pill") {
                 if (!this.game.device.windows) {
+                    manager.yellowSprites[0].alpha = 1;
+                    manager.yellowSprites[0].scale.x = 1;
+                    manager.yellowSprites[0].scale.y = 1;
                     manager.yellowSprites[1].alpha = 1;
                     manager.yellowSprites[1].scale.x = 1;
                     manager.yellowSprites[1].scale.y = 1;
@@ -2354,12 +2362,11 @@ SceneGame.Manager.prototype = {
                 manager.HoldKeyUp(0);
             }
             if (manager.currentScene.soundType == 6) {
-                manager.inputSound.stop();
+                manager.inputSound.pause();
             }
         });
         if (manager.keySet[1] != null) {
             manager.keySet[1].onDown.add(function () {
-                manager.HoldKeysFeedback(1);
                 manager.HoldKeyPress(1);
             });
             manager.keySet[1].onUp.add(function () {
@@ -2368,7 +2375,6 @@ SceneGame.Manager.prototype = {
         }
         if (manager.keySet[2] != null) {
             manager.keySet[2].onDown.add(function () {
-                manager.HoldKeysFeedback(2);
                 manager.HoldKeyPress(2);
             });
             manager.keySet[2].onUp.add(function () {
@@ -2377,7 +2383,6 @@ SceneGame.Manager.prototype = {
         }
         if (manager.keySet[3] != null) {
             manager.keySet[3].onDown.add(function () {
-                manager.HoldKeysFeedback(3);
                 manager.HoldKeyPress(3);
             });
             manager.keySet[3].onUp.add(function () {
@@ -2418,6 +2423,8 @@ SceneGame.Manager.prototype = {
 
     HoldKeyPress: function (num) {
         var manager = this;
+        manager.yellowSprites[num].scale.x = .9;
+        manager.yellowSprites[num].scale.y = .9;
         manager.keysPressed[num] = true;
         manager.YellowKeyInput(num);
         manager.yellowSprites[num].alpha = 0.5;
@@ -2755,6 +2762,7 @@ SceneGame.Manager.prototype = {
         } else {
             if (!manager.currentScene.decrease && manager.currentScene.name != "sleep") {
                 manager.time.events.removeAll();
+                console.log("oh you should b");
                 manager.time.events.add(Phaser.Timer.SECOND, manager.NextScene, this);
                 manager.tweens.removeAll();
                 manager.ResetKeyboard();
@@ -2868,26 +2876,27 @@ SceneGame.Manager.prototype = {
         var manager = this;
         manager.upInt += 1;
         manager.decreasing = false;
-
-        if (manager.upInt != 0) {
-            if (manager.upInt % manager.sceneSpeed == 0) {
-                if (manager.spriteNum >= 3) {
-                    manager.sheetNum += 1;
-                    manager.spriteNum = 0;
-                    if (manager.sheetNum >= manager.currentScene.sheets) {
-                        manager.gameReady = false;
-                        manager.RestartCheck();
+        if (manager.gameReady) {
+            if (manager.upInt != 0) {
+                if (manager.upInt % manager.sceneSpeed == 0) {
+                    if (manager.spriteNum >= 3) {
+                        manager.sheetNum += 1;
+                        manager.spriteNum = 0;
+                        if (manager.sheetNum >= manager.currentScene.sheets) {
+                            manager.gameReady = false;
+                            manager.time.events.add(Phaser.Timer.SECOND / 2, manager.NextScene, this);
+                        } else {
+                            manager.CreateOrReFindPic(manager.currentScene.name);
+                        }
                     } else {
-                        manager.CreateOrReFindPic(manager.currentScene.name);
+                        if (manager.sheetNum <= manager.currentScene.sheets) {
+                            manager.spriteNum += 1;
+                            manager.CreateOrReFindPic(manager.currentScene.name);
+                        }
                     }
-                } else {
-                    if (manager.sheetNum <= manager.currentScene.sheets) {
-                        manager.spriteNum += 1;
-                        manager.CreateOrReFindPic(manager.currentScene.name);
+                    for (var i = 0; i < manager.hands.length; i++) {
+                        manager.world.bringToTop(manager.hands[i]);
                     }
-                }
-                for (var i = 0; i < manager.hands.length; i++) {
-                    manager.world.bringToTop(manager.hands[i]);
                 }
             }
         }
@@ -2920,6 +2929,7 @@ SceneGame.Manager.prototype = {
                 }
             }
             if (manager.currentSetTracking.includes(sheetName + manager.sheetNum + manager.spriteNum)) {
+                console.log("the sprite is " + sheetName + manager.sheetNum + manager.spriteNum);
                 manager.world.bringToTop(manager.currentSet[manager.currentSetTracking.indexOf(sheetName + manager.sheetNum + manager.spriteNum)]);
             } else {
                 manager.currentSet.push(manager.add.sprite(0, 0, sheetName + "-" + manager.sheetNum, manager.spriteNum));
@@ -2962,7 +2972,9 @@ SceneGame.Manager.prototype = {
     DecreaseInt: function () {
         var manager = this;
         manager.decreasing = true;
-        manager.upInt -= 1;
+        if (manager.upInt > 0) {
+            manager.upInt -= 1;
+        }
         if (manager.upInt >= 1) {
             if (manager.upInt % manager.currentScene.speed == 0) {
                 manager.spriteNum -= 1;

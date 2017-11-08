@@ -140,10 +140,10 @@ SceneGame.Preloader.prototype = {
     fileComplete: function () {
         this.filesCompleted++;
         if (this.filesCompleted == 15) {
-            var audio = this.game.add.audio('muffled');
-            audio.play();
+            this.audio = this.game.add.audio('muffled');
+            this.audio.play();
             if (!this.game.device.firefox) {
-                audio.loopFull();
+                this.audio.loopFull();
             }
         }
     },
@@ -175,6 +175,7 @@ SceneGame.Preloader.prototype = {
     startGame: function () {
         this.load.onFileComplete.remove(this.fileComplete, this);
         this.load.onLoadComplete.remove(this.loadComplete, this);
+        this.audio.stop();
         this.ready = true;
         this.game.load.preloadSprite = null;
         this.state.start('Manager');

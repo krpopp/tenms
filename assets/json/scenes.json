@@ -21,6 +21,24 @@
             "updateCheck": true
     },
         {
+            "name": "ramen",
+            "sheets": 3,
+            "sound": ["stoveon"],
+            "tone": "roomtone",
+            "loop": false,
+            "soundType": 3,
+            "soundFrame": 1,
+            "time": "morning",
+            "keySet": ["manager.cursors.up", "manager.cursors.left", "manager.cursors.down", "manager.cursors.right"],
+            "pattern": 1,
+            "greySpeed": 0.5,
+            "speed": 1,
+            "hands": 1,
+            "restart": false,
+            "decrease": false,
+            "updateCheck": false
+    },
+        {
             "name": "playlist",
             "sheets": 5,
             "sound": ["adultmom1", "phoneclick"],
@@ -189,7 +207,7 @@
             "sound": ["stoveon"],
             "tone": "roomtone",
             "loop": false,
-            "soundType": 0,
+            "soundType": 3,
             "soundFrame": 50,
             "time": "midday",
             "keySet": ["manager.cursors.up", "manager.cursors.left", "manager.cursors.down", "manager.cursors.right"],

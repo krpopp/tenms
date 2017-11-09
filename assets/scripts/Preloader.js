@@ -34,7 +34,12 @@ SceneGame.Preloader.prototype = {
         this.filesCompleted = 0;
         this.load.onFileComplete.add(this.fileComplete, this);
 
-        this.game.load.onFileComplete.add(this.fileComplete, this);
+
+        this.breathing = this.game.add.audio('breathing');
+        this.breathing.play();
+        this.breathing.volume = .3;
+        this.breathing.loopFull();
+
         this.load.onLoadComplete.add(this.loadComplete, this);
 
         for (var i = 0; i < this.scenesJSON.Scenes.length; i++) {

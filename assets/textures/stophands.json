@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "stop_0000_Frame-3",
+	"frame": {"x":1,"y":1,"w":113,"h":157},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":113,"h":157},
+	"sourceSize": {"w":113,"h":157}
+},
+{
+	"filename": "stop_0001_Frame-2",
+	"frame": {"x":1,"y":160,"w":113,"h":157},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":113,"h":157},
+	"sourceSize": {"w":113,"h":157}
+},
+{
+	"filename": "stop_0002_Frame-1",
+	"frame": {"x":1,"y":319,"w":113,"h":157},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":113,"h":157},
+	"sourceSize": {"w":113,"h":157}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "stophands.png",
+	"format": "RGBA8888",
+	"size": {"w":115,"h":477},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:ad2b9260f08714d176226affe60253a0:4b0684af68f92fc02921d5653e973a8d:6517e28188f8ad20d6488b9d4d4eb417$"
+}
+}

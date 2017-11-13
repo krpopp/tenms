@@ -79,10 +79,15 @@ SceneGame.Preloader.prototype = {
         this.load.atlasJSONArray('space', 'assets/textures/space.png', 'assets/textures/space.json');
         this.load.atlasJSONArray('newkeys', 'assets/textures/newkeys.png', 'assets/textures/newkeys.json');
         this.load.atlasJSONArray('sleep', 'assets/textures/sleep.png', 'assets/textures/sleep.json');
+        this.load.atlasJSONArray('pausekey', 'assets/textures/pausekey.png', 'assets/textures/pausekey.json');
 
         this.load.atlasJSONArray('blanketover-0', 'assets/textures/blanketover-0.png', 'assets/textures/blanketover-0.json');
         this.load.atlasJSONArray('blanketover-1', 'assets/textures/blanketover-1.png', 'assets/textures/blanketover-1.json');
         this.load.atlasJSONArray('computerframeplain-0', 'assets/textures/computerframeplain-0.png', 'assets/textures/computerframeplain-0.json');
+
+        for (var i = 0; i < 5; i++) {
+            this.load.atlasJSONArray('pause-' + i, 'assets/textures/pause-' + i + '.png', 'assets/textures/pause-' + i + '.json');
+        }
 
         this.load.atlasJSONArray('keys', 'assets/textures/keys.png', 'assets/textures/keys.json');
         this.load.atlasJSONArray('keyz', 'assets/textures/keyz.png', 'assets/textures/keyz.json');
@@ -96,11 +101,15 @@ SceneGame.Preloader.prototype = {
         this.load.atlasJSONArray('allkeys', 'assets/textures/allkeys.png', 'assets/textures/allkeys.json');
         this.load.atlasJSONArray('line', 'assets/textures/line.png', 'assets/textures/line.json');
         this.load.atlasJSONArray('singleHand', 'assets/textures/hand.png', 'assets/textures/hand.json');
+        this.load.atlasJSONArray('stophands', 'assets/textures/stophands.png', 'assets/textures/stophands.json');
 
         this.load.image('toplid', 'assets/image/toplid2.png');
         this.load.image('lowerlid', 'assets/image/lowerlid2.png');
         this.load.image('plainScreen', 'assets/image/plainscreen.png');
         this.load.image('bluescreen', 'assets/textures/bluescreen.png');
+        this.load.image('lilblack', 'assets/image/lilblack.png');
+        this.load.image('black', 'assets/image/black.png');
+        this.load.image('pause', 'assets/image/pause.png');
 
         this.load.image('greyscale', 'assets/image/greyscale.png');
 
@@ -108,7 +117,8 @@ SceneGame.Preloader.prototype = {
         this.load.image('greyscale', 'assets/image/greyscale.png');
 
         this.load.audio('music', 'assets/sound/adultmom4.mp3', 'assets/sound/adultmom4.ogg');
-        this.load.audio('sink', 'assets/sound/sink.mp3', 'assets/sound/sink.ogg');
+        this.load.audio('fullsong', 'assets/sound/fullsog.mp3', 'assets/sound/fullsog.ogg');
+        this.load.audio('singing', 'assets/sound/singing.mp3', 'assets/sound/singing.ogg');
         this.load.audio('phonevibrate', 'assets/sound/phonevibrate.mp3', 'assets/sound/phonevibrate.ogg');
         this.load.audio('roomtone', 'assets/sound/roomTone1.mp3', 'assets/sound/roomTone1.ogg');
         this.load.audio('closedfridge', 'assets/sound/closedfridge.mp3', 'assets/sound/closedfridge.ogg');

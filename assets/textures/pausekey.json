@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "pausekey_0000_Layer-5",
+	"frame": {"x":1,"y":56,"w":22,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":22,"h":24},
+	"sourceSize": {"w":22,"h":24}
+},
+{
+	"filename": "pausekey_0001_Layer-4",
+	"frame": {"x":1,"y":29,"w":22,"h":25},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":22,"h":25},
+	"sourceSize": {"w":22,"h":25}
+},
+{
+	"filename": "pausekey_0002_Layer-3",
+	"frame": {"x":1,"y":1,"w":22,"h":26},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":22,"h":26},
+	"sourceSize": {"w":22,"h":26}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "pausekey.png",
+	"format": "RGBA8888",
+	"size": {"w":24,"h":81},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:32e297f964529812abea9896f32641f1:b6761edacf1a1dc14921e83eb9088230:b2576bc761865817175772167d76b6e6$"
+}
+}

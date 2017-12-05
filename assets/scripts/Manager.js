@@ -40,6 +40,7 @@ SceneGame.Manager.prototype = {
         }
         manager.greyscale = manager.add.sprite(0, 0, 'greyscale');
         manager.greyscale.blendMode = 14;
+        manager.FirstCreateKeys();
         manager.CreatePausedStuff();
         manager.InitCreateHands();
     },
@@ -87,6 +88,7 @@ SceneGame.Manager.prototype = {
         manager.deleteFrame = 17;
         manager.deleteKeyFrame = 4;
         manager.deleteYellowFrame = 0;
+        manager.createdNext = false;
         manager.rndSprite = [];
         manager.rndSheet = [];
         manager.ChangeEachHandsX = [410, 440, 550, 590, 550, 500];
@@ -428,6 +430,7 @@ SceneGame.Manager.prototype = {
         manager.ResetKeyboard();
         manager.tweens.removeAll();
         manager.keysPressed = [];
+        manager.DisappearAllKeys();
         if (manager.currentSound != null) {
             manager.currentSound.stop();
         }
@@ -727,6 +730,52 @@ SceneGame.Manager.prototype = {
                 break;
         }
     },
+
+    FirstCreateKeys: function () {
+        var manager = this;
+        manager.smallKeyBackgrounds = [];
+        manager.smallKeyPressed = [];
+        manager.smallKeyUnPressed = [];
+        for (var i = 0; i <= 8; i++) {
+            manager.smallKeyBackgrounds.push(manager.add.sprite(-100, -100, 'allkeys', 'keybackground'));
+            manager.smallKeyBackgrounds[i].scale.x = 0.8;
+            manager.smallKeyBackgrounds[i].scale.y = 0.8;
+            manager.smallKeyBackgrounds[i].anchor.setTo(0.5, 0.5);
+            manager.smallKeyUnPressed.push(manager.add.sprite(-100, -100, 'allkeys', 'keyunpressed'));
+            manager.smallKeyUnPressed[i].scale.x = 0.8;
+            manager.smallKeyUnPressed[i].scale.y = 0.8;
+            manager.smallKeyUnPressed[i].anchor.setTo(0.5, 0.5);
+        }
+        manager.longKeyBackground = manager.add.sprite(-100, -100, 'allkeys', 'longkeybg');
+        manager.longKeyUnpressed = manager.add.sprite(-100, -100, 'allkeys', 'longkeyunpressed');
+    },
+
+    DisappearAllKeys: function () {
+        var manager = this;
+        for (var i = 0; i <= 8; i++) {
+            manager.smallKeyBackgrounds[i].visible = false;
+            manager.smallKeyUnPressed[i].visible = false;
+        }
+        manager.longKeyBackground.visible = false;
+        manager.longKeyUnpressed.visible = false;
+    },
+
+    CreateKeyBGS: function () {
+        var manager = this;
+        if (!manager.currentScene.specialSet) {
+            manager.arrowsPosX = [650, 530, 650, 770];
+            manager.arrowsPosY = [580, 700, 700, 700];
+            for (var i = 0; i < 4; i++) {
+                manager.smallKeyBackgrounds[i].visible = true;
+                manager.smallKeyBackgrounds[i].position.x = manager.arrowsPosX[i];
+                manager.smallKeyBackgrounds[i].position.y = manager.arrowsPosY[i];
+                manager.smallKeyUnPressed[i].visible = true;
+                manager.smallKeyUnPressed[i].position.x = manager.arrowsPosX[i];
+                manager.smallKeyUnPressed[i].position.y = manager.arrowsPosY[i];
+            }
+        }
+    },
+
 
     LetterYellowBG: function (keyName, num) {
         var manager = this;
@@ -1689,6 +1738,7 @@ SceneGame.Manager.prototype = {
     KeyCheckSwitch: function (pattern) {
         var manager = this;
         var allDone = false;
+        manager.CreateKeyBGS();
         switch (pattern) {
             case 14:
                 manager.nextInt = 0;
@@ -1835,6 +1885,7 @@ SceneGame.Manager.prototype = {
     EndCreate: function () {
         var manager = this;
         manager.number = 0;
+        manager.endRounds = 1;
         manager.LidCreate(-550, 400, 501);
         manager.endNumber = manager.add.sprite(610, 560, 'numbers', 'numbers' + (manager.number + 1) + '0');
         manager.world.bringToTop(manager.hands[0]);
@@ -1849,45 +1900,47 @@ SceneGame.Manager.prototype = {
             }
         }
         manager.time.events.loop(Phaser.Timer.SECOND / 7, function () {
-            manager.EndNumberRotate();
+            manager.EndNumberRotate(manager.number, manager.endNumber);
         }, this);
         manager.EndBringToTop();
+        manager.score = 14;
         manager.EndGame(0);
+
     },
 
-    EndNumberRotate: function () {
+    EndNumberRotate: function (num, sprite) {
         var manager = this;
-        switch (manager.number) {
+        switch (num) {
             case 0:
-                manager.RotateSpriteOutline(manager.endNumber, 5, 3);
+                manager.RotateSpriteOutline(sprite, 5, 3);
                 break;
             case 1:
-                manager.RotateSpriteOutline(manager.endNumber, 8, 6);
+                manager.RotateSpriteOutline(sprite, 8, 6);
                 break;
             case 2:
-                manager.RotateSpriteOutline(manager.endNumber, 11, 9);
+                manager.RotateSpriteOutline(sprite, 11, 9);
                 break;
             case 3:
-                manager.RotateSpriteOutline(manager.endNumber, 14, 12);
+                manager.RotateSpriteOutline(sprite, 14, 12);
                 break;
             case 4:
-                manager.RotateSpriteOutline(manager.endNumber, 17, 15);
+                manager.RotateSpriteOutline(sprite, 17, 15);
                 break;
             case 5:
-                manager.RotateSpriteOutline(manager.endNumber, 20, 18);
+                manager.RotateSpriteOutline(sprite, 20, 18);
                 break;
             case 6:
-                manager.RotateSpriteOutline(manager.endNumber, 23, 21);
+                manager.RotateSpriteOutline(sprite, 23, 21);
                 break;
             case 7:
-                manager.RotateSpriteOutline(manager.endNumber, 26, 24);
+                manager.RotateSpriteOutline(sprite, 26, 24);
                 break;
             case 8:
-                manager.RotateSpriteOutline(manager.endNumber, 29, 27);
+                manager.RotateSpriteOutline(sprite, 29, 27);
                 break;
             case 9:
-                manager.RotateSpriteOutline(manager.endNumber, 2, 0);
-                manager.RotateSpriteOutline(manager.finalOne, 5, 3);
+                manager.RotateSpriteOutline(sprite, 2, 0);
+                //manager.RotateSpriteOutline(manager.finalOne, 5, 3);
                 break;
         }
     },
@@ -1900,25 +1953,41 @@ SceneGame.Manager.prototype = {
         manager.world.bringToTop(manager.yellowSprites[0]);
         manager.world.bringToTop(manager.letterKeys[0]);
         manager.world.bringToTop(manager.endNumber);
+        if (manager.endRounds > 9) {
+            manager.world.bringToTop(manager.yellowSprites[1]);
+            manager.world.bringToTop(manager.letterKeys[1]);
+            manager.world.bringToTop(manager.finalOne);
+        }
         manager.world.bringToTop(manager.hands[0]);
     },
 
     EndGame: function (number) {
         var manager = this;
+        console.log("but how");
+        manager.firstPressed = false;
         manager.keySet[number].onDown.add(function () {
-            manager.IncreaseInt();
-            manager.IncreaseBlend();
+            if (manager.endRounds > 9) {
+                if (manager.nextPressed) {
+                    manager.time.events.add(Phaser.Timer.SECOND / 10, manager.EndIncreaseInt, this);
+                    manager.time.events.add(Phaser.Timer.SECOND / 10, manager.FadeTenthBackIn, this);
+                }
+                manager.firstPressed = true;
+            } else {
+                manager.IncreaseInt();
+                manager.IncreaseBlend();
 
-            manager.EndBringToTop();
-            manager.AlphaTweens(manager.endNumber, 0, 200);
-            manager.AlphaTweens(manager.yellowSprites[0], 0, 200);
-            if (manager.tLid.position.y < 0) {
-                manager.YTweens(manager.tLid, '+100', 1000);
+                manager.EndBringToTop();
+                manager.AlphaTweens(manager.endNumber, 0, 200);
+                manager.AlphaTweens(manager.yellowSprites[0], 0, 200);
+                if (manager.tLid.position.y < 150 && manager.endRounds < 10) {
+                    manager.YTweens(manager.tLid, '+100', 1000);
+                }
+                if (manager.bLid.position.y > 150) {
+                    manager.YTweens(manager.bLid, '-100', 1000);
+                }
+                manager.time.events.add(Phaser.Timer.SECOND / 10, manager.EndIncreaseInt, this);
+
             }
-            if (manager.bLid.position.y > 0) {
-                manager.YTweens(manager.bLid, '-100', 1000);
-            }
-            manager.time.events.add(Phaser.Timer.SECOND / 10, manager.EndIncreaseInt, this);
         }, this);
     },
 
@@ -1943,61 +2012,6 @@ SceneGame.Manager.prototype = {
         }, time, Phaser.Easing.Linear.None, true);
     },
 
-    //    EndNumbers: function (firstNum, secondNum, sprite, key, mybool, oppositeBool) {
-    //        var manager = this;
-    //        manager.ResetKeyboard();
-    //        mybool = false;
-    //        //        key.onDown.add.function() {
-    //        //            if (oppositeBool) {
-    //        //                manager.IncreaseInt();
-    //        //                manager.IncreaseBlend();
-    //        //                manager.time.events.add(Phaser.Timer.SECOND / 10, manager.EndIncreaseInt, this);
-    //        //            }
-    //        //            mybool = true;
-    //        //            manager.EndBringToTop();
-    //        //            manager.AlphaTweens(manager.endNumber, 0, 200);
-    //        //            manager.AlphaTweens(manager.yellowSprites[0], 0, 200);
-    //        //            if (manager.tLid.position.y < 0) {
-    //        //                manager.YTweens(manager.tLid, '+100', 1000);
-    //        //            }
-    //        //            if (manager.bLid.position.y > 0) {
-    //        //                manager.YTweens(manager.bLid, '-100', 1000);
-    //        //            }
-    //        //        }
-    //        switch (firstNum) {
-    //            case 0:
-    //                sprite.frame = 0;
-    //                break;
-    //            case 1:
-    //                sprite.frame = 3;
-    //                break;
-    //            case 2:
-    //                sprite.frame = 7;
-    //                break;
-    //            case 3:
-    //                sprite.frame = 11;
-    //                break;
-    //            case 4:
-    //                sprite.frame = 15;
-    //                break;
-    //            case 5:
-    //                sprite.frame = 19;
-    //                break;
-    //            case 6:
-    //                sprite.frame = 23;
-    //                break;
-    //            case 7:
-    //                sprite.frame = 27;
-    //                break;
-    //            case 8:
-    //                sprite.frame = 31;
-    //                break;
-    //            case 9:
-    //                sprite.frame = 35;
-    //                break;
-    //        }
-    //    },
-
     EndIncreaseInt: function () {
         var manager = this;
         manager.IncreaseInt();
@@ -2005,50 +2019,140 @@ SceneGame.Manager.prototype = {
 
         manager.EndBringToTop();
         manager.keySet[manager.number].reset();
+
         manager.number += 1;
+        manager.endRounds += 1;
         manager.AlphaTweens(manager.endNumber, 1, 200);
         manager.AlphaTweens(manager.yellowSprites[0], 1, 200);
-        manager.endNumber.frame += 3;
-        if (manager.number < 9) {
-            manager.YTweens(manager.hands[0], 1500, 30000)
-            manager.EndGame(manager.number);
-        } else {
-            manager.yellowSprites[0].alpha = 1;
-            manager.FinalLetterCreate();
-            manager.keyOne.onDown.add(function () {
-                manager.AlphaTweens(manager.letterKeys[1], 0, 1000);
-                manager.AlphaTweens(manager.yellowSprites[1], 0, 1000);
-                if (manager.tLid.position.y < 0) {
-                    manager.tLid.position.y = 0;
-                }
-                manager.onePress = true;
-            }, this);
-            manager.keyZero.onDown.add(function () {
+        if (manager.endRounds < manager.score) {
+            manager.YTweens(manager.hands[0], 1500, 30000);
+            if (manager.endRounds == 10) {
+                manager.endNumber.frame += 3;
                 if (manager.tLid.position.y != -150) {
+                    manager.tweens.removeAll();
                     manager.YTweens(manager.tLid, -150, 200)
                 }
                 if (manager.bLid.position.y != 0) {
                     manager.YTweens(manager.bLid, 50, 200)
                 }
-                manager.time.events.add(Phaser.Timer.SECOND * 3, manager.NextScene, this);
-                manager.AlphaTweens(manager.letterKeys[0], 0, 1000);
-                manager.AlphaTweens(manager.yellowSprites[0], 0, 1000);
-                manager.AlphaTweens(manager.endNumber, 0, 2000);
-                manager.AlphaTweens(manager.finalOne, 0, 2500);
-                manager.AlphaTweens(manager.hands[0], 0, 1000);
-                if (manager.bLid.position.y > 0) {
-                    manager.bLid.position.y = 0;
+                manager.FinalLetterCreate();
+                manager.SetNextTenth();
+                manager.EndGame(manager.number);
+            } else if (manager.endRounds == 11) {
+                manager.number = 0;
+                manager.endNumber.frame == 0;
+                manager.SetNextTenth();
+                manager.EndGame(manager.number);
+            } else if (manager.endRounds > 11 && manager.endRounds < 20) {
+                manager.endNumber.frame += 3;
+                manager.SetNextTenth();
+                manager.EndGame(manager.number);
+            } else if (manager.endRounds == 20) {
+                manager.finalOne.frame += 3;
+                manager.endNumber.frame += 3;
+                manager.SetNextTenth();
+                manager.EndGame(manager.number);
+            } else if (manager.endRounds == 21) {
+                manager.number = 0;
+                manager.endNumber.frame == 0;
+                manager.SetNextTenth();
+                manager.EndGame(manager.number);
+            } else if (manager.endRounds > 21) {
+                manager.endNumber.frame += 3;
+                manager.SetNextTenth();
+                manager.EndGame(manager.number);
+            } else {
+                manager.endNumber.frame += 3;
+                manager.EndGame(manager.number);
+            }
+        } else if (manager.endRounds >= manager.score) {
+            //manager.yellowSprites[0].alpha = 1;
+
+            console.log(manager.createdNext);
+            if (!manager.createdNext) {
+                console.log("but y");
+                manager.FinalLetterCreate();
+            }
+
+            if (manager.number == 10) {
+                manager.number = 0;
+                manager.keySet[manager.number].reset();
+            }
+            if (manager.endRounds > 9 && manager.endRounds < 20) {
+                manager.keyOne.reset();
+                manager.keyOne.onDown.add(function () {
+                    manager.EndBringToTop();
+                    manager.AlphaTweens(manager.letterKeys[1], 0, 1000);
+                    manager.AlphaTweens(manager.yellowSprites[1], 0, 1000);
+                    manager.onePress = true;
+                }, this);
+            } else {
+                manager.keyTwo.reset();
+                manager.keyTwo.onDown.add(function () {
+                    manager.EndBringToTop();
+                    manager.AlphaTweens(manager.letterKeys[1], 0, 1000);
+                    manager.AlphaTweens(manager.yellowSprites[1], 0, 1000);
+                    manager.onePress = true;
+                }, this);
+            }
+
+            manager.keySet[manager.number].onDown.add(function () {
+                if (manager.onePress) {
+                    manager.AlphaTweens(manager.letterKeys[0], 0, 1000);
+                    manager.AlphaTweens(manager.yellowSprites[0], 0, 1000);
+                    manager.AlphaTweens(manager.endNumber, 0, 2000);
+                    manager.AlphaTweens(manager.finalOne, 0, 2500);
+                    manager.AlphaTweens(manager.hands[0], 0, 1000);
+                    manager.time.events.add(Phaser.Timer.SECOND * 3, manager.NextScene, this);
+                    manager.gameReady = false;
                 }
-                manager.gameReady = false;
-                manager.zeroPress = true;
             }, this);
         }
     },
 
+    FadeTenthBackIn: function () {
+        var manager = this;
+        manager.AlphaTweens(manager.finalOne, 1, 200);
+        manager.AlphaTweens(manager.yellowSprites[1], 1, 200);
+    },
 
+    SetNextTenth: function () {
+        var manager = this;
+        manager.nextPressed = false;
+        if (manager.endRounds >= 10 && manager.endRounds < 20) {
+            manager.keyOne.reset();
+            manager.keyOne.onDown.add(function () {
+                // manager.EndBringToTop();
+                manager.world.bringToTop(manager.yellowSprites[1]);
+                manager.world.bringToTop(manager.finalOne);
+                manager.AlphaTweens(manager.finalOne, 0, 200);
+                manager.AlphaTweens(manager.yellowSprites[1], 0, 200);
+                if (manager.firstPressed) {
+                    manager.time.events.add(Phaser.Timer.SECOND / 10, manager.EndIncreaseInt, this);
+                    manager.time.events.add(Phaser.Timer.SECOND / 10, manager.FadeTenthBackIn, this);
+                }
+                manager.nextPressed = true;
+            }, this);
+        } else {
+            manager.keyTwo.onDown.add(function () {
+                //manager.EndBringToTop();
+                manager.world.bringToTop(manager.yellowSprites[1]);
+                manager.world.bringToTop(manager.finalOne);
+                manager.AlphaTweens(manager.finalOne, 0, 200);
+                manager.AlphaTweens(manager.yellowSprites[1], 0, 200);
+                if (manager.firstPressed) {
+                    manager.time.events.add(Phaser.Timer.SECOND / 10, manager.EndIncreaseInt, this);
+                    manager.time.events.add(Phaser.Timer.SECOND / 10, manager.FadeTenthBackIn, this);
+                }
+                manager.nextPressed = true;
+            }, this);
+        }
+        manager.time.events.add(Phaser.Timer.SECOND / 10, manager.FadeTenthBackIn, this);
+    },
 
     FinalLetterCreate: function () {
         var manager = this;
+        manager.createdNext = true;
         manager.finalOne = manager.add.sprite(540, 560, 'numbers', 'numbers10');
         manager.letterKeys[1] = manager.add.sprite(500, 550, "qw", "qwkey0");
         manager.EndYellowBG(manager.currentScene.keySet[0], 1);
@@ -2554,7 +2658,11 @@ SceneGame.Manager.prototype = {
                 if (manager.upInt >= 10) {
                     if (manager.upInt > 20) {
                         manager.BlanketOver();
-                    } else {
+                    } else if (manager.upInt == 19) {
+                        manager.BlanketOver();
+                        manager.time.events.add(Phaser.Timer.SECOND * 3, manager.NextScene, this);
+
+                    } else if (manager.upInt < 19) {
                         manager.IncreaseInt();
                         manager.IncreaseBlend();
 
@@ -2588,6 +2696,8 @@ SceneGame.Manager.prototype = {
     ManyKeySequence: function () {
         var manager = this;
         manager.keysPressed[0] = false;
+        manager.keySet[manager.ManyKeyInt].reset();
+        manager.keySet[manager.ManyKeyInt + 1].reset();
         manager.keySet[manager.ManyKeyInt].onDown.add(function () {
             manager.IncreaseInt();
             manager.IncreaseBlend();
@@ -2599,6 +2709,7 @@ SceneGame.Manager.prototype = {
             manager.hands[0].position.x += 500;
             manager.hands[0].scale.y = 1;
             manager.hands[0].rotation = 45;
+            manager.keySet[manager.ManyKeyInt].reset();
         });
         var nextKey = manager.ManyKeyInt + 1;
         manager.keySet[nextKey].onDown.add(function () {
@@ -3141,7 +3252,7 @@ SceneGame.Manager.prototype = {
 
     RestartCheck: function () {
         var manager = this;
-        if (!manager.givenScore) {
+        if (!manager.givenScore && manager.currentScene.name != "sleep") {
             manager.score += 1;
         }
         manager.givenScore = true;

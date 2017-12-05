@@ -16,9 +16,29 @@
             "greySpeed": 0.05,
             "speed": 20,
             "hands": 2,
+            "specialSet": false,
             "restart": false,
             "decrease": false,
             "updateCheck": true
+    },
+        {
+            "name": "button",
+            "sheets": 4,
+            "sound": ["button1", "button2", "button3"],
+            "tone": "roomtone",
+            "loop": false,
+            "soundType": 9,
+            "soundFrame": 50,
+            "time": "morning",
+            "keySet": ["manager.keyFive", "manager.keySix", "manager.tee", "manager.why", "manager.gee", "manager.ach", "manager.bee", "manager.en"],
+            "pattern": 9,
+            "greySpeed": 0.2,
+            "speed": 1,
+            "hands": 1,
+            "specialSet": false,
+            "restart": true,
+            "decrease": false,
+            "updateCheck": false
     },
         {
             "name": "playlist",
@@ -33,6 +53,7 @@
             "greySpeed": 0.05,
             "speed": 20,
             "hands": 1,
+            "specialSet": false,
             "restart": false,
             "decrease": false,
             "updateCheck": true
@@ -51,6 +72,7 @@
             "greySpeed": 0.1,
             "speed": 1,
             "hands": 2,
+            "specialSet": false,
             "restart": true,
             "decrease": false,
             "updateCheck": false
@@ -69,6 +91,7 @@
             "greySpeed": 0.1,
             "speed": 2,
             "hands": 1,
+            "specialSet": false,
             "restart": false,
             "reverse": false,
             "decrease": false,
@@ -89,6 +112,7 @@
             "greySpeed": 0.05,
             "speed": 1,
             "hands": 1,
+            "specialSet": false,
             "restart": false,
             "decrease": false,
             "updateCheck": true
@@ -110,6 +134,7 @@
             "hands": 2,
             "soundMult": 30,
             "restartSheet": null,
+            "specialSet": false,
             "restart": false,
             "decrease": false,
             "startframe": null,
@@ -128,6 +153,7 @@
             "greySpeed": 0.05,
             "speed": 1,
             "hands": 3,
+            "specialSet": false,
             "restart": true,
             "decrease": false,
             "updateCheck": false
@@ -146,6 +172,7 @@
             "greySpeed": 0.05,
             "speed": 1,
             "hands": 1,
+            "specialSet": false,
             "restart": true,
             "decrease": false,
             "updateCheck": true
@@ -164,6 +191,7 @@
             "greySpeed": 0.1,
             "speed": 1,
             "hands": 1,
+            "specialSet": false,
             "restart": true,
             "decrease": false,
             "updateCheck": false
@@ -183,6 +211,7 @@
             "switchInt": 50,
             "speed": 5,
             "hands": 1,
+            "specialSet": false,
             "restart": false,
             "decrease": false,
             "updateCheck": true
@@ -201,6 +230,7 @@
             "greySpeed": 0.1,
             "speed": 1,
             "hands": 1,
+            "specialSet": false,
             "restart": false,
             "decrease": false,
             "updateCheck": false
@@ -219,6 +249,7 @@
             "greySpeed": 0.5,
             "speed": 1,
             "hands": 1,
+            "specialSet": false,
             "restart": false,
             "decrease": false,
             "updateCheck": false
@@ -237,6 +268,7 @@
             "greySpeed": 0.5,
             "speed": 1,
             "hands": 1,
+            "specialSet": false,
             "restart": false,
             "decrease": false,
             "updateCheck": false
@@ -254,6 +286,7 @@
             "greySpeed": 0.05,
             "speed": 10,
             "hands": 1,
+            "specialSet": false,
             "restart": true,
             "decrease": false,
             "updateCheck": true
@@ -273,6 +306,7 @@
             "greySpeed": 0.05,
             "speed": 1,
             "hands": 3,
+            "specialSet": false,
             "restart": false,
             "decrease": false,
             "updateCheck": false
@@ -292,6 +326,7 @@
             "greySpeed": 0.1,
             "speed": 5,
             "hands": 3,
+            "specialSet": false,
             "restart": true,
             "decrease": false,
             "updateCheck": true
@@ -311,6 +346,7 @@
             "greySpeed": 0.1,
             "speed": 1,
             "hands": 3,
+            "specialSet": false,
             "restart": false,
             "decrease": false,
             "updateCheck": false
@@ -328,6 +364,7 @@
             "greySpeed": 0.5,
             "speed": 1,
             "hands": 1,
+            "specialSet": false,
             "restart": false,
             "decrease": false,
             "updateCheck": false
@@ -347,6 +384,7 @@
             "greySpeed": 0.3,
             "speed": 1,
             "hands": 3,
+            "specialSet": false,
             "restart": false,
             "decrease": false,
             "updateCheck": false
@@ -364,6 +402,7 @@
             "greySpeed": 0,
             "speed": 10,
             "hands": 1,
+            "specialSet": false,
             "restart": true,
             "decrease": false,
             "updateCheck": true
@@ -381,6 +420,7 @@
             "greySpeed": 0.05,
             "speed": 2,
             "hands": 1,
+            "specialSet": false,
             "restart": false,
             "decrease": true,
             "updateCheck": true
@@ -399,6 +439,7 @@
             "greySpeed": 0.05,
             "speed": 10,
             "hands": 1,
+            "specialSet": false,
             "restart": false,
             "decrease": false,
             "updateCheck": false
@@ -417,6 +458,7 @@
             "switchInt": 60,
             "speed": 5,
             "hands": 1,
+            "specialSet": false,
             "restart": false,
             "decrease": false,
             "updateCheck": true
@@ -435,6 +477,7 @@
             "greySpeed": 0.2,
             "speed": 1,
             "hands": 1,
+            "specialSet": false,
             "restart": true,
             "decrease": false,
             "updateCheck": false

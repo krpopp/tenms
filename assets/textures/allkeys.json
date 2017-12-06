@@ -23,24 +23,24 @@
             }
 },
         {
-            "filename": "rightarrow",
+            "filename": "leftarrow",
             "frame": {
-                "x": 74,
-                "y": 456,
-                "w": 69,
-                "h": 49
+                "x": 293,
+                "y": 113,
+                "w": 68,
+                "h": 48
             },
             "rotated": false,
             "trimmed": false,
             "spriteSourceSize": {
                 "x": 0,
                 "y": 0,
-                "w": 69,
-                "h": 49
+                "w": 68,
+                "h": 48
             },
             "sourceSize": {
-                "w": 69,
-                "h": 49
+                "w": 68,
+                "h": 48
             }
 },
         {
@@ -65,26 +65,27 @@
             }
 },
         {
-            "filename": "leftarrow",
+            "filename": "rightarrow",
             "frame": {
-                "x": 293,
-                "y": 113,
-                "w": 68,
-                "h": 48
+                "x": 74,
+                "y": 456,
+                "w": 69,
+                "h": 49
             },
             "rotated": false,
             "trimmed": false,
             "spriteSourceSize": {
                 "x": 0,
                 "y": 0,
-                "w": 68,
-                "h": 48
+                "w": 69,
+                "h": 49
             },
             "sourceSize": {
-                "w": 68,
-                "h": 48
+                "w": 69,
+                "h": 49
             }
 },
+
         {
             "filename": "one",
             "frame": {

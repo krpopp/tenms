@@ -22,25 +22,6 @@
             "updateCheck": true
     },
         {
-            "name": "button",
-            "sheets": 4,
-            "sound": ["button1", "button2", "button3"],
-            "tone": "roomtone",
-            "loop": false,
-            "soundType": 9,
-            "soundFrame": 50,
-            "time": "morning",
-            "keySet": ["manager.keyFive", "manager.keySix", "manager.tee", "manager.why", "manager.gee", "manager.ach", "manager.bee", "manager.en"],
-            "pattern": 9,
-            "greySpeed": 0.2,
-            "speed": 1,
-            "hands": 1,
-            "specialSet": false,
-            "restart": true,
-            "decrease": false,
-            "updateCheck": false
-    },
-        {
             "name": "playlist",
             "sheets": 5,
             "sound": ["adultmom1", "phoneclick"],
@@ -57,25 +38,6 @@
             "restart": false,
             "decrease": false,
             "updateCheck": true
-    },
-        {
-            "name": "jogging",
-            "sheets": 6,
-            "sound": ["footstep1", "footstep2", "footstep3", "footstep4"],
-            "tone": "street",
-            "loop": false,
-            "soundType": 8,
-            "soundFrame": 50,
-            "time": "morning",
-            "keySet": ["manager.cue", "manager.doubleEwe", "manager.oh", "manager.pee"],
-            "pattern": 24,
-            "greySpeed": 0.1,
-            "speed": 1,
-            "hands": 2,
-            "specialSet": false,
-            "restart": true,
-            "decrease": false,
-            "updateCheck": false
     },
         {
             "name": "shave",
@@ -112,7 +74,7 @@
             "greySpeed": 0.05,
             "speed": 1,
             "hands": 1,
-            "specialSet": false,
+            "specialSet": true,
             "restart": false,
             "decrease": false,
             "updateCheck": true
@@ -153,7 +115,7 @@
             "greySpeed": 0.05,
             "speed": 1,
             "hands": 3,
-            "specialSet": false,
+            "specialSet": true,
             "restart": true,
             "decrease": false,
             "updateCheck": false
@@ -172,7 +134,7 @@
             "greySpeed": 0.05,
             "speed": 1,
             "hands": 1,
-            "specialSet": false,
+            "specialSet": true,
             "restart": true,
             "decrease": false,
             "updateCheck": true
@@ -326,7 +288,7 @@
             "greySpeed": 0.1,
             "speed": 5,
             "hands": 3,
-            "specialSet": false,
+            "specialSet": true,
             "restart": true,
             "decrease": false,
             "updateCheck": true
@@ -346,7 +308,7 @@
             "greySpeed": 0.1,
             "speed": 1,
             "hands": 3,
-            "specialSet": false,
+            "specialSet": true,
             "restart": false,
             "decrease": false,
             "updateCheck": false
@@ -384,7 +346,7 @@
             "greySpeed": 0.3,
             "speed": 1,
             "hands": 3,
-            "specialSet": false,
+            "specialSet": true,
             "restart": false,
             "decrease": false,
             "updateCheck": false
@@ -439,7 +401,7 @@
             "greySpeed": 0.05,
             "speed": 10,
             "hands": 1,
-            "specialSet": false,
+            "specialSet": true,
             "restart": false,
             "decrease": false,
             "updateCheck": false
@@ -477,7 +439,7 @@
             "greySpeed": 0.2,
             "speed": 1,
             "hands": 1,
-            "specialSet": false,
+            "specialSet": true,
             "restart": true,
             "decrease": false,
             "updateCheck": false

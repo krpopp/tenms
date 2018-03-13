@@ -2,87 +2,129 @@
     "frames": [
 
         {
-            "filename": "emailscreen",
-            "frame": {
-                "x": 1,
-                "y": 482,
-                "w": 943,
-                "h": 480
-            },
-            "rotated": false,
-            "trimmed": false,
-            "spriteSourceSize": {
-                "x": 0,
-                "y": 0,
-                "w": 943,
-                "h": 480
-            },
-            "sourceSize": {
-                "w": 943,
-                "h": 480
-            }
-},
-        {
-            "filename": "excel",
-            "frame": {
-                "x": 1,
-                "y": 964,
-                "w": 943,
-                "h": 480
-            },
-            "rotated": false,
-            "trimmed": false,
-            "spriteSourceSize": {
-                "x": 0,
-                "y": 0,
-                "w": 943,
-                "h": 480
-            },
-            "sourceSize": {
-                "w": 943,
-                "h": 480
-            }
-},
-        {
             "filename": "excelcursor",
             "frame": {
                 "x": 1,
-                "y": 1,
-                "w": 70,
-                "h": 18
+                "y": 1451,
+                "w": 45,
+                "h": 15
             },
             "rotated": false,
             "trimmed": false,
             "spriteSourceSize": {
                 "x": 0,
                 "y": 0,
-                "w": 70,
-                "h": 18
+                "w": 45,
+                "h": 15
             },
             "sourceSize": {
-                "w": 70,
-                "h": 18
+                "w": 45,
+                "h": 15
+            }
+},
+        {
+            "filename": "desktopbackground",
+            "frame": {
+                "x": 1,
+                "y": 1,
+                "w": 526,
+                "h": 288
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 348,
+                "y": 0,
+                "w": 526,
+                "h": 288
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+},
+        {
+            "filename": "emailclient",
+            "frame": {
+                "x": 1,
+                "y": 291,
+                "w": 526,
+                "h": 288
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 348,
+                "y": 0,
+                "w": 526,
+                "h": 288
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
             }
 },
         {
             "filename": "loanemail",
             "frame": {
                 "x": 1,
-                "y": 21,
-                "w": 952,
-                "h": 459
+                "y": 581,
+                "w": 526,
+                "h": 288
             },
             "rotated": false,
-            "trimmed": false,
+            "trimmed": true,
             "spriteSourceSize": {
-                "x": 0,
+                "x": 348,
                 "y": 0,
-                "w": 952,
-                "h": 459
+                "w": 526,
+                "h": 288
             },
             "sourceSize": {
-                "w": 952,
-                "h": 459
+                "w": 1200,
+                "h": 500
+            }
+},
+        {
+            "filename": "emailscreen",
+            "frame": {
+                "x": 1,
+                "y": 871,
+                "w": 526,
+                "h": 288
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 348,
+                "y": 0,
+                "w": 526,
+                "h": 288
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
+            }
+},
+        {
+            "filename": "excel",
+            "frame": {
+                "x": 1,
+                "y": 1161,
+                "w": 526,
+                "h": 288
+            },
+            "rotated": false,
+            "trimmed": true,
+            "spriteSourceSize": {
+                "x": 348,
+                "y": 0,
+                "w": 526,
+                "h": 288
+            },
+            "sourceSize": {
+                "w": 1200,
+                "h": 500
             }
 }],
     "meta": {
@@ -91,10 +133,10 @@
         "image": "compmaterials.png",
         "format": "RGBA8888",
         "size": {
-            "w": 954,
-            "h": 1445
+            "w": 528,
+            "h": 1467
         },
         "scale": "1",
-        "smartupdate": "$TexturePacker:SmartUpdate:581b12609640300e5182dd20ec104a2b:33186b955e50b9f86b2ef757f4b40809:d8d12883748d7054d708bdd1d10bcde8$"
+        "smartupdate": "$TexturePacker:SmartUpdate:13599bb635f970e5e7c5d634b6c44ac4:e4bd4fa15c2e9a006e06fd384ede5544:d8d12883748d7054d708bdd1d10bcde8$"
     }
 }

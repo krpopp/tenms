@@ -1,7 +1,7 @@
 {
     "Scenes": [
         {
-            "name": "wakephone",
+            "name": "wakeup",
             "sheets": 3,
             "sound": ["muffled", "bedsheets1"],
             "tone": "roomtone",
@@ -19,24 +19,66 @@
             "specialSet": false,
             "restart": false,
             "decrease": false,
+            "playBlank": true,
+            "updateCheck": true
+    }, {
+            "name": "sleep",
+            "sheets": 1,
+            "sound": ["sleep"],
+            "tone": "roomtone",
+            "loop": false,
+            "soundType": 0,
+            "time": "morning",
+            "keySet": [
+        "manager.keyOne", "manager.keyTwo", "manager.keyThree", "manager.keyFour", "manager.keyFive", "manager.keySix", "manager.keySeven", "manager.keyEight", "manager.keyNine", "manager.keyZero"
+      ],
+            "pattern": 6,
+            "greySpeed": 0.05,
+            "speed": 1,
+            "hands": 1,
+            "specialSet": true,
+            "restart": false,
+            "decrease": false,
+            "playBlank": true,
             "updateCheck": true
     },
         {
-            "name": "playlist",
-            "sheets": 5,
-            "sound": ["adultmom1", "phoneclick"],
-            "tone": "steps",
+            "name": "recordplay",
+            "sheets": 7,
+            "sound": ["adultmom1"],
+            "tone": "roomtone",
             "loop": false,
             "soundType": 10,
             "time": "morning",
-            "keySet": ["manager.cursors.right"],
-            "pattern": 22,
+            "keySet": ["manager.cursors.down", "manager.cursors.up", "manager.cursors.down"],
+            "pattern": 10,
             "greySpeed": 0.05,
-            "speed": 20,
+            "switchInt": [40, 80],
+            "speed": 5,
             "hands": 1,
             "specialSet": false,
             "restart": false,
             "decrease": false,
+            "playBlank": true,
+            "updateCheck": true
+    },
+        {
+            "name": "situp",
+            "sheets": 3,
+            "sound": ["grunt"],
+            "tone": "roomtone",
+            "loop": false,
+            "soundType": 13,
+            "time": "morning",
+            "keySet": ["manager.cursors.up"],
+            "pattern": 2,
+            "greySpeed": 0.05,
+            "speed": 5,
+            "hands": 1,
+            "specialSet": false,
+            "restart": false,
+            "decrease": true,
+            "playBlank": true,
             "updateCheck": true
     },
         {
@@ -57,11 +99,12 @@
             "restart": false,
             "reverse": false,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": true
     },
         {
             "name": "sleep",
-            "sheets": 3,
+            "sheets": 1,
             "sound": ["sleep"],
             "tone": "roomtone",
             "loop": false,
@@ -77,6 +120,7 @@
             "specialSet": true,
             "restart": false,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": true
     },
         {
@@ -87,9 +131,7 @@
             "loop": false,
             "soundType": 8,
             "time": "midday",
-            "keySet": [
-        "manager.cursors.left"
-      ],
+            "keySet": ["manager.cursors.left"],
             "pattern": 0,
             "greySpeed": 0.05,
             "speed": 10,
@@ -100,11 +142,12 @@
             "restart": false,
             "decrease": false,
             "startframe": null,
+            "playBlank": true,
             "updateCheck": true
     },
         {
             "name": "cantsleep",
-            "sheets": 5,
+            "sheets": 1,
             "sound": ["toss"],
             "tone": "sleep",
             "soundType": 0,
@@ -118,6 +161,7 @@
             "specialSet": true,
             "restart": true,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": false
         },
         {
@@ -137,6 +181,7 @@
             "specialSet": true,
             "restart": true,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": true
     },
         {
@@ -156,6 +201,7 @@
             "specialSet": false,
             "restart": true,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": false
     },
         {
@@ -174,8 +220,9 @@
             "speed": 5,
             "hands": 1,
             "specialSet": false,
-            "restart": false,
+            "restart": true,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": true
     },
         {
@@ -195,6 +242,7 @@
             "specialSet": false,
             "restart": false,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": false
     },
         {
@@ -214,6 +262,7 @@
             "specialSet": false,
             "restart": false,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": false
     },
         {
@@ -233,6 +282,7 @@
             "specialSet": false,
             "restart": false,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": false
     },
         {
@@ -248,16 +298,17 @@
             "greySpeed": 0.05,
             "speed": 10,
             "hands": 1,
-            "specialSet": false,
+            "specialSet": true,
             "restart": true,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": true
     },
         {
-            "name": "computerframeplain",
+            "name": "computertypeemail",
             "insidePicSheet": "compmaterials",
             "insidePicSprite": "emailscreen",
-            "sheets": 1,
+            "sheets": 2,
             "sound": ["click2", "click3", "click4", "click1"],
             "tone": "office",
             "soundType": 3,
@@ -268,15 +319,17 @@
             "greySpeed": 0.05,
             "speed": 1,
             "hands": 3,
-            "specialSet": false,
-            "restart": false,
+            "specialSet": true,
+            "restart": true,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": false
         },
+
         {
             "name": "treez",
             "insidePicSheet": "compmaterials",
-            "insidePicSprite": "excel",
+            "insidePicSprite": "emailclient",
             "sheets": 2,
             "sound": ["nature"],
             "tone": "office",
@@ -291,51 +344,56 @@
             "specialSet": true,
             "restart": true,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": true
   },
+
         {
-            "name": "computerframeloan",
+            "name": "computertypeloan",
             "insidePicSheet": "compmaterials",
             "insidePicSprite": "loanemail",
-            "sheets": 1,
+            "sheets": 2,
             "sound": [],
             "tone": "office",
             "soundType": 4,
             "loop": false,
             "time": "midday",
-            "keySet": [],
+            "keySet": ["manager.deleteKey"],
             "pattern": 15,
             "greySpeed": 0.1,
             "speed": 1,
             "hands": 3,
             "specialSet": true,
-            "restart": false,
+            "restart": true,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": false
         },
         {
-            "name": "computerframesocial",
-            "sheets": 1,
-            "sound": ["click2", "click3", "click4", "click1"],
-            "tone": "office",
+            "name": "bathroom",
+            "sheets": 2,
+            "sound": [],
+            "tone": "bathroom",
             "soundType": 3,
             "loop": false,
             "time": "midday",
-            "keySet": ["manager.cursors.down", "manager.cursors.up"],
-            "pattern": 17,
+            "keySet": ["manager.cursors.up"],
+            "pattern": 11,
             "greySpeed": 0.5,
             "speed": 1,
             "hands": 1,
             "specialSet": false,
-            "restart": false,
-            "decrease": false,
+            "restart": true,
+            "decrease": true,
+            "playBlank": true,
             "updateCheck": false
         },
+
         {
-            "name": "computerframeexcel",
+            "name": "computertypeexcel",
             "insidePicSheet": "compmaterials",
             "insidePicSprite": "excel",
-            "sheets": 1,
+            "sheets": 2,
             "sound": ["click2", "click3", "click4", "click1"],
             "tone": "office",
             "soundType": 3,
@@ -347,8 +405,9 @@
             "speed": 1,
             "hands": 3,
             "specialSet": true,
-            "restart": false,
+            "restart": true,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": false
   },
         {
@@ -364,9 +423,10 @@
             "greySpeed": 0,
             "speed": 10,
             "hands": 1,
-            "specialSet": false,
+            "specialSet": true,
             "restart": true,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": true
     },
         {
@@ -385,6 +445,7 @@
             "specialSet": false,
             "restart": false,
             "decrease": true,
+            "playBlank": true,
             "updateCheck": true
     },
         {
@@ -404,6 +465,7 @@
             "specialSet": true,
             "restart": false,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": false
     },
         {
@@ -421,10 +483,12 @@
             "speed": 5,
             "hands": 1,
             "specialSet": false,
-            "restart": false,
+            "restart": true,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": true
     },
+
         {
             "name": "button",
             "sheets": 4,
@@ -442,6 +506,7 @@
             "specialSet": true,
             "restart": true,
             "decrease": false,
+            "playBlank": true,
             "updateCheck": false
     }
   ]
